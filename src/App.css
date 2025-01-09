@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -39,4 +40,49 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.pixel-button {
+  position: relative;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Geist Mono", monospace;
+  font-weight: 400;
+  text-transform: uppercase;
+  box-shadow: 0 0px 16px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.3s ease;
+  text-shadow: 0 16px 20px rgba(0, 0, 0, 0.7);
+}
+
+.pixel-button::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 1px solid white;
+  border-radius: 12px;
+  opacity: 0.3;
+  transition: opacity 0.1s ease, box-shadow 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.pixel-button:hover {
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
+}
+
+.pixel-button:hover::before {
+  opacity: 1;
+}
+
+.pixel-button span {
+  position: relative;
+  z-index: 2;
 }
