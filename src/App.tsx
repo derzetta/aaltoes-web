@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 
 
-function RotatingLights() {
+function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
   const light1 = useRef<THREE.PointLight>(null)
   const light2 = useRef<THREE.PointLight>(null)
   const light3 = useRef<THREE.PointLight>(null)
@@ -19,6 +19,17 @@ function RotatingLights() {
   const [isSweeping, setIsSweeping] = useState(true)
   const isMobile = window.innerWidth <= 768
   const radius = isMobile ? 50 : 150  // Smaller radius for mobile
+  const [lightsVisible, setLightsVisible] = useState(false)
+
+  useEffect(() => {
+    if (isModelLoaded) {
+      // Small delay to ensure model is visible first
+      const timer = setTimeout(() => {
+        setLightsVisible(true)
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [isModelLoaded])
 
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime()
@@ -63,14 +74,14 @@ function RotatingLights() {
 
   return (
     <>
-      <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={1.0} />
-      <pointLight ref={light1} color={0x00ffff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light2} color={0xff00ff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light3} color={0x00ff00} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={lightsVisible ? 1.0 : 0} />
+      <pointLight ref={light1} color={0x00ffff} intensity={lightsVisible ? (isMobile ? 4 : 5) : 0} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light2} color={0xff00ff} intensity={lightsVisible ? (isMobile ? 4 : 5) : 0} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light3} color={0x00ff00} intensity={lightsVisible ? (isMobile ? 4 : 5) : 0} distance={isMobile ? 150 : 200} decay={0.5} />
       
-      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
-      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
-      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={lightsVisible ? (isMobile ? 2 : 2.5) : 0} distance={isMobile ? 150 : 200} />
+      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={lightsVisible ? (isMobile ? 2 : 2.5) : 0} distance={isMobile ? 150 : 200} />
+      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={lightsVisible ? (isMobile ? 2 : 2.5) : 0} distance={isMobile ? 150 : 200} />
       <pointLight 
         ref={sweepLight}
         color={0xffffff}
@@ -84,6 +95,7 @@ function RotatingLights() {
 
 function Scene() {
   const gltf = useLoader(GLTFLoader, '/aalto_logo_3d.glb')
+  const [isLoaded, setIsLoaded] = useState(false)
   const [scale, setScale] = useState(() => {
     if (window.innerWidth <= 480) {
       return 7.0
@@ -109,6 +121,12 @@ function Scene() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
   
+  useEffect(() => {
+    if (gltf) {
+      setIsLoaded(true)
+    }
+  }, [gltf])
+  
   gltf.scene.traverse((child: any) => {
     if (child.isMesh) {
       child.material = new THREE.MeshPhysicalMaterial({
@@ -125,17 +143,20 @@ function Scene() {
   })
   
   return (
-    <primitive 
-      object={gltf.scene} 
-      scale={scale}
-      position={[0, 0, 0]}
-    />
+    <>
+      <primitive 
+        object={gltf.scene} 
+        scale={scale}
+        position={[0, 0, 0]}
+      />
+      <RotatingLights isModelLoaded={isLoaded} />
+    </>
   )
 }
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const words = ["builders", "innovators", "brave", "open source"]
+  const words = ["builders", "innovators", "brave", "open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
@@ -219,7 +240,6 @@ function App() {
           decay={0.2}
           color={0xffffff}
         />
-        <RotatingLights key={pageUpdate} />
         
         <Suspense fallback={null}>
           <Scene />
@@ -275,7 +295,7 @@ function App() {
             marginBottom: window.innerWidth <= 768 ? '1rem' : '0',
           //  backgroundColor: 'rgba(255, 0, 0, 0.1)'  // Semi-transparent red
           }}>
-            <h2 className="font-mono text-white/50 text-xs sm:text-sm tracking-widest uppercase flex items-center gap-2">
+            <h2 className="font-mono text-white/50 text-xs sm:text-sm tracking-widest uppercase flex items-center gap-3">
               Year of the{' '}
               <AnimatePresence mode="wait">
                 <motion.span
@@ -301,10 +321,7 @@ function App() {
             width: window.innerWidth <= 768 ? '100%' : '50%',
           //  backgroundColor: 'rgba(0, 0, 255, 0.1)'  // Semi-transparent blue
           }}>
-            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
-              <span className="relative z-10 uppercase">Join Aaltoes</span>
-              <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </button>
+            
             <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
               <span className="relative z-10 uppercase">Our Events</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -312,6 +329,11 @@ function App() {
             <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
               <span className="relative z-10 uppercase">Community Chat</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            </button>
+            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]">
+              <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
+              <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
             </button>
           </div>
         </div>
