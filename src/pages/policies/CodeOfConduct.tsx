@@ -14,7 +14,7 @@ function CodeOfConduct() {
             appearance, gender, race, religion, age, sexual orientation, disability or other personal attributes.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="space-y-12">
             <div>
               <h2 className="section-title">Behaviour We Don't Tolerate</h2>
               <ul className="text-content space-y-3 list-disc pl-4">
@@ -27,7 +27,44 @@ function CodeOfConduct() {
             </div>
 
             <div>
-              <h2 className="section-title">Harassment Contact Persons</h2>
+              <h2 className="section-title">Repercussions of CoC Violations</h2>
+              <p className="text-content">
+                By attending events organised by Aaltoes, you agree to obey these rules. Unacceptable behaviour 
+                will not be tolerated. Anyone asked to stop unacceptable behavior is expected to comply immediately. 
+                If a participant engages in unacceptable behaviour, Aaltoes may take any action it deems appropriate, 
+                including warning or expelling the offender from the event. For more egregious behaviour, Aaltoes may, 
+                in its reasonable discretion, temporarily ban or permanently ban a participant from the community. 
+                Continuous behaviour that violates the code of conduct will also lead to permanent ban from all 
+                Aaltoes events and activities.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="section-title">What to Do If You Encounter CoC Violations?</h2>
+              <div className="space-y-4 text-content">
+                <p>
+                  The Aaltoes Code of Conduct has been established to secure that every attendee in our event feels 
+                  safe and respected. If you are subjected to unacceptable behavior, notice that someone else is being 
+                  subjected to unacceptable behaviour, or have any other concerns, please notify Aaltoes event staff 
+                  or contact the harassment contact people (below) as soon as possible.
+                </p>
+                <p>
+                  Aaltoes event staff will be available to assist those experiencing unacceptable behavior to feel 
+                  safe for the duration of the event. All events have designated harassment contact people introduced 
+                  at the beginning of events and can be distinguished by their yellow armbands. All raised cases will 
+                  be handled confidentially and thoroughly, involving all parties and if necessary, third parties such 
+                  as the police.
+                </p>
+                <p>
+                  <a href="#" className="text-white/60 hover:text-white/90 transition-colors">
+                    Form for reporting harassment
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="section-title">Our Harassment Contact Persons</h2>
               <div className="space-y-8">
                 <div className="text-content">
                   <p className="text-white/90 font-medium">Patricia Sarkkinen (she/her)</p>

@@ -10,7 +10,12 @@ function Footer() {
     return `font-mono ${isActive ? 'text-white' : 'text-white/50'} hover:text-white/70 transition-colors uppercase tracking-wider whitespace-nowrap`
   }
 
-  // Save scroll position when it changes
+  // Reset vertical scroll position on route change
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
+  // Keep the horizontal scroll functionality
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -23,7 +28,6 @@ function Footer() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Restore scroll position on mount and route change
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -41,7 +45,7 @@ function Footer() {
           to="/" 
           className={getClassName('/')}
         >
-          Home
+          AALTOES 2025
         </Link>
         <div className="h-6 w-px bg-white/10" />
         <Link 
