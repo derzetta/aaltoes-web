@@ -5,6 +5,7 @@ function BillingInfo() {
     <div className="min-h-screen bg-black text-white">
       <div className="page-container">
         <h1 className="page-title">Billing Information</h1>
+        <div className="title-divider" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>

@@ -5,6 +5,7 @@ import App from './App'
 import BillingInfo from './pages/BillingInfo'
 import CodeOfConduct from './pages/policies/CodeOfConduct'
 import PrivacyNotice from './pages/policies/PrivacyNotice'
+import AssociationRules from './pages/policies/AssociationRules'
 import './index.css'
 
 const router = createHashRouter([
@@ -23,6 +24,10 @@ const router = createHashRouter([
   {
     path: '/privacy-notice',
     element: <PrivacyNotice />,
+  },
+  {
+    path: '/association-rules',
+    element: <AssociationRules />,
   },
 ])
 

@@ -62,6 +62,12 @@ function Footer() {
         >
           Privacy Notice
         </Link>
+        <Link 
+          to="/association-rules" 
+          className={getClassName('/association-rules')}
+        >
+          Association Rules
+        </Link>
       </div>
     </footer>
   )
