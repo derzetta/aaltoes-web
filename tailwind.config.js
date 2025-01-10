@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         mono: ['"Geist Mono"', 'monospace'],
+        sans: ['Geist', 'sans-serif'],
       },
       animation: {
         'loading-bar': 'loading-bar 1.5s ease-in-out infinite',

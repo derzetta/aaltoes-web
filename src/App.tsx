@@ -7,6 +7,7 @@ import { Suspense, useRef, useState, useEffect } from 'react'
 import './index.css'
 import { EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
 import { motion, AnimatePresence } from 'framer-motion'
+import Footer from './components/Footer'
 
 
 
@@ -229,156 +230,159 @@ function App() {
   }
 
   return (
-    <div style={{ 
-      position: 'relative',
-      width: '100%',
-      maxWidth: '1300px',
-      height: isSmallMobile ? '45vh' : '50vh',
-      margin: '0 auto',
-      overflow: 'hidden'
-    }}>
-      <Canvas
-        dpr={[1, 2]}
-        performance={{ min: 0.5 }}
-        style={{
-          width: '100%',
-          height: isSmallMobile ? '45vh' : '50vh',
-          position: 'fixed',
-          top: isSmallMobile ? '45%' : '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          borderRadius: '4px'
-        }}
-        camera={{
-          fov: isMobile ? 75 : 55,
-          position: [0, 0, isSmallMobile ? 16 : isMobile ? 20 : 21],
-          near: 0.1,
-          far: 1000
-        }}
-      >
-        <color attach="background" args={['#000000']} />
-        
-        <ambientLight intensity={0.05} />
-        <pointLight 
-          position={[mousePosition.x, mousePosition.y, 90]} 
-          intensity={cursorLightVisible ? 0.9 : 0}
-          distance={200}
-          decay={0.2}
-          color={0xffffff}
-        />
-        
-        <Suspense fallback={null}>
-          <Scene />
-        </Suspense>
-
-        <OrbitControls 
-          enableZoom={false}
-          enablePan={false}
-          enableRotate={false}
-          autoRotate={false}
-        />
-
-        <EffectComposer>
-          <ChromaticAberration
-            offset={new THREE.Vector2(0.0012, 0.0012)}
-            radialModulation={false}
-            modulationOffset={0}
-          />
-        </EffectComposer>
-      </Canvas>
-
-      <div style={{
-        position: 'fixed',
-        top: isSmallMobile ? 'calc(45% + 17vh)' : 'calc(50% + 19vh)',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 1000,
+    <div className="relative">
+      <div style={{ 
+        position: 'relative',
         width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '0 1rem'
+        maxWidth: '1300px',
+        height: isSmallMobile ? '45vh' : '50vh',
+        margin: '0 auto',
+        overflow: 'hidden'
       }}>
+        <Canvas
+          dpr={[1, 2]}
+          performance={{ min: 0.5 }}
+          style={{
+            width: '100%',
+            height: isSmallMobile ? '45vh' : '50vh',
+            position: 'fixed',
+            top: isSmallMobile ? '45%' : '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            borderRadius: '4px'
+          }}
+          camera={{
+            fov: isMobile ? 75 : 55,
+            position: [0, 0, isSmallMobile ? 16 : isMobile ? 20 : 21],
+            near: 0.1,
+            far: 1000
+          }}
+        >
+          <color attach="background" args={['#000000']} />
+          
+          <ambientLight intensity={0.05} />
+          <pointLight 
+            position={[mousePosition.x, mousePosition.y, 90]} 
+            intensity={cursorLightVisible ? 0.9 : 0}
+            distance={200}
+            decay={0.2}
+            color={0xffffff}
+          />
+          
+          <Suspense fallback={null}>
+            <Scene />
+          </Suspense>
+
+          <OrbitControls 
+            enableZoom={false}
+            enablePan={false}
+            enableRotate={false}
+            autoRotate={false}
+          />
+
+          <EffectComposer>
+            <ChromaticAberration
+              offset={new THREE.Vector2(0.0012, 0.0012)}
+              radialModulation={false}
+              modulationOffset={0}
+            />
+          </EffectComposer>
+        </Canvas>
+
         <div style={{
+          position: 'fixed',
+          top: isSmallMobile ? 'calc(45% + 17vh)' : 'calc(50% + 19vh)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 1000,
           width: '100%',
-          maxWidth: '1300px',
           display: 'flex',
-          flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+          justifyContent: 'center',
           alignItems: 'center',
-          padding: '1rem',
-          gap: '1rem',
-          border: '1px solid rgba(128, 128, 128, 0.2)',
-          borderRadius: '4px',
-          background: 'rgba(0, 0, 0, 0.3)',
-          backdropFilter: 'blur(8px)'
+          padding: '0 1rem'
         }}>
           <div style={{
-            flex: '1 1 50%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: window.innerWidth <= 768 ? '100%' : '50%',
-            marginBottom: window.innerWidth <= 768 ? '1rem' : '0',
-          //  backgroundColor: 'rgba(255, 0, 0, 0.1)'  // Semi-transparent red
-          }}>
-            <h2 className="font-mono text-white/50 text-xs sm:text-sm tracking-widest uppercase flex items-center gap-3">
-              Year of the{' '}
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentWordIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-white/70"
-                >
-                  {words[currentWordIndex]}
-                </motion.span>
-              </AnimatePresence>
-            </h2>
-          </div>
-
-          <div style={{
-            flex: '1 1 50%',
+            width: '100%',
+            maxWidth: '1300px',
             display: 'flex',
             flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
-            justifyContent: 'center',
-            alignItems: 'stretch',
-            gap: window.innerWidth <= 768 ? '0.5rem' : '1.7rem',
-            width: window.innerWidth <= 768 ? '100%' : '50%',
-          //  backgroundColor: 'rgba(0, 0, 255, 0.1)'  // Semi-transparent blue
+            alignItems: 'center',
+            padding: '1rem',
+            gap: '1rem',
+            border: '1px solid rgba(128, 128, 128, 0.2)',
+            borderRadius: '4px',
+            background: 'rgba(0, 0, 0, 0.3)',
+            backdropFilter: 'blur(8px)'
           }}>
-            
-            <a 
-              href="https://lu.ma/aaltoes-calendar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
-            >
-              <span className="relative z-10 uppercase">Our Events</span>
-              <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </a>
-            <a 
-              href="https://t.me/+DU5AIzwYa3o5NDIy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
-            >
-              <span className="relative z-10 uppercase">Community Chat</span>
-              <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </a>
-            <a 
-              href="https://aaltoes2025.typeform.com/membership"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
-            >
-              <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
-              <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-            </a>
+            <div style={{
+              flex: '1 1 50%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: window.innerWidth <= 768 ? '100%' : '50%',
+              marginBottom: window.innerWidth <= 768 ? '1rem' : '0',
+            //  backgroundColor: 'rgba(255, 0, 0, 0.1)'  // Semi-transparent red
+            }}>
+              <h2 className="font-mono text-white/50 text-xs sm:text-sm tracking-widest uppercase flex items-center gap-3">
+                Year of the{' '}
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentWordIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-white/70"
+                  >
+                    {words[currentWordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </h2>
+            </div>
+
+            <div style={{
+              flex: '1 1 50%',
+              display: 'flex',
+              flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+              justifyContent: 'center',
+              alignItems: 'stretch',
+              gap: window.innerWidth <= 768 ? '0.5rem' : '1.7rem',
+              width: window.innerWidth <= 768 ? '100%' : '50%',
+            //  backgroundColor: 'rgba(0, 0, 255, 0.1)'  // Semi-transparent blue
+            }}>
+              
+              <a 
+                href="https://lu.ma/aaltoes-calendar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
+              >
+                <span className="relative z-10 uppercase">Our Events</span>
+                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </a>
+              <a 
+                href="https://t.me/+DU5AIzwYa3o5NDIy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
+              >
+                <span className="relative z-10 uppercase">Community Chat</span>
+                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </a>
+              <a 
+                href="https://aaltoes2025.typeform.com/membership"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+              >
+                <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
+                <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

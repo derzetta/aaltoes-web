@@ -8,11 +8,15 @@
   }
 
   html, body {
-    @apply w-full h-full overflow-hidden;
+    @apply w-full h-full;
   }
 
   body {
     @apply bg-black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans text-white/90;
   }
 
   ::selection {
@@ -26,57 +30,54 @@
 
 @layer components {
   #root {
-    @apply w-screen h-screen m-0 p-0 text-center;
+    @apply w-screen min-h-screen m-0 p-0;
   }
 
-  .logo {
-    @apply h-24 p-6 will-change-[filter] transition-[filter] duration-300;
+  .page-container {
+    @apply max-w-5xl mx-auto px-6 py-16 pb-32;
   }
 
-  .logo:hover {
-    @apply filter drop-shadow-[0_0_2em_#646cffaa];
+  .page-title {
+    @apply text-3xl font-medium text-white/90 mb-2 tracking-tight;
   }
 
-  .logo.react:hover {
-    @apply filter drop-shadow-[0_0_2em_#61dafbaa];
+  .title-divider {
+    @apply h-[1px] w-16 bg-white/20 mb-16;
   }
 
-  .pixel-button {
-    @apply relative px-8 py-4 text-lg bg-white text-black cursor-pointer rounded-lg font-mono font-normal uppercase
-           shadow-[0_0_16px_rgba(255,255,255,0.5)] 
-           transition-shadow duration-300
-           text-shadow-[1px_1px_0_rgba(0,0,0,0.2),-1px_-1px_0_rgba(0,0,0,0.2),1px_-1px_0_rgba(0,0,0,0.2),-1px_1px_0_rgba(0,0,0,0.2),2px_2px_4px_rgba(0,0,0,0.3)];
+  .section-title {
+    @apply text-lg text-white/80 font-medium mb-6 tracking-wide;
   }
 
-  .pixel-button::before {
-    @apply content-[''] absolute -top-1 -left-1 -right-1 -bottom-1 
-           border border-white rounded-xl opacity-30
-           transition-[opacity,box-shadow] duration-100 pointer-events-none
-           shadow-[0_0_20px_rgba(255,255,255,0.1)];
+  .subsection-title {
+    @apply text-sm text-white/70 uppercase tracking-wider mb-3;
   }
 
-  .pixel-button:hover {
-    @apply shadow-[0_8px_32px_rgba(255,255,255,0.2)];
+  .text-content {
+    @apply text-white/80 leading-relaxed;
   }
 
-  .pixel-button:hover::before {
-    @apply opacity-100;
+  .content-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-12;
   }
 
-  .pixel-button span {
-    @apply relative z-[2];
+  .content-section {
+    @apply space-y-8;
   }
 
-  .animate-loading-bar {
-    @apply animate-[loading-bar_1.5s_ease-in-out_infinite];
+  .link {
+    @apply text-white/60 hover:text-white/90 transition-colors;
   }
-}
 
-@keyframes loading-bar {
-  0% {
-    transform: translateX(-100%);
+  .home-button {
+    @apply font-['Geist_Sans'] tracking-wide;
   }
-  100% {
-    transform: translateX(100%);
+
+  .home-slogan {
+    @apply font-['Geist_Sans'] tracking-wide;
+  }
+
+  .footer-text {
+    @apply font-['Geist_Sans'] text-xs tracking-wide;
   }
 }
