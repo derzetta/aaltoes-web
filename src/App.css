@@ -56,7 +56,12 @@
   text-transform: uppercase;
   box-shadow: 0 0px 16px rgba(255, 255, 255, 0.5);
   transition: box-shadow 0.3s ease;
-  text-shadow: 0 16px 20px rgba(0, 0, 0, 0.7);
+  text-shadow: 
+    1px 1px 0 rgba(0, 0, 0, 0.2),
+    -1px -1px 0 rgba(0, 0, 0, 0.2),
+    1px -1px 0 rgba(0, 0, 0, 0.2),
+    -1px 1px 0 rgba(0, 0, 0, 0.2),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .pixel-button::before {
@@ -85,4 +90,17 @@
 .pixel-button span {
   position: relative;
   z-index: 2;
+}
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.5s ease-in-out infinite;
 }

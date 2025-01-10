@@ -155,13 +155,38 @@ function Scene() {
   )
 }
 
+function LoadingScreen() {
+  const [loadingText, setLoadingText] = useState("Patience, my founder")
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingText("just buy a new router bro")
+    }, 6000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
+      <div className="text-center">
+        <h2 className="font-mono text-white/50 text-sm sm:text-base tracking-widest uppercase mb-4">
+          {loadingText}
+        </h2>
+        <div className="w-64 h-1 bg-white/10 rounded-full overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-white/20 via-white/40 to-white/20 animate-loading-bar" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const words = ["builders", "innovators", "brave", "open source", "explorers", "igniters"]
+  const words = ["builders", "innovators", "misfits", "openings", "brave", "open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
   const [cursorLightVisible, setCursorLightVisible] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -191,6 +216,17 @@ function App() {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return <LoadingScreen />
+  }
 
   return (
     <div style={{ 
