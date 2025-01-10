@@ -76,13 +76,13 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
   return (
     <>
       <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={1.0} />
-      <pointLight ref={light1} color={0x00ffff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light2} color={0xff00ff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light3} color={0x00ff00} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light1} color={0xFF1493} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light2} color={0x00BFFF} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light3} color={0xfffff0} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
       
-      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
-      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
-      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[0, 0, 100]} color={0xFF1493} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[-50, -50, 80]} color={0x00BFFF} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[50, 50, 80]} color={0xfffff0} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
       <pointLight 
         ref={sweepLight}
         color={0xffffff}
@@ -280,7 +280,7 @@ function App() {
 
         <EffectComposer>
           <ChromaticAberration
-            offset={new THREE.Vector2(0.002, 0.002)}
+            offset={new THREE.Vector2(0.0012, 0.0012)}
             radialModulation={false}
             modulationOffset={0}
           />
