@@ -242,7 +242,7 @@ function App() {
         position: 'relative',
         width: '100%',
         maxWidth: '1300px',
-        height: isSmallMobile ? '45vh' : '50vh',
+        height: isSmallMobile ? '40vh' : '45vh',
         margin: '0 auto',
         overflow: 'hidden'
       }}>
@@ -251,9 +251,9 @@ function App() {
           performance={{ min: 0.5 }}
           style={{
             width: '100%',
-            height: isSmallMobile ? '45vh' : '50vh',
+            height: isSmallMobile ? '40vh' : '45vh',
             position: 'fixed',
-            top: isSmallMobile ? '45%' : '50%',
+            top: isSmallMobile ? '40%' : '45%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             borderRadius: '4px'
@@ -298,7 +298,7 @@ function App() {
 
         <div style={{
           position: 'fixed',
-          top: isSmallMobile ? 'calc(45% + 17vh)' : 'calc(50% + 19vh)',
+          top: isSmallMobile ? 'calc(40% + 15vh)' : 'calc(45% + 17vh)',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 1000,

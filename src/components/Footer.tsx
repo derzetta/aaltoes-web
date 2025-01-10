@@ -1,30 +1,64 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 
 function Footer() {
+  const location = useLocation()
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const getClassName = (path: string) => {
+    const isActive = location.pathname === path
+    return `font-mono ${isActive ? 'text-white' : 'text-white/50'} hover:text-white/70 transition-colors uppercase tracking-wider whitespace-nowrap`
+  }
+
+  // Save scroll position when it changes
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      localStorage.setItem('footerScrollPosition', container.scrollLeft.toString())
+    }
+
+    container.addEventListener('scroll', handleScroll)
+    return () => container.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Restore scroll position on mount and route change
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const savedPosition = localStorage.getItem('footerScrollPosition')
+    if (savedPosition) {
+      container.scrollLeft = parseInt(savedPosition)
+    }
+  }, [location.pathname])
+
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 py-4 px-6">
-      <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4 sm:gap-8 text-xs">
+    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 py-6 px-6 overflow-x-auto" ref={scrollContainerRef}>
+      <div className="max-w-4xl mx-auto flex flex-nowrap justify-start sm:justify-center gap-8 sm:gap-16 text-sm min-w-max px-4">
         <Link 
           to="/" 
-          className="font-mono text-white/50 hover:text-white/70 transition-colors uppercase tracking-wider"
+          className={getClassName('/')}
         >
           Home
         </Link>
+        <div className="h-6 w-px bg-white/10" />
         <Link 
           to="/billing-info" 
-          className="font-mono text-white/50 hover:text-white/70 transition-colors uppercase tracking-wider"
+          className={getClassName('/billing-info')}
         >
           Billing
         </Link>
         <Link 
           to="/code-of-conduct" 
-          className="font-mono text-white/50 hover:text-white/70 transition-colors uppercase tracking-wider"
+          className={getClassName('/code-of-conduct')}
         >
           Code of Conduct
         </Link>
         <Link 
           to="/privacy-notice" 
-          className="font-mono text-white/50 hover:text-white/70 transition-colors uppercase tracking-wider"
+          className={getClassName('/privacy-notice')}
         >
           Privacy Notice
         </Link>

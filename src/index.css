@@ -34,27 +34,27 @@
   }
 
   .page-container {
-    @apply max-w-5xl mx-auto px-6 py-16 pb-32;
+    @apply max-w-4xl mx-auto px-6 py-16 pb-32;
   }
 
   .page-title {
-    @apply text-3xl font-medium text-white/90 mb-2 tracking-tight;
+    @apply text-3xl font-mono text-white/90 font-medium tracking-tight mb-4;
   }
 
   .title-divider {
-    @apply h-[1px] w-16 bg-white/20 mb-16;
+    @apply h-px w-16 bg-white/20 mb-16;
   }
 
   .section-title {
-    @apply text-lg text-white/80 font-medium mb-6 tracking-wide;
+    @apply text-lg font-mono text-white/80 font-medium tracking-wide mb-6 uppercase;
   }
 
   .subsection-title {
-    @apply text-sm text-white/70 uppercase tracking-wider mb-3;
+    @apply text-sm font-mono text-white/70 uppercase tracking-wider mb-3;
   }
 
   .text-content {
-    @apply text-white/80 leading-relaxed;
+    @apply text-white/80 leading-relaxed font-mono tracking-wide;
   }
 
   .content-grid {
@@ -62,7 +62,7 @@
   }
 
   .content-section {
-    @apply space-y-8;
+    @apply space-y-12;
   }
 
   .link {
