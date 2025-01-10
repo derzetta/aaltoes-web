@@ -56,7 +56,7 @@ function CodeOfConduct() {
                   as the police.
                 </p>
                 <p>
-                  <a href="#" className="text-white/60 hover:text-white/90 transition-colors">
+                  <a href="https://aaltoes2025.typeform.com/to/ZXPDN0cs" className="text-white/60 hover:text-white/90 transition-colors">
                     Form for reporting harassment
                   </a>
                 </p>
@@ -67,20 +67,18 @@ function CodeOfConduct() {
               <h2 className="section-title">Our Harassment Contact Persons</h2>
               <div className="space-y-8">
                 <div className="text-content">
-                  <p className="text-white/90 font-medium">Patricia Sarkkinen (she/her)</p>
+                  <p className="text-white/90 font-medium">Vaneeza Maqsood</p>
                   <div className="space-y-1 mt-2">
-                    <p>patricia.sarkkinen@aaltoes.com</p>
-                    <p>+358 45 164 0640</p>
-                    <p>TG: @patariisi</p>
+                    <p>+358 44 244 6768</p>
+                    <p>telegram: @vaneezamaqsood</p>
                   </div>
                 </div>
 
                 <div className="text-content">
-                  <p className="text-white/90 font-medium">Tomi Tan-Röholm (he/him)</p>
+                  <p className="text-white/90 font-medium">Doni Peltojarvi</p>
                   <div className="space-y-1 mt-2">
-                    <p>tomi.tan-roholm@aaltoes.com</p>
-                    <p>+358 40 678 3877</p>
-                    <p>TG: @Tomi_tr</p>
+                    <p>+358 40 773 4436</p>
+                    <p>telegram: @donijar</p>
                   </div>
                 </div>
               </div>
