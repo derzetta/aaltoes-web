@@ -16,17 +16,17 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
   const light3 = useRef<THREE.PointLight>(null)
   const mainLight = useRef<THREE.DirectionalLight>(null)
   const sweepLight = useRef<THREE.PointLight>(null)
-  const [isSweeping, setIsSweeping] = useState(true)
+  const [isSweeping, setIsSweeping] = useState(false)
+  const [startTime, setStartTime] = useState(0)
   const isMobile = window.innerWidth <= 768
-  const radius = isMobile ? 50 : 150  // Smaller radius for mobile
-  const [lightsVisible, setLightsVisible] = useState(false)
+  const radius = isMobile ? 50 : 150
 
   useEffect(() => {
     if (isModelLoaded) {
-      // Small delay to ensure model is visible first
       const timer = setTimeout(() => {
-        setLightsVisible(true)
-      }, 100)
+        setIsSweeping(true)
+        setStartTime(performance.now())
+      }, 300)
       return () => clearTimeout(timer)
     }
   }, [isModelLoaded])
@@ -57,7 +57,8 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
     }
 
     if (sweepLight.current && isSweeping) {
-      const sweepTime = clock.getElapsedTime() * 0.8
+      const currentTime = (performance.now() - startTime) / 1000
+      const sweepTime = currentTime * 0.8
       if (sweepTime <= 1) {
         const sweepRadius = isMobile ? 150 : 200
         sweepLight.current.position.x = -sweepRadius + (sweepTime * sweepRadius * 2)
@@ -74,14 +75,14 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
 
   return (
     <>
-      <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={lightsVisible ? 1.0 : 0} />
-      <pointLight ref={light1} color={0x00ffff} intensity={lightsVisible ? (isMobile ? 4 : 5) : 0} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light2} color={0xff00ff} intensity={lightsVisible ? (isMobile ? 4 : 5) : 0} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light3} color={0x00ff00} intensity={lightsVisible ? (isMobile ? 4 : 5) : 0} distance={isMobile ? 150 : 200} decay={0.5} />
+      <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={1.0} />
+      <pointLight ref={light1} color={0x00ffff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light2} color={0xff00ff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light3} color={0x00ff00} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
       
-      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={lightsVisible ? (isMobile ? 2 : 2.5) : 0} distance={isMobile ? 150 : 200} />
-      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={lightsVisible ? (isMobile ? 2 : 2.5) : 0} distance={isMobile ? 150 : 200} />
-      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={lightsVisible ? (isMobile ? 2 : 2.5) : 0} distance={isMobile ? 150 : 200} />
+      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
       <pointLight 
         ref={sweepLight}
         color={0xffffff}
