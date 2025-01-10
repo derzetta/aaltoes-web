@@ -17,10 +17,11 @@ function RotatingLights() {
   const mainLight = useRef<THREE.DirectionalLight>(null)
   const sweepLight = useRef<THREE.PointLight>(null)
   const [isSweeping, setIsSweeping] = useState(true)
+  const isMobile = window.innerWidth <= 768
+  const radius = isMobile ? 50 : 150  // Smaller radius for mobile
 
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime()
-    const radius = 150
 
     if (mainLight.current) {
       mainLight.current.position.x = Math.cos(time * 0.9) * (radius * 5)
@@ -47,12 +48,13 @@ function RotatingLights() {
     if (sweepLight.current && isSweeping) {
       const sweepTime = clock.getElapsedTime() * 0.8
       if (sweepTime <= 1) {
-        sweepLight.current.position.x = -200 + (sweepTime * 400)
+        const sweepRadius = isMobile ? 150 : 200
+        sweepLight.current.position.x = -sweepRadius + (sweepTime * sweepRadius * 2)
         sweepLight.current.position.y = 0
         sweepLight.current.position.z = 100
         const t = sweepTime
         const easeInOut = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-        sweepLight.current.intensity = easeInOut * 20
+        sweepLight.current.intensity = easeInOut * (isMobile ? 15 : 20)
       } else {
         setIsSweeping(false)
       }
@@ -62,18 +64,18 @@ function RotatingLights() {
   return (
     <>
       <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={1.0} />
-      <pointLight ref={light1} color={0x00ffff} intensity={5} distance={200} decay={0.5} />
-      <pointLight ref={light2} color={0xff00ff} intensity={5} distance={200} decay={0.5} />
-      <pointLight ref={light3} color={0x00ff00} intensity={5} distance={200} decay={0.5} />
+      <pointLight ref={light1} color={0x00ffff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light2} color={0xff00ff} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
+      <pointLight ref={light3} color={0x00ff00} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
       
-      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={2.5} distance={200} />
-      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={2.5} distance={200} />
-      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={2.5} distance={200} />
+      <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
+      <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={isMobile ? 2 : 2.5} distance={isMobile ? 150 : 200} />
       <pointLight 
         ref={sweepLight}
         color={0xffffff}
         intensity={0}
-        distance={400}
+        distance={isMobile ? 300 : 400}
         decay={0}
       />
     </>
@@ -84,9 +86,9 @@ function Scene() {
   const gltf = useLoader(GLTFLoader, '/aalto_logo_3d.glb')
   const [scale, setScale] = useState(() => {
     if (window.innerWidth <= 480) {
-      return 7.0
+      return 8.0
     } else if (window.innerWidth <= 768) {
-      return 9.0
+      return 10.0
     }
     return 13.0
   })
@@ -94,9 +96,9 @@ function Scene() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 480) {
-        setScale(7.0)
+        setScale(8.0)
       } else if (window.innerWidth <= 768) {
-        setScale(9.0)
+        setScale(10.0)
       } else {
         setScale(13.0)
       }
@@ -189,6 +191,8 @@ function App() {
       overflow: 'hidden'
     }}>
       <Canvas
+        dpr={[1, 2]}
+        performance={{ min: 0.5 }}
         style={{
           width: '100%',
           height: isSmallMobile ? '45vh' : '50vh',
@@ -199,8 +203,8 @@ function App() {
           borderRadius: '4px'
         }}
         camera={{
-          fov: isMobile ? 85 : 55,
-          position: [0, 0, isSmallMobile ? 12 : isMobile ? 14 : 21],
+          fov: isMobile ? 75 : 55,
+          position: [0, 0, isSmallMobile ? 14 : isMobile ? 16 : 21],
           near: 0.1,
           far: 1000
         }}
