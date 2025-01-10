@@ -160,7 +160,6 @@ function App() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
-  const [pageUpdate, setPageUpdate] = useState(0)
   const [cursorLightVisible, setCursorLightVisible] = useState(false)
 
   useEffect(() => {
@@ -190,16 +189,6 @@ function App() {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setPageUpdate(prev => prev + 1)
-    }
-
-    // Listen for page updates
-    window.addEventListener('popstate', handleRouteChange)
-    return () => window.removeEventListener('popstate', handleRouteChange)
   }, [])
 
   return (
