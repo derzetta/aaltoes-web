@@ -184,23 +184,23 @@ function App() {
       position: 'relative',
       width: '100%',
       maxWidth: '1300px',
-      height: '50vh',
+      height: isSmallMobile ? '45vh' : '50vh',
       margin: '0 auto',
       overflow: 'hidden'
     }}>
       <Canvas
         style={{
           width: '100%',
-          height: '50vh',
+          height: isSmallMobile ? '45vh' : '50vh',
           position: 'fixed',
-          top: '50%',
+          top: isSmallMobile ? '45%' : '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           borderRadius: '4px'
         }}
         camera={{
           fov: isMobile ? 85 : 55,
-          position: [0, 0, isSmallMobile ? 16 : isMobile ? 23 : 21],
+          position: [0, 0, isSmallMobile ? 12 : isMobile ? 14 : 21],
           near: 0.1,
           far: 1000
         }}
@@ -239,7 +239,7 @@ function App() {
 
       <div style={{
         position: 'fixed',
-        top: 'calc(50% + 19vh)',
+        top: isSmallMobile ? 'calc(45% + 17vh)' : 'calc(50% + 19vh)',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 1000,
