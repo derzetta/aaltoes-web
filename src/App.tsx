@@ -340,27 +340,42 @@ function App() {
           <div style={{
             flex: '1 1 50%',
             display: 'flex',
-            flexDirection: window.innerWidth <= 480 ? 'column' : 'row',
+            flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
             justifyContent: 'center',
             alignItems: 'stretch',
-            gap: window.innerWidth <= 480 ? '1rem' : '2rem',
+            gap: window.innerWidth <= 768 ? '0.5rem' : '1.7rem',
             width: window.innerWidth <= 768 ? '100%' : '50%',
           //  backgroundColor: 'rgba(0, 0, 255, 0.1)'  // Semi-transparent blue
           }}>
             
-            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
+            <a 
+              href="https://lu.ma/aaltoes-calendar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
+            >
               <span className="relative z-10 uppercase">Our Events</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </button>
-            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
+            </a>
+            <a 
+              href="https://t.me/+DU5AIzwYa3o5NDIy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
+            >
               <span className="relative z-10 uppercase">Community Chat</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </button>
-            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]">
+            </a>
+            <a 
+              href="https://aaltoes2025.typeform.com/membership"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+            >
               <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
