@@ -15,44 +15,67 @@ function RotatingLights() {
   const light2 = useRef<THREE.PointLight>(null)
   const light3 = useRef<THREE.PointLight>(null)
   const mainLight = useRef<THREE.DirectionalLight>(null)
+  const sweepLight = useRef<THREE.PointLight>(null)
+  const [isSweeping, setIsSweeping] = useState(true)
 
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime()
-    const radius = 90
+    const radius = 150
 
     if (mainLight.current) {
-      mainLight.current.position.x = Math.cos(time * 0.9) * (radius * 0.8)
-      mainLight.current.position.y = Math.sin(time * 0.9) * (radius * 0.8)
-      mainLight.current.position.z = 10
+      mainLight.current.position.x = Math.cos(time * 0.9) * (radius * 5)
+      mainLight.current.position.y = Math.sin(time * 0.9) * (radius * 5)
+      mainLight.current.position.z = 100
     }
 
     if (light1.current) {
       light1.current.position.x = Math.cos(time * 0.5) * radius
       light1.current.position.y = Math.sin(time * 0.5) * radius
-      light1.current.position.z = 80
+      light1.current.position.z = 70
     }
     if (light2.current) {
       light2.current.position.x = Math.cos(time * 0.5 + 2.1) * radius
       light2.current.position.y = Math.sin(time * 0.5 + 2.1) * radius
-      light2.current.position.z = 80
+      light2.current.position.z = 70
     }
     if (light3.current) {
       light3.current.position.x = Math.cos(time * 0.5 + 4.2) * radius
       light3.current.position.y = Math.sin(time * 0.5 + 4.2) * radius
-      light3.current.position.z = 100
+      light3.current.position.z = 70
+    }
+
+    if (sweepLight.current && isSweeping) {
+      const sweepTime = clock.getElapsedTime() * 0.8
+      if (sweepTime <= 1) {
+        sweepLight.current.position.x = -200 + (sweepTime * 400)
+        sweepLight.current.position.y = 0
+        sweepLight.current.position.z = 100
+        const t = sweepTime
+        const easeInOut = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+        sweepLight.current.intensity = easeInOut * 20
+      } else {
+        setIsSweeping(false)
+      }
     }
   })
 
   return (
     <>
       <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={1.0} />
-      <pointLight ref={light1} color={0x00ffff} intensity={5} distance={200} decay={1} />
-      <pointLight ref={light2} color={0xff00ff} intensity={5} distance={200} decay={1} />
-      <pointLight ref={light3} color={0x00ff00} intensity={5} distance={200} decay={1} />
+      <pointLight ref={light1} color={0x00ffff} intensity={5} distance={200} decay={0.5} />
+      <pointLight ref={light2} color={0xff00ff} intensity={5} distance={200} decay={0.5} />
+      <pointLight ref={light3} color={0x00ff00} intensity={5} distance={200} decay={0.5} />
       
       <pointLight position={[0, 0, 100]} color={0xff00ff} intensity={2.5} distance={200} />
       <pointLight position={[-50, -50, 80]} color={0x00ffff} intensity={2.5} distance={200} />
       <pointLight position={[50, 50, 80]} color={0x00ff00} intensity={2.5} distance={200} />
+      <pointLight 
+        ref={sweepLight}
+        color={0xffffff}
+        intensity={0}
+        distance={400}
+        decay={0}
+      />
     </>
   )
 }
@@ -61,21 +84,21 @@ function Scene() {
   const gltf = useLoader(GLTFLoader, '/aalto_logo_3d.glb')
   const [scale, setScale] = useState(() => {
     if (window.innerWidth <= 480) {
-      return 3.0
+      return 7.0
     } else if (window.innerWidth <= 768) {
-      return 4.0
+      return 9.0
     }
-    return 6.5
+    return 13.0
   })
   
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 480) {
-        setScale(3.0)
+        setScale(7.0)
       } else if (window.innerWidth <= 768) {
-        setScale(4.0)
+        setScale(9.0)
       } else {
-        setScale(6.5)
+        setScale(13.0)
       }
     }
 
@@ -114,12 +137,15 @@ function App() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
+  const [pageUpdate, setPageUpdate] = useState(0)
+  const [cursorLightVisible, setCursorLightVisible] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1
       const y = -(event.clientY / window.innerHeight) * 2 + 1
-      setMousePosition({ x: x * 90, y: y * 90 })
+      setMousePosition({ x: x * 200, y: y * 200 })
+      setCursorLightVisible(true)
     }
 
     window.addEventListener('mousemove', handleMouseMove)
@@ -143,24 +169,38 @@ function App() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setPageUpdate(prev => prev + 1)
+    }
+
+    // Listen for page updates
+    window.addEventListener('popstate', handleRouteChange)
+    return () => window.removeEventListener('popstate', handleRouteChange)
+  }, [])
+
   return (
     <div style={{ 
       position: 'relative',
-      width: '100vw',
-      height: '100vh',
+      width: '100%',
+      maxWidth: '1300px',
+      height: '50vh',
+      margin: '0 auto',
       overflow: 'hidden'
     }}>
       <Canvas
         style={{
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          height: '50vh',
           position: 'fixed',
-          top: isMobile ? -5 : -20,
-          left: 0
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          borderRadius: '4px'
         }}
         camera={{
-          fov: isMobile ? 75 : 45,
-          position: [0, 0, isSmallMobile ? 15 : isMobile ? 22 : 20],
+          fov: isMobile ? 85 : 55,
+          position: [0, 0, isSmallMobile ? 16 : isMobile ? 23 : 21],
           near: 0.1,
           far: 1000
         }}
@@ -170,12 +210,12 @@ function App() {
         <ambientLight intensity={0.05} />
         <pointLight 
           position={[mousePosition.x, mousePosition.y, 90]} 
-          intensity={0.9}
-          distance={300}
-          decay={1}
+          intensity={cursorLightVisible ? 0.9 : 0}
+          distance={200}
+          decay={0.2}
           color={0xffffff}
         />
-        <RotatingLights />
+        <RotatingLights key={pageUpdate} />
         
         <Suspense fallback={null}>
           <Scene />
@@ -198,10 +238,10 @@ function App() {
       </Canvas>
 
       <div style={{
-        position: 'absolute',
-        top: '75%',
+        position: 'fixed',
+        top: 'calc(50% + 19vh)',
         left: '50%',
-        transform: 'translate(-50%, -50%)',
+        transform: 'translateX(-50%)',
         zIndex: 1000,
         width: '100%',
         display: 'flex',
@@ -211,18 +251,25 @@ function App() {
       }}>
         <div style={{
           width: '100%',
-          maxWidth: '1200px',
+          maxWidth: '1300px',
           display: 'flex',
           flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
           alignItems: 'center',
-          gap: window.innerWidth <= 768 ? '2rem' : '4rem',
-          padding: '0 1rem'
+          padding: '1rem',
+          gap: '1rem',
+          border: '1px solid rgba(128, 128, 128, 0.2)',
+          borderRadius: '4px',
+          background: 'rgba(0, 0, 0, 0.3)',
+          backdropFilter: 'blur(8px)'
         }}>
           <div style={{
-            flex: window.innerWidth <= 768 ? 'initial' : '1',
+            flex: '1 1 50%',
             display: 'flex',
             justifyContent: 'center',
-            marginBottom: window.innerWidth <= 768 ? '1rem' : '0'
+            alignItems: 'center',
+            width: window.innerWidth <= 768 ? '100%' : '50%',
+            marginBottom: window.innerWidth <= 768 ? '1rem' : '0',
+          //  backgroundColor: 'rgba(255, 0, 0, 0.1)'  // Semi-transparent red
           }}>
             <h2 className="font-mono text-white/50 text-xs sm:text-sm tracking-widest uppercase flex items-center gap-2">
               Year of the{' '}
@@ -241,20 +288,24 @@ function App() {
           </div>
 
           <div style={{
+            flex: '1 1 50%',
             display: 'flex',
             flexDirection: window.innerWidth <= 480 ? 'column' : 'row',
+            justifyContent: 'center',
+            alignItems: 'stretch',
             gap: window.innerWidth <= 480 ? '1rem' : '2rem',
-            width: window.innerWidth <= 480 ? '100%' : 'auto'
+            width: window.innerWidth <= 768 ? '100%' : '50%',
+          //  backgroundColor: 'rgba(0, 0, 255, 0.1)'  // Semi-transparent blue
           }}>
-            <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
+            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
               <span className="relative z-10 uppercase">Join Aaltoes</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </button>
-            <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
+            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
               <span className="relative z-10 uppercase">Our Events</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </button>
-            <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
+            <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20">
               <span className="relative z-10 uppercase">Community Chat</span>
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </button>
