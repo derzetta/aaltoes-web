@@ -86,9 +86,9 @@ function Scene() {
   const gltf = useLoader(GLTFLoader, '/aalto_logo_3d.glb')
   const [scale, setScale] = useState(() => {
     if (window.innerWidth <= 480) {
-      return 8.0
+      return 7.0
     } else if (window.innerWidth <= 768) {
-      return 10.0
+      return 8.0
     }
     return 13.0
   })
@@ -96,9 +96,9 @@ function Scene() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 480) {
-        setScale(8.0)
+        setScale(7.0)
       } else if (window.innerWidth <= 768) {
-        setScale(10.0)
+        setScale(8.0)
       } else {
         setScale(13.0)
       }
@@ -204,7 +204,7 @@ function App() {
         }}
         camera={{
           fov: isMobile ? 75 : 55,
-          position: [0, 0, isSmallMobile ? 14 : isMobile ? 16 : 21],
+          position: [0, 0, isSmallMobile ? 16 : isMobile ? 20 : 21],
           near: 0.1,
           far: 1000
         }}
