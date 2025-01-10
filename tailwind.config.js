@@ -9,6 +9,18 @@ export default {
       fontFamily: {
         mono: ['"Geist Mono"', 'monospace'],
       },
+      animation: {
+        'loading-bar': 'loading-bar 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        'loading-bar': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' }
+        }
+      },
+      textShadow: {
+        'default': '1px 1px 0 rgba(0,0,0,0.2), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 2px 2px 4px rgba(0,0,0,0.3)',
+      },
     },
   },
   plugins: [],

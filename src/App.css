@@ -1,95 +1,49 @@
-#root {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@layer components {
+  #root {
+    @apply w-screen h-screen m-0 p-0 text-center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .logo {
+    @apply h-24 p-6 will-change-[filter] transition-[filter] duration-300;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .logo:hover {
+    @apply filter drop-shadow-[0_0_2em_#646cffaa];
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .logo.react:hover {
+    @apply filter drop-shadow-[0_0_2em_#61dafbaa];
+  }
 
-.read-the-docs {
-  color: #888;
-}
+  .pixel-button {
+    @apply relative px-8 py-4 text-lg bg-white text-black cursor-pointer rounded-lg font-mono font-normal uppercase
+           shadow-[0_0_16px_rgba(255,255,255,0.5)] 
+           transition-shadow duration-300
+           text-shadow-[1px_1px_0_rgba(0,0,0,0.2),-1px_-1px_0_rgba(0,0,0,0.2),1px_-1px_0_rgba(0,0,0,0.2),-1px_1px_0_rgba(0,0,0,0.2),2px_2px_4px_rgba(0,0,0,0.3)];
+  }
 
-.pixel-button {
-  position: relative;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background-color: white;
-  border: none;
-  color: black;
-  cursor: pointer;
-  border-radius: 8px;
-  font-family: "Geist Mono", monospace;
-  font-weight: 400;
-  text-transform: uppercase;
-  box-shadow: 0 0px 16px rgba(255, 255, 255, 0.5);
-  transition: box-shadow 0.3s ease;
-  text-shadow: 
-    1px 1px 0 rgba(0, 0, 0, 0.2),
-    -1px -1px 0 rgba(0, 0, 0, 0.2),
-    1px -1px 0 rgba(0, 0, 0, 0.2),
-    -1px 1px 0 rgba(0, 0, 0, 0.2),
-    2px 2px 4px rgba(0, 0, 0, 0.3);
-}
+  .pixel-button::before {
+    @apply content-[''] absolute -top-1 -left-1 -right-1 -bottom-1 
+           border border-white rounded-xl opacity-30
+           transition-[opacity,box-shadow] duration-100 pointer-events-none
+           shadow-[0_0_20px_rgba(255,255,255,0.1)];
+  }
 
-.pixel-button::before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border: 1px solid white;
-  border-radius: 12px;
-  opacity: 0.3;
-  transition: opacity 0.1s ease, box-shadow 0.3s ease;
-  pointer-events: none;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
+  .pixel-button:hover {
+    @apply shadow-[0_8px_32px_rgba(255,255,255,0.2)];
+  }
 
-.pixel-button:hover {
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
-}
+  .pixel-button:hover::before {
+    @apply opacity-100;
+  }
 
-.pixel-button:hover::before {
-  opacity: 1;
-}
+  .pixel-button span {
+    @apply relative z-[2];
+  }
 
-.pixel-button span {
-  position: relative;
-  z-index: 2;
+  .animate-loading-bar {
+    @apply animate-[loading-bar_1.5s_ease-in-out_infinite];
+  }
 }
 
 @keyframes loading-bar {
@@ -99,8 +53,4 @@
   100% {
     transform: translateX(100%);
   }
-}
-
-.animate-loading-bar {
-  animation: loading-bar 1.5s ease-in-out infinite;
 }

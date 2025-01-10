@@ -2,28 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  html, body {
+    @apply w-full h-full overflow-hidden;
+  }
+
+  body {
+    @apply bg-black;
+  }
+
+  ::selection {
+    @apply bg-gray-500/30 text-white;
+  }
+
+  ::-moz-selection {
+    @apply bg-gray-500/30 text-white;
+  }
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+@layer components {
+  #root {
+    @apply w-screen h-screen m-0 p-0 text-center;
+  }
+
+  .logo {
+    @apply h-24 p-6 will-change-[filter] transition-[filter] duration-300;
+  }
+
+  .logo:hover {
+    @apply filter drop-shadow-[0_0_2em_#646cffaa];
+  }
+
+  .logo.react:hover {
+    @apply filter drop-shadow-[0_0_2em_#61dafbaa];
+  }
+
+  .pixel-button {
+    @apply relative px-8 py-4 text-lg bg-white text-black cursor-pointer rounded-lg font-mono font-normal uppercase
+           shadow-[0_0_16px_rgba(255,255,255,0.5)] 
+           transition-shadow duration-300
+           text-shadow-[1px_1px_0_rgba(0,0,0,0.2),-1px_-1px_0_rgba(0,0,0,0.2),1px_-1px_0_rgba(0,0,0,0.2),-1px_1px_0_rgba(0,0,0,0.2),2px_2px_4px_rgba(0,0,0,0.3)];
+  }
+
+  .pixel-button::before {
+    @apply content-[''] absolute -top-1 -left-1 -right-1 -bottom-1 
+           border border-white rounded-xl opacity-30
+           transition-[opacity,box-shadow] duration-100 pointer-events-none
+           shadow-[0_0_20px_rgba(255,255,255,0.1)];
+  }
+
+  .pixel-button:hover {
+    @apply shadow-[0_8px_32px_rgba(255,255,255,0.2)];
+  }
+
+  .pixel-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .pixel-button span {
+    @apply relative z-[2];
+  }
+
+  .animate-loading-bar {
+    @apply animate-[loading-bar_1.5s_ease-in-out_infinite];
+  }
 }
 
-body {
-  background: #000;
-}
-
-::selection {
-  background: rgba(128, 128, 128, 0.3);
-  color: white;
-}
-
-::-moz-selection {
-  background: rgba(128, 128, 128, 0.3);
-  color: white;
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

@@ -4,7 +4,7 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from '@react-three/drei'
 import { Suspense, useRef, useState, useEffect } from 'react'
-import './App.css'
+import './index.css'
 import { EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
 import { motion, AnimatePresence } from 'framer-motion'
 
