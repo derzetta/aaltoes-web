@@ -187,7 +187,10 @@ function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
   const [cursorLightVisible, setCursorLightVisible] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(() => {
+    // Check if we've already loaded once in this session
+    return !sessionStorage.getItem('hasLoaded')
+  })
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -219,11 +222,15 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 2000)
-    return () => clearTimeout(timer)
-  }, [])
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+        // Mark that we've loaded
+        sessionStorage.setItem('hasLoaded', 'true')
+      }, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [isLoading])
 
   if (isLoading) {
     return <LoadingScreen />
