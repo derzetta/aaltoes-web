@@ -248,7 +248,7 @@ function App() {
       {/* Main content container */}
       <div className="flex flex-col items-center gap-6" style={{ 
         width: '100%',
-        maxWidth: isTabletOrMobile ? '896px' : '1400px',
+        maxWidth: '1400px',
         margin: '0 auto',
         padding: '0 1rem',
       }}>
@@ -301,7 +301,7 @@ function App() {
 
             <EffectComposer>
               <ChromaticAberration
-                offset={new THREE.Vector2(0.0012, 0.0012)}
+                offset={new THREE.Vector2(0.001, 0.001)}
                 radialModulation={false}
                 modulationOffset={0}
               />
