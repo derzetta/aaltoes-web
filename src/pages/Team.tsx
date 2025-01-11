@@ -1,4 +1,5 @@
 import Footer from '../components/Footer'
+import PreviousBoards from '../components/PreviousBoards'
 
 interface TeamMemberProps {
   name: string
@@ -110,6 +111,10 @@ function Team() {
           <p className="text-white/60 text-center mt-12">
             Write us at firstname.lastname@aaltoes.com
           </p>
+
+          <div className="mt-24">
+            <PreviousBoards />
+          </div>
         </div>
       </div>
       <Footer />
