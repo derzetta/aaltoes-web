@@ -38,8 +38,11 @@ function Footer() {
   }, [location.pathname])
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 py-6">
-      <div className="overflow-x-auto scrollbar-hide" ref={scrollContainerRef}>
+    <footer 
+      className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10"
+      ref={scrollContainerRef}
+    >
+      <div className="overflow-x-auto scrollbar-hide py-6">
         <div className="mx-auto w-[1400px] flex flex-nowrap justify-between text-sm px-6">
           <Link to="/" className={getClassName('/')}>
             AALTOES 2025
