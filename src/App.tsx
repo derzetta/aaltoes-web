@@ -36,24 +36,24 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
     const time = clock.getElapsedTime()
 
     if (mainLight.current) {
-      mainLight.current.position.x = Math.cos(time * 0.9) * (radius * 5)
-      mainLight.current.position.y = Math.sin(time * 0.9) * (radius * 5)
-      mainLight.current.position.z = 100
+      mainLight.current.position.x = Math.cos(time * 0.9) * (radius * 3)
+      mainLight.current.position.y = Math.sin(time * 0.9) * (radius * 3)
+      mainLight.current.position.z = 70
     }
 
     if (light1.current) {
-      light1.current.position.x = Math.cos(time * 0.5) * radius
-      light1.current.position.y = Math.sin(time * 0.5) * radius
+      light1.current.position.x = Math.cos(time * 0.8) * radius
+      light1.current.position.y = Math.sin(time * 0.8) * radius
       light1.current.position.z = 70
     }
     if (light2.current) {
-      light2.current.position.x = Math.cos(time * 0.5 + 2.1) * radius
-      light2.current.position.y = Math.sin(time * 0.5 + 2.1) * radius
+      light2.current.position.x = Math.cos(time * 0.8 + 2.1) * radius
+      light2.current.position.y = Math.sin(time * 0.8 + 2.1) * radius
       light2.current.position.z = 70
     }
     if (light3.current) {
-      light3.current.position.x = Math.cos(time * 0.5 + 4.2) * radius
-      light3.current.position.y = Math.sin(time * 0.5 + 4.2) * radius
+      light3.current.position.x = Math.cos(time * 0.8 + 4.2) * radius
+      light3.current.position.y = Math.sin(time * 0.8 + 4.2) * radius
       light3.current.position.z = 70
     }
 

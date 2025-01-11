@@ -22,8 +22,8 @@ function ProjectCard({ logo, name, description, url }: ProjectCardProps) {
           className="h-12 w-12 object-contain filter brightness-75 group-hover:brightness-100 transition-all"
         />
         <div>
-          <h3 className="font-mono text-white/90 text-lg tracking-wide mb-2">{name}</h3>
-          <p className="font-sans text-white/60 text-sm leading-relaxed">{description}</p>
+          <h3 className="font-['Geist'] text-white/90 text-lg tracking-wide mb-2">{name}</h3>
+          <p className="font-['Geist'] text-white/60 text-sm leading-relaxed">{description}</p>
         </div>
       </div>
       <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -42,8 +42,8 @@ function NewProjectCard() {
           <span className="text-2xl text-white/70 group-hover:text-white/90">+</span>
         </div>
         <div>
-          <h3 className="font-mono text-white/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
-          <p className="font-sans text-white/60 text-sm leading-relaxed">
+          <h3 className="font-['Geist'] text-white/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
+          <p className="font-['Geist'] text-white/60 text-sm leading-relaxed">
             Contact us with your idea and let's make it happen together
           </p>
         </div>
