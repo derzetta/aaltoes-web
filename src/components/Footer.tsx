@@ -27,6 +27,10 @@ function Footer() {
     const container = scrollContainerRef.current
     if (!container) return
 
+    // Reset vertical scroll position
+    window.scrollTo(0, 0)
+
+    // Handle horizontal scroll position
     const savedPosition = localStorage.getItem('footerScrollPosition')
     if (savedPosition) {
       container.scrollLeft = parseInt(savedPosition)
