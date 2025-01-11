@@ -239,7 +239,7 @@ function App() {
   return (
     <div className="relative min-h-screen">
       <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/30 to-black/70 -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
       <div style={{ 
         position: 'relative',
         width: '100%',
@@ -331,7 +331,7 @@ function App() {
               marginBottom: window.innerWidth <= 768 ? '1rem' : '0',
             //  backgroundColor: 'rgba(255, 0, 0, 0.1)'  // Semi-transparent red
             }}>
-              <h2 className="font-mono text-white/50 text-xs sm:text-sm tracking-widest uppercase flex items-center gap-3">
+              <h2 className="font-mono text-white/50 text-sm sm:text-lg tracking-widest uppercase flex items-center gap-3">
                 Year of the{' '}
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -362,7 +362,7 @@ function App() {
                 href="https://lu.ma/aaltoes-calendar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
+                className="group relative px-4 sm:px-8 py-3 sm:py-4 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-base tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
               >
                 <span className="relative z-10 uppercase">Our Events</span>
                 <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -371,7 +371,7 @@ function App() {
                 href="https://t.me/+DU5AIzwYa3o5NDIy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20"
+                className="group relative px-4 sm:px-8 py-3 sm:py-4 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-base tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
               >
                 <span className="relative z-10 uppercase">Community Chat</span>
                 <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -380,7 +380,7 @@ function App() {
                 href="https://aaltoes2025.typeform.com/membership"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-xs sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+                className="group relative px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-sm sm:text-base tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] flex items-center justify-center"
               >
                 <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
                 <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
