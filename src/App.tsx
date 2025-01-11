@@ -237,7 +237,9 @@ function App() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
+      <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/30 to-black/70 -z-10" />
       <div style={{ 
         position: 'relative',
         width: '100%',
@@ -264,9 +266,8 @@ function App() {
             near: 0.1,
             far: 1000
           }}
+          gl={{ alpha: true }}
         >
-          <color attach="background" args={['#000000']} />
-          
           <ambientLight intensity={0.05} />
           <pointLight 
             position={[mousePosition.x, mousePosition.y, 90]} 

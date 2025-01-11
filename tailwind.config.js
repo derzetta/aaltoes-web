@@ -22,6 +22,12 @@ export default {
       textShadow: {
         'default': '1px 1px 0 rgba(0,0,0,0.2), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 2px 2px 4px rgba(0,0,0,0.3)',
       },
+      backgroundImage: {
+        'grid-white': 'linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px)'
+      },
+      backgroundSize: {
+        'grid': '24px 24px'
+      }
     },
   },
   plugins: [],

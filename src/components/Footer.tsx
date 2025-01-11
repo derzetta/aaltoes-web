@@ -10,11 +10,6 @@ function Footer() {
     return `font-mono ${isActive ? 'text-white' : 'text-white/50'} hover:text-white/70 transition-colors uppercase tracking-wider whitespace-nowrap`
   }
 
-  // Reset vertical scroll position on route change
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location.pathname])
-
   // Keep the horizontal scroll functionality
   useEffect(() => {
     const container = scrollContainerRef.current
@@ -40,7 +35,7 @@ function Footer() {
 
   return (
     <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 py-6">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" ref={scrollContainerRef}>
         <div className="max-w-4xl mx-auto flex flex-nowrap justify-start sm:justify-center gap-8 sm:gap-16 text-sm min-w-max px-6">
           <Link to="/" className={getClassName('/')}>
             AALTOES 2025
