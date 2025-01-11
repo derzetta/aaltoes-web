@@ -22,8 +22,8 @@ function TeamMember({ name, role, image }: TeamMemberProps) {
           />
         </div>
         <div>
-          <h3 className="font-['Geist'] text-white/90 text-lg tracking-wide mb-1">{name}</h3>
-          <p className="font-['Geist'] text-white/60 text-sm">{role}</p>
+          <h3 className="font-sans text-white/90 text-lg tracking-wide mb-1">{name}</h3>
+          <p className="font-sans text-white/60 text-sm">{role}</p>
         </div>
       </div>
     </div>

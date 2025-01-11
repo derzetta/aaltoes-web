@@ -38,18 +38,18 @@ function ProjectCard({ project }: { project: Project }) {
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between gap-4">
-          <h3 className="font-['Geist'] text-white/90 text-base tracking-wide">{name}</h3>
+          <h3 className="font-sans text-white/90 text-base tracking-wide">{name}</h3>
           <StatusBadge status={status} />
         </div>
-        <p className="font-['Geist'] text-white/60 text-sm leading-relaxed mt-4 line-clamp-4">{description}</p>
+        <p className="font-sans text-white/60 text-sm leading-relaxed mt-4 line-clamp-4">{description}</p>
         <div className="flex flex-col gap-1 mt-auto pt-4">
           {spinOffYear && (
-            <div className="font-['Geist_Mono'] text-xs text-white/40">
+            <div className="font-mono text-xs text-white/40">
               {spinOffYear}
             </div>
           )}
           {url && (
-            <div className="font-['Geist_Mono'] text-xs text-white/40">
+            <div className="font-mono text-xs text-white/40">
               {new URL(url).hostname}
             </div>
           )}
@@ -71,8 +71,8 @@ function NewProjectCard() {
           <span className="text-2xl text-white/70 group-hover:text-white/90">+</span>
         </div>
         <div>
-          <h3 className="font-['Geist'] text-white/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
-          <p className="font-['Geist'] text-white/60 text-sm leading-relaxed">
+          <h3 className="font-sans text-white/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
+          <p className="font-sans text-white/60 text-sm leading-relaxed">
             Contact us with your idea and let's make it happen together
           </p>
         </div>
@@ -182,7 +182,14 @@ function Projects() {
     }
   ]
 
-  const filteredProjects = projects.filter(p => p.category === selectedCategory)
+  const filteredProjects = projects
+    .filter(p => p.category === selectedCategory)
+    .sort((a, b) => {
+      if (selectedCategory === 'spinout' && a.spinOffYear && b.spinOffYear) {
+        return b.spinOffYear - a.spinOffYear // Sort by year in descending order
+      }
+      return 0
+    })
 
   return (
     <div className="min-h-screen bg-black text-white">
