@@ -100,21 +100,21 @@ function Scene() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [scale, setScale] = useState(() => {
     if (window.innerWidth <= 480) {
-      return 7.0
-    } else if (window.innerWidth <= 768) {
       return 8.0
+    } else if (window.innerWidth <= 768) {
+      return 9.0
     }
-    return 13.0
+    return 14.0
   })
   
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 480) {
-        setScale(7.0)
-      } else if (window.innerWidth <= 768) {
         setScale(8.0)
+      } else if (window.innerWidth <= 768) {
+        setScale(9.0)
       } else {
-        setScale(13.0)
+        setScale(14.0)
       }
     }
 
@@ -246,9 +246,9 @@ function App() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
       
       {/* Main content container */}
-      <div className="flex flex-col items-center gap-4" style={{ 
+      <div className="flex flex-col items-center gap-6" style={{ 
         width: '100%',
-        maxWidth: '1300px',
+        maxWidth: isTabletOrMobile ? '896px' : '1400px',
         margin: '0 auto',
         padding: '0 1rem',
       }}>
@@ -256,23 +256,24 @@ function App() {
         <div style={{ 
           position: 'relative',
           width: '100%',
-          height: isSmallMobile ? '200px' : isTabletOrMobile ? '230px' : '250px',
+          height: isSmallMobile ? '150px' : isTabletOrMobile ? '180px' : '250px',
           overflow: 'hidden',
           clipPath: 'inset(0 0 0 0)',
+          borderRadius: '4px',
         }}>
           <Canvas
             dpr={[1, 2]}
             performance={{ min: 0.5 }}
             style={{
               width: '100%',
-              height: '400px',
+              height: '200%',
               position: 'relative',
               borderRadius: '4px',
-              transform: `translateY(${isSmallMobile ? '-100px' : isTabletOrMobile ? '-85px' : '-75px'})`,
+              transform: `translateY(-25%)`,
             }}
             camera={{
               fov: isMobile ? 75 : 55,
-              position: [0, 0, isSmallMobile ? 16 : isMobile ? 20 : 21],
+              position: [0, -2, isSmallMobile ? 20 : isMobile ? 24 : 25],
               near: 0.1,
               far: 1000
             }}
@@ -311,8 +312,7 @@ function App() {
         {/* Slogan and buttons container */}
         <div style={{
           width: '100%',
-          maxWidth: '1300px',
-          padding: '0 1rem'
+          padding: '0'
         }}>
           <div style={{
             width: '100%',
