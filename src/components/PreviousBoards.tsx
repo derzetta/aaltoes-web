@@ -6,6 +6,7 @@ interface BoardMember {
 interface BoardYear {
   year: number
   members: BoardMember[]
+  isGolden?: boolean
 }
 
 function PreviousBoards() {
@@ -42,7 +43,8 @@ function PreviousBoards() {
         { name: "Artur Skwarek", role: "Projects" },
         { name: "Venla Lymysalo", role: "Operations" },
         { name: "Anna Chiala", role: "Brand & Marketing" }
-      ]
+      ],
+      isGolden: true
     },
     {
       year: 2021,
@@ -201,16 +203,22 @@ function PreviousBoards() {
       {boards.map((board) => (
         <div key={board.year} className="space-y-4">
           <div className="flex items-center gap-4">
-            <h3 className="font-['Geist_Mono'] text-white/90">{board.year}</h3>
-            <div className="h-px flex-grow bg-white/10" />
+            <h3 className={`font-['Geist_Mono'] ${board.isGolden ? 'text-amber-300' : 'text-white/90'}`}>
+              {board.year}
+            </h3>
+            <div className={`h-px flex-grow ${board.isGolden ? 'bg-amber-300/30' : 'bg-white/10'}`} />
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-2">
             {board.members.map((member, index) => (
               <div key={index} className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-white/10" />
-                <span className="text-sm text-white/70">{member.name}</span>
+                <div className={`w-6 h-6 rounded-full ${board.isGolden ? 'bg-amber-300/20' : 'bg-white/10'}`} />
+                <span className={`text-sm ${board.isGolden ? 'text-amber-300' : 'text-white/70'}`}>
+                  {member.name}
+                </span>
                 {member.role && (
-                  <span className="text-xs text-white/40">{member.role}</span>
+                  <span className={`text-xs ${board.isGolden ? 'text-amber-300/70' : 'text-white/40'}`}>
+                    {member.role}
+                  </span>
                 )}
               </div>
             ))}
