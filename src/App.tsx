@@ -96,7 +96,7 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
 }
 
 function Scene() {
-  const gltf = useLoader(GLTFLoader, '/aalto_logo_3d.glb')
+  const gltf = useLoader(GLTFLoader, '/aalto_logo_3ds.glb')
   const [isLoaded, setIsLoaded] = useState(false)
   const [scale, setScale] = useState(() => {
     if (window.innerWidth <= 480) {
