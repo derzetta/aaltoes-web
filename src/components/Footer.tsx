@@ -1,45 +1,36 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { useFooterScroll } from '../contexts/FooterScrollContext'
 
 function Footer() {
   const location = useLocation()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const { scrollPosition } = useFooterScroll()
+  
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      scrollPosition.current = container.scrollLeft
+    }
+
+    container.addEventListener('scroll', handleScroll)
+    container.scrollLeft = scrollPosition.current
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll)
+    }
+  }, [location.pathname])
 
   const getClassName = (path: string) => {
     const isActive = location.pathname === path
     return `font-mono ${isActive ? 'text-white' : 'text-white/50'} hover:text-white/70 transition-colors uppercase tracking-wider whitespace-nowrap`
   }
 
-  // Keep the horizontal scroll functionality
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    const handleScroll = () => {
-      localStorage.setItem('footerScrollPosition', container.scrollLeft.toString())
-    }
-
-    container.addEventListener('scroll', handleScroll)
-    return () => container.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    // Reset vertical scroll position
-    window.scrollTo(0, 0)
-
-    // Handle horizontal scroll position
-    const savedPosition = localStorage.getItem('footerScrollPosition')
-    if (savedPosition) {
-      container.scrollLeft = parseInt(savedPosition)
-    }
-  }, [location.pathname])
-
   return (
     <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10">
-      <div className="overflow-x-auto scrollbar-hide py-6">
+      <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hide py-6">
         <div className="container w-[1400px] mx-auto flex flex-nowrap justify-between text-sm px-6" style={{ minWidth: '1400px' }}>
           <Link to="/" className={getClassName('/')}>
             AALTOES 2025

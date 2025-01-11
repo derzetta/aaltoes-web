@@ -8,6 +8,7 @@ import './index.css'
 import { EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
 import { motion, AnimatePresence } from 'framer-motion'
 import Footer from './components/Footer'
+import { FooterScrollProvider } from './contexts/FooterScrollContext'
 
 
 
@@ -239,171 +240,173 @@ function App() {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-center" style={{ 
-      paddingBottom: '4rem'
-    }}>
-      <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
-      
-      {/* Main content container */}
-      <div className="flex flex-col items-center gap-6" style={{ 
-        width: '100%',
-        maxWidth: '1400px',
-        margin: '0 auto',
-        padding: '0 1rem',
+    <FooterScrollProvider>
+      <div className="relative min-h-screen flex flex-col justify-center" style={{ 
+        paddingBottom: '4rem'
       }}>
-        {/* Canvas container */}
-        <div style={{ 
-          position: 'relative',
+        <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
+        
+        {/* Main content container */}
+        <div className="flex flex-col items-center gap-6" style={{ 
           width: '100%',
-          height: isSmallMobile ? '150px' : isTabletOrMobile ? '180px' : '250px',
-          overflow: 'hidden',
-          clipPath: 'inset(0 0 0 0)',
-          borderRadius: '4px',
+          maxWidth: '1400px',
+          margin: '0 auto',
+          padding: '0 1rem',
         }}>
-          <Canvas
-            dpr={[1, 2]}
-            performance={{ min: 0.5 }}
-            style={{
-              width: '100%',
-              height: '200%',
-              position: 'relative',
-              borderRadius: '4px',
-              transform: `translateY(-25%)`,
-            }}
-            camera={{
-              fov: isMobile ? 75 : 55,
-              position: [0, -2, isSmallMobile ? 20 : isMobile ? 24 : 25],
-              near: 0.1,
-              far: 1000
-            }}
-            gl={{ alpha: true }}
-          >
-            <ambientLight intensity={0.05} />
-            <pointLight 
-              position={[mousePosition.x, mousePosition.y, 90]} 
-              intensity={cursorLightVisible ? 0.9 : 0}
-              distance={200}
-              decay={0.2}
-              color={0xffffff}
-            />
-            
-            <Suspense fallback={null}>
-              <Scene />
-            </Suspense>
-
-            <OrbitControls 
-              enableZoom={false}
-              enablePan={false}
-              enableRotate={false}
-              autoRotate={false}
-            />
-
-            <EffectComposer>
-              <ChromaticAberration
-                offset={new THREE.Vector2(0.001, 0.001)}
-                radialModulation={false}
-                modulationOffset={0}
+          {/* Canvas container */}
+          <div style={{ 
+            position: 'relative',
+            width: '100%',
+            height: isSmallMobile ? '150px' : isTabletOrMobile ? '180px' : '250px',
+            overflow: 'hidden',
+            clipPath: 'inset(0 0 0 0)',
+            borderRadius: '4px',
+          }}>
+            <Canvas
+              dpr={[1, 2]}
+              performance={{ min: 0.5 }}
+              style={{
+                width: '100%',
+                height: '200%',
+                position: 'relative',
+                borderRadius: '4px',
+                transform: `translateY(-25%)`,
+              }}
+              camera={{
+                fov: isMobile ? 75 : 55,
+                position: [0, -2, isSmallMobile ? 20 : isMobile ? 24 : 25],
+                near: 0.1,
+                far: 1000
+              }}
+              gl={{ alpha: true }}
+            >
+              <ambientLight intensity={0.05} />
+              <pointLight 
+                position={[mousePosition.x, mousePosition.y, 90]} 
+                intensity={cursorLightVisible ? 0.9 : 0}
+                distance={200}
+                decay={0.2}
+                color={0xffffff}
               />
-            </EffectComposer>
-          </Canvas>
-        </div>
+              
+              <Suspense fallback={null}>
+                <Scene />
+              </Suspense>
 
-        {/* Slogan and buttons container */}
-        <div style={{
-          width: '100%',
-          padding: '0'
-        }}>
+              <OrbitControls 
+                enableZoom={false}
+                enablePan={false}
+                enableRotate={false}
+                autoRotate={false}
+              />
+
+              <EffectComposer>
+                <ChromaticAberration
+                  offset={new THREE.Vector2(0.001, 0.001)}
+                  radialModulation={false}
+                  modulationOffset={0}
+                />
+              </EffectComposer>
+            </Canvas>
+          </div>
+
+          {/* Slogan and buttons container */}
           <div style={{
             width: '100%',
-            display: 'flex',
-            flexDirection: isTabletOrMobile ? 'column' : 'row',
-            alignItems: 'center',
-            padding: '1rem',
-            gap: '1rem',
-            border: '1px solid rgba(128, 128, 128, 0.2)',
-            borderRadius: '4px',
-            background: 'rgba(0, 0, 0, 0.3)',
-            backdropFilter: 'blur(8px)'
+            padding: '0'
           }}>
             <div style={{
-              flex: '1 1 auto',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: isTabletOrMobile ? '100%' : 'auto',
-              marginBottom: isTabletOrMobile ? '1rem' : '0',
-            }}>
-              <h2 className="font-mono text-white/50 text-base sm:text-lg tracking-widest uppercase flex items-center gap-3">
-                Year of the{' '}
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={currentWordIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="text-white/70"
-                  >
-                    {words[currentWordIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </h2>
-            </div>
-
-            {/* Divider */}
-            <div className={`
-              ${isTabletOrMobile 
-                ? 'w-[calc(100%+2rem)] -mx-4 h-px bg-white/10' 
-                : 'h-12 w-px bg-white/10'
-              }
-            `} />
-
-            {/* Buttons Section */}
-            <div style={{
+              width: '100%',
               display: 'flex',
               flexDirection: isTabletOrMobile ? 'column' : 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'stretch',
-              gap: isTabletOrMobile ? '0.5rem' : '1.7rem',
-              padding: isTabletOrMobile ? '0' : '0 1.7rem',
-              width: isTabletOrMobile ? '100%' : 'auto',
-              minWidth: isTabletOrMobile ? 'auto' : 'fit-content',
+              alignItems: 'center',
+              padding: '1rem',
+              gap: '1rem',
+              border: '1px solid rgba(128, 128, 128, 0.2)',
+              borderRadius: '4px',
+              background: 'rgba(0, 0, 0, 0.3)',
+              backdropFilter: 'blur(8px)'
             }}>
-              <a 
-                href="https://lu.ma/aaltoes-calendar"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
-              >
-                <span className="relative z-10 uppercase">2025 Events</span>
-                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </a>
-              <a 
-                href="https://t.me/+DU5AIzwYa3o5NDIy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
-              >
-                <span className="relative z-10 uppercase">2025 Chat</span>
-                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </a>
-              <a 
-                href="https://aaltoes2025.typeform.com/membership"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] flex items-center justify-center whitespace-nowrap"
-              >
-                <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
-                <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-              </a>
+              <div style={{
+                flex: '1 1 auto',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: isTabletOrMobile ? '100%' : 'auto',
+                marginBottom: isTabletOrMobile ? '1rem' : '0',
+              }}>
+                <h2 className="font-mono text-white/50 text-base sm:text-lg tracking-widest uppercase flex items-center gap-3">
+                  Year of the{' '}
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={currentWordIndex}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="text-white/70"
+                    >
+                      {words[currentWordIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </h2>
+              </div>
+
+              {/* Divider */}
+              <div className={`
+                ${isTabletOrMobile 
+                  ? 'w-[calc(100%+2rem)] -mx-4 h-px bg-white/10' 
+                  : 'h-12 w-px bg-white/10'
+                }
+              `} />
+
+              {/* Buttons Section */}
+              <div style={{
+                display: 'flex',
+                flexDirection: isTabletOrMobile ? 'column' : 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'stretch',
+                gap: isTabletOrMobile ? '0.5rem' : '1.7rem',
+                padding: isTabletOrMobile ? '0' : '0 1.7rem',
+                width: isTabletOrMobile ? '100%' : 'auto',
+                minWidth: isTabletOrMobile ? 'auto' : 'fit-content',
+              }}>
+                <a 
+                  href="https://lu.ma/aaltoes-calendar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
+                >
+                  <span className="relative z-10 uppercase">2025 Events</span>
+                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </a>
+                <a 
+                  href="https://t.me/+DU5AIzwYa3o5NDIy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
+                >
+                  <span className="relative z-10 uppercase">2025 Chat</span>
+                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </a>
+                <a 
+                  href="https://aaltoes2025.typeform.com/membership"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] flex items-center justify-center whitespace-nowrap"
+                >
+                  <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
+                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
+        
+        <Footer />
       </div>
-      
-      <Footer />
-    </div>
+    </FooterScrollProvider>
   )
 }
 
