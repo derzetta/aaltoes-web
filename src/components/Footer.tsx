@@ -51,8 +51,8 @@ function Footer() {
           <Link to="/about" className={getClassName('/about')}>
             About
           </Link>
-          <Link to="/board" className={getClassName('/board')}>
-            Board
+          <Link to="/team" className={getClassName('/team')}>
+            Team
           </Link>
           <Link to="/projects" className={getClassName('/projects')}>
             Projects

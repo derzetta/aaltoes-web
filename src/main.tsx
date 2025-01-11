@@ -6,6 +6,10 @@ import BillingInfo from './pages/BillingInfo'
 import CodeOfConduct from './pages/policies/CodeOfConduct'
 import PrivacyNotice from './pages/policies/PrivacyNotice'
 import AssociationRules from './pages/policies/AssociationRules'
+import Projects from './pages/Projects'
+import About from './pages/About'
+import Team from './pages/Team'
+import Events from './pages/Events'
 import './index.css'
 
 const router = createHashRouter([
@@ -28,6 +32,22 @@ const router = createHashRouter([
   {
     path: '/association-rules',
     element: <AssociationRules />,
+  },
+  {
+    path: '/projects',
+    element: <Projects />,
+  },
+  {
+    path: '/about',
+    element: <About />,
+  },
+  {
+    path: '/team',
+    element: <Team />,
+  },
+  {
+    path: '/events',
+    element: <Events />,
   },
 ])
 
