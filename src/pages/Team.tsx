@@ -9,7 +9,7 @@ interface TeamMemberProps {
   linkedin?: string
 }
 
-function TeamMember({ name, role, image, email }: TeamMemberProps) {
+function TeamMember({ name, role, image }: TeamMemberProps) {
   return (
     <div className="group relative bg-black/30 backdrop-blur-sm p-6 transition-all hover:bg-black/40">
       <div className="flex flex-col items-center text-center gap-3">
