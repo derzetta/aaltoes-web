@@ -239,81 +239,80 @@ function App() {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen flex flex-col">
       <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
-      <div style={{ 
-        position: 'relative',
+      
+      {/* Main content container */}
+      <div className="flex-1 flex flex-col items-center justify-center" style={{ 
         width: '100%',
         maxWidth: '1300px',
-        height: isSmallMobile ? '40vh' : '45vh',
         margin: '0 auto',
-        overflow: 'hidden'
+        paddingTop: '2rem',
+        paddingBottom: '6rem' // Space for footer
       }}>
-        <Canvas
-          dpr={[1, 2]}
-          performance={{ min: 0.5 }}
-          style={{
-            width: '100%',
-            height: isSmallMobile ? '40vh' : '45vh',
-            position: 'fixed',
-            top: isSmallMobile ? '40%' : '45%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            borderRadius: '4px'
-          }}
-          camera={{
-            fov: isMobile ? 75 : 55,
-            position: [0, 0, isSmallMobile ? 16 : isMobile ? 20 : 21],
-            near: 0.1,
-            far: 1000
-          }}
-          gl={{ alpha: true }}
-        >
-          <ambientLight intensity={0.05} />
-          <pointLight 
-            position={[mousePosition.x, mousePosition.y, 90]} 
-            intensity={cursorLightVisible ? 0.9 : 0}
-            distance={200}
-            decay={0.2}
-            color={0xffffff}
-          />
-          
-          <Suspense fallback={null}>
-            <Scene />
-          </Suspense>
-
-          <OrbitControls 
-            enableZoom={false}
-            enablePan={false}
-            enableRotate={false}
-            autoRotate={false}
-          />
-
-          <EffectComposer>
-            <ChromaticAberration
-              offset={new THREE.Vector2(0.0012, 0.0012)}
-              radialModulation={false}
-              modulationOffset={0}
-            />
-          </EffectComposer>
-        </Canvas>
-
-        <div style={{
-          position: 'fixed',
-          top: isSmallMobile ? 'calc(40% + 10vh)' : isTabletOrMobile ? 'calc(45% + 12vh)' : 'calc(45% + 17vh)',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 1000,
+        {/* Canvas container */}
+        <div style={{ 
+          position: 'relative',
           width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          height: isSmallMobile ? '40vh' : '45vh',
+        }}>
+          <Canvas
+            dpr={[1, 2]}
+            performance={{ min: 0.5 }}
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              borderRadius: '4px'
+            }}
+            camera={{
+              fov: isMobile ? 75 : 55,
+              position: [0, 0, isSmallMobile ? 16 : isMobile ? 20 : 21],
+              near: 0.1,
+              far: 1000
+            }}
+            gl={{ alpha: true }}
+          >
+            <ambientLight intensity={0.05} />
+            <pointLight 
+              position={[mousePosition.x, mousePosition.y, 90]} 
+              intensity={cursorLightVisible ? 0.9 : 0}
+              distance={200}
+              decay={0.2}
+              color={0xffffff}
+            />
+            
+            <Suspense fallback={null}>
+              <Scene />
+            </Suspense>
+
+            <OrbitControls 
+              enableZoom={false}
+              enablePan={false}
+              enableRotate={false}
+              autoRotate={false}
+            />
+
+            <EffectComposer>
+              <ChromaticAberration
+                offset={new THREE.Vector2(0.0012, 0.0012)}
+                radialModulation={false}
+                modulationOffset={0}
+              />
+            </EffectComposer>
+          </Canvas>
+        </div>
+
+        {/* Slogan and buttons container */}
+        <div style={{
+          width: '100%',
+          maxWidth: '1300px',
+          marginTop: '-2rem',
           padding: '0 1rem'
         }}>
           <div style={{
             width: '100%',
-            maxWidth: '1300px',
             display: 'flex',
             flexDirection: isTabletOrMobile ? 'column' : 'row',
             alignItems: 'center',
@@ -399,6 +398,7 @@ function App() {
           </div>
         </div>
       </div>
+      
       <Footer />
     </div>
   )
