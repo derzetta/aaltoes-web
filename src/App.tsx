@@ -197,7 +197,7 @@ function App() {
     const handleMouseMove = (event: MouseEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1
       const y = -(event.clientY / window.innerHeight) * 2 + 1
-      setMousePosition({ x: x * 200, y: y * 200 })
+      setMousePosition({ x: x * 300, y: y * 300 })
       setCursorLightVisible(true)
     }
 
@@ -391,7 +391,7 @@ function App() {
                 href="https://aaltoes2025.typeform.com/membership"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] flex items-center justify-center"
+                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm text-white rounded-lg border border-white/30 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] flex items-center justify-center whitespace-nowrap"
               >
                 <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
                 <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

@@ -82,11 +82,13 @@ function Projects() {
         <h1 className="page-title">Projects</h1>
         <div className="title-divider" />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.name} {...project} />
-          ))}
-          <NewProjectCard />
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+            {projects.map((project) => (
+              <ProjectCard key={project.name} {...project} />
+            ))}
+            <NewProjectCard />
+          </div>
         </div>
       </div>
       <Footer />

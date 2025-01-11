@@ -31,14 +31,7 @@ function TeamMember({ name, role, image }: TeamMemberProps) {
 
 function Team() {
   const teamMembers = [
-    {
-      name: "Yera Slam",
-      role: "Partnerships & Finance",
-      image: "/team/yera.jpg",
-      email: "yera.slam@aaltoes.com",
-      telegram: "yeralkhan",
-      linkedin: "https://linkedin.com/in/yeralkhan"
-    },
+    
     {
       name: "Milana Begantsova",
       role: "Tech",
@@ -77,8 +70,15 @@ function Team() {
       image: "/team/lauri.jpg",
       email: "lauri.loyttyniemi@aaltoes.com",
       telegram: "lauriloyttyniemi",
-      linkedin: "https://linkedin.com/in/lauriloyttyniemi"
     },
+      {
+        name: "Yera Slam",
+        role: "Partnerships & Finance",
+        image: "/team/yera.jpg",
+        email: "yera.slam@aaltoes.com",
+        telegram: "yeralkhan",
+        linkedin: "https://linkedin.com/in/yeralkhan"
+      },
     {
       name: "Doni Peltojarvi",
       role: "President",
@@ -101,7 +101,7 @@ function Team() {
             working together to foster entrepreneurship and innovation in the Aalto community.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
             {teamMembers.map((member) => (
               <TeamMember key={member.name} {...member} />
             ))}
