@@ -301,7 +301,7 @@ function App() {
 
         <div style={{
           position: 'fixed',
-          top: isSmallMobile ? 'calc(40% + 15vh)' : 'calc(45% + 17vh)',
+          top: isSmallMobile ? 'calc(40% + 10vh)' : isTabletOrMobile ? 'calc(45% + 12vh)' : 'calc(45% + 17vh)',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 1000,
