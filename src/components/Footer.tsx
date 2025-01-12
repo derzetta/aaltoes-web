@@ -47,12 +47,12 @@ function Footer() {
     },
     {
       icon: <FaLinkedin size={20} />,
-      url: 'https://linkedin.com/company/aaltoes',
+      url: 'https://linkedin.com/company/aalto-entrepreneurship-society',
       label: 'LinkedIn'
     },
     {
       icon: <FaTelegram size={20} />,
-      url: 'https://t.me/+DU5AIzwYa3o5NDIy',
+      url: 'https://t.me/aaltoes',
       label: 'Telegram'
     }
   ]
