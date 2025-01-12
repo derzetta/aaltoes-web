@@ -83,9 +83,23 @@ function NewProjectCard() {
 }
 
 function Projects() {
-  const [selectedCategory, setSelectedCategory] = useState<Project['category']>('spinout')
+  const [selectedCategory, setSelectedCategory] = useState<Project['category']>('brewing')
 
   const projects: Project[] = [
+    {
+      name: "Ignite",
+      description: "A pre-accelerator program helping first-time founders validate their ideas and build their first MVP. From idea to prototype in 6 weeks.",
+      status: 'active',
+      url: "https://ignite.aaltoes.com",
+      category: 'brewing'
+    },
+    {
+      name: "Strive",
+      description: "A founder-focused community program helping early-stage startups grow through peer learning and mentorship.",
+      status: 'active',
+      url: "https://striveforstartups.com",
+      category: 'brewing'
+    },
     {
       name: "Startup Sauna",
       description: "The world's #1 university-based accelerator program. Taking in teams from all over Europe with a special emphasis on eastern Europe. Around 1-3% acceptance rate per batch.",

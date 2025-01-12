@@ -172,7 +172,7 @@ function PreviousBoards() {
     {
       year: 2010,
       members: [
-        { name: "Jens Sodersen", role: "President" },
+        { name: "Jens Sørensen", role: "President" },
         { name: "Markus Nuotto", role: "VP" },
         { name: "Mikko Ikola", role: "Finance" },
         { name: "Lauri Hynynen", role: "Technology" },
