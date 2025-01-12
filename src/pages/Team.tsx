@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Footer from '../components/Footer'
 import PreviousBoards from '../components/PreviousBoards'
 
@@ -31,6 +32,10 @@ function TeamMember({ name, role, image }: TeamMemberProps) {
 }
 
 function Team() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const teamMembers = [
     
     {

@@ -1,6 +1,11 @@
+import { useEffect } from 'react'
 import Footer from '../components/Footer'
 
 function About() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="page-container">

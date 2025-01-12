@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import { Project } from '../types/project'
 
@@ -83,6 +83,10 @@ function NewProjectCard() {
 }
 
 function Projects() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const [selectedCategory, setSelectedCategory] = useState<Project['category']>('brewing')
 
   const projects: Project[] = [
