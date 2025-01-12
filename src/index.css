@@ -12,7 +12,12 @@
   }
 
   body {
-    @apply bg-black overflow-y-scroll overflow-x-hidden;
+    @apply bg-black overflow-x-hidden;
+    overflow-y: auto;
+  }
+
+  body.home-page {
+    @apply overflow-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
