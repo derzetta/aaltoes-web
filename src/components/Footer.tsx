@@ -1,12 +1,19 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import { useFooterScroll } from '../contexts/FooterScrollContext'
+import { FaInstagram, FaXTwitter, FaLinkedin, FaTelegram } from 'react-icons/fa6'
 
 function Footer() {
   const location = useLocation()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const { scrollPosition } = useFooterScroll()
-  
+
+  const getClassName = (path: string) => {
+    const isActive = location.pathname === path
+    return `font-mono ${isActive ? 'text-white' : 'text-white/50'} hover:text-white/70 transition-colors uppercase tracking-wider whitespace-nowrap`
+  }
+
+  // Save scroll position when scrolling
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -16,22 +23,44 @@ function Footer() {
     }
 
     container.addEventListener('scroll', handleScroll)
+    return () => container.removeEventListener('scroll', handleScroll)
+  }, [scrollPosition])
+
+  // Restore scroll position after navigation
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    
     container.scrollLeft = scrollPosition.current
+  }, [location.pathname, scrollPosition])
 
-    return () => {
-      container.removeEventListener('scroll', handleScroll)
+  const socialLinks = [
+    {
+      icon: <FaInstagram size={20} />,
+      url: 'https://instagram.com/aaltoes',
+      label: 'Instagram'
+    },
+    {
+      icon: <FaXTwitter size={20} />,
+      url: 'https://x.com/aaltoes',
+      label: 'X (Twitter)'
+    },
+    {
+      icon: <FaLinkedin size={20} />,
+      url: 'https://linkedin.com/company/aaltoes',
+      label: 'LinkedIn'
+    },
+    {
+      icon: <FaTelegram size={20} />,
+      url: 'https://t.me/+DU5AIzwYa3o5NDIy',
+      label: 'Telegram'
     }
-  }, [location.pathname])
-
-  const getClassName = (path: string) => {
-    const isActive = location.pathname === path
-    return `font-mono ${isActive ? 'text-white' : 'text-white/50'} hover:text-white/70 transition-colors uppercase tracking-wider whitespace-nowrap`
-  }
+  ]
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10">
+    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 max-h-[50vh] overflow-y-auto">
       <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hide py-6">
-        <div className="container w-[1400px] mx-auto flex flex-nowrap justify-between text-sm px-6" style={{ minWidth: '1400px' }}>
+        <div className="container w-[1400px] mx-auto flex flex-nowrap justify-between items-center text-sm px-6" style={{ minWidth: '1400px' }}>
           <Link to="/" className={getClassName('/')}>
             AALTOES 2025
           </Link>
@@ -61,6 +90,21 @@ function Footer() {
           <Link to="/association-rules" className={getClassName('/association-rules')}>
             Association Rules
           </Link>
+          <div className="h-6 w-px bg-white/10" />
+          <div className="flex items-center gap-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 hover:text-white/70 transition-colors"
+                aria-label={link.label}
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

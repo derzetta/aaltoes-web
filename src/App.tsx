@@ -21,7 +21,7 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
   const [isSweeping, setIsSweeping] = useState(false)
   const [startTime, setStartTime] = useState(0)
   const isMobile = window.innerWidth <= 768
-  const radius = isMobile ? 50 : 150
+  const radius = isMobile ? 90 : 150
 
   useEffect(() => {
     if (isModelLoaded) {
@@ -241,9 +241,7 @@ function App() {
 
   return (
     <FooterScrollProvider>
-      <div className="relative min-h-screen flex flex-col justify-center" style={{ 
-        paddingBottom: '4rem'
-      }}>
+      <div className="relative min-h-screen flex flex-col justify-center overflow-hidden sm:overflow-auto">
         <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
         
@@ -329,12 +327,15 @@ function App() {
               backdropFilter: 'blur(8px)'
             }}>
               <div style={{
-                flex: '1 1 auto',
+                flex: isTabletOrMobile ? '0 0 auto' : '1 1 auto',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: isTabletOrMobile ? '100%' : 'auto',
-                marginBottom: isTabletOrMobile ? '1rem' : '0',
+                width: '100%',
+                height: '100%',
+                marginBottom: isTabletOrMobile ? '0' : '0',
+                textAlign: isTabletOrMobile ? 'center' : 'left',
+                minHeight: isTabletOrMobile ? '48px' : 'auto'
               }}>
                 <h2 className="font-mono text-white/50 text-base sm:text-lg tracking-widest uppercase flex items-center gap-3">
                   Year of the{' '}
