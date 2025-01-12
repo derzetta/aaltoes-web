@@ -13,17 +13,17 @@ interface TeamMemberProps {
 
 function TeamMember({ name, role, image }: TeamMemberProps) {
   return (
-    <div className="group relative bg-black/30 backdrop-blur-sm p-6 transition-all hover:bg-black/40">
+    <div className="relative bg-black/30 backdrop-blur-sm p-4 w-full max-w-[280px] sm:max-w-[240px] lg:max-w-[200px] min-h-[220px] rounded-xl mx-auto">
       <div className="flex flex-col items-center text-center gap-3">
-        <div className="relative w-40 h-40 rounded-full overflow-hidden">
+        <div className="relative w-[70%] sm:w-full aspect-square rounded-full overflow-hidden">
           <img 
             src={image} 
             alt={name} 
-            className="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 transition-all"
+            className="w-full h-full object-cover"
           />
         </div>
         <div>
-          <h3 className="font-sans text-white/90 text-lg tracking-wide mb-1">{name}</h3>
+          <h3 className="font-sans text-white/90 text-base tracking-wide mb-1">{name}</h3>
           <p className="font-sans text-white/60 text-sm">{role}</p>
         </div>
       </div>
@@ -37,11 +37,10 @@ function Team() {
   }, [])
 
   const teamMembers = [
-    
     {
       name: "Milana Begantsova",
       role: "Tech",
-      image: "/team/milana.jpg",
+      image: "/board/milana.png",
       email: "milana.begantsova@aaltoes.com",
       telegram: "milanabeg",
       linkedin: "https://linkedin.com/in/milanabeg"
@@ -49,7 +48,7 @@ function Team() {
     {
       name: "Tetsu Fujimura",
       role: "Brand",
-      image: "/team/tetsu.jpg",
+      image: "/board/tetsu.png",
       email: "tetsu.fujimura@aaltoes.com",
       telegram: "tetsufujimura",
       linkedin: "https://linkedin.com/in/tetsufujimura"
@@ -57,7 +56,7 @@ function Team() {
     {
       name: "Vaneeza Maqsood",
       role: "Ecosystem",
-      image: "/team/vaneeza.jpg",
+      image: "/board/vaneeza.png",
       email: "vaneeza.maqsood@aaltoes.com",
       telegram: "vaneezamaqsood",
       linkedin: "https://linkedin.com/in/vaneezamaqsood"
@@ -65,7 +64,7 @@ function Team() {
     {
       name: "Siiri Lautamies",
       role: "Operations",
-      image: "/team/siiri.jpg",
+      image: "/board/siiri.png",
       email: "siiri.lautamies@aaltoes.com",
       telegram: "siirilautamies",
       linkedin: "https://linkedin.com/in/siirilautamies"
@@ -73,22 +72,22 @@ function Team() {
     {
       name: "Lauri Loyttyniemi",
       role: "External Relations",
-      image: "/team/lauri.jpg",
+      image: "/board/lauri.png",
       email: "lauri.loyttyniemi@aaltoes.com",
       telegram: "lauriloyttyniemi",
     },
-      {
-        name: "Yera Slam",
-        role: "Partnerships & Finance",
-        image: "/team/yera.jpg",
-        email: "yera.slam@aaltoes.com",
-        telegram: "yeralkhan",
-        linkedin: "https://linkedin.com/in/yeralkhan"
-      },
+    {
+      name: "Yera Slam",
+      role: "Partnerships & Finance",
+      image: "/board/yera.png",
+      email: "yera.slam@aaltoes.com",
+      telegram: "yeralkhan",
+      linkedin: "https://linkedin.com/in/yeralkhan"
+    },
     {
       name: "Doni Peltojarvi",
       role: "President",
-      image: "/team/doni.jpg",
+      image: "/board/doni.png",
       email: "doni.peltojarvi@aaltoes.com",
       telegram: "donijar",
       linkedin: "https://linkedin.com/in/donipeltojarvi"
@@ -102,15 +101,25 @@ function Team() {
         <div className="title-divider" />
         
         <div className="content-section">
+          <div className="relative w-full aspect-[21/9] mb-12 bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center">
+            <p className="text-white/60 font-mono text-sm tracking-wider uppercase">
+              Here will be our photoshoot pic!
+            </p>
+          </div>
+
           <p className="text-content mb-8">
             Meet the dedicated team behind Aaltoes 2025. We're a group of passionate individuals 
             working together to foster entrepreneurship and innovation in the Aalto community.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
-            {teamMembers.map((member) => (
-              <TeamMember key={member.name} {...member} />
-            ))}
+          <div className="flex flex-col items-center gap-4 w-full max-w-[900px] mx-auto">
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-6">
+              {teamMembers.map((member) => (
+                <div key={member.name} className="w-full sm:w-[calc(50%-2rem)] lg:w-[calc(25%-1.5rem)]">
+                  <TeamMember {...member} />
+                </div>
+              ))}
+            </div>
           </div>
 
           <p className="text-white/60 text-center mt-12">
