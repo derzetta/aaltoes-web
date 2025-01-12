@@ -58,7 +58,7 @@ function Footer() {
   ]
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 max-h-[50vh] overflow-y-auto">
+    <footer className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10 max-h-[50vh] overflow-y-auto z-50">
       <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hide py-6">
         <div className="container w-[1400px] mx-auto flex flex-nowrap justify-between items-center text-sm px-6" style={{ minWidth: '1400px' }}>
           <Link to="/" className={getClassName('/')}>

@@ -183,7 +183,7 @@ function LoadingScreen() {
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const words = ["builders", "innovators", "misfits", "openings", "brave", "open source", "explorers", "igniters"]
+  const words = ["builders", "innovators", "misfits", "openings", "brave", "strivers", "mavericks","open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
@@ -241,9 +241,10 @@ function App() {
 
   return (
     <FooterScrollProvider>
-      <div className="relative min-h-screen flex flex-col justify-center overflow-hidden sm:overflow-auto">
-        <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10" />
+      <div className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-black bg-grid-white bg-grid -z-10 sm:h-auto h-[50vh]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/50 to-black -z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-black to-transparent -z-10 sm:hidden" />
         
         {/* Main content container */}
         <div className="flex flex-col items-center gap-6" style={{ 

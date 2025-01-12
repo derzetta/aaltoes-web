@@ -15,7 +15,7 @@ function PreviousBoards() {
       year: 2024,
       members: [
         { name: "Maija Rissanen", role: "President" },
-        { name: "Ernesti Sario", role: "Vice President" },
+        { name: "Ernesti Sario", role: "VP" },
         { name: "Hermanni Aho", role: "Finance" },
         { name: "Eli Saaresto", role: "Community" },
         { name: "Samuli Hartikainen", role: "International Relations" },
@@ -27,7 +27,7 @@ function PreviousBoards() {
       year: 2023,
       members: [
         { name: "Niklas Hamberg", role: "President" },
-        { name: "Meri Heikkinen", role: "Vice President, International Relations" },
+        { name: "Meri Heikkinen", role: "VP, International Relations" },
         { name: "Nantte Kivinen", role: "Finance" },
         { name: "Laura Vettenranta", role: "Partnerships & Projects" },
         { name: "Roope Ripatti", role: "Operations" },
@@ -38,7 +38,7 @@ function PreviousBoards() {
       year: 2022,
       members: [
         { name: "Ahmed Hadi", role: "President" },
-        { name: "Oskari Ojavuo", role: "Vice President, Partnerships & International Relations" },
+        { name: "Oskari Ojavuo", role: "VP, Partnerships & Int. Relations" },
         { name: "Valtteri Haikarainen", role: "Finance" },
         { name: "Artur Skwarek", role: "Projects" },
         { name: "Venla Lymysalo", role: "Operations" },
@@ -50,7 +50,7 @@ function PreviousBoards() {
       year: 2021,
       members: [
         { name: "Mona Ismail", role: "President" },
-        { name: "Aaro Angerpuro", role: "Vice President, Finance" },
+        { name: "Aaro Angerpuro", role: "VP, Finance" },
         { name: "Aleksi Päkkilä", role: "International Relations" },
         { name: "Hilla Klemetti", role: "Projects & Community" },
         { name: "Patrik Fjällberg", role: "Partnerships & Academic Affairs" },
@@ -61,7 +61,7 @@ function PreviousBoards() {
       year: 2020,
       members: [
         { name: "Niko Laukkanen", role: "President" },
-        { name: "Veikko Väyrynen", role: "Vice President, International Relations" },
+        { name: "Veikko Väyrynen", role: "VP, International Relations" },
         { name: "Roni Lahti", role: "Finance" },
         { name: "Joel Järvensivu", role: "Partnerships" },
         { name: "Aino Kenttämies", role: "Community" },
@@ -72,7 +72,7 @@ function PreviousBoards() {
       year: 2019,
       members: [
         { name: "Timo Luukkola", role: "President" },
-        { name: "Lauri Kaijasilta", role: "Vice President, Finance" },
+        { name: "Lauri Kaijasilta", role: "VP, Finance" },
         { name: "Riku Suonsivu", role: "Operations" },
         { name: "Markus Koljonen", role: "Projects" },
         { name: "Katri Mäki-Kullas", role: "Community" }
@@ -82,7 +82,7 @@ function PreviousBoards() {
       year: 2018,
       members: [
         { name: "Tiina Nyman", role: "President" },
-        { name: "Aleksi Löytynoja", role: "Vice President, Finance" },
+        { name: "Aleksi Löytynoja", role: "VP, Finance" },
         { name: "Ella Liuksiala", role: "Brand & Marketing" },
         { name: "Sakari Huhtanen", role: "Kiuas Lead" },
         { name: "Sindre Trosterud", role: "International Relations" },
@@ -93,7 +93,7 @@ function PreviousBoards() {
       year: 2017,
       members: [
         { name: "Anttoni Aniebonam", role: "President" },
-        { name: "Stella Tuovinen", role: "Vice President, International Relations" },
+        { name: "Stella Tuovinen", role: "VP, International Relations" },
         { name: "Kasimir Hellman", role: "Finance" },
         { name: "Verneri Jäämuru", role: "Brand & Marketing" },
         { name: "Sam Sihvonen", role: "Technology" },
@@ -104,7 +104,7 @@ function PreviousBoards() {
       year: 2016,
       members: [
         { name: "Aleksi Hämäläinen", role: "President" },
-        { name: "Jesse Miettinen", role: "Vice President, Startup Sauna" },
+        { name: "Jesse Miettinen", role: "VP, Startup Sauna" },
         { name: "Ville Leppälä", role: "Junction Lead" },
         { name: "Aleksi Heinonen", role: "Finance" },
         { name: "Eero Kettunen", role: "Partnerships" },
@@ -117,7 +117,7 @@ function PreviousBoards() {
       year: 2015,
       members: [
         { name: "Julius Hietala", role: "President" },
-        { name: "Kenneth Blomqvist", role: "Vice President, Junction" },
+        { name: "Kenneth Blomqvist", role: "VP, Junction" },
         { name: "Riko Nyberg", role: "International & Academic Relations" },
         { name: "Peik Hämekoski", role: "Finance" },
         { name: "Richard Makara", role: "Brand & Marketing" },
@@ -129,7 +129,7 @@ function PreviousBoards() {
       year: 2014,
       members: [
         { name: "Kasper Suomalainen", role: "President" },
-        { name: "Panu Paljakka", role: "Vice President, Startup Sauna" },
+        { name: "Panu Paljakka", role: "VP, Startup Sauna" },
         { name: "Teemu Laiho", role: "Finance" },
         { name: "Ida Vehnämäki", role: "Brand & Marketing" },
         { name: "Mariam Olaleka", role: "Events" },
@@ -140,7 +140,7 @@ function PreviousBoards() {
       year: 2013,
       members: [
         { name: "Elina Uuttela", role: "President" },
-        { name: "Risto Vuorio", role: "Vice President, Finance & Startup Sauna" },
+        { name: "Risto Vuorio", role: "VP, Finance & Startup Sauna" },
         { name: "Kristian Hartikainen", role: "Technology" },
         { name: "Markus Ahrenberg", role: "Community" },
         { name: "Juuso Koskinen", role: "Startup Sauna" },
@@ -151,7 +151,7 @@ function PreviousBoards() {
       year: 2012,
       members: [
         { name: "Nils Paajanen", role: "President" },
-        { name: "Atte Hujanen", role: "Vice President" },
+        { name: "Atte Hujanen", role: "VP" },
         { name: "Mikko Hagelberg", role: "Finance" },
         { name: "Teemu Tapanila", role: "Operations" },
         { name: "Juhana Nurmio", role: "Academic Relations" },
@@ -173,7 +173,7 @@ function PreviousBoards() {
       year: 2010,
       members: [
         { name: "Jens Sodersen", role: "President" },
-        { name: "Markus Nuotto", role: "Vice President" },
+        { name: "Markus Nuotto", role: "VP" },
         { name: "Mikko Ikola", role: "Finance" },
         { name: "Lauri Hynynen", role: "Technology" },
         { name: "Tapani Alasaarela", role: "Community" },
@@ -186,7 +186,7 @@ function PreviousBoards() {
       year: 2009,
       members: [
         { name: "Kristo Ovaska", role: "President" },
-        { name: "Markus Nuotto", role: "Vice President" },
+        { name: "Markus Nuotto", role: "VP" },
         { name: "Aku-Ville Lehtimäki", role: "Finance" },
         { name: "Perttu Ojansuu", role: "Community" },
         { name: "Riku Seppälä", role: "Events" },
@@ -208,7 +208,7 @@ function PreviousBoards() {
             </h3>
             <div className={`h-px flex-grow ${board.isGolden ? 'bg-amber-300/30' : 'bg-white/10'}`} />
           </div>
-          <div className="flex flex-wrap gap-x-8 gap-y-2">
+          <div className="flex flex-col sm:flex-wrap sm:flex-row gap-x-8 gap-y-2">
             {board.members.map((member, index) => (
               <div key={index} className="flex items-center gap-2">
                 <div className={`w-6 h-6 rounded-full ${board.isGolden ? 'bg-amber-300/20' : 'bg-white/10'}`} />
