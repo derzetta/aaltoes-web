@@ -27,7 +27,7 @@ export default function Authors() {
             </div>
 
             <div>
-              <h2 className="section-title mb-3">Design & Development</h2>
+              <h2 className="section-title mb-3">Web Design & Development</h2>
               <p>Doni Peltojärvi</p>
             </div>
           </div>
