@@ -29,7 +29,7 @@ function CompanyLogos() {
     {
       name: 'Veri',
       logo: '/logos/veri.svg',
-      url: 'https://veri.com'
+      url: 'https://veri.co'
     },
     {
       name: 'Solu',
