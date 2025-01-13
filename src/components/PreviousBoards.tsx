@@ -130,7 +130,7 @@ function PreviousBoards() {
       year: 2014,
       members: [
         { name: "Kasper Suomalainen", role: "President" },
-        { name: "Panu Paljakka", role: "VP, Startup Sauna" },
+        { name: "Panu Paljakka", role: "VP, Summer of Startups" },
         { name: "Teemu Laiho", role: "Finance" },
         { name: "Ida Vehnämäki", role: "Brand & Marketing" },
         { name: "Mariam Olaleka", role: "Events" },
