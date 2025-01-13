@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Footer from '../components/Footer'
 import EarlyAccessBanner from '../components/EarlyAccessBanner'
+import CompanyLogos from '../components/CompanyLogos'
 
 function About() {
   useEffect(() => {
@@ -13,7 +14,7 @@ function About() {
         <h1 className="page-title">About Aaltoes</h1>
         <div className="title-divider" />
         <EarlyAccessBanner />
-
+        
         <div className="content-section">
           <div className="space-y-12">
             <div>
@@ -31,39 +32,11 @@ function About() {
                 </p>
               </div>
             </div>
-
-            <div>
-              <h2 className="section-title">What We Do</h2>
-              <div className="text-content space-y-4">
-                <p>
-                  We organize a wide range of activities and events throughout the year, including:
-                </p>
-                <ul className="space-y-3 list-disc pl-4">
-                  <li>Startup workshops and educational programs</li>
-                  <li>Networking events with successful entrepreneurs</li>
-                  <li>Hackathons and innovation challenges</li>
-                  <li>Mentoring sessions with industry experts</li>
-                  <li>Social events for the entrepreneurship community</li>
-                </ul>
-              </div>
+            <div className="mt-36">
+              <h2 className="section-title">Founded by our alumni</h2>
+              <CompanyLogos />
             </div>
-
-            <div>
-              <h2 className="section-title">Our Impact</h2>
-              <div className="text-content space-y-4">
-                <p>
-                  Over the years, Aaltoes has been instrumental in:
-                </p>
-                <ul className="space-y-3 list-disc pl-4">
-                  <li>Launching Slush, which has grown into Europe's leading startup event</li>
-                  <li>Creating Junction, Europe's largest hackathon</li>
-                  <li>Establishing Wave Ventures, the first student-run venture capital fund in the Nordics</li>
-                  <li>Building Kiuas, Finland's leading startup accelerator program</li>
-                </ul>
-              </div>
-            </div>
-
-            <div>
+            <div className="mt-36">
               <h2 className="section-title">Join Our Community</h2>
               <div className="text-content space-y-4">
                 <p>
@@ -80,18 +53,11 @@ function About() {
                     <span className="relative z-10 uppercase">Become a Member</span>
                     <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   </a>
-                  <a 
-                    href="https://t.me/+DU5AIzwYa3o5NDIy"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
-                  >
-                    <span className="relative z-10 uppercase">Join Our Chat</span>
-                    <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  </a>
                 </div>
               </div>
             </div>
+
+         
           </div>
         </div>
       </div>
