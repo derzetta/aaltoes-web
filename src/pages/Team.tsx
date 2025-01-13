@@ -108,9 +108,9 @@ function Team() {
           </div>
 
           <p className="text-content mb-8">
-            Meet the dedicated team behind Aaltoes 2025. We're a group of passionate individuals 
-            working together to foster entrepreneurship and innovation in the Aalto community.
+          Aaltoes is run by a student-led board, that changes annually. In addition to the board, there are tens of volunteers leading and working in Aaltoes-projects. Altogether our ecosystem consists of many more hundreds of entrepreneurially minded people, who come to our events and are working on solving the current problems of our world.
           </p>
+          <h2 className="text-2xl font-normal mb-4 text-center">Meet the Board 2025!</h2>
 
           <div className="flex flex-col items-center gap-4 w-full max-w-[900px] mx-auto">
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-6">
