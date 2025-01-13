@@ -25,6 +25,7 @@ export default function Authors() {
               <h2 className="section-title mb-3">Content</h2>
               <p>Yera Slam</p>
               <p>Tetsu Fujimura</p>
+              <p>Doni Peltojärvi</p>
             </div>
 
             <div>
