@@ -86,8 +86,8 @@ function PreviousBoards() {
         { name: "Aleksi Löytynoja", role: "VP, Finance" },
         { name: "Ella Liuksiala", role: "Brand & Marketing" },
         { name: "Sakari Huhtanen", role: "Kiuas Lead" },
-        { name: "Sindre Trosterud", role: "International Relations" },
-        { name: "Pirkka Sippola", role: "Community" }
+        { name: "Sindre Trosterud", role: "Technology" },
+        { name: "Pirkka Sippola", role: "Partnerships & Academic Relations" }
       ]
     },
     {
@@ -122,8 +122,7 @@ function PreviousBoards() {
         { name: "Riko Nyberg", role: "International & Academic Relations" },
         { name: "Peik Hämekoski", role: "Finance" },
         { name: "Richard Makara", role: "Brand & Marketing" },
-        { name: "Joona Karjula", role: "Operations" },
-        { name: "Annika Oukka" }
+        { name: "Joona Karjula", role: "Operations" }
       ]
     },
     {
