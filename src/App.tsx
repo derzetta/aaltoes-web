@@ -7,6 +7,7 @@ import { Suspense, useRef, useState, useEffect } from 'react'
 import './index.css'
 import { EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Analytics } from "@vercel/analytics/react"
 import Footer from './components/Footer'
 import { FooterScrollProvider } from './contexts/FooterScrollContext'
 
@@ -433,6 +434,7 @@ function App() {
         
         <Footer />
       </div>
+      <Analytics />
     </FooterScrollProvider>
   )
 }
