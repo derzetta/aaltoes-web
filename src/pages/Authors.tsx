@@ -16,7 +16,7 @@ export default function Authors() {
         <div className="space-y-8">
 
             <div>
-              <h2 className="section-title mb-3">3D Design</h2>
+              <h2 className="section-title mb-3">3D Logo assistance</h2>
               <p>Katerina Tchilinguirov</p>
               <p className="text-white/60 text-sm mt-1">Led by Tetsu Fujimura</p>
             </div>

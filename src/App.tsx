@@ -198,7 +198,7 @@ function App() {
     const handleMouseMove = (event: MouseEvent) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1
       const y = -(event.clientY / window.innerHeight) * 2 + 1
-      setMousePosition({ x: x * 300, y: y * 300 })
+      setMousePosition({ x: x * 190, y: y * 190 - 40 })
       setCursorLightVisible(true)
     }
 
@@ -253,7 +253,7 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/80 to-black -z-10" />
         <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-black via-black/95 to-transparent -z-10 sm:hidden" />
         
-        {/* Background 2025 with Grid */}
+        {/* Background with Grid */}
         <div className="fixed inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
           {/* Grid */}
           <div 
@@ -268,19 +268,6 @@ function App() {
               opacity: 0.5,
             }}
           />
-          
-          {/* 2025 Text */}
-          <div 
-            className="font-['Geist_Mono'] text-[35vw] font-normal whitespace-nowrap select-none"
-            style={{
-              transform: 'perspective(1000px) rotateX(15deg) translateY(-20%)',
-              WebkitTextStroke: '1px rgba(255,255,255,0.1)',
-              WebkitTextFillColor: 'transparent',
-              color: 'transparent',
-            }}
-          >
-            2O25
-          </div>
         </div>
 
         {/* Main content container */}

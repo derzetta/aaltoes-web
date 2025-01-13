@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Footer from '../components/Footer'
+import EarlyAccessBanner from '../components/EarlyAccessBanner'
 
 function About() {
   useEffect(() => {
@@ -11,6 +12,7 @@ function About() {
       <div className="page-container">
         <h1 className="page-title">About Aaltoes</h1>
         <div className="title-divider" />
+        <EarlyAccessBanner />
 
         <div className="content-section">
           <div className="space-y-12">

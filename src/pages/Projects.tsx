@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import { Project } from '../types/project'
+import EarlyAccessBanner from '../components/EarlyAccessBanner'
 
 function StatusBadge({ status }: { status: Project['status'] }) {
   const getStatusStyles = () => {
@@ -94,16 +95,21 @@ function Projects() {
   const projects: Project[] = [
     {
       name: "Ignite",
-      description: "A pre-accelerator program helping first-time founders validate their ideas and build their first MVP. From idea to prototype in 6 weeks.",
+      description: "A pre-accelerator program helping first-time founders validate their ideas and build their first MVP.",
       status: 'active',
       url: "https://ignite.aaltoes.com",
       category: 'brewing'
     },
     {
-      name: "Aaltoes Open Source",
+      name: "Open Source",
       description: "A community-driven initiative to build and maintain open source projects that benefit the startup ecosystem.",
       status: 'planned',
-      url: "https://github.com/aaltoes",
+      category: 'brewing'
+    },
+    {
+      name: "Blueprint",
+      description: "Aaltoes Ecosystem continuity project.",
+      status: 'planned',
       category: 'brewing'
     },
     {
@@ -115,25 +121,26 @@ function Projects() {
     },
     {
       name: "Deep Dive",
-      description: "A case competition bridging gap between academia and entrepreneurship",
+      description: "A case competition bridging the gap between academia and entrepreneurship, where students solve real business development challenges faced by research-based startups.",
       status: 'active',
+      url: "https://deep-dive.org",
       spinOffYear: 2023,
       category: 'spinout'
     },
     {
       name: "Startup Sauna",
-      description: "World's leading student-led Entrepreneurship hub",
+      description: "World's leading student-led Entrepreneurship hub.",
       status: 'active',
       url: "https://startupsauna.org",
-      spinOffYear: 2012,
+      spinOffYear: 2010,
       category: 'spinout'
     },
     {
       name: "Slush",
-      description: "annually hosting the world's leading startup event.",
+      description: "Annually hosting the world's leading startup event.",
       status: 'active',
       url: "https://slush.org",
-      spinOffYear: 2012,
+      spinOffYear: 2011,
       category: 'spinout'
     },
     {
@@ -141,53 +148,54 @@ function Projects() {
       description: "Providing tools and a community for women to understand technology and how to build their ideas.",
       status: 'active',
       url: "https://railsgirls.com",
-      spinOffYear: 2012,
+      spinOffYear: 2010,
       category: 'spinout'
     },
     {
       name: "Startuplifers",
-      description: "Sending Finnish talent to work in global startups",
+      description: "A decade-long initiative that connected Nordic talent with Silicon Valley startups, helping over 200+ partner startups and fostering international startup ecosystem connections.",
       status: 'inactive',
-      spinOffYear: 2016,
+      url: "https://startuplifers.org",
+      spinOffYear: 2011,
       category: 'spinout'
     },
     {
       name: "Day For Failure",
       description: "Celebrating the art of failing on the 13th of October.",
       status: 'inactive',
-      spinOffYear: 2016,
+      spinOffYear: 2010,
       category: 'spinout'
     },
     {
       name: "Junction",
-      description: "World-class hackathons hosted throughout the year across the globe",
+      description: "World-class hackathons hosted throughout the year across the globe.",
       status: 'active',
       url: "https://www.hackjunction.com",
-      spinOffYear: 2016,
+      spinOffYear: 2015,
       category: 'spinout'
     },
     {
       name: "Kiuas",
-      description: "Accelerator program to help early-stage startup founders to build world-changing companies",
+      description: "Accelerator program to help early-stage startup founders to build world-changing companies.",
       status: 'active',
       url: "https://kiuas.com",
-      spinOffYear: 2018,
+      spinOffYear: 2017,
       category: 'spinout'
     },
     {
       name: "Dash",
-      description: "A design thinking hackathon, promoting multidisciplinarity. Bringing together hipsters, hackers, hustlers and wild cards",
+      description: "A design thinking hackathon, promoting multidisciplinarity. Bringing together hipsters, hackers, hustlers and wild cards.",
       status: 'active',
-      url: "https://dash.aaltoes.com",
-      spinOffYear: 2023,
+      url: "https://www.dash.design",
+      spinOffYear: 2017,
       category: 'spinout'
     },
     {
       name: "SILTA",
-      description: "Program taking early-stage founders from Finland to San Francisco for 3 months to develop their companies",
+      description: "Program taking early-stage founders from Finland to San Francisco for 3 months to develop their companies.",
       status: 'active',
       url: "https://www.siltahouse.com",
-      spinOffYear: 2023,
+      spinOffYear: 2021,
       category: 'spinout'
     }
   ]
@@ -212,6 +220,7 @@ function Projects() {
       <div className="page-container">
         <h1 className="page-title">Projects</h1>
         <div className="title-divider" />
+        <EarlyAccessBanner />
         
         <div className="flex justify-center mb-12">
           <div className="inline-flex rounded-lg border border-white/10 p-1 font-mono text-sm">

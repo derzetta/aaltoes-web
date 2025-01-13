@@ -47,7 +47,7 @@
   }
 
   .title-divider {
-    @apply h-px w-16 bg-white/20 mb-16;
+    @apply w-12 h-px bg-white/10 mb-8;
   }
 
   .section-title {
