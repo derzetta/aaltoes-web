@@ -18,16 +18,16 @@ export default function Authors() {
             <div>
               <h2 className="section-title mb-3">3D Logo assistance</h2>
               <p>Katerina Tchilinguirov</p>
-              <p className="text-white/60 text-sm mt-1">Led by Tetsu Fujimura</p>
             </div>
 
             <div>
               <h2 className="section-title mb-3">Content</h2>
               <p>Yera Slam</p>
+              <p>Tetsu Fujimura</p>
             </div>
 
             <div>
-              <h2 className="section-title mb-3">Web Design & Development</h2>
+              <h2 className="section-title mb-3">Design & Development</h2>
               <p>Doni Peltojärvi</p>
             </div>
           </div>
