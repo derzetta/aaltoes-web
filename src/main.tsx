@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import About from './pages/About'
 import Team from './pages/Team'
@@ -12,7 +12,7 @@ import PrivacyNotice from './pages/policies/PrivacyNotice'
 import Authors from './pages/Authors'
 import AssociationRules from './pages/policies/AssociationRules'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App />,
