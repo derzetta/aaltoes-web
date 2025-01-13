@@ -21,6 +21,11 @@ function CompanyLogos() {
       url: 'https://huuva.io'
     },
     {
+      name: 'Meru',
+      logo: '/logos/meru.svg',
+      url: 'https://meruhealth.com'
+    },
+    {
       name: 'Singa',
       logo: '/logos/singa.svg',
       url: 'https://singa.com'
