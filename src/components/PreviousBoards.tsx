@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 interface BoardMember {
   name: string
   role?: string
@@ -10,14 +12,13 @@ interface BoardYear {
 }
 
 function PreviousBoards() {
+  const [isExpanded, setIsExpanded] = useState(false)
   const boards: BoardYear[] = [
     {
       year: 2024,
       members: [
         { name: "Maija Rissanen", role: "President" },
         { name: "Ernesti Sario", role: "VP" },
-        { name: "Hermanni Aho", role: "Finance" },
-        { name: "Eli Saaresto", role: "Community" },
         { name: "Samuli Hartikainen", role: "International Relations" },
         { name: "Patricia Sarkkinen", role: "Brand & Marketing" },
         { name: "Tomi Tan-Röholm", role: "Partnerships & Finance" }
@@ -199,32 +200,49 @@ function PreviousBoards() {
 
   return (
     <div className="space-y-12">
-      <h2 className="section-title">Previous Boards</h2>
-      {boards.map((board) => (
-        <div key={board.year} className="space-y-4">
-          <div className="flex items-center gap-4">
-            <h3 className={`font-['Geist_Mono'] ${board.isGolden ? 'text-amber-300' : 'text-white/90'}`}>
-              {board.year}
-            </h3>
-            <div className={`h-px flex-grow ${board.isGolden ? 'bg-amber-300/30' : 'bg-white/10'}`} />
+      <button 
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full text-left"
+      >
+        <div className="flex items-center gap-4 group">
+          <h2 className="section-title flex-shrink-0">Previous Boards</h2>
+          <div className="flex-grow flex items-center -mt-5">
+            <div className="h-[1px] w-full bg-white/10 group-hover:bg-white/20 transition-colors" />
           </div>
-          <div className="flex flex-col sm:flex-wrap sm:flex-row gap-x-8 gap-y-2">
-            {board.members.map((member, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <div className={`w-6 h-6 rounded-full ${board.isGolden ? 'bg-amber-300/20' : 'bg-white/10'}`} />
-                <span className={`text-sm ${board.isGolden ? 'text-amber-300' : 'text-white/70'}`}>
-                  {member.name}
-                </span>
-                {member.role && (
-                  <span className={`text-xs ${board.isGolden ? 'text-amber-300/70' : 'text-white/40'}`}>
-                    {member.role}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
+          <span className={`text-white/60 transition-transform duration-300 -mt-5 ${isExpanded ? 'rotate-90' : ''}`}>
+            →
+          </span>
         </div>
-      ))}
+      </button>
+
+      {isExpanded && (
+        <div className="space-y-8 animate-fadeIn">
+          {boards.map((board) => (
+            <div key={board.year} className="space-y-4">
+              <div className="flex items-center gap-4">
+                <h3 className="font-['Geist_Mono'] text-white/90">
+                  {board.year}
+                </h3>
+                <div className="h-px flex-grow bg-white/10" />
+              </div>
+              <div className="flex flex-col sm:flex-wrap sm:flex-row gap-x-8 gap-y-2">
+                {board.members.map((member, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <span className="text-sm text-white/70">
+                      {member.name}
+                    </span>
+                    {member.role && (
+                      <span className="text-xs text-white/40">
+                        {member.role}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
