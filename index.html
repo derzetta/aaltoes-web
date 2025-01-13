@@ -8,15 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Geist+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
-    <script>
-      // Redirect from clean URLs to hash URLs
-      (function() {
-        var path = window.location.pathname;
-        if (path !== '/' && path !== '') {
-          window.location.replace(window.location.origin + '/#' + path);
-        }
-      })();
-    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
