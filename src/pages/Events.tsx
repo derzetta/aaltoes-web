@@ -15,9 +15,10 @@ function Events() {
         <div className="content-section">
           <div className="space-y-8">
             <p className="text-content">
-              Join us at our upcoming events to connect with fellow entrepreneurs, 
-              learn from experienced founders, and be part of the Aaltoes community.
+            You’re already invited! Explore our curated lineup of events designed to deliver top-tier insights, expert advice, and fresh inspiration on entrepreneurship, startups, and more. 
             </p>
+            <p className="text-content">
+            All our events are free and open to everyone—jump in below or visit the calendar to secure your spot!            </p>
 
             <div className="relative w-full aspect-[4/3] bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden">
               <iframe

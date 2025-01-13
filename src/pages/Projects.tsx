@@ -102,7 +102,7 @@ function Projects() {
     },
     {
       name: "Open Source",
-      description: "A community-driven initiative to build and maintain open source projects that benefit the startup ecosystem.",
+      description: "Fueling innovation together—our open-source projects are built for collaboration, creativity, and impact.",
       status: 'planned',
       category: 'brewing'
     },
@@ -114,7 +114,7 @@ function Projects() {
     },
     {
       name: "Strive",
-      description: "A founder-focused community program helping early-stage startups grow through peer learning and mentorship.",
+      description: "Platform designed to help students and startups find the perfect match.",
       status: 'active',
       url: "https://striveforstartups.com",
       category: 'brewing'
@@ -153,7 +153,7 @@ function Projects() {
     },
     {
       name: "Startuplifers",
-      description: "A decade-long initiative that connected Nordic talent with Silicon Valley startups, helping over 200+ partner startups and fostering international startup ecosystem connections.",
+      description: "Bringing talent from the Nordics to Silicon Valley startups.",
       status: 'inactive',
       url: "https://startuplifers.org",
       spinOffYear: 2011,

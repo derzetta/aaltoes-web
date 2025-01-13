@@ -13,7 +13,7 @@ export default function Authors() {
         <div className="title-divider" />
         
         <div className="content-section">
-        <div className="space-y-8">
+        <div className="space-y-12">
 
             <div>
               <h2 className="section-title mb-3">3D Logo Development</h2>
@@ -26,11 +26,17 @@ export default function Authors() {
               <p>Yera Slam</p>
               <p>Tetsu Fujimura</p>
               <p>Doni Peltojärvi</p>
+              <br / >
+              <p>All previous boards</p>
             </div>
 
             <div>
               <h2 className="section-title mb-3">Web Design & Development</h2>
               <p>Doni Peltojärvi</p>
+            </div>
+
+            <div>
+              <p className="text-white/60">Noticed a mistake? Please let us know at <a href="mailto:board@aaltoes.com" className="hover:text-white/90 transition-colors">board@aaltoes.com</a></p>
             </div>
           </div>
         </div>
