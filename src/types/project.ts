@@ -1,4 +1,4 @@
-export type ProjectStatus = 'active' | 'inactive' | 'archived'
+export type ProjectStatus = 'active' | 'inactive' | 'archived' | 'planned'
 
 export interface Project {
   name: string

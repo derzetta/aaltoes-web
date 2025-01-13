@@ -11,6 +11,8 @@ function StatusBadge({ status }: { status: Project['status'] }) {
         return 'bg-amber-500/20 text-amber-300 border-amber-500/30'
       case 'archived':
         return 'bg-neutral-500/20 text-neutral-300 border-neutral-500/30'
+      case 'planned':
+        return 'bg-blue-500/20 text-blue-300 border-blue-500/30'
     }
   }
 
@@ -98,6 +100,13 @@ function Projects() {
       category: 'brewing'
     },
     {
+      name: "Aaltoes Open Source",
+      description: "A community-driven initiative to build and maintain open source projects that benefit the startup ecosystem.",
+      status: 'planned',
+      url: "https://github.com/aaltoes",
+      category: 'brewing'
+    },
+    {
       name: "Strive",
       description: "A founder-focused community program helping early-stage startups grow through peer learning and mentorship.",
       status: 'active',
@@ -105,16 +114,23 @@ function Projects() {
       category: 'brewing'
     },
     {
+      name: "Deep Dive",
+      description: "A case competition bridging gap between academia and entrepreneurship",
+      status: 'active',
+      spinOffYear: 2023,
+      category: 'spinout'
+    },
+    {
       name: "Startup Sauna",
-      description: "The world's #1 university-based accelerator program. Taking in teams from all over Europe with a special emphasis on eastern Europe. Around 1-3% acceptance rate per batch.",
-      status: 'inactive',
-      url: "https://startupsauna.com",
+      description: "World's leading student-led Entrepreneurship hub",
+      status: 'active',
+      url: "https://startupsauna.org",
       spinOffYear: 2012,
       category: 'spinout'
     },
     {
       name: "Slush",
-      description: "The most founder focused event on earth. A startup conference in November bringing together founders and investors in Helsinki",
+      description: "annually hosting the world's leading startup event.",
       status: 'active',
       url: "https://slush.org",
       spinOffYear: 2012,
@@ -122,7 +138,7 @@ function Projects() {
     },
     {
       name: "Rails Girls",
-      description: "Getting more women to code. A curriculum of one day long events to encourage young women into the world of tech through coding.",
+      description: "Providing tools and a community for women to understand technology and how to build their ideas.",
       status: 'active',
       url: "https://railsgirls.com",
       spinOffYear: 2012,
@@ -130,40 +146,32 @@ function Projects() {
     },
     {
       name: "Startuplifers",
-      description: "Sending Finnish talent to work in the best global startups. Heavy focus on Silicon Valley, also has sent people to a few other hubs (Moscow, Berlin, SE Asia etc.)",
-      status: 'active',
-      url: "https://startuplifers.org",
+      description: "Sending Finnish talent to work in global startups",
+      status: 'inactive',
       spinOffYear: 2016,
       category: 'spinout'
     },
     {
       name: "Day For Failure",
-      description: "Celebrating the art of failing on the 13th of October. Internationally recognized as a holiday in some European countries",
+      description: "Celebrating the art of failing on the 13th of October.",
       status: 'inactive',
       spinOffYear: 2016,
       category: 'spinout'
     },
     {
       name: "Junction",
-      description: "What if we made a hackathon that looked like Slush. The biggest hackathon organizer in Europe, organizing events in multiple countries and building a hackathon-platform.",
+      description: "World-class hackathons hosted throughout the year across the globe",
       status: 'active',
-      url: "https://junction.xyz",
+      url: "https://www.hackjunction.com",
       spinOffYear: 2016,
       category: 'spinout'
     },
     {
       name: "Kiuas",
-      description: "The best accelerator-program in the Nordics. A seed-stage startup accelerator.",
+      description: "Accelerator program to help early-stage startup founders to build world-changing companies",
       status: 'active',
       url: "https://kiuas.com",
       spinOffYear: 2018,
-      category: 'spinout'
-    },
-    {
-      name: "Hel Tech",
-      description: "A monthly tech meetup with changing topics. Bringing together experts, founders, researchers and students",
-      status: 'inactive',
-      spinOffYear: 2019,
       category: 'spinout'
     },
     {
@@ -175,27 +183,11 @@ function Projects() {
       category: 'spinout'
     },
     {
-      name: "Wicked Helsinki",
-      description: "An impact entrepreneurship community",
-      status: 'active',
-      url: "https://wickedhelsinki.fi",
-      spinOffYear: 2021,
-      category: 'spinout'
-    },
-    {
       name: "SILTA",
-      description: "An accelerator-program taking Finnish founders to Silicon Valley for 3 months to live in a hacker house and make a market entry there",
+      description: "Program taking early-stage founders from Finland to San Francisco for 3 months to develop their companies",
       status: 'active',
-      url: "https://silta.xyz",
+      url: "https://www.siltahouse.com",
       spinOffYear: 2023,
-      category: 'spinout'
-    },
-    {
-      name: "Deep Dive",
-      description: "A case competition bridging the gap between academia and entrepreneurship. Bringing students together with R2B-teams to tackle some of their issues with commercializing research.",
-      status: 'active',
-      url: "https://www.deep-dive.org/",
-      spinOffYear: 2022,
       category: 'spinout'
     }
   ]
@@ -206,7 +198,13 @@ function Projects() {
       if (selectedCategory === 'spinout' && a.spinOffYear && b.spinOffYear) {
         return b.spinOffYear - a.spinOffYear // Sort by year in descending order
       }
-      return 0
+      if (selectedCategory === 'brewing') {
+        // Sort active first, then planned
+        if (a.status === 'active' && b.status !== 'active') return -1;
+        if (a.status !== 'active' && b.status === 'active') return 1;
+        return 0;
+      }
+      return 0;
     })
 
   return (

@@ -105,6 +105,10 @@ function Footer() {
               </a>
             ))}
           </div>
+          <div className="h-6 w-px bg-white/10" />
+          <Link to="/authors" className={getClassName('/authors')}>
+            Authors
+          </Link>
         </div>
       </div>
     </footer>

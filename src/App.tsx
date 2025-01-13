@@ -253,8 +253,38 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/80 to-black -z-10" />
         <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-black via-black/95 to-transparent -z-10 sm:hidden" />
         
+        {/* Background 2025 with Grid */}
+        <div className="fixed inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+          {/* Grid */}
+          <div 
+            className="absolute w-[200vw] h-[200vh]"
+            style={{
+              transform: 'perspective(1000px) rotateX(60deg) translateY(-70%) translateZ(-100px)',
+              background: `
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+              `,
+              backgroundSize: '4vw 4vw',
+              opacity: 0.5,
+            }}
+          />
+          
+          {/* 2025 Text */}
+          <div 
+            className="font-['Geist_Mono'] text-[35vw] font-normal whitespace-nowrap select-none"
+            style={{
+              transform: 'perspective(1000px) rotateX(15deg) translateY(-20%)',
+              WebkitTextStroke: '1px rgba(255,255,255,0.1)',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent',
+            }}
+          >
+            2O25
+          </div>
+        </div>
+
         {/* Main content container */}
-        <div className="flex flex-col items-center gap-6" style={{ 
+        <div className="flex flex-col items-center gap-6 relative z-10" style={{ 
           width: '100%',
           maxWidth: '1400px',
           margin: '0 auto',
@@ -269,6 +299,7 @@ function App() {
             clipPath: 'inset(0 0 0 0)',
             borderRadius: '4px',
           }}>
+   
             <Canvas
               dpr={[1, 2]}
               performance={{ min: 0.5 }}
