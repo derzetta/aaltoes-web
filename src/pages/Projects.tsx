@@ -121,7 +121,7 @@ function Projects() {
     },
     {
       name: "Deep Dive",
-      description: "A case competition bridging the gap between academia and entrepreneurship, where students solve real business development challenges faced by research-based startups.",
+      description: "A case competition bridging the gap between academia and entrepreneurship.",
       status: 'active',
       url: "https://deep-dive.org",
       spinOffYear: 2023,
