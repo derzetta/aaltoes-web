@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 
 function CompanyLogos() {
   const companies = [
@@ -21,6 +20,11 @@ function CompanyLogos() {
       name: 'Huuva',
       logo: '/logos/huuva.svg',
       url: 'https://huuva.com'
+    },
+    {
+      name: 'Meru',
+      logo: '/logos/meru.svg',
+      url: 'https://meruhealth.com'
     },
     {
       name: 'Singa',
