@@ -141,11 +141,12 @@ function PreviousBoards() {
       year: 2013,
       members: [
         { name: "Elina Uuttela", role: "President" },
-        { name: "Risto Vuorio", role: "VP, Finance & Startup Sauna" },
+        { name: "Risto Vuorio", role: "VP, Finance & Summer of Startups" },
         { name: "Kristian Hartikainen", role: "Technology" },
         { name: "Markus Ahrenberg", role: "Community" },
         { name: "Juuso Koskinen", role: "Startup Sauna" },
-        { name: "Miki Pernu", role: "Events" }
+        { name: "Miki Pernu", role: "Events" },
+        { name: "Tatu Mäkijärvi ", role: "Startup Life" }
       ]
     },
     {
@@ -154,9 +155,10 @@ function PreviousBoards() {
         { name: "Nils Paajanen", role: "President" },
         { name: "Atte Hujanen", role: "VP" },
         { name: "Mikko Hagelberg", role: "Finance" },
-        { name: "Teemu Tapanila", role: "Operations" },
+        { name: "Teemu Tapanila", role: "Tech" },
         { name: "Juhana Nurmio", role: "Academic Relations" },
-        { name: "Riku Lindholm", role: "Events" }
+        { name: "Riku Lindholm", role: "Events" },
+        { name: "Juho Kokkola", role: "Design and Summer of Startups" }
       ]
     },
     {
