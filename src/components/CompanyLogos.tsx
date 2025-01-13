@@ -1,4 +1,3 @@
-
 function CompanyLogos() {
   const companies = [
     {
@@ -19,7 +18,7 @@ function CompanyLogos() {
     {
       name: 'Huuva',
       logo: '/logos/huuva.svg',
-      url: 'https://huuva.com'
+      url: 'https://huuva.io'
     },
     {
       name: 'Singa',
@@ -41,6 +40,16 @@ function CompanyLogos() {
       logo: '/logos/komu.svg',
       url: 'https://komuhomes.com'
     },
+    {
+      name: 'Taito',
+      logo: '/logos/taito.svg',
+      url: 'https://taito.ai'
+    },
+    {
+      name: 'Arca',
+      logo: '/logos/arca.svg',
+      url: 'https://arca.so'
+    },
   ]
 
   return (
@@ -51,12 +60,13 @@ function CompanyLogos() {
           href={company.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 flex items-center justify-center"
+          className="group bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 flex items-center justify-center 
+                     hover:bg-white/10 hover:border-white/30 transition-all duration-150"
         >
           <img 
             src={company.logo} 
             alt={company.name} 
-            className="h-6 w-auto opacity-50 hover:opacity-100 transition-opacity"
+            className="h-6 w-auto opacity-50 group-hover:opacity-100 transition-all duration-150"
           />
         </a>
       ))}
