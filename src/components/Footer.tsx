@@ -82,7 +82,7 @@ function Footer() {
             Billing
           </Link>
           <Link to="/code-of-conduct" className={getClassName('/code-of-conduct')}>
-            Code of Conduct
+            Conduct
           </Link>
           <Link to="/privacy-notice" className={getClassName('/privacy-notice')}>
             Privacy Notice

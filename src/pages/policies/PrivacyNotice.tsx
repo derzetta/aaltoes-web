@@ -18,7 +18,7 @@ function PrivacyNotice() {
               <h2 className="section-title">1. The Controller</h2>
               <p className="text-content">
                 The controller is Aaltoes (Aalto Entrepreneurship Society ry, business ID 2291638-6). 
-                All contacts and inquiries should be addressed to Nantte Kivinen (nantte.kivinen@aaltoes.com).
+                All contacts and inquiries should be addressed to Yeralkhan Slam (yera.slam@aaltoes.com).
               </p>
             </div>
 

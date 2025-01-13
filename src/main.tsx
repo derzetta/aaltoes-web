@@ -10,6 +10,7 @@ import BillingInfo from './pages/BillingInfo'
 import CodeOfConduct from './pages/policies/CodeOfConduct'
 import PrivacyNotice from './pages/policies/PrivacyNotice'
 import Authors from './pages/Authors'
+import AssociationRules from './pages/policies/AssociationRules'
 
 const router = createHashRouter([
   {
@@ -47,6 +48,10 @@ const router = createHashRouter([
   {
     path: "/authors",
     element: <Authors />,
+  },
+  {
+    path: "/association-rules",
+    element: <AssociationRules />,
   }
 ])
 
