@@ -109,7 +109,7 @@ function PreviousBoards() {
         { name: "Ville Leppälä", role: "Junction Lead" },
         { name: "Aleksi Heinonen", role: "Finance" },
         { name: "Eero Kettunen", role: "Partnerships" },
-        { name: "Jaan Lundström", role: "Operations" },
+        { name: "Jan Lundström", role: "Operations" },
         { name: "Juha-Pekka Puska", role: "Academic Affairs" },
         { name: "Jenna Kallunki", role: "Brand & Marketing" }
       ]
