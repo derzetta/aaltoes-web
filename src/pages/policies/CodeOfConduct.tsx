@@ -72,10 +72,10 @@ function CodeOfConduct() {
               <h2 className="section-title">Our Harassment Contact Persons</h2>
               <div className="space-y-8">
                 <div className="text-content">
-                  <p className="text-white/90 font-medium">Vaneeza Maqsood</p>
+                  <p className="text-white/90 font-medium">Siiri Lautamies</p>
                   <div className="space-y-1 mt-2">
-                    <p>+358 44 244 6768</p>
-                    <p>telegram: @vaneezamaqsood</p>
+                    <p>+358 44 019 99 53</p>
+                    <p>telegram: @siirimies</p>
                   </div>
                 </div>
 
