@@ -184,7 +184,7 @@ function Projects() {
     },
     {
       name: "Dash",
-      description: "A design thinking hackathon, promoting multidisciplinarity. Bringing together hipsters, hackers, hustlers and wild cards.",
+      description: "A movement for a better designed future.",
       status: 'active',
       url: "https://www.dash.design",
       spinOffYear: 2017,
