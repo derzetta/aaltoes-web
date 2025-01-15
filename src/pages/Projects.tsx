@@ -170,7 +170,7 @@ function Projects() {
       name: "Junction",
       description: "World-class hackathons hosted throughout the year across the globe.",
       status: 'active',
-      url: "https://www.hackjunction.com",
+      url: "https://hackjunction.com",
       spinOffYear: 2015,
       category: 'spinout'
     },
@@ -186,7 +186,7 @@ function Projects() {
       name: "Dash",
       description: "A movement for a better designed future.",
       status: 'active',
-      url: "https://www.dash.design",
+      url: "https://dash.design",
       spinOffYear: 2017,
       category: 'spinout'
     },
@@ -194,7 +194,7 @@ function Projects() {
       name: "SILTA",
       description: "Program taking early-stage founders from Finland to San Francisco for 3 months to develop their companies.",
       status: 'active',
-      url: "https://www.siltahouse.com",
+      url: "https://siltahouse.com",
       spinOffYear: 2021,
       category: 'spinout'
     },
@@ -202,7 +202,7 @@ function Projects() {
       name: "FR8",
       description: "Where young mavericks build the future.",
       status: 'active',
-      url: "https://www.fr8.so",
+      url: "https://fr8.so",
       spinOffYear: 2024,
       category: 'spinout'
     }
