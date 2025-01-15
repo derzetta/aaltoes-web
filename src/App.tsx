@@ -409,12 +409,12 @@ function App() {
                   <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </a>
                 <a 
-                  href="https://t.me/aaltoes"
+                  href="https://t.me/+1P42HmirI81lYTMy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-black/30 backdrop-blur-xs text-white/70 rounded-lg border border-white/10 font-mono text-sm sm:text-sm tracking-widest transition-all hover:text-white hover:bg-black/40 hover:border-white/20 flex items-center justify-center"
                 >
-                  <span className="relative z-10 uppercase">Info Channel</span>
+                  <span className="relative z-10 uppercase">2025 Chat</span>
                   <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </a>
                 <a 
