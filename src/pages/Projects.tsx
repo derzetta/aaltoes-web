@@ -197,6 +197,14 @@ function Projects() {
       url: "https://www.siltahouse.com",
       spinOffYear: 2021,
       category: 'spinout'
+    },
+    {
+      name: "FR8",
+      description: "Where young mavericks build the future.",
+      status: 'active',
+      url: "https://www.fr8.so",
+      spinOffYear: 2024,
+      category: 'spinout'
     }
   ]
 
