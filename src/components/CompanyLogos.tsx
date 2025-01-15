@@ -55,6 +55,11 @@ function CompanyLogos() {
       logo: '/logos/arca.svg',
       url: 'https://arca.so'
     },
+    {
+      name: 'Cactos',
+      logo: '/logos/cactos.svg', 
+      url: 'https://cactos.com'
+    }
   ]
 
   return (
