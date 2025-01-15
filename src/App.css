@@ -24,13 +24,13 @@
 
   .pixel-button::before {
     @apply content-[''] absolute -top-1 -left-1 -right-1 -bottom-1 
-           border border-white rounded-xl opacity-30
+           border border-neutral-100 rounded-xl opacity-30
            transition-[opacity,box-shadow] duration-100 pointer-events-none
-           shadow-[0_0_20px_rgba(255,255,255,0.1)];
+           shadow-[0_0_20px_rgba(245,245,245,0.1)];
   }
 
   .pixel-button:hover {
-    @apply shadow-[0_8px_32px_rgba(255,255,255,0.2)];
+    @apply shadow-[0_8px_32px_rgba(245,245,245,0.2)];
   }
 
   .pixel-button:hover::before {

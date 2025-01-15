@@ -1,7 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from './App'
+import NotFound from './pages/NotFound'
+import App from './App.tsx'
 import About from './pages/About'
 import Team from './pages/Team'
 import Projects from './pages/Projects'
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/association-rules",
     element: <AssociationRules />,
+  },
+  {
+    path: "*",
+    element: <NotFound />
   }
 ])
 

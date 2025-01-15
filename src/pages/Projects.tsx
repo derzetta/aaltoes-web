@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Footer from '../components/Footer'
+import Layout from '../components/Layout'
 import { Project } from '../types/project'
 import EarlyAccessBanner from '../components/EarlyAccessBanner'
 
@@ -37,22 +37,22 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Card 
       {...cardProps}
-      className="group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 transition-all hover:bg-black/40 hover:border-white/20 block h-[280px]"
+      className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 transition-all hover:bg-neutral-950/40 hover:border-neutral-100/20 block h-[280px]"
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between gap-4">
-          <h3 className="font-sans text-white/90 text-base tracking-wide">{name}</h3>
+          <h3 className="font-sans text-neutral-100/90 text-base tracking-wide">{name}</h3>
           <StatusBadge status={status} />
         </div>
-        <p className="font-sans text-white/60 text-sm leading-relaxed mt-4 line-clamp-4">{description}</p>
+        <p className="font-sans text-neutral-100/60 text-sm leading-relaxed mt-4 line-clamp-4">{description}</p>
         <div className="flex flex-col gap-1 mt-auto pt-4">
           {spinOffYear && (
-            <div className="font-mono text-xs text-white/40">
+            <div className="font-mono text-xs text-neutral-100/40">
               {spinOffYear}
             </div>
           )}
           {url && (
-            <div className="font-mono text-xs text-white/40">
+            <div className="font-mono text-xs text-neutral-100/40">
               {new URL(url).hostname}
             </div>
           )}
@@ -67,15 +67,15 @@ function NewProjectCard() {
   return (
     <a 
       href="mailto:board@aaltoes.com"
-      className="group relative bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm border border-white/30 rounded-lg p-6 transition-all hover:from-white/10 hover:via-white/20 hover:to-white/10 hover:border-white/50"
+      className="group relative bg-gradient-to-r from-neutral-100/5 via-neutral-100/10 to-neutral-100/5 backdrop-blur-sm border border-neutral-100/30 rounded-lg p-6 transition-all hover:from-neutral-100/10 hover:via-neutral-100/20 hover:to-neutral-100/10 hover:border-neutral-100/50"
     >
       <div className="flex flex-col gap-4 items-center justify-center h-full text-center">
-        <div className="h-12 w-12 rounded-full border-2 border-white/30 flex items-center justify-center group-hover:border-white/50 transition-all">
-          <span className="text-2xl text-white/70 group-hover:text-white/90">+</span>
+        <div className="h-12 w-12 rounded-full border-2 border-neutral-100/30 flex items-center justify-center group-hover:border-neutral-100/50 transition-all">
+          <span className="text-2xl text-neutral-100/70 group-hover:text-neutral-100/90">+</span>
         </div>
         <div>
-          <h3 className="font-sans text-white/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
-          <p className="font-sans text-white/60 text-sm leading-relaxed">
+          <h3 className="font-sans text-neutral-100/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
+          <p className="font-sans text-neutral-100/60 text-sm leading-relaxed">
             Contact us with your idea and let's make it happen together
           </p>
         </div>
@@ -85,12 +85,12 @@ function NewProjectCard() {
   )
 }
 
-function Projects() {
+export default function Projects() {
+  const [selectedCategory, setSelectedCategory] = useState<'brewing' | 'spinout'>('brewing')
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
-  const [selectedCategory, setSelectedCategory] = useState<Project['category']>('brewing')
 
   const projects: Project[] = [
     {
@@ -224,42 +224,37 @@ function Projects() {
     })
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="page-container">
-        <h1 className="page-title">Projects</h1>
-        <div className="title-divider" />
-        <EarlyAccessBanner />
-        
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-lg border border-white/10 p-1 font-mono text-sm">
-            {(['brewing', 'spinout'] as const).map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-md transition-all uppercase tracking-wider ${
-                  selectedCategory === category 
-                    ? 'bg-white/10 text-white' 
-                    : 'text-white/50 hover:text-white/70'
-                }`}
-              >
-                {category === 'brewing' ? 'Currently Brewing' : 'Spin Outs'}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
-            {selectedCategory === 'brewing' && <NewProjectCard />}
-          </div>
+    <Layout>
+      <h1 className="page-title">Projects</h1>
+      <div className="title-divider" />
+      <EarlyAccessBanner />
+      
+      <div className="flex justify-center mb-12">
+        <div className="inline-flex rounded-lg border border-neutral-100/10 p-1 font-mono text-sm">
+          {(['brewing', 'spinout'] as const).map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded-md transition-all uppercase tracking-wider ${
+                selectedCategory === category 
+                  ? 'bg-neutral-100/10 text-neutral-100' 
+                  : 'text-neutral-100/50 hover:text-neutral-100/70'
+              }`}
+            >
+              {category === 'brewing' ? 'Currently Brewing' : 'Spin Outs'}
+            </button>
+          ))}
         </div>
       </div>
-      <Footer />
-    </div>
-  )
-}
 
-export default Projects 
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.name} project={project} />
+          ))}
+          {selectedCategory === 'brewing' && <NewProjectCard />}
+        </div>
+      </div>
+    </Layout>
+  )
+} 
