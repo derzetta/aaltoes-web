@@ -24,7 +24,7 @@ export default function Events() {
 
           <div className="relative w-full aspect-[4/3] bg-neutral-950/30 backdrop-blur-sm rounded-lg border border-neutral-100/10 overflow-hidden">
             <iframe
-              src="https://lu.ma/embed/calendar/cal-Dt7ZTA5Hc4gfnxp/events?theme=dark&hideDescription=1&backgroundColor=rgb(0,0,0)&primaryColor=rgb(255,255,255)&textColor=rgba(255,255,255,0.7)"
+              src="https://lu.ma/embed/calendar/cal-Dt7ZTA5Hc4gfnxp/events?theme=dark&hideDescription=1&backgroundColor=rgb(0,0,0)&primaryColor=rgb(255,255,255)&textColor=rgba(255,255,255,0.7)&forceTheme=dark"
               className="absolute inset-0 w-full h-full"
               style={{ 
                 border: 'none',

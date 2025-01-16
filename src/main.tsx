@@ -12,6 +12,7 @@ import CodeOfConduct from './pages/policies/CodeOfConduct'
 import PrivacyNotice from './pages/policies/PrivacyNotice'
 import Authors from './pages/Authors'
 import AssociationRules from './pages/policies/AssociationRules'
+import LogoBank from './pages/LogoBank'
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
   {
     path: "/association-rules",
     element: <AssociationRules />,
+  },
+  {
+    path: "/resources/authors",
+    element: <Authors />
+  },
+  {
+    path: "/resources/logo-bank",
+    element: <LogoBank />
   },
   {
     path: "*",
