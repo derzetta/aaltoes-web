@@ -9,7 +9,7 @@ export default function LogoBank() {
 
   return (
     <Layout>
-      <h1 className="page-title">Logo Bank</h1>
+      <h1 className="page-title">Aaltoes 2025 Logo Bank</h1>
       <div className="title-divider" />
       
       <div className="content-section">
