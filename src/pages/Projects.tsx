@@ -14,6 +14,8 @@ function StatusBadge({ status }: { status: Project['status'] }) {
         return 'bg-neutral-500/20 text-neutral-300 border-neutral-500/30'
       case 'planned':
         return 'bg-blue-500/20 text-blue-300 border-blue-500/30'
+      case 'pilot':
+        return 'bg-purple-500/20 text-purple-300 border-purple-500/30'
     }
   }
 
@@ -120,6 +122,19 @@ export default function Projects() {
       category: 'brewing'
     },
     {
+      name: "wednesday.",
+      description: "Inspiring women every day of the week.",
+      status: 'active',
+      url: "https://wednesday.aaltoes.com/",
+      category: 'brewing'
+    },
+    {
+      name: "DAWN",
+      description: "From zero to one in three weeks!",
+      status: 'pilot',
+      category: 'brewing'
+    },
+    {
       name: "Deep Dive",
       description: "A case competition bridging the gap between academia and entrepreneurship.",
       status: 'active',
@@ -215,9 +230,11 @@ export default function Projects() {
         return b.spinOffYear - a.spinOffYear // Sort by year in descending order
       }
       if (selectedCategory === 'brewing') {
-        // Sort active first, then planned
+        // Sort active first, then pilot, then planned
         if (a.status === 'active' && b.status !== 'active') return -1;
         if (a.status !== 'active' && b.status === 'active') return 1;
+        if (a.status === 'pilot' && b.status === 'planned') return -1;
+        if (a.status === 'planned' && b.status === 'pilot') return 1;
         return 0;
       }
       return 0;
