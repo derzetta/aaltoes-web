@@ -39,7 +39,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Card 
       {...cardProps}
-      className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 transition-all hover:bg-neutral-950/40 hover:border-neutral-100/20 block h-[280px]"
+      className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 transition-all hover:bg-neutral-900 hover:border-neutral-100/20 block h-[280px]"
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between gap-4">
@@ -60,7 +60,6 @@ function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
       </div>
-      <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </Card>
   )
 }
