@@ -227,7 +227,6 @@ function Footer() {
               </a>
             ))}
           </div>
-          <div className="h-6 w-px bg-neutral-100/10" />
         </div>
       </div>
     </footer>
