@@ -127,11 +127,18 @@ export default function Projects() {
       category: 'brewing'
     },
     {
-      name: "DAWN",
-      description: "From zero to one in three weeks!",
-      status: 'pilot',
+      name: "Founders Fuel",
+      description: "Your no bullshit tech & startup news & events  from Finland & beyond. Always free.",
+      status: 'active',
+      url: "https://foundersfuel.aaltoes.com/",
       category: 'brewing'
     },
+      {
+        name: "DAWN",
+        description: "From zero to one in three weeks!",
+        status: 'pilot',
+        category: 'brewing'
+      },
     {
       name: "Deep Dive",
       description: "A case competition bridging the gap between academia and entrepreneurship.",
