@@ -68,10 +68,10 @@ function NewProjectCard() {
   return (
     <a 
       href="mailto:board@aaltoes.com"
-      className="group relative bg-gradient-to-r from-neutral-100/5 via-neutral-100/10 to-neutral-100/5 backdrop-blur-sm border border-neutral-100/30 rounded-lg p-6 transition-all hover:from-neutral-100/10 hover:via-neutral-100/20 hover:to-neutral-100/10 hover:border-neutral-100/50"
+      className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 transition-all hover:bg-neutral-900 hover:border-neutral-100/20 block h-[280px]"
     >
       <div className="flex flex-col gap-4 items-center justify-center h-full text-center">
-        <div className="h-12 w-12 rounded-full border-2 border-neutral-100/30 flex items-center justify-center group-hover:border-neutral-100/50 transition-all">
+        <div className="h-12 w-12 rounded-full border-2 border-neutral-100/10 flex items-center justify-center group-hover:border-neutral-100/20 transition-all">
           <span className="text-2xl text-neutral-100/70 group-hover:text-neutral-100/90">+</span>
         </div>
         <div>
@@ -81,7 +81,6 @@ function NewProjectCard() {
           </p>
         </div>
       </div>
-      <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </a>
   )
 }

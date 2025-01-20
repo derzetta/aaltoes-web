@@ -85,6 +85,27 @@
   .footer-text {
     @apply font-sans text-xs tracking-wide;
   }
+
+  .base-button {
+    @apply relative px-4 sm:px-6 py-2.5 sm:py-3 
+           bg-neutral-950/30 backdrop-blur-sm 
+           border border-neutral-100/10 
+           text-neutral-100/70
+           rounded-lg font-mono text-sm tracking-widest
+           transition-all
+           hover:bg-neutral-900 hover:border-neutral-100/20 hover:text-neutral-100;
+  }
+
+  .base-button-highlight {
+    @apply relative px-4 sm:px-6 py-2.5 sm:py-3
+           bg-gradient-to-r from-neutral-100/5 via-neutral-100/10 to-neutral-100/5
+           backdrop-blur-sm border border-neutral-100/30
+           text-neutral-100
+           rounded-lg font-mono text-sm tracking-widest
+           transition-all
+           hover:from-neutral-100/10 hover:via-neutral-100/20 hover:to-neutral-100/10
+           hover:border-neutral-100/50;
+  }
 }
 
 html {
