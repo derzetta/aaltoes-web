@@ -46,7 +46,7 @@ const teamMembers = [
   },
   {
     name: "Lauri Loyttyniemi",
-    role: "External Relations",
+    role: "Projects",
     image: "/board/lauri.png",
     email: "lauri.loyttyniemi@aaltoes.com",
     telegram: "lauriloyttyniemi",
