@@ -88,18 +88,26 @@ export default function FoodChart() {
     <div className="h-screen bg-neutral-950 p-6">
       <div className="h-full max-w-4xl mx-auto">
         <div className="h-full rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-6 border border-white/[0.08] flex flex-col">
-          <div className="mb-8">
-            <h1 className="font-mono text-2xl font-bold text-neutral-100 tracking-tighter">
-              Aaltoes Events food chart
-            </h1>
-            <p className="font-mono text-sm text-neutral-400">
-              last updated 22.01.25
-            </p>
-            {error && (
-              <p className="font-mono text-sm text-red-400 mt-2">
-                {error}
+          <div className="mb-8 flex justify-between items-start">
+            <div>
+              <h1 className="font-mono text-2xl font-bold text-neutral-100 tracking-tighter">
+                Aaltoes Events food chart
+              </h1>
+              <p className="font-mono text-sm text-neutral-400">
+                last updated 22.01.25
               </p>
-            )}
+              {error && (
+                <p className="font-mono text-sm text-red-400 mt-2">
+                  {error}
+                </p>
+              )}
+            </div>
+            <a 
+              href="/"
+              className="px-3 py-2 rounded font-mono text-sm bg-neutral-800/50 hover:bg-neutral-800/70 text-neutral-300 border border-white/[0.08]"
+            >
+              ← Homepage
+            </a>
           </div>
 
           <div className="relative w-full h-[calc(100%-6rem)] bg-neutral-900/50 rounded-xl border border-white/[0.08] p-6">
