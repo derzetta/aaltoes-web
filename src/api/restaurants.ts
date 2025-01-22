@@ -21,29 +21,28 @@ export async function getRestaurants() {
   }
 }
 
-export async function addVote(restaurantId: number, isLike: boolean | null) {
+export async function addVote(restaurantId: number, cookieId: string, isLike: boolean | null) {
   try {
-    console.log('Managing vote:', { restaurantId, isLike })
+    console.log('Managing vote:', { restaurantId, cookieId, isLike })
     
     if (isLike === null) {
-      // Delete the vote
+      // Delete the specific user's vote
       const { rows } = await sql`
         DELETE FROM votes 
         WHERE restaurant_id = ${restaurantId}
+        AND cookie_id = ${cookieId}
         RETURNING *;
       `
       console.log('Vote removed:', rows[0])
       return rows[0]
     }
     
-    // Add/update vote - delete any existing vote first
+    // Add/update vote - using upsert to handle duplicates
     const { rows } = await sql`
-      WITH deleted AS (
-        DELETE FROM votes 
-        WHERE restaurant_id = ${restaurantId}
-      )
-      INSERT INTO votes (restaurant_id, is_like)
-      VALUES (${restaurantId}, ${isLike})
+      INSERT INTO votes (restaurant_id, cookie_id, is_like)
+      VALUES (${restaurantId}, ${cookieId}, ${isLike})
+      ON CONFLICT (restaurant_id, cookie_id)
+      DO UPDATE SET is_like = ${isLike}
       RETURNING *;
     `
     console.log('Vote updated:', rows[0])

@@ -19,6 +19,10 @@ export default function FoodChart() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    // Ensure user has a cookie ID
+    if (!Cookies.get('user_id')) {
+      Cookies.set('user_id', Math.random().toString(36).substring(2), { expires: 365 })
+    }
     fetchRestaurants()
   }, [])
 
@@ -40,12 +44,13 @@ export default function FoodChart() {
   const handleVote = async (id: number, isLike: boolean) => {
     const cookieKey = `voted_${id}`
     const existingVote = Cookies.get(cookieKey)
+    const userId = Cookies.get('user_id')!
     
     // If already voted with same choice, remove the vote
     if (existingVote === JSON.stringify(isLike)) {
       setVoting(String(id))
       try {
-        await addVote(id, null) // Cancel vote
+        await addVote(id, userId, null) // Cancel vote
         Cookies.remove(cookieKey)
         await fetchRestaurants()
       } catch (err: any) {
@@ -58,13 +63,10 @@ export default function FoodChart() {
       return
     }
 
-    // If switching vote, first cancel the old vote
+    // Add or update vote
     setVoting(String(id))
     try {
-      if (existingVote !== null) {
-        await addVote(id, null) // Cancel previous vote
-      }
-      await addVote(id, isLike) // Add new vote
+      await addVote(id, userId, isLike)
       Cookies.set(cookieKey, JSON.stringify(isLike), { expires: 365 })
       await fetchRestaurants()
     } catch (err: any) {
