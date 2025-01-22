@@ -118,7 +118,7 @@ export default function Chat() {
   return (
     <div className="flex gap-6 h-screen bg-neutral-950 p-6">
       {/* Left screen - Brainhack Schedule (2/3) */}
-      <div className="w-2/3 h-full rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-8 flex flex-col border border-neutral-800 relative overflow-hidden">
+      <div className="w-2/3 h-full rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-8 flex flex-col border border-white/[0.3] relative overflow-hidden">
         {/* Background Animation */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 opacity-80">
@@ -182,7 +182,7 @@ export default function Chat() {
           <div className="space-y-6">
             <div className="space-y-3">
               <div className="space-y-4">
-                <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800/50 backdrop-blur-sm">
+                <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-700/30 backdrop-blur-sm">
                   <h3 className="font-mono text-3xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">January 22, 2025</h3>
                   <div className="space-y-4">
                     <div className="flex items-center">
@@ -211,7 +211,7 @@ export default function Chat() {
                       <div className="flex-1">
                         <span className="font-mono text-2xl text-neutral-300">Project Presentations</span>
                         <p className="font-mono text-lg text-neutral-500 mt-1">Share your ideas, progress, and learnings</p>
-                        <div className="mt-2 bg-purple-900/30 p-3 rounded-md border border-purple-800/50">
+                        <div className="mt-3 bg-purple-900/30 p-3 rounded-md border border-purple-600/30">
                           <p className="font-mono text-lg text-purple-300">🏆 Best presentation wins a Muse S device!</p>
                         </div>
                       </div>
@@ -225,7 +225,7 @@ export default function Chat() {
       </div>
 
       {/* Right screen - QR Code and Animations (1/3) */}
-      <div className="w-1/3 h-full rounded-3xl bg-neutral-900/30 backdrop-blur-sm relative overflow-hidden border border-neutral-800">
+      <div className="w-1/3 h-full rounded-3xl bg-neutral-700/30 backdrop-blur-sm relative overflow-hidden border border-white/[0.3]">
         {/* Grid Background */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
           <div 
@@ -272,15 +272,15 @@ export default function Chat() {
             </AnimatePresence>
           </div>
 
-          <div className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-neutral-800/50">
+          <div className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-neutral-700/30">
             <QRCodeSVG
               value={chatUrl}
-              size={240}
+              size={280}
               level="H"
               includeMargin={true}
               className="bg-white p-4 rounded-lg"
             />
-            <p className="font-mono text-center text-neutral-400 mt-4 text-sm tracking-tight uppercase">
+            <p className="font-mono text-center text-neutral-400 mt-6 text-lg tracking-tight uppercase">
               Scan to join our community
             </p>
           </div>
