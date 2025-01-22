@@ -14,6 +14,7 @@ import Authors from './pages/Authors'
 import AssociationRules from './pages/policies/AssociationRules'
 import LogoBank from './pages/LogoBank'
 import Chat from './pages/Chat'
+import FoodChart from './pages/FoodChart'
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />,
+  },
+  {
+    path: "/food-chart",
+    element: <FoodChart />,
   },
   {
     path: "/code-of-conduct",

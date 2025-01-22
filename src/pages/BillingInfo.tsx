@@ -34,7 +34,8 @@ function BillingInfo() {
               <div className="text-content">
                 Aalto Entrepreneurship Society ry<br />
                 PO BOX: 16112<br />
-                00021, LASKUTUS
+                00021, LASKUTUS<br />
+                Puumiehenkuja 5a, 02150 Espoo
               </div>
             </div>
 
