@@ -12,8 +12,8 @@ function AnimatedLogo() {
       viewBox="0 0 714 476" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-25"
-      animate={{ opacity: [0.25, 0.15, 0.25] }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40"
+      animate={{ opacity: [0.4, 0.25, 0.4] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     >
       <motion.path
@@ -175,45 +175,44 @@ export default function Chat() {
           }}
         />
 
-        <div className="relative z-10 mt-12">
-          <h1 className="font-mono text-[8rem] font-bold text-neutral-100 tracking-tighter mb-16">
+        <div className="relative z-10 mt-8">
+          <h1 className="font-mono text-[7rem] font-bold text-neutral-100 tracking-tighter mb-12">
             Brainhack
           </h1>
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="font-mono text-3xl font-medium text-neutral-200 tracking-tight uppercase">Schedule</h2>
-              <div className="space-y-6">
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="space-y-4">
                 <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800/50 backdrop-blur-sm">
-                  <h3 className="font-mono text-2xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">January 22, 2025</h3>
-                  <div className="space-y-3">
+                  <h3 className="font-mono text-3xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">January 22, 2025</h3>
+                  <div className="space-y-4">
                     <div className="flex items-center">
-                      <span className="font-mono text-xl text-neutral-400 w-24">13:00</span>
+                      <span className="font-mono text-2xl text-neutral-400 w-28">13:00</span>
                       <div className="flex-1">
-                        <span className="font-mono text-xl text-neutral-300">Team Formation & Ideation</span>
-                        <p className="font-mono text-sm text-neutral-500 mt-1">Ideate measurements or projects you want to work on</p>
+                        <span className="font-mono text-2xl text-neutral-300">Team Formation & Ideation</span>
+                        <p className="font-mono text-lg text-neutral-500 mt-1">Ideate measurements or projects you want to work on</p>
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <span className="font-mono text-xl text-neutral-400 w-24">13:45</span>
+                      <span className="font-mono text-2xl text-neutral-400 w-28">13:45</span>
                       <div className="flex-1">
-                        <span className="font-mono text-xl text-neutral-300">Hands-on Session</span>
-                        <p className="font-mono text-sm text-neutral-500 mt-1">Measuring, coding, learning, and sharing</p>
+                        <span className="font-mono text-2xl text-neutral-300">Hands-on Session</span>
+                        <p className="font-mono text-lg text-neutral-500 mt-1">Measuring, coding, learning, and sharing</p>
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <span className="font-mono text-xl text-neutral-400 w-24">16:00</span>
+                      <span className="font-mono text-2xl text-neutral-400 w-28">16:00</span>
                       <div className="flex-1">
-                        <span className="font-mono text-xl text-neutral-300">Food Break</span>
-                        <p className="font-mono text-sm text-neutral-500 mt-1">Recharge and network</p>
+                        <span className="font-mono text-2xl text-neutral-300">Food Break</span>
+                        <p className="font-mono text-lg text-neutral-500 mt-1">Recharge and network</p>
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <span className="font-mono text-xl text-neutral-400 w-24">19:00</span>
+                      <span className="font-mono text-2xl text-neutral-400 w-28">19:00</span>
                       <div className="flex-1">
-                        <span className="font-mono text-xl text-neutral-300">Project Presentations</span>
-                        <p className="font-mono text-sm text-neutral-500 mt-1">Share your ideas, progress, and learnings</p>
+                        <span className="font-mono text-2xl text-neutral-300">Project Presentations</span>
+                        <p className="font-mono text-lg text-neutral-500 mt-1">Share your ideas, progress, and learnings</p>
                         <div className="mt-2 bg-purple-900/30 p-3 rounded-md border border-purple-800/50">
-                          <p className="font-mono text-sm text-purple-300">🏆 Best presentation wins a Muse S device!</p>
+                          <p className="font-mono text-lg text-purple-300">🏆 Best presentation wins a Muse S device!</p>
                         </div>
                       </div>
                     </div>
@@ -234,10 +233,10 @@ export default function Chat() {
             style={{
               transform: 'perspective(1000px) rotateX(60deg) translateY(0%) translateZ(-100px)',
               backgroundImage: `
-                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.25) 0px, rgba(163, 163, 163, 0.25) 1px, transparent 1px, transparent 60px),
-                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.25) 0px, rgba(163, 163, 163, 0.25) 1px, transparent 1px, transparent 60px)
+                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px)
               `,
-              opacity: 0.5,
+              opacity: 0.7,
             }}
           />
           {/* Top fade overlay */}
