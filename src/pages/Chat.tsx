@@ -1,57 +1,7 @@
-import { useEffect, useState, Suspense, useRef } from 'react'
-import * as THREE from 'three'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { OrbitControls } from '@react-three/drei'
-import { EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { QRCodeSVG } from 'qrcode.react'
-import { Vector2 } from 'three'
 
-function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
-  const light1 = useRef<THREE.PointLight>(null)
-  const light2 = useRef<THREE.PointLight>(null)
-  const light3 = useRef<THREE.PointLight>(null)
-  const mainLight = useRef<THREE.DirectionalLight>(null)
-  const isMobile = window.innerWidth <= 768
-  const radius = isMobile ? 90 : 150
-
-  useFrame(({ clock }) => {
-    const time = clock.getElapsedTime()
-
-    if (mainLight.current) {
-      mainLight.current.position.x = Math.cos(time * 0.9) * (radius * 3)
-      mainLight.current.position.y = Math.sin(time * 0.9) * (radius * 3)
-      mainLight.current.position.z = 70
-    }
-
-    if (light1.current) {
-      light1.current.position.x = Math.cos(time * 0.8) * radius
-      light1.current.position.y = Math.sin(time * 0.8) * radius
-      light1.current.position.z = 70
-    }
-    if (light2.current) {
-      light2.current.position.x = Math.cos(time * 0.8 + 2.1) * radius
-      light2.current.position.y = Math.sin(time * 0.8 + 2.1) * radius
-      light2.current.position.z = 70
-    }
-    if (light3.current) {
-      light3.current.position.x = Math.cos(time * 0.8 + 4.2) * radius
-      light3.current.position.y = Math.sin(time * 0.8 + 4.2) * radius
-      light3.current.position.z = 70
-    }
-  })
-
-  return (
-    <>
-      <directionalLight ref={mainLight} position={[0, 0, 50]} intensity={1.0} />
-      <pointLight ref={light1} color={0xFF1493} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light2} color={0x00BFFF} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-      <pointLight ref={light3} color={0xfffff0} intensity={isMobile ? 4 : 5} distance={isMobile ? 150 : 200} decay={0.5} />
-    </>
-  )
-}
 
 
 function AnimatedLogo() {
@@ -137,7 +87,7 @@ export default function Chat() {
   const words = ["builders", "innovators", "misfits", "openings", "brave", "strivers", "mavericks", "open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const chatUrl = "https://t.me/+TP2QOzbls4oxMjE6"
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
