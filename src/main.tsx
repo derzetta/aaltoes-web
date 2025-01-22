@@ -13,6 +13,7 @@ import PrivacyNotice from './pages/policies/PrivacyNotice'
 import Authors from './pages/Authors'
 import AssociationRules from './pages/policies/AssociationRules'
 import LogoBank from './pages/LogoBank'
+import Chat from './pages/Chat'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/billing-info",
     element: <BillingInfo />,
+  },
+  {
+    path: "/chat",
+    element: <Chat />,
   },
   {
     path: "/code-of-conduct",
