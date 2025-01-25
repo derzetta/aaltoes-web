@@ -611,7 +611,7 @@ module.exports = {
   return (
     <Layout>
       {/* Floating Navigation */}
-      <div className={`fixed right-8 top-24 z-50 transition-transform duration-300 ${showNav ? 'translate-y-0' : '-translate-y-[120%]'}`}>
+      <div className={`fixed right-8 top-24 z-50 transition-transform duration-300 hidden lg:block ${showNav ? 'translate-y-0' : '-translate-y-[120%]'}`}>
         <div className="bg-neutral-950/70 backdrop-blur-md border border-neutral-100/10 rounded-lg p-4 w-64">
           <div className="font-mono text-sm text-neutral-100/50 uppercase tracking-wider mb-4">Navigation</div>
           <nav className="space-y-1">
