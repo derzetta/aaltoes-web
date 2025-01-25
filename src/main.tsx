@@ -12,10 +12,8 @@ import CodeOfConduct from './pages/policies/CodeOfConduct'
 import PrivacyNotice from './pages/policies/PrivacyNotice'
 import Authors from './pages/Authors'
 import AssociationRules from './pages/policies/AssociationRules'
-import LogoBank from './pages/LogoBank'
 import Chat from './pages/Chat'
 import FoodChart from './pages/FoodChart'
-import PosterCoC from './pages/PosterCoC.tsx'
 import Brand from './pages/Brand'
 
 const router = createBrowserRouter([
@@ -55,10 +53,7 @@ const router = createBrowserRouter([
     path: "/code-of-conduct",
     element: <CodeOfConduct />,
   },
-  {
-    path: "/postercoc",
-    element: <PosterCoC />,
-  },
+
   {
     path: "/privacy-notice",
     element: <PrivacyNotice />,
