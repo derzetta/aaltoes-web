@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import App from './App.tsx'
 import About from './pages/About'
@@ -15,6 +15,8 @@ import AssociationRules from './pages/policies/AssociationRules'
 import LogoBank from './pages/LogoBank'
 import Chat from './pages/Chat'
 import FoodChart from './pages/FoodChart'
+import PosterCoC from './pages/PosterCoC.tsx'
+import Brand from './pages/Brand'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
     element: <CodeOfConduct />,
   },
   {
+    path: "/postercoc",
+    element: <PosterCoC />,
+  },
+  {
     path: "/privacy-notice",
     element: <PrivacyNotice />,
   },
@@ -71,7 +77,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/resources/logo-bank",
-    element: <LogoBank />
+    element: <Navigate to="/brand" replace />
+  },
+  {
+    path: "/resources/logobank",
+    element: <Navigate to="/brand" replace />
+  },
+  {
+    path: "/brand",
+    element: <Brand />
   },
   {
     path: "*",

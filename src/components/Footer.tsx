@@ -196,17 +196,17 @@ function Footer() {
                     Authors
                   </Link>
                   <Link
-                    to="/resources/logo-bank"
+                    to="/brand"
                     className="block px-4 py-2 text-sm text-neutral-100/50 hover:text-neutral-100 hover:bg-neutral-100/5 transition-colors"
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
-                      const href = '/resources/logo-bank'
+                      const href = '/brand'
                       navigate(href)
                       setTimeout(() => setIsResourcesOpen(false), 200)
                     }}
                   >
-                    Logo Bank
+                    Brand Guidelines
                   </Link>
                 </div>
               </Portal>
