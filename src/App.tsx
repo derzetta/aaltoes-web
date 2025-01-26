@@ -261,20 +261,20 @@ function App() {
             style={{
               transform: 'perspective(1000px) rotateX(60deg) translateY(-50%) translateZ(-100px)',
               backgroundImage: `
-                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.25) 0px, rgba(163, 163, 163, 0.25) 1px, transparent 1px, transparent 60px),
-                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.25) 0px, rgba(163, 163, 163, 0.25) 1px, transparent 1px, transparent 60px)
+                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.50) 0px, rgba(163, 163, 163, 0.50) 1px, transparent 1px, transparent 70px),
+                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.50) 0px, rgba(163, 163, 163, 0.50) 1px, transparent 5px, transparent 150px)
               `,
               opacity: 1,
             }}
           />
           {/* Fade overlays */}
           <div 
-            className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-transparent to-neutral-950"
-            style={{ opacity: 0.95 }}
+            className="absolute inset-0 bg-gradient-to-b h-[120vh] from-neutral-950 via-transparent to-neutral-950"
+            style={{ opacity: 1.0 }}
           />
           <div 
-            className="absolute bottom-0 left-0 right-0 h-[70vh] bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent"
-            style={{ opacity: 0.9 }}
+            className="absolute bottom-0 left-0 right-0 h-[90vh] bg-gradient-to-t from-neutral-950 via-neutral-950/90 to-transparent"
+            style={{ opacity: 1.0 }}
           />
         </div>
 
