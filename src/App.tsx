@@ -424,12 +424,12 @@ function App() {
                   <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </a>
                 <a 
-                  href="https://aaltoes2025.typeform.com/membership"
+                  href="https://form.typeform.com/to/mGQRO8Te"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="base-button inline-flex items-center justify-center"
                 >
-                  <span className="relative z-10 uppercase font-medium">Join Aaltoes 2025</span>
+                  <span className="relative z-10 uppercase font-medium">Become a volunteer</span>
                   <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
                 </a>
