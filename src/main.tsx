@@ -12,7 +12,7 @@ import CodeOfConduct from './pages/policies/CodeOfConduct'
 import PrivacyNotice from './pages/policies/PrivacyNotice'
 import Authors from './pages/Authors'
 import AssociationRules from './pages/policies/AssociationRules'
-import Chat from './pages/Chat'
+import Screen from './pages/Screen.tsx'
 import FoodChart from './pages/FoodChart'
 import Brand from './pages/Brand'
 
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
     element: <BillingInfo />,
   },
   {
-    path: "/chat",
-    element: <Chat />,
+    path: "/screen",
+    element: <Screen />,
   },
   {
     path: "/food-chart",
