@@ -214,19 +214,27 @@ export default function Chat() {
   // Add keyboard event listener for screen toggling
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
+      // Check if Ctrl or Cmd (Mac) is pressed
+      const modifierPressed = event.ctrlKey || event.metaKey
+
+      if (!modifierPressed) return
+
       if (event.key.toLowerCase() === 'l') {
+        event.preventDefault() // Prevent default browser behavior
         setLayout(prev => ({
           ...prev,
           leftScreenVisible: !prev.leftScreenVisible,
           rightScreenVisible: !prev.leftScreenVisible ? true : prev.rightScreenVisible
         }))
       } else if (event.key.toLowerCase() === 'r') {
+        event.preventDefault() // Prevent default browser behavior
         setLayout(prev => ({
           ...prev,
           rightScreenVisible: !prev.rightScreenVisible,
           leftScreenVisible: !prev.rightScreenVisible ? true : prev.leftScreenVisible
         }))
       } else if (event.key.toLowerCase() === 's') {
+        event.preventDefault() // Prevent default browser behavior
         setShowControls(prev => !prev)
       }
     }
