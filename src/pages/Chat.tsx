@@ -83,11 +83,107 @@ function AnimatedLogo() {
   )
 }
 
+interface ScheduleItem {
+  time: string;
+  title: string;
+  description: string;
+  highlight?: string;
+}
+
+interface GradientSettings {
+  color1: string;
+  color2: string;
+  color3: string;
+}
+
+interface LayoutSettings {
+  leftScreenVisible: boolean;
+  rightScreenVisible: boolean;
+  leftScreenWidth: number; // percentage
+}
+
 export default function Chat() {
   const words = ["builders", "innovators", "misfits", "openings", "brave", "strivers", "mavericks", "open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const chatUrl = "https://t.me/+TP2QOzbls4oxMjE6"
   const [, setMousePosition] = useState({ x: 0, y: 0 })
+  const [showControls, setShowControls] = useState(false)
+  
+  // Layout controls
+  const [layout, setLayout] = useState<LayoutSettings>(() => {
+    const saved = localStorage.getItem('chatLayoutSettings')
+    return saved ? JSON.parse(saved) : {
+      leftScreenVisible: true,
+      rightScreenVisible: true,
+      leftScreenWidth: 66 // 66% by default (2/3)
+    }
+  })
+
+  // Initialize states with saved values
+  const [eventName, setEventName] = useState(() => {
+    return localStorage.getItem('eventName') || "Brainhack"
+  })
+  
+  const [eventDate, setEventDate] = useState(() => {
+    return localStorage.getItem('eventDate') || "January 22, 2025"
+  })
+  
+  const [scheduleItems, setScheduleItems] = useState<ScheduleItem[]>(() => {
+    const saved = localStorage.getItem('scheduleItems')
+    return saved ? JSON.parse(saved) : [
+      {
+        time: "13:00",
+        title: "Team Formation & Ideation",
+        description: "Ideate measurements or projects you want to work on"
+      },
+      {
+        time: "13:45",
+        title: "Hands-on Session",
+        description: "Measuring, coding, learning, and sharing"
+      },
+      {
+        time: "16:00",
+        title: "Food Break",
+        description: "Recharge and network"
+      },
+      {
+        time: "19:00",
+        title: "Project Presentations",
+        description: "Share your ideas, progress, and learnings",
+        highlight: "🏆 Best presentation wins a Muse S device!"
+      }
+    ]
+  })
+  
+  const [gradients, setGradients] = useState<GradientSettings>(() => {
+    const saved = localStorage.getItem('gradients')
+    return saved ? JSON.parse(saved) : {
+      color1: "rgba(255,20,147,0.8)",
+      color2: "rgba(0,191,255,0.8)",
+      color3: "rgba(147,51,234,0.8)"
+    }
+  })
+
+  // Save settings whenever they change
+  useEffect(() => {
+    localStorage.setItem('eventName', eventName)
+  }, [eventName])
+
+  useEffect(() => {
+    localStorage.setItem('eventDate', eventDate)
+  }, [eventDate])
+
+  useEffect(() => {
+    localStorage.setItem('scheduleItems', JSON.stringify(scheduleItems))
+  }, [scheduleItems])
+
+  useEffect(() => {
+    localStorage.setItem('gradients', JSON.stringify(gradients))
+  }, [gradients])
+
+  useEffect(() => {
+    localStorage.setItem('chatLayoutSettings', JSON.stringify(layout))
+  }, [layout])
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -115,105 +211,353 @@ export default function Chat() {
     return () => clearInterval(interval)
   }, [])
 
+  const addScheduleItem = () => {
+    setScheduleItems([...scheduleItems, {
+      time: "",
+      title: "New Event",
+      description: "Description"
+    }])
+  }
+
+  const updateScheduleItem = (index: number, field: keyof ScheduleItem, value: string) => {
+    const newItems = [...scheduleItems]
+    newItems[index] = { ...newItems[index], [field]: value }
+    setScheduleItems(newItems)
+  }
+
+  const removeScheduleItem = (index: number) => {
+    setScheduleItems(scheduleItems.filter((_, i) => i !== index))
+  }
+
   return (
-    <div className="flex gap-6 h-screen bg-neutral-950 p-6">
-      {/* Left screen - Brainhack Schedule (2/3) */}
-      <div className="w-2/3 h-full rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-8 flex flex-col border border-white/[0.3] relative overflow-hidden">
-        {/* Background Animation */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 opacity-80">
-            <div className="absolute w-full h-full animate-pulse"
-              style={{
-                background: `radial-gradient(circle at ${50}% ${50}%, rgba(255,20,147,0.8) 0%, rgba(255,20,147,0.4) 40%, transparent 80%)`,
-                animation: 'moveGradient1 30s infinite linear',
-                transform: 'scale(2.5)'
-              }}
-            />
-            <div className="absolute w-full h-full animate-pulse delay-150"
-              style={{
-                background: `radial-gradient(circle at ${45}% ${45}%, rgba(0,191,255,0.8) 0%, rgba(0,191,255,0.4) 40%, transparent 80%)`,
-                animation: 'moveGradient2 35s infinite linear',
-                transform: 'scale(2.5)'
-              }}
-            />
-            <div className="absolute w-full h-full animate-pulse delay-300"
-              style={{
-                background: `radial-gradient(circle at ${55}% ${55}%, rgba(147,51,234,0.8) 0%, rgba(147,51,234,0.4) 40%, transparent 80%)`,
-                animation: 'moveGradient3 40s infinite linear',
-                transform: 'scale(2.5)'
-              }}
-            />
+    <div className="flex gap-6 h-screen bg-neutral-950 p-6 relative">
+      {/* Control Panel Toggle - Updated styling */}
+      <button
+        onClick={() => setShowControls(!showControls)}
+        className="absolute top-4 right-4 z-50 bg-neutral-800/20 hover:bg-neutral-700 text-white/50 hover:text-white px-4 py-2 rounded-md font-mono transition-all duration-200 backdrop-blur-sm"
+      >
+        {showControls ? "Hide Controls" : "⚙️"}
+      </button>
+
+      {/* Customization Controls */}
+      {showControls && (
+        <div className="absolute right-4 top-16 w-96 bg-neutral-900/95 backdrop-blur-sm p-6 rounded-lg border border-neutral-700 z-50 overflow-y-auto max-h-[calc(100vh-8rem)]">
+          <h3 className="text-xl font-mono text-white mb-4">Customize Display</h3>
+          
+          <div className="space-y-4">
+            {/* Layout Controls */}
+            <div>
+              <label className="block text-sm font-mono text-neutral-400 mb-2">Layout</label>
+              <div className="space-y-2">
+                <div className="flex items-center gap-4">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={layout.leftScreenVisible}
+                      onChange={(e) => setLayout({
+                        ...layout,
+                        leftScreenVisible: e.target.checked,
+                        rightScreenVisible: e.target.checked ? layout.rightScreenVisible : true
+                      })}
+                      className="rounded bg-neutral-700"
+                    />
+                    <span className="text-sm text-neutral-300">Left Screen</span>
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={layout.rightScreenVisible}
+                      onChange={(e) => setLayout({
+                        ...layout,
+                        rightScreenVisible: e.target.checked,
+                        leftScreenVisible: e.target.checked ? layout.leftScreenVisible : true
+                      })}
+                      className="rounded bg-neutral-700"
+                    />
+                    <span className="text-sm text-neutral-300">Right Screen</span>
+                  </label>
+                </div>
+                {layout.leftScreenVisible && layout.rightScreenVisible && (
+                  <div>
+                    <label className="block text-sm text-neutral-300 mb-1">Left Screen Width</label>
+                    <input
+                      type="range"
+                      min="20"
+                      max="80"
+                      value={layout.leftScreenWidth}
+                      onChange={(e) => setLayout({
+                        ...layout,
+                        leftScreenWidth: parseInt(e.target.value)
+                      })}
+                      className="w-full"
+                    />
+                    <div className="text-sm text-neutral-400 text-center">{layout.leftScreenWidth}%</div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-mono text-neutral-400 mb-4">Event Name</label>
+              <input
+                type="text"
+                value={eventName}
+                onChange={(e) => setEventName(e.target.value)}
+                className="w-full bg-neutral-800 text-white px-3 py-2 rounded-md"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-mono text-neutral-400 mb-4">Event Date</label>
+              <input
+                type="text"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+                className="w-full bg-neutral-800 text-white px-3 py-2 rounded-md"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-mono text-neutral-400 mb-2">Gradient Colors</label>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="color"
+                    value={hexFromRgba(gradients.color1)}
+                    onChange={(e) => setGradients({...gradients, color1: rgbaFromHex(e.target.value, 0.8)})}
+                    className="w-12 h-8 rounded cursor-pointer"
+                  />
+                  <div className="flex-1 h-8 rounded relative overflow-hidden">
+                    <div className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(to right, ${gradients.color1} 0%, ${gradients.color1.replace('0.8', '0.4')} 50%, ${gradients.color1.replace('0.8', '0.1')} 75%, transparent 100%)`
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `
+                          linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '8px 8px',
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)'
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="color"
+                    value={hexFromRgba(gradients.color2)}
+                    onChange={(e) => setGradients({...gradients, color2: rgbaFromHex(e.target.value, 0.8)})}
+                    className="w-12 h-8 rounded cursor-pointer"
+                  />
+                  <div className="flex-1 h-8 rounded relative overflow-hidden">
+                    <div className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(to right, ${gradients.color2} 0%, ${gradients.color2.replace('0.8', '0.4')} 50%, ${gradients.color2.replace('0.8', '0.1')} 75%, transparent 100%)`
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `
+                          linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '8px 8px',
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)'
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="color"
+                    value={hexFromRgba(gradients.color3)}
+                    onChange={(e) => setGradients({...gradients, color3: rgbaFromHex(e.target.value, 0.8)})}
+                    className="w-12 h-8 rounded cursor-pointer"
+                  />
+                  <div className="flex-1 h-8 rounded relative overflow-hidden">
+                    <div className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(to right, ${gradients.color3} 0%, ${gradients.color3.replace('0.8', '0.4')} 50%, ${gradients.color3.replace('0.8', '0.1')} 75%, transparent 100%)`
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `
+                          linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '8px 8px',
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)'
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-mono text-neutral-400 mb-2">Schedule</label>
+              <div className="space-y-4">
+                {scheduleItems.map((item, index) => (
+                  <div key={index} className="bg-neutral-800 p-3 rounded-md">
+                    <div className="flex justify-between mb-2">
+                      <input
+                        type="text"
+                        value={item.time}
+                        onChange={(e) => updateScheduleItem(index, 'time', e.target.value)}
+                        className="w-24 bg-neutral-700 text-white px-2 py-1 rounded"
+                        placeholder="Time"
+                      />
+                      <button
+                        onClick={() => removeScheduleItem(index)}
+                        className="text-red-400 hover:text-red-300"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      value={item.title}
+                      onChange={(e) => updateScheduleItem(index, 'title', e.target.value)}
+                      className="w-full bg-neutral-700 text-white px-2 py-1 rounded mb-2"
+                      placeholder="Title"
+                    />
+                    <input
+                      type="text"
+                      value={item.description}
+                      onChange={(e) => updateScheduleItem(index, 'description', e.target.value)}
+                      className="w-full bg-neutral-700 text-white px-2 py-1 rounded mb-2"
+                      placeholder="Description"
+                    />
+                    <input
+                      type="text"
+                      value={item.highlight || ''}
+                      onChange={(e) => updateScheduleItem(index, 'highlight', e.target.value)}
+                      className="w-full bg-neutral-700 text-white px-2 py-1 rounded"
+                      placeholder="Highlight (optional)"
+                    />
+                  </div>
+                ))}
+                <button
+                  onClick={addScheduleItem}
+                  className="w-full bg-neutral-700 hover:bg-neutral-600 text-white py-2 rounded-md"
+                >
+                  Add Schedule Item
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+      )}
 
-        <style>
-          {`
-            @keyframes moveGradient1 {
-              0% { transform: translate(-100%, -100%) scale(2.5) rotate(0deg); }
-              50% { transform: translate(100%, 100%) scale(2.5) rotate(180deg); }
-              100% { transform: translate(-100%, -100%) scale(2.5) rotate(360deg); }
-            }
-            @keyframes moveGradient2 {
-              0% { transform: translate(100%, -100%) scale(2.5) rotate(0deg); }
-              50% { transform: translate(-100%, 100%) scale(2.5) rotate(-180deg); }
-              100% { transform: translate(100%, -100%) scale(2.5) rotate(-360deg); }
-            }
-            @keyframes moveGradient3 {
-              0% { transform: translate(-100%, 100%) scale(2.5) rotate(0deg); }
-              50% { transform: translate(100%, -100%) scale(2.5) rotate(180deg); }
-              100% { transform: translate(-100%, 100%) scale(2.5) rotate(360deg); }
-            }
-          `}
-        </style>
+      {/* Screens with dynamic layout */}
+      <div className="flex gap-6 w-full">
+        {layout.leftScreenVisible && (
+          <div 
+            className={`rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-8 flex flex-col border border-white/[0.3] relative overflow-hidden transition-all duration-300`}
+            style={{ width: layout.rightScreenVisible ? `${layout.leftScreenWidth}%` : '100%' }}
+          >
+            {/* Background Animation */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0 opacity-80">
+                <div className="absolute w-full h-full animate-pulse"
+                  style={{
+                    background: `radial-gradient(circle at ${50}% ${50}%, ${gradients.color1} 0%, ${gradients.color1.replace('0.8', '0.4')} 25%, ${gradients.color1.replace('0.8', '0.1')} 50%, transparent 70%)`,
+                    animation: 'moveGradient1 30s infinite linear',
+                    transform: 'scale(2.5)'
+                  }}
+                />
+                <div className="absolute w-full h-full animate-pulse delay-150"
+                  style={{
+                    background: `radial-gradient(circle at ${45}% ${45}%, ${gradients.color2} 0%, ${gradients.color2.replace('0.8', '0.4')} 25%, ${gradients.color2.replace('0.8', '0.1')} 50%, transparent 70%)`,
+                    animation: 'moveGradient2 35s infinite linear',
+                    transform: 'scale(2.5)'
+                  }}
+                />
+                <div className="absolute w-full h-full animate-pulse delay-300"
+                  style={{
+                    background: `radial-gradient(circle at ${55}% ${55}%, ${gradients.color3} 0%, ${gradients.color3.replace('0.8', '0.4')} 25%, ${gradients.color3.replace('0.8', '0.1')} 50%, transparent 70%)`,
+                    animation: 'moveGradient3 40s infinite linear',
+                    transform: 'scale(2.5)'
+                  }}
+                />
+              </div>
+            </div>
 
-        {/* Top fade overlay */}
-        <div 
-          className="absolute inset-0"
-          style={{ 
-            background: 'linear-gradient(to bottom, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 15%, rgba(10, 10, 10, 0.98) 20%, rgba(10, 10, 10, 0.9) 25%, rgba(10, 10, 10, 0) 45%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.8) 85%, rgb(10, 10, 10) 100%)',
-            opacity: 1
-          }}
-        />
+            {/* Grid Overlay */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px)
+                `,
+                backgroundSize: '20px 20px',
+                backgroundColor: 'rgba(0, 0, 0, 0.05)'
+              }}
+            />
 
-        <div className="relative z-10 mt-8">
-          <h1 className="font-mono text-[7rem] font-bold text-neutral-100 tracking-tighter mb-12">
-            Brainhack
-          </h1>
-          <div className="space-y-6">
-            <div className="space-y-3">
-              <div className="space-y-4">
-                <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-700/30 backdrop-blur-sm">
-                  <h3 className="font-mono text-3xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">January 22, 2025</h3>
+            {/* Animation Keyframes */}
+            <style>
+              {`
+                @keyframes moveGradient1 {
+                  0% { transform: translate(-100%, -100%) scale(2.5) rotate(0deg); }
+                  50% { transform: translate(100%, 100%) scale(2.5) rotate(180deg); }
+                  100% { transform: translate(-100%, -100%) scale(2.5) rotate(360deg); }
+                }
+                @keyframes moveGradient2 {
+                  0% { transform: translate(100%, -100%) scale(2.5) rotate(0deg); }
+                  50% { transform: translate(-100%, 100%) scale(2.5) rotate(-180deg); }
+                  100% { transform: translate(100%, -100%) scale(2.5) rotate(-360deg); }
+                }
+                @keyframes moveGradient3 {
+                  0% { transform: translate(-100%, 100%) scale(2.5) rotate(0deg); }
+                  50% { transform: translate(100%, -100%) scale(2.5) rotate(180deg); }
+                  100% { transform: translate(-100%, 100%) scale(2.5) rotate(360deg); }
+                }
+              `}
+            </style>
+
+            {/* Top fade overlay */}
+            <div 
+              className="absolute inset-0"
+              style={{ 
+                background: 'linear-gradient(to bottom, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 15%, rgba(10, 10, 10, 0.98) 20%, rgba(10, 10, 10, 0.9) 25%, rgba(10, 10, 10, 0) 45%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.8) 85%, rgb(10, 10, 10) 100%)',
+                opacity: 1
+              }}
+            />
+
+            {/* Content */}
+            <div className="relative z-10 mt-8">
+              <h1 className="font-mono text-[7rem] font-bold text-neutral-100 tracking-tighter mb-12">
+                {eventName}
+              </h1>
+              <div className="space-y-6">
+                <div className="space-y-3">
                   <div className="space-y-4">
-                    <div className="flex items-center">
-                      <span className="font-mono text-2xl text-neutral-400 w-28">13:00</span>
-                      <div className="flex-1">
-                        <span className="font-mono text-2xl text-neutral-300">Team Formation & Ideation</span>
-                        <p className="font-mono text-lg text-neutral-500 mt-1">Ideate measurements or projects you want to work on</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="font-mono text-2xl text-neutral-400 w-28">13:45</span>
-                      <div className="flex-1">
-                        <span className="font-mono text-2xl text-neutral-300">Hands-on Session</span>
-                        <p className="font-mono text-lg text-neutral-500 mt-1">Measuring, coding, learning, and sharing</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="font-mono text-2xl text-neutral-400 w-28">16:00</span>
-                      <div className="flex-1">
-                        <span className="font-mono text-2xl text-neutral-300">Food Break</span>
-                        <p className="font-mono text-lg text-neutral-500 mt-1">Recharge and network</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="font-mono text-2xl text-neutral-400 w-28">19:00</span>
-                      <div className="flex-1">
-                        <span className="font-mono text-2xl text-neutral-300">Project Presentations</span>
-                        <p className="font-mono text-lg text-neutral-500 mt-1">Share your ideas, progress, and learnings</p>
-                        <div className="mt-3 bg-purple-900/30 p-3 rounded-md border border-purple-600/30">
-                          <p className="font-mono text-lg text-purple-300">🏆 Best presentation wins a Muse S device!</p>
-                        </div>
+                    <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-700/30 backdrop-blur-sm">
+                      <h3 className="font-mono text-3xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">{eventDate}</h3>
+                      <div className="space-y-4">
+                        {scheduleItems.map((item, index) => (
+                          <div key={index} className="flex items-center">
+                            <span className="font-mono text-2xl text-neutral-400 w-28">{item.time}</span>
+                            <div className="flex-1">
+                              <span className="font-mono text-2xl text-neutral-300">{item.title}</span>
+                              <p className="font-mono text-lg text-neutral-500 mt-1">{item.description}</p>
+                              {item.highlight && (
+                                <div className="mt-3 bg-purple-900/30 p-3 rounded-md border border-purple-600/30">
+                                  <p className="font-mono text-lg text-purple-300">{item.highlight}</p>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -221,71 +565,91 @@ export default function Chat() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
 
-      {/* Right screen - QR Code and Animations (1/3) */}
-      <div className="w-1/3 h-full rounded-3xl bg-neutral-700/30 backdrop-blur-sm relative overflow-hidden border border-white/[0.3]">
-        {/* Grid Background */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+        {layout.rightScreenVisible && (
           <div 
-            className="absolute w-[200%] h-[200%] translate-y-[50%]"
-            style={{
-              transform: 'perspective(1000px) rotateX(60deg) translateY(0%) translateZ(-100px)',
-              backgroundImage: `
-                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px),
-                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px)
-              `,
-              opacity: 0.7,
-            }}
-          />
-          {/* Top fade overlay */}
-          <div 
-            className="absolute inset-0"
-            style={{ 
-              background: 'linear-gradient(to bottom, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 15%, rgba(10, 10, 10, 0.98) 20%, rgba(10, 10, 10, 0.9) 25%, rgba(10, 10, 10, 0) 45%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.8) 85%, rgb(10, 10, 10) 100%)',
-              opacity: 1
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full p-4 gap-8">
-          <div className="flex flex-col items-center relative">
-            <div className="absolute inset-0 flex items-center justify-center -z-10">
-              <AnimatedLogo />
+            className={`rounded-3xl bg-neutral-700/30 backdrop-blur-sm relative overflow-hidden border border-white/[0.3] transition-all duration-300`}
+            style={{ width: layout.leftScreenVisible ? `${100 - layout.leftScreenWidth}%` : '100%' }}
+          >
+            {/* Right screen - QR Code and Animations (1/3) */}
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+              <div 
+                className="absolute w-[200%] h-[200%] translate-y-[50%]"
+                style={{
+                  transform: 'perspective(1000px) rotateX(60deg) translateY(0%) translateZ(-100px)',
+                  backgroundImage: `
+                    repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px),
+                    repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px)
+                  `,
+                  opacity: 0.7,
+                }}
+              />
+              {/* Top fade overlay */}
+              <div 
+                className="absolute inset-0"
+                style={{ 
+                  background: 'linear-gradient(to bottom, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 15%, rgba(10, 10, 10, 0.98) 20%, rgba(10, 10, 10, 0.9) 25%, rgba(10, 10, 10, 0) 45%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.8) 85%, rgb(10, 10, 10) 100%)',
+                  opacity: 1
+                }}
+              />
             </div>
-            <div className="text-center">
-              <div className="font-mono text-2xl text-neutral-400 tracking-tight uppercase">
-                YEAR OF THE
+
+            <div className="relative z-10 flex flex-col items-center justify-center h-full p-4 gap-8">
+              <div className="flex flex-col items-center relative">
+                <div className="absolute inset-0 flex items-center justify-center -z-10">
+                  <AnimatedLogo />
+                </div>
+                <div className="text-center">
+                  <div className="font-mono text-2xl text-neutral-400 tracking-tight uppercase">
+                    YEAR OF THE
+                  </div>
+                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={words[currentWordIndex]}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="font-mono text-[4rem] font-normal text-neutral-100 tracking-tighter text-center uppercase whitespace-nowrap"
+                  >
+                    {words[currentWordIndex]}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <div className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-neutral-700/30">
+                <QRCodeSVG
+                  value={chatUrl}
+                  size={280}
+                  level="H"
+                  includeMargin={true}
+                  className="bg-white p-4 rounded-lg"
+                />
+                <p className="font-mono text-center text-neutral-400 mt-6 text-lg tracking-tight uppercase">
+                  Scan to join our community
+                </p>
               </div>
             </div>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={words[currentWordIndex]}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="font-mono text-[4rem] font-normal text-neutral-100 tracking-tighter text-center uppercase whitespace-nowrap"
-              >
-                {words[currentWordIndex]}
-              </motion.div>
-            </AnimatePresence>
           </div>
-
-          <div className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-neutral-700/30">
-            <QRCodeSVG
-              value={chatUrl}
-              size={280}
-              level="H"
-              includeMargin={true}
-              className="bg-white p-4 rounded-lg"
-            />
-            <p className="font-mono text-center text-neutral-400 mt-6 text-lg tracking-tight uppercase">
-              Scan to join our community
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   )
+}
+
+// Add these helper functions at the top of the file, after the imports
+function hexFromRgba(rgba: string): string {
+  const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+  if (!match) return '#000000'
+  const [, r, g, b] = match
+  const toHex = (n: string) => parseInt(n).toString(16).padStart(2, '0')
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+}
+
+function rgbaFromHex(hex: string, alpha: number): string {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`
 } 
