@@ -105,7 +105,7 @@ interface LayoutSettings {
 export default function Chat() {
   const words = ["builders", "innovators", "misfits", "openings", "brave", "strivers", "mavericks", "open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const chatUrl = "https://t.me/+TP2QOzbls4oxMjE6"
+  const chatUrl = "https://t.me/+Rr6niJhw4mtiYmIy"
   const [, setMousePosition] = useState({ x: 0, y: 0 })
   const [showControls, setShowControls] = useState(false)
   
