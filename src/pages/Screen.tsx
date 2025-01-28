@@ -211,6 +211,30 @@ export default function Chat() {
     return () => clearInterval(interval)
   }, [])
 
+  // Add keyboard event listener for screen toggling
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === 'l') {
+        setLayout(prev => ({
+          ...prev,
+          leftScreenVisible: !prev.leftScreenVisible,
+          rightScreenVisible: !prev.leftScreenVisible ? true : prev.rightScreenVisible
+        }))
+      } else if (event.key.toLowerCase() === 'r') {
+        setLayout(prev => ({
+          ...prev,
+          rightScreenVisible: !prev.rightScreenVisible,
+          leftScreenVisible: !prev.rightScreenVisible ? true : prev.leftScreenVisible
+        }))
+      } else if (event.key.toLowerCase() === 's') {
+        setShowControls(prev => !prev)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [])
+
   const addScheduleItem = () => {
     setScheduleItems([...scheduleItems, {
       time: "",
@@ -231,17 +255,9 @@ export default function Chat() {
 
   return (
     <div className="flex gap-6 h-screen bg-neutral-950 p-6 relative">
-      {/* Control Panel Toggle - Updated styling */}
-      <button
-        onClick={() => setShowControls(!showControls)}
-        className="absolute top-4 right-4 z-50 bg-neutral-800/20 hover:bg-neutral-700 text-white/50 hover:text-white px-4 py-2 rounded-md font-mono transition-all duration-200 backdrop-blur-sm"
-      >
-        {showControls ? "Hide Controls" : "⚙️"}
-      </button>
-
       {/* Customization Controls */}
       {showControls && (
-        <div className="absolute right-4 top-16 w-96 bg-neutral-900/95 backdrop-blur-sm p-6 rounded-lg border border-neutral-700 z-50 overflow-y-auto max-h-[calc(100vh-8rem)]">
+        <div className="absolute right-4 top-4 w-96 bg-neutral-900/95 backdrop-blur-sm p-6 rounded-lg border border-neutral-700 z-50 overflow-y-auto max-h-[calc(100vh-8rem)]">
           <h3 className="text-xl font-mono text-white mb-4">Customize Display</h3>
           
           <div className="space-y-4">
@@ -458,133 +474,79 @@ export default function Chat() {
 
       {/* Screens with dynamic layout */}
       <div className="flex gap-6 w-full">
-        {layout.leftScreenVisible && (
-          <div 
-            className={`rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-8 flex flex-col border border-white/[0.3] relative overflow-hidden transition-all duration-300`}
-            style={{ width: layout.rightScreenVisible ? `${layout.leftScreenWidth}%` : '100%' }}
-          >
-            {/* Background Animation */}
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute inset-0 opacity-80">
-                <div className="absolute w-full h-full animate-pulse"
-                  style={{
-                    background: `radial-gradient(circle at ${50}% ${50}%, ${gradients.color1} 0%, ${gradients.color1.replace('0.8', '0.4')} 25%, ${gradients.color1.replace('0.8', '0.1')} 50%, transparent 70%)`,
-                    animation: 'moveGradient1 30s infinite linear',
-                    transform: 'scale(2.5)'
-                  }}
-                />
-                <div className="absolute w-full h-full animate-pulse delay-150"
-                  style={{
-                    background: `radial-gradient(circle at ${45}% ${45}%, ${gradients.color2} 0%, ${gradients.color2.replace('0.8', '0.4')} 25%, ${gradients.color2.replace('0.8', '0.1')} 50%, transparent 70%)`,
-                    animation: 'moveGradient2 35s infinite linear',
-                    transform: 'scale(2.5)'
-                  }}
-                />
-                <div className="absolute w-full h-full animate-pulse delay-300"
-                  style={{
-                    background: `radial-gradient(circle at ${55}% ${55}%, ${gradients.color3} 0%, ${gradients.color3.replace('0.8', '0.4')} 25%, ${gradients.color3.replace('0.8', '0.1')} 50%, transparent 70%)`,
-                    animation: 'moveGradient3 40s infinite linear',
-                    transform: 'scale(2.5)'
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Grid Overlay */}
-            <div 
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px)
-                `,
-                backgroundSize: '20px 20px',
-                backgroundColor: 'rgba(0, 0, 0, 0.05)'
+        <AnimatePresence mode="wait">
+          {layout.leftScreenVisible && (
+            <motion.div 
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ 
+                width: layout.rightScreenVisible ? `${layout.leftScreenWidth}%` : '100%',
+                opacity: 1 
               }}
-            />
-
-            {/* Animation Keyframes */}
-            <style>
-              {`
-                @keyframes moveGradient1 {
-                  0% { transform: translate(-100%, -100%) scale(2.5) rotate(0deg); }
-                  50% { transform: translate(100%, 100%) scale(2.5) rotate(180deg); }
-                  100% { transform: translate(-100%, -100%) scale(2.5) rotate(360deg); }
-                }
-                @keyframes moveGradient2 {
-                  0% { transform: translate(100%, -100%) scale(2.5) rotate(0deg); }
-                  50% { transform: translate(-100%, 100%) scale(2.5) rotate(-180deg); }
-                  100% { transform: translate(100%, -100%) scale(2.5) rotate(-360deg); }
-                }
-                @keyframes moveGradient3 {
-                  0% { transform: translate(-100%, 100%) scale(2.5) rotate(0deg); }
-                  50% { transform: translate(100%, -100%) scale(2.5) rotate(180deg); }
-                  100% { transform: translate(-100%, 100%) scale(2.5) rotate(360deg); }
-                }
-              `}
-            </style>
-
-            {/* Top fade overlay */}
-            <div 
-              className="absolute inset-0"
-              style={{ 
-                background: 'linear-gradient(to bottom, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 15%, rgba(10, 10, 10, 0.98) 20%, rgba(10, 10, 10, 0.9) 25%, rgba(10, 10, 10, 0) 45%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.8) 85%, rgb(10, 10, 10) 100%)',
-                opacity: 1
-              }}
-            />
-
-            {/* Content */}
-            <div className="relative z-10 mt-8">
-              <h1 className="font-mono text-[7rem] font-bold text-neutral-100 tracking-tighter mb-12">
-                {eventName}
-              </h1>
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <div className="space-y-4">
-                    <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-700/30 backdrop-blur-sm">
-                      <h3 className="font-mono text-3xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">{eventDate}</h3>
-                      <div className="space-y-4">
-                        {scheduleItems.map((item, index) => (
-                          <div key={index} className="flex items-center">
-                            <span className="font-mono text-2xl text-neutral-400 w-28">{item.time}</span>
-                            <div className="flex-1">
-                              <span className="font-mono text-2xl text-neutral-300">{item.title}</span>
-                              <p className="font-mono text-lg text-neutral-500 mt-1">{item.description}</p>
-                              {item.highlight && (
-                                <div className="mt-3 bg-purple-900/30 p-3 rounded-md border border-purple-600/30">
-                                  <p className="font-mono text-lg text-purple-300">{item.highlight}</p>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="rounded-3xl bg-neutral-900/30 backdrop-blur-sm p-8 flex flex-col border border-white/[0.3] relative overflow-hidden"
+            >
+              {/* Background Animation */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute inset-0 opacity-80">
+                  <div className="absolute w-full h-full animate-pulse"
+                    style={{
+                      background: `radial-gradient(circle at ${50}% ${50}%, ${gradients.color1} 0%, ${gradients.color1.replace('0.8', '0.4')} 25%, ${gradients.color1.replace('0.8', '0.1')} 50%, transparent 70%)`,
+                      animation: 'moveGradient1 30s infinite linear',
+                      transform: 'scale(2.5)'
+                    }}
+                  />
+                  <div className="absolute w-full h-full animate-pulse delay-150"
+                    style={{
+                      background: `radial-gradient(circle at ${45}% ${45}%, ${gradients.color2} 0%, ${gradients.color2.replace('0.8', '0.4')} 25%, ${gradients.color2.replace('0.8', '0.1')} 50%, transparent 70%)`,
+                      animation: 'moveGradient2 35s infinite linear',
+                      transform: 'scale(2.5)'
+                    }}
+                  />
+                  <div className="absolute w-full h-full animate-pulse delay-300"
+                    style={{
+                      background: `radial-gradient(circle at ${55}% ${55}%, ${gradients.color3} 0%, ${gradients.color3.replace('0.8', '0.4')} 25%, ${gradients.color3.replace('0.8', '0.1')} 50%, transparent 70%)`,
+                      animation: 'moveGradient3 40s infinite linear',
+                      transform: 'scale(2.5)'
+                    }}
+                  />
                 </div>
               </div>
-            </div>
-          </div>
-        )}
 
-        {layout.rightScreenVisible && (
-          <div 
-            className={`rounded-3xl bg-neutral-700/30 backdrop-blur-sm relative overflow-hidden border border-white/[0.3] transition-all duration-300`}
-            style={{ width: layout.leftScreenVisible ? `${100 - layout.leftScreenWidth}%` : '100%' }}
-          >
-            {/* Right screen - QR Code and Animations (1/3) */}
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+              {/* Grid Overlay */}
               <div 
-                className="absolute w-[200%] h-[200%] translate-y-[50%]"
+                className="absolute inset-0 pointer-events-none"
                 style={{
-                  transform: 'perspective(1000px) rotateX(60deg) translateY(0%) translateZ(-100px)',
                   backgroundImage: `
-                    repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px),
-                    repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px)
+                    linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px)
                   `,
-                  opacity: 0.7,
+                  backgroundSize: '20px 20px',
+                  backgroundColor: 'rgba(0, 0, 0, 0.05)'
                 }}
               />
+
+              {/* Animation Keyframes */}
+              <style>
+                {`
+                  @keyframes moveGradient1 {
+                    0% { transform: translate(-100%, -100%) scale(2.5) rotate(0deg); }
+                    50% { transform: translate(100%, 100%) scale(2.5) rotate(180deg); }
+                    100% { transform: translate(-100%, -100%) scale(2.5) rotate(360deg); }
+                  }
+                  @keyframes moveGradient2 {
+                    0% { transform: translate(100%, -100%) scale(2.5) rotate(0deg); }
+                    50% { transform: translate(-100%, 100%) scale(2.5) rotate(-180deg); }
+                    100% { transform: translate(100%, -100%) scale(2.5) rotate(-360deg); }
+                  }
+                  @keyframes moveGradient3 {
+                    0% { transform: translate(-100%, 100%) scale(2.5) rotate(0deg); }
+                    50% { transform: translate(100%, -100%) scale(2.5) rotate(180deg); }
+                    100% { transform: translate(-100%, 100%) scale(2.5) rotate(360deg); }
+                  }
+                `}
+              </style>
+
               {/* Top fade overlay */}
               <div 
                 className="absolute inset-0"
@@ -593,46 +555,117 @@ export default function Chat() {
                   opacity: 1
                 }}
               />
-            </div>
 
-            <div className="relative z-10 flex flex-col items-center justify-center h-full p-4 gap-8">
-              <div className="flex flex-col items-center relative">
-                <div className="absolute inset-0 flex items-center justify-center -z-10">
-                  <AnimatedLogo />
-                </div>
-                <div className="text-center">
-                  <div className="font-mono text-2xl text-neutral-400 tracking-tight uppercase">
-                    YEAR OF THE
+              {/* Content */}
+              <div className="relative z-10 mt-8">
+                <h1 className="font-mono text-[7rem] font-bold text-neutral-100 tracking-tighter mb-12">
+                  {eventName}
+                </h1>
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <div className="space-y-4">
+                      <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-700/30 backdrop-blur-sm">
+                        <h3 className="font-mono text-3xl text-neutral-200 font-medium mb-4 tracking-tight uppercase">{eventDate}</h3>
+                        <div className="space-y-4">
+                          {scheduleItems.map((item, index) => (
+                            <div key={index} className="flex items-center">
+                              <span className="font-mono text-2xl text-neutral-400 w-28">{item.time}</span>
+                              <div className="flex-1">
+                                <span className="font-mono text-2xl text-neutral-300">{item.title}</span>
+                                <p className="font-mono text-lg text-neutral-500 mt-1">{item.description}</p>
+                                {item.highlight && (
+                                  <div className="mt-3 bg-purple-900/30 p-3 rounded-md border border-purple-600/30">
+                                    <p className="font-mono text-lg text-purple-300">{item.highlight}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={words[currentWordIndex]}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="font-mono text-[4rem] font-normal text-neutral-100 tracking-tighter text-center uppercase whitespace-nowrap"
-                  >
-                    {words[currentWordIndex]}
-                  </motion.div>
-                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence mode="wait">
+          {layout.rightScreenVisible && (
+            <motion.div 
+              initial={{ width: 0, opacity: 0, x: "100%" }}
+              animate={{ 
+                width: layout.leftScreenVisible ? `${100 - layout.leftScreenWidth}%` : '100%',
+                opacity: 1,
+                x: 0
+              }}
+              exit={{ width: 0, opacity: 0, x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="rounded-3xl bg-neutral-700/30 backdrop-blur-sm relative overflow-hidden border border-white/[0.3]"
+            >
+              {/* Right screen - QR Code and Animations (1/3) */}
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+                <div 
+                  className="absolute w-[200%] h-[200%] translate-y-[50%]"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(60deg) translateY(0%) translateZ(-100px)',
+                    backgroundImage: `
+                      repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px),
+                      repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.35) 0px, rgba(163, 163, 163, 0.35) 1px, transparent 1px, transparent 60px)
+                    `,
+                    opacity: 0.7,
+                  }}
+                />
+                {/* Top fade overlay */}
+                <div 
+                  className="absolute inset-0"
+                  style={{ 
+                    background: 'linear-gradient(to bottom, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 15%, rgba(10, 10, 10, 0.98) 20%, rgba(10, 10, 10, 0.9) 25%, rgba(10, 10, 10, 0) 45%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.8) 85%, rgb(10, 10, 10) 100%)',
+                    opacity: 1
+                  }}
+                />
               </div>
 
-              <div className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-neutral-700/30">
-                <QRCodeSVG
-                  value={chatUrl}
-                  size={280}
-                  level="H"
-                  includeMargin={true}
-                  className="bg-white p-4 rounded-lg"
-                />
-                <p className="font-mono text-center text-neutral-400 mt-6 text-lg tracking-tight uppercase">
-                  Scan to join our community
-                </p>
+              <div className="relative z-10 flex flex-col items-center justify-center h-full p-4 gap-8">
+                <div className="flex flex-col items-center relative">
+                  <div className="absolute inset-0 flex items-center justify-center -z-10">
+                    <AnimatedLogo />
+                  </div>
+                  <div className="text-center">
+                    <div className="font-mono text-2xl text-neutral-400 tracking-tight uppercase">
+                      YEAR OF THE
+                    </div>
+                  </div>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={words[currentWordIndex]}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className="font-mono text-[4rem] font-normal text-neutral-100 tracking-tighter text-center uppercase whitespace-nowrap"
+                    >
+                      {words[currentWordIndex]}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                <div className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-neutral-700/30">
+                  <QRCodeSVG
+                    value={chatUrl}
+                    size={280}
+                    level="H"
+                    includeMargin={true}
+                    className="bg-white p-4 rounded-lg"
+                  />
+                  <p className="font-mono text-center text-neutral-400 mt-6 text-lg tracking-tight uppercase">
+                    Scan to join our community
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   )
