@@ -11,7 +11,7 @@ function StatusBadge({ status }: { status: Project['status'] }) {
       case 'inactive':
         return 'bg-amber-500/20 text-amber-300 border-amber-500/30'
       case 'archived':
-        return 'bg-neutral-500/20 text-neutral-300 border-neutral-500/30'
+        return 'bg-zinc-500/20 text-zinc-300 border-zinc-500/30'
       case 'planned':
         return 'bg-blue-500/20 text-blue-300 border-blue-500/30'
       case 'pilot':
@@ -39,22 +39,22 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Card 
       {...cardProps}
-      className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 transition-all hover:bg-neutral-900 hover:border-neutral-100/20 block h-[280px]"
+      className="group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-100/10 rounded-lg p-6 transition-all hover:bg-zinc-900 hover:border-zinc-100/20 block h-[280px]"
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between gap-4">
-          <h3 className="font-sans text-neutral-100/90 text-base tracking-wide">{name}</h3>
+          <h3 className="font-sans text-zinc-100 text-base tracking-wide">{name}</h3>
           <StatusBadge status={status} />
         </div>
-        <p className="font-sans text-neutral-100/60 text-sm leading-relaxed mt-4 line-clamp-4">{description}</p>
+        <p className="font-sans text-zinc-400 text-sm leading-relaxed mt-4 line-clamp-4">{description}</p>
         <div className="flex flex-col gap-1 mt-auto pt-4">
           {spinOffYear && (
-            <div className="font-mono text-xs text-neutral-100/40">
+            <div className="font-mono text-xs text-zinc-600">
               {spinOffYear}
             </div>
           )}
           {url && (
-            <div className="font-mono text-xs text-neutral-100/40">
+            <div className="font-mono text-xs text-zinc-100/40">
               {new URL(url).hostname}
             </div>
           )}
@@ -68,15 +68,15 @@ function NewProjectCard() {
   return (
     <a 
       href="mailto:board@aaltoes.com"
-      className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 transition-all hover:bg-neutral-900 hover:border-neutral-100/20 block h-[280px]"
+      className="group relative bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-lg p-6 transition-all hover:bg-zinc-900 hover:border-zinc-100/20 block h-[280px]"
     >
       <div className="flex flex-col gap-4 items-center justify-center h-full text-center">
-        <div className="h-12 w-12 rounded-full border-2 border-neutral-100/10 flex items-center justify-center group-hover:border-neutral-100/20 transition-all">
-          <span className="text-2xl text-neutral-100/70 group-hover:text-neutral-100/90">+</span>
+        <div className="h-12 w-12 rounded-full border-2 border-zinc-100/10 flex items-center justify-center group-hover:border-zinc-100/20 transition-all">
+          <span className="text-2xl text-zinc-100/70 group-hover:text-zinc-100/90">+</span>
         </div>
         <div>
-          <h3 className="font-sans text-neutral-100/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
-          <p className="font-sans text-neutral-100/60 text-sm leading-relaxed">
+          <h3 className="font-sans text-zinc-100/90 text-lg tracking-wide mb-2">Want to start a new project?</h3>
+          <p className="font-sans text-zinc-100/60 text-sm leading-relaxed">
             Contact us with your idea and let's make it happen together
           </p>
         </div>
@@ -252,15 +252,15 @@ export default function Projects() {
       <EarlyAccessBanner />
       
       <div className="flex justify-center mb-12">
-        <div className="inline-flex rounded-lg border border-neutral-100/10 p-1 font-mono text-sm">
+        <div className="inline-flex rounded-lg border border-zinc-100/10 p-1 font-mono text-sm">
           {(['brewing', 'spinout'] as const).map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`px-4 py-2 rounded-md transition-all uppercase tracking-wider ${
                 selectedCategory === category 
-                  ? 'bg-neutral-100/10 text-neutral-100' 
-                  : 'text-neutral-100/50 hover:text-neutral-100/70'
+                  ? 'bg-zinc-100/10 text-zinc-100' 
+                  : 'text-zinc-100/50 hover:text-zinc-100/70'
               }`}
             >
               {category === 'brewing' ? 'Currently Brewing' : 'Spin Outs'}

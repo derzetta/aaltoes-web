@@ -169,13 +169,13 @@ function LoadingScreen() {
   }, [])
 
   return (
-    <div className="fixed inset-0 bg-neutral-950 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-zinc-950 flex items-center justify-center z-50">
       <div className="text-center">
-        <h2 className="font-mono text-neutral-100/50 text-sm sm:text-base tracking-widest uppercase mb-4">
+        <h2 className="font-mono text-zinc-100/50 text-sm sm:text-base tracking-widest uppercase mb-4">
           {loadingText}
         </h2>
-        <div className="w-64 h-1 bg-neutral-100/10 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-neutral-100/20 via-neutral-100/40 to-neutral-100/20 animate-loading-bar" />
+        <div className="w-64 h-1 bg-zinc-100/10 rounded-full overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-zinc-100/20 via-zinc-100/40 to-zinc-100/20 animate-loading-bar" />
         </div>
       </div>
     </div>
@@ -250,9 +250,9 @@ function App() {
   return (
     <FooterScrollProvider>
       <div className="relative h-[calc(100vh-96px)] flex flex-col justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-neutral-950 bg-grid-neutral-100 bg-grid -z-10 sm:h-auto h-[50vh]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/0 via-neutral-950/80 to-neutral-950 -z-10" />
-        <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-neutral-950 via-neutral-950/95 to-transparent -z-10 sm:hidden" />
+        <div className="absolute inset-0 bg-zinc-950 bg-grid-zinc-100 bg-grid -z-10 sm:h-auto h-[50vh]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/0 via-zinc-950/80 to-zinc-950 -z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent -z-10 sm:hidden" />
         
         {/* Grid Background */}
         <div className="fixed inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
@@ -261,19 +261,19 @@ function App() {
             style={{
               transform: 'perspective(1000px) rotateX(60deg) translateY(-50%) translateZ(-100px)',
               backgroundImage: `
-                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.9) 0px, rgba(163, 163, 163, 0.9) 1px, transparent 1px, transparent 70px),
-                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.9) 0px, rgba(163, 163, 163, 0.9) 1px, transparent 5px, transparent 150px)
+                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.8) 0px, rgba(163, 163, 163, 0.8) 1px, transparent 1px, transparent 70px),
+                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.8) 0px, rgba(163, 163, 163, 0.8) 1px, transparent 5px, transparent 150px)
               `,
               opacity: 1,
             }}
           />
           {/* Fade overlays */}
           <div 
-            className="absolute inset-0 bg-gradient-to-b h-[120vh] from-neutral-950 via-transparent to-neutral-950"
+            className="absolute inset-0 bg-gradient-to-b h-[120vh] from-zinc-950 via-transparent to-zinc-950"
             style={{ opacity: 1.0 }}
           />
           <div 
-            className="absolute bottom-0 left-0 right-0 h-[90vh] bg-gradient-to-t from-neutral-950 via-neutral-950/90 to-transparent"
+            className="absolute bottom-0 left-0 right-0 h-[90vh] bg-gradient-to-t from-zinc-950 via-zinc-950/90 to-transparent"
             style={{ opacity: 1.0 }}
           />
         </div>
@@ -371,7 +371,7 @@ function App() {
                 textAlign: isTabletOrMobile ? 'center' : 'left',
                 minHeight: isTabletOrMobile ? '48px' : 'auto'
               }}>
-                <h2 className="font-mono text-neutral-100/50 text-base sm:text-lg tracking-widest uppercase flex items-center gap-3">
+                <h2 className="font-mono text-zinc-400 text-base sm:text-lg tracking-widest uppercase flex items-center gap-3">
                   Year of the{' '}
                   <AnimatePresence mode="wait">
                     <motion.span
@@ -379,7 +379,7 @@ function App() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="text-neutral-100/70"
+                      className="text-zinc-100"
                     >
                       {words[currentWordIndex]}
                     </motion.span>

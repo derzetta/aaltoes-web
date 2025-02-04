@@ -18,7 +18,7 @@ function Footer() {
 
   const getClassName = (path: string) => {
     const isActive = location.pathname === path
-    return `font-mono ${isActive ? 'text-neutral-100' : 'text-neutral-100/50'} hover:text-neutral-100/70 transition-colors uppercase tracking-wider whitespace-nowrap`
+    return `font-mono ${isActive ? 'text-zinc-100' : 'text-zinc-500'} hover:text-zinc-400 transition-colors uppercase tracking-wider whitespace-nowrap`
   }
 
   // Save scroll position when scrolling
@@ -119,13 +119,13 @@ function Footer() {
   }, [])
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-neutral-950/70 backdrop-blur-sm border-t border-neutral-100/10 z-[60]">
+    <footer className="fixed bottom-0 left-0 right-0 bg-zinc-950/70 backdrop-blur-sm border-t border-zinc-100/10 z-[60]">
       <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hide py-6">
         <div className="container w-[1400px] mx-auto flex flex-nowrap justify-between items-center text-sm px-6" style={{ minWidth: '1400px' }}>
           <Link to="/" className={getClassName('/')}>
             AALTOES 2025
           </Link>
-          <div className="h-6 w-px bg-neutral-100/10" />
+          <div className="h-6 w-px bg-zinc-800" />
           <Link to="/about" className={getClassName('/about')}>
             About
           </Link>
@@ -138,7 +138,7 @@ function Footer() {
           <Link to="/events" className={getClassName('/events')}>
             Events
           </Link>
-          <div className="h-6 w-px bg-neutral-100/10" />
+          <div className="h-6 w-px bg-zinc-100/10" />
           <Link to="/billing-info" className={getClassName('/billing-info')}>
             Billing
           </Link>
@@ -151,7 +151,7 @@ function Footer() {
           <Link to="/association-rules" className={getClassName('/association-rules')}>
             Association Rules
           </Link>
-          <div className="h-6 w-px bg-neutral-100/10" />
+          <div className="h-6 w-px bg-zinc-100/10" />
           <div 
             ref={dropdownRef} 
             className="relative"
@@ -160,7 +160,7 @@ function Footer() {
           >
             <button
               onClick={() => isMobile && setIsResourcesOpen(!isResourcesOpen)}
-              className="font-mono text-neutral-100/50 hover:text-neutral-100/70 transition-colors uppercase tracking-wider whitespace-nowrap flex items-center gap-2"
+              className="font-mono text-zinc-500 hover:text-zinc-400 transition-colors uppercase tracking-wider whitespace-nowrap flex items-center gap-2"
             >
               Resources
               <FaChevronDown 
@@ -172,7 +172,7 @@ function Footer() {
             {isResourcesOpen && dropdownRect && (
               <Portal>
                 <div 
-                  className="fixed bg-neutral-950 border border-neutral-100/10 rounded-lg overflow-hidden min-w-[160px] shadow-xl z-[1000]"
+                  className="fixed bg-zinc-950 border border-zinc-100/10 rounded-lg overflow-hidden min-w-[160px] shadow-xl z-[1000]"
                   style={{
                     bottom: `calc(100vh - ${dropdownRect.top}px + 0.75rem)`,
                     left: dropdownRect.left,
@@ -184,7 +184,7 @@ function Footer() {
                 >
                   <Link
                     to="/resources/authors"
-                    className="block px-4 py-2 text-sm text-neutral-100/50 hover:text-neutral-100 hover:bg-neutral-100/5 transition-colors"
+                    className="block px-4 py-2 text-sm text-zinc-100/50 hover:text-zinc-100 hover:bg-zinc-100/5 transition-colors"
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
@@ -197,7 +197,7 @@ function Footer() {
                   </Link>
                   <Link
                     to="/brand"
-                    className="block px-4 py-2 text-sm text-neutral-100/50 hover:text-neutral-100 hover:bg-neutral-100/5 transition-colors"
+                    className="block px-4 py-2 text-sm text-zinc-100/50 hover:text-zinc-100 hover:bg-zinc-100/5 transition-colors"
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
@@ -212,7 +212,7 @@ function Footer() {
               </Portal>
             )}
           </div>
-          <div className="h-6 w-px bg-neutral-100/10" />
+          <div className="h-6 w-px bg-zinc-100/10" />
           <div className="flex items-center gap-4">
             {socialLinks.map((link) => (
               <a
@@ -220,7 +220,7 @@ function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-100/50 hover:text-neutral-100/70 transition-colors"
+                className="text-zinc-100/50 hover:text-zinc-100/70 transition-colors"
                 aria-label={link.label}
               >
                 {link.icon}

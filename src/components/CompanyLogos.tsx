@@ -70,8 +70,8 @@ function CompanyLogos() {
           href={company.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative bg-neutral-950/30 backdrop-blur-sm border border-neutral-100/10 rounded-lg p-6 flex items-center justify-center 
-                     hover:bg-neutral-900 hover:border-neutral-100/20 transition-all duration-150"
+          className="group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-100/10 rounded-lg p-6 flex items-center justify-center 
+                     hover:bg-zinc-900 hover:border-zinc-100/20 transition-all duration-150"
         >
           <img 
             src={company.logo} 

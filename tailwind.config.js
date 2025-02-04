@@ -24,9 +24,9 @@ export default {
       },
       backgroundImage: {
         'grid-white': 'linear-gradient(to right, rgb(255 255 255 / 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgb(255 255 255 / 0.1) 1px, transparent 1px)',
-        'grid-neutral': 'linear-gradient(to right, rgb(245 245 245 / 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgb(245 245 245 / 0.1) 1px, transparent 1px)',
-        'grid-neutral-100': 'linear-gradient(rgba(163,163,163,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(163,163,163,0.08) 1px, transparent 1px)',
-        'grid': 'linear-gradient(rgba(163,163,163,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(163,163,163,0.08) 1px, transparent 1px)'
+        'grid-zinc': 'linear-gradient(to right, rgb(244 244 245 / 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgb(244 244 245 / 0.1) 1px, transparent 1px)',
+        'grid-zinc-100': 'linear-gradient(rgba(244,244,245,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(244,244,245,0.08) 1px, transparent 1px)',
+        'grid': 'linear-gradient(rgba(244,244,245,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(244,244,245,0.08) 1px, transparent 1px)'
       },
       backgroundSize: {
         'grid': '24px 24px'

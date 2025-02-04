@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply bg-neutral-950 text-neutral-100/90 overflow-x-hidden;
+    @apply bg-zinc-950 text-zinc-100 overflow-x-hidden font-normal;
     overflow-y: auto;
   }
 
@@ -21,16 +21,17 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans text-neutral-100/90;
+    @apply font-sans text-zinc-100  ;
   }
 
   ::selection {
-    @apply bg-neutral-500/30 text-neutral-100;
+    @apply bg-zinc-500/30 text-zinc-100;
   }
 
   ::-moz-selection {
-    @apply bg-neutral-500/30 text-neutral-100;
+    @apply bg-zinc-500/30 text-zinc-100;
   }
+  
 }
 
 @layer components {
@@ -43,23 +44,23 @@
   }
 
   .page-title {
-    @apply text-3xl font-sans text-neutral-100/90 font-medium tracking-tight mb-4;
+    @apply text-3xl font-sans text-zinc-100 font-medium tracking-tight mb-4;
   }
 
   .title-divider {
-    @apply w-12 h-px bg-neutral-100/10 mb-8;
+    @apply w-12 h-px bg-zinc-100/10 mb-8;
   }
 
   .section-title {
-    @apply text-lg font-sans text-neutral-100/80 font-medium tracking-wide mb-6 uppercase;
+    @apply text-lg font-sans text-zinc-200 font-medium tracking-wide mb-6 uppercase;
   }
 
   .subsection-title {
-    @apply text-sm font-sans text-neutral-100/70 uppercase tracking-wider mb-3;
+    @apply text-sm font-sans text-zinc-400 uppercase tracking-wider mb-3;
   }
 
   .text-content {
-    @apply text-neutral-100/80 leading-relaxed font-sans tracking-wide;
+    @apply text-zinc-400 leading-relaxed font-sans font-normal tracking-wide;
   }
 
   .content-grid {
@@ -71,7 +72,7 @@
   }
 
   .link {
-    @apply font-mono text-neutral-100/60 hover:text-neutral-100/90 transition-colors;
+    @apply font-mono text-zinc-100/60 hover:text-zinc-100/90 transition-colors;
   }
 
   .home-button {
@@ -88,24 +89,25 @@
 
   .base-button {
     @apply relative px-4 sm:px-6 py-2.5 sm:py-3 
-           bg-neutral-950/30 backdrop-blur-sm 
-           border border-neutral-100/10 
-           text-neutral-100/70
+           bg-zinc-950/30 backdrop-blur-sm 
+           border border-zinc-100/10 
+           text-zinc-100/70
            rounded-lg font-mono text-sm tracking-widest
            transition-all
-           hover:bg-neutral-900 hover:border-neutral-100/20 hover:text-neutral-100;
+           hover:bg-zinc-900 hover:border-zinc-100/20 hover:text-zinc-100;
   }
 
   .base-button-highlight {
     @apply relative px-4 sm:px-6 py-2.5 sm:py-3
-           bg-gradient-to-r from-neutral-100/5 via-neutral-100/10 to-neutral-100/5
-           backdrop-blur-sm border border-neutral-100/30
-           text-neutral-100
+           bg-gradient-to-r from-zinc-100/5 via-zinc-100/10 to-zinc-100/5
+           backdrop-blur-sm border border-zinc-100/30
+           text-zinc-100
            rounded-lg font-mono text-sm tracking-widest
            transition-all
-           hover:from-neutral-100/10 hover:via-neutral-100/20 hover:to-neutral-100/10
-           hover:border-neutral-100/50;
+           hover:from-zinc-100/10 hover:via-zinc-100/20 hover:to-zinc-100/10
+           hover:border-zinc-100/50;
   }
+  
 }
 
 html {

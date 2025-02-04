@@ -15,11 +15,11 @@ function BillingInfo() {
         <div>
           <h2 className="section-title">Contact Information</h2>
           <div className="space-y-2 text-content">
-            <p className="text-neutral-100/90 text-lg">Yeralkhan Slam</p>
+            <p className="text-zinc-100 text-lg">Yeralkhan Slam</p>
             <p>Board Member, Partnerships and Finance</p>
             <a 
               href="mailto:yera.slam@aaltoes.com"
-              className="text-neutral-100/60 hover:text-neutral-100/90 transition-colors block mt-2"
+              className="text-zinc-400 hover:text-zinc-100 underline transition-colors block mt-2"
             >
               yera.slam@aaltoes.com
             </a>
@@ -58,8 +58,8 @@ function BillingInfo() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-neutral-100/10">
-              <p className="text-neutral-100/60">VAT Number: FI22916386</p>
+            <div className="pt-4 border-t border-zinc-100/10">
+              <p className="text-zinc-100/60">VAT Number: FI22916386</p>
             </div>
           </div>
         </div>
