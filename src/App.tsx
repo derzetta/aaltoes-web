@@ -261,8 +261,8 @@ function App() {
             style={{
               transform: 'perspective(1000px) rotateX(60deg) translateY(-50%) translateZ(-100px)',
               backgroundImage: `
-                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.50) 0px, rgba(163, 163, 163, 0.50) 1px, transparent 1px, transparent 70px),
-                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.50) 0px, rgba(163, 163, 163, 0.50) 1px, transparent 5px, transparent 150px)
+                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.9) 0px, rgba(163, 163, 163, 0.9) 1px, transparent 1px, transparent 70px),
+                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.9) 0px, rgba(163, 163, 163, 0.9) 1px, transparent 5px, transparent 150px)
               `,
               opacity: 1,
             }}
