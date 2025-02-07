@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Analytics } from "@vercel/analytics/react"
 import Footer from './components/Footer'
 import { FooterScrollProvider } from './contexts/FooterScrollContext'
+import { Link } from 'react-router-dom'
 
 
 
@@ -179,6 +180,69 @@ function LoadingScreen() {
         </div>
       </div>
     </div>
+  )
+}
+
+function LivestreamBanner() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  })
+  const [isTabletOrMobile] = useState(window.innerWidth <= 1024)
+
+  useEffect(() => {
+    const targetDate = new Date('2025-02-11T17:00:00+02:00')
+    const updateTimer = () => {
+      const now = new Date()
+      const difference = targetDate.getTime() - now.getTime()
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
+        const minutes = Math.floor((difference / 1000 / 60) % 60)
+        const seconds = Math.floor((difference / 1000) % 60)
+        setTimeLeft({ days, hours, minutes, seconds })
+      }
+    }
+    updateTimer()
+    const timer = setInterval(updateTimer, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="fixed top-6 left-0 right-0 z-50 flex justify-center mx-4"
+    >
+      <Link to="/2025" className="group">
+        <div className="relative flex flex-col sm:flex-row items-center p-3.5 px-5 gap-3.5 rounded-lg border border-zinc-800 bg-zinc-900/30 backdrop-blur-md transition-colors duration-200 hover:bg-zinc-800/30">
+          <div className="flex justify-center sm:justify-start items-center">
+            <h2 className="font-geist text-zinc-100 text-base tracking-wide">
+              Paramount Year of Crafting
+            </h2>
+          </div>
+
+          {!isTabletOrMobile && (
+            <div className="h-4 w-px bg-zinc-700/50 mx-2" />
+          )}
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              <span className="font-mono text-zinc-400 text-sm uppercase tracking-wider">Livestream in</span>
+            </div>
+            <div className="flex items-center gap-3 font-mono text-sm uppercase">
+              <div className="text-zinc-100">{timeLeft.days}D</div>
+              <div className="text-zinc-100">{timeLeft.hours}H</div>
+              <div className="text-zinc-100">{timeLeft.minutes}M</div>
+              <div className="text-zinc-100">{timeLeft.seconds}S</div>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
   )
 }
 
@@ -421,7 +485,6 @@ function App() {
                   className="base-button inline-flex items-center justify-center"
                 >
                   <span className="relative z-10 uppercase">2025 Chat</span>
-                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </a>
                 <a 
                   href="https://form.typeform.com/to/mGQRO8Te"
@@ -430,8 +493,6 @@ function App() {
                   className="base-button inline-flex items-center justify-center"
                 >
                   <span className="relative z-10 uppercase font-medium">Become a volunteer</span>
-                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
                 </a>
               </div>
             </div>
@@ -441,6 +502,7 @@ function App() {
         <Footer />
       </div>
       <Analytics />
+      <LivestreamBanner />
     </FooterScrollProvider>
   )
 }

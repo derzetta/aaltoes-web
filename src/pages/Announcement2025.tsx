@@ -72,7 +72,9 @@ export default function Announcement2025() {
           {...fadeIn}
         >
           <div className="flex items-center gap-4">
-            <img src="/bank/aaltoes_white.svg" alt="Aaltoes Logo" className="h-8" />
+            <Link to="/">
+              <img src="/bank/aaltoes_white.svg" alt="Aaltoes Logo" className="h-8" />
+            </Link>
           </div>
           <div className="text-right font-mono text-zinc-400 text-md tracking-wide">
             <div className="hidden sm:block">FEBRUARY 11TH, TUESDAY, 17:00</div>
