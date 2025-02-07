@@ -16,6 +16,7 @@ import Screen from './pages/Screen.tsx'
 import FoodChart from './pages/FoodChart'
 import Brand from './pages/Brand'
 import Announcement2025 from './pages/Announcement2025'
+import Tokyo2025Task from './pages/Tokyo2025Task'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/2025",
     element: <Announcement2025 />,
+  },
+  {
+    path: "/tokyo2025task",
+    element: <Tokyo2025Task />,
   },
   {
     path: "/about",
