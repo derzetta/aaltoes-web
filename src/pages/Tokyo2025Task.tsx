@@ -96,7 +96,7 @@ const Tokyo2025Task: React.FC = () => {
                     </div>
 
                     <div className="font-mono bg-zinc-900/30 backdrop-blur-sm border border-zinc-100/10 rounded-lg p-6">
-                      <h3 className="font-mono text-xl font-semibold mb-4 uppercase tracking-wider text-zinc-100">Task 3: Your Creative Submission</h3>
+                      <h3 className="font-mono text-xl font-semibold mb-4 uppercase tracking-wider text-zinc-100">Task 3: Your Own Prompt</h3>
                       <p className="text-zinc-400">
                         If you feel none of these tasks fully showcase your skills, willpower, or fire in the belly, propose your own prompt! Show us something outside the box that highlights your unique abilities and passion for the Japan expedition.
                       </p>
