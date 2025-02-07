@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Layout from '../components/Layout'
 
 function CountdownTimer() {
@@ -55,12 +56,21 @@ function CountdownTimer() {
   )
 }
 
+const fadeIn = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+}
+
 export default function Announcement2025() {
   return (
     <Layout>
       <div className="space-y-12">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <motion.div 
+          className="flex items-center justify-between mb-8"
+          {...fadeIn}
+        >
           <div className="flex items-center gap-4">
             <img src="/bank/aaltoes_white.svg" alt="Aaltoes Logo" className="h-8" />
           </div>
@@ -71,18 +81,26 @@ export default function Announcement2025() {
               <div>17:00</div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Title */}
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          {...fadeIn}
+          transition={{ ...fadeIn.transition, delay: 0.1 }}
+        >
           <h1 className="tracking-tighter text-5xl font-medium font-geist bg-gradient-to-b from-[#ffffff] to-[#e5e5e5] text-transparent bg-clip-text">
             Paramount Year of Crafting
           </h1>
           <p className="mt-4 text-xl font-normal text-zinc-400">Doni Peltojärvi on 2025 plans</p>
-        </div>
+        </motion.div>
 
         {/* Preview Image */}
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900">
+        <motion.div 
+          className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900"
+          {...fadeIn}
+          transition={{ ...fadeIn.transition, delay: 0.2 }}
+        >
           <img 
             src="/bank/paramount.png" 
             alt="2025 Announcement Preview" 
@@ -95,10 +113,14 @@ export default function Announcement2025() {
               <span className="font-mono text-sm text-zinc-300 uppercase tracking-wider">Livestream</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Event Details */}
-        <div className="space-y-8 py-8">
+        <motion.div 
+          className="space-y-8 py-8"
+          {...fadeIn}
+          transition={{ ...fadeIn.transition, delay: 0.3 }}
+        >
           <CountdownTimer />
           
           <div className="flex justify-center">
@@ -110,7 +132,7 @@ export default function Announcement2025() {
               <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </Layout>
   )
