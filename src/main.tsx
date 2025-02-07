@@ -15,11 +15,16 @@ import AssociationRules from './pages/policies/AssociationRules'
 import Screen from './pages/Screen.tsx'
 import FoodChart from './pages/FoodChart'
 import Brand from './pages/Brand'
+import Announcement2025 from './pages/Announcement2025'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/2025",
+    element: <Announcement2025 />,
   },
   {
     path: "/about",
@@ -53,7 +58,6 @@ const router = createBrowserRouter([
     path: "/code-of-conduct",
     element: <CodeOfConduct />,
   },
-
   {
     path: "/privacy-notice",
     element: <PrivacyNotice />,
