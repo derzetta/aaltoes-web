@@ -85,19 +85,19 @@ export default function Announcement2025() {
 
         {/* Title */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-12 pb-1"
           {...fadeIn}
           transition={{ ...fadeIn.transition, delay: 0.1 }}
         >
-          <h1 className="tracking-tighter text-5xl font-medium font-geist bg-gradient-to-b from-[#ffffff] to-[#e5e5e5] text-transparent bg-clip-text">
+          <h1 className="tracking-tighter text-5xl font-[500] font-geist bg-gradient-to-b from-[#ffffff] to-[#e5e5e5] text-transparent bg-clip-text leading-tighter pb-1">
             Paramount Year of Crafting
           </h1>
-          <p className="mt-4 text-xl font-normal text-zinc-400">Doni Peltojärvi on 2025 plans</p>
+          <p className="mt-4 text-lg sm:text-xl font-normal text-zinc-400">Doni Peltojärvi on 2025 plans</p>
         </motion.div>
 
         {/* Preview Image */}
         <motion.div 
-          className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900"
+          className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900 mb-6"
           {...fadeIn}
           transition={{ ...fadeIn.transition, delay: 0.2 }}
         >
@@ -117,22 +117,22 @@ export default function Announcement2025() {
 
         {/* Event Details */}
         <motion.div 
-          className="space-y-8 py-8"
+          className="mb-12"
           {...fadeIn}
           transition={{ ...fadeIn.transition, delay: 0.3 }}
         >
           <CountdownTimer />
-          
-          <div className="flex justify-center">
-            <Link 
-              to="/"
-              className="base-button inline-flex items-center justify-center group"
-            >
-              <span className="relative z-10 uppercase">Back to Homepage</span>
-              <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </Link>
-          </div>
         </motion.div>
+
+        <div className="flex justify-center">
+          <Link 
+            to="/"
+            className="base-button inline-flex items-center justify-center group"
+          >
+            <span className="relative z-10 uppercase">Back to Homepage</span>
+            <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          </Link>
+        </div>
       </div>
     </Layout>
   )
