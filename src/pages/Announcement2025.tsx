@@ -91,7 +91,7 @@ export default function Announcement2025() {
           {...fadeIn}
           transition={{ ...fadeIn.transition, delay: 0.1 }}
         >
-          <h1 className="tracking-tighter text-5xl font-[500] font-geist bg-gradient-to-b from-[#ffffff] to-[#e5e5e5] text-transparent bg-clip-text leading-tighter pb-1">
+          <h1 className="tracking-tighter text-5xl font-geist font-[500] bg-gradient-to-b from-[#ffffff] to-[#e5e5e5] text-transparent bg-clip-text leading-tighter pb-1">
             Paramount Year of Crafting
           </h1>
           <p className="mt-4 text-lg sm:text-xl font-normal text-zinc-400">Doni Peltojärvi on 2025 plans</p>

@@ -9,6 +9,13 @@ export default {
       fontFamily: {
         mono: ['"Geist Mono"', 'monospace'],
         sans: ['Geist', 'sans-serif'],
+        geist: ['Geist', 'sans-serif'],
+      },
+      fontWeight: {
+        normal: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
       },
       animation: {
         'loading-bar': 'loading-bar 1.5s ease-in-out infinite',
