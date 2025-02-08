@@ -129,7 +129,7 @@ export default function Announcement2025() {
         <div className="flex justify-center">
           <Link 
             to="/"
-            className="base-button inline-flex items-center justify-center group"
+            className="base-button inline-flex items-center justify-center"
           >
             <span className="relative z-10 uppercase">Back to Homepage</span>
             <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
