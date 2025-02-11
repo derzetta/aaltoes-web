@@ -12,7 +12,7 @@ function CountdownTimer() {
   })
 
   useEffect(() => {
-    const targetDate = new Date('2025-02-11T19:00:00+02:00') // Helsinki time (UTC+2)
+    const targetDate = new Date('2025-02-12T18:00:00+02:00') // Helsinki time (UTC+2)
 
     const updateTimer = () => {
       const now = new Date()
@@ -79,7 +79,7 @@ export default function Announcement2025() {
               <div className="flex flex-col items-center text-center space-y-6">
                 <div className="w-3 h-3 rounded-full bg-zinc-100 animate-pulse" />
                 <p className="font-mono text-zinc-100 text-lg">
-                  Due to technical problems, our announcement has been postponed by 2 hours. Please join us for the live stream at the new time of 19:00.
+                  Due to technical problems, our announcement has been postponed. Please join us for the live stream at the new time of February 12th, 18:00.
                 </p>
                 <button
                   onClick={() => setShowNotification(false)}
