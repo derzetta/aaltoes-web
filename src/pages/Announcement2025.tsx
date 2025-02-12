@@ -140,6 +140,20 @@ export default function Announcement2025() {
           />
         </motion.div>
 
+        {/* Video Note */}
+        <motion.div
+          className="text-left mb-8"
+          {...fadeIn}
+          transition={{ ...fadeIn.transition, delay: 0.25 }}
+        >
+          <p className="font-mono text-zinc-400 text-sm italic">
+            *we are publishing more raw version of our video, to make you be introduced with program asap. fixed one comes soon.
+          </p>
+          <p className="font-mono text-zinc-400 text-sm mt-2">
+            &lt;3 doni, tetsu, yera and vaneeza
+          </p>
+        </motion.div>
+
         {/* Event Details */}
         <motion.div 
           className="mb-12"
