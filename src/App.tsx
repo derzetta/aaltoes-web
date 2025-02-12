@@ -193,7 +193,7 @@ function LivestreamBanner() {
   const [isTabletOrMobile] = useState(window.innerWidth <= 1024)
 
   useEffect(() => {
-    const targetDate = new Date('2025-02-12T18:00:00+02:00')
+    const targetDate = new Date('2025-02-12T19:00:00+02:00')
     const updateTimer = () => {
       const now = new Date()
       const difference = targetDate.getTime() - now.getTime()

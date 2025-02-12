@@ -63,7 +63,7 @@ const fadeIn = {
 }
 
 export default function Announcement2025() {
-  const [showNotification, setShowNotification] = useState(true)
+  const [showNotification, setShowNotification] = useState(false)
 
   return (
     <Layout>
@@ -125,24 +125,19 @@ export default function Announcement2025() {
           <p className="mt-4 text-lg sm:text-xl font-normal text-zinc-400">Doni Peltojärvi on 2025 plans</p>
         </motion.div>
 
-        {/* Preview Image */}
+        {/* Video */}
         <motion.div 
           className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900 mb-6"
           {...fadeIn}
           transition={{ ...fadeIn.transition, delay: 0.2 }}
         >
-          <img 
-            src="/bank/paramount.png" 
-            alt="2025 Announcement Preview" 
-            className="w-full h-full object-cover"
+          <iframe
+            src="https://www.youtube.com/embed/k2uiHDZe66k"
+            title="2025 Announcement"
+            className="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-          <div className="absolute bottom-6 left-6 right-6">
-            <div className="flex items-center gap-4">
-              <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
-              <span className="font-mono text-sm text-zinc-300 uppercase tracking-wider">Livestream</span>
-            </div>
-          </div>
         </motion.div>
 
         {/* Event Details */}
