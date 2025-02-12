@@ -12,7 +12,7 @@ function CountdownTimer() {
   })
 
   useEffect(() => {
-    const targetDate = new Date('2025-02-12T18:00:00+02:00') // Helsinki time (UTC+2)
+    const targetDate = new Date('2025-02-12T19:00:00+02:00') // Helsinki time (UTC+2)
 
     const updateTimer = () => {
       const now = new Date()
