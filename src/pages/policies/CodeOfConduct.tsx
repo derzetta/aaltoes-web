@@ -61,7 +61,7 @@ function CodeOfConduct() {
               </p>
               <p>
                 <a 
-                  href="https://aaltoes2025.typeform.com/to/ZXPDN0cs" 
+                  href="https://form.typeform.com/to/ZXPDN0cs" 
                   className="text-neutral-100/60 hover:text-neutral-100/90 transition-colors"
                 >
                   Form for reporting harassment

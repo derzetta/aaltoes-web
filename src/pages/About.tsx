@@ -52,7 +52,7 @@ export default function About() {
                   <span className="relative z-10 uppercase">2025 Chat</span>
                 </a>
                 <a 
-                  href="https://aaltoes2025.typeform.com/membership"
+                  href="https://form.typeform.com/to/T93m5bJm"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="base-button-highlight inline-flex items-center justify-center"
