@@ -60,7 +60,7 @@ const teamMembers = [
     linkedin: "https://linkedin.com/in/yeralkhan"
   },
   {
-    name: "Doni Peltojarvi",
+    name: "Doni Peltojärvi",
     role: "President",
     image: "/board/doni.png",
     email: "doni.peltojarvi@aaltoes.com",
