@@ -41,7 +41,7 @@ export default function Spinout() {
             className="base-button inline-flex items-center justify-center group"
           >
             <span className="relative z-10 uppercase flex items-center gap-2">
-              Open Source Infrastructure
+              Aaltoes Open Source
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -210,9 +210,9 @@ export default function Spinout() {
                 />
               </div>
             </div>
-            <div className="w-full md:w-2/3 space-y-8 text-center md:text-left">
+            <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between">
                   <h3 className="text-4xl font-medium text-zinc-100">Ignite</h3>
                   <span className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">Continuing</span>
                 </div>
@@ -220,7 +220,7 @@ export default function Spinout() {
                   A pre-accelerator program helping first-time founders validate their ideas and build their first MVP.
                 </p>
               </div>
-              <div>
+              <div className="flex justify-start">
                 <a 
                   href="https://ignite.aaltoes.com"
                   target="_blank"
@@ -240,7 +240,7 @@ export default function Spinout() {
           <section className="flex flex-col-reverse md:flex-row items-center gap-16">
             <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between">
                   <h3 className="text-4xl font-medium text-zinc-100">wednesday.</h3>
                   <span className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
                 </div>
@@ -248,7 +248,7 @@ export default function Spinout() {
                   Inspiring women every day of the week. A community and platform dedicated to empowering women in entrepreneurship.
                 </p>
               </div>
-              <div>
+              <div className="flex justify-start">
                 <a 
                   href="https://wednesday.aaltoes.com"
                   target="_blank"
@@ -284,9 +284,9 @@ export default function Spinout() {
                 />
               </div>
             </div>
-            <div className="w-full md:w-2/3 space-y-8 text-center md:text-left">
+            <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between">
                   <h3 className="text-4xl font-medium text-zinc-100">Strive</h3>
                   <span className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
                 </div>
@@ -294,7 +294,7 @@ export default function Spinout() {
                   Platform designed to help students and startups find the perfect match. Connecting talent with opportunities.
                 </p>
               </div>
-              <div>
+              <div className="flex justify-start">
                 <a 
                   href="https://striveforstartups.com"
                   target="_blank"

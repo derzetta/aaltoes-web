@@ -190,7 +190,7 @@ export default function OpenSource() {
                 NEW PROJECT
               </span>
             </Link>
-              <h1 className="text-5xl font-medium text-zinc-100">Open Source Infrastructure</h1>
+              <h1 className="text-5xl font-medium text-zinc-100">Aaltoes Open Source</h1>
               <p className="text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
                 Building the foundation for Finland's next generation of open source innovation.
               </p>
