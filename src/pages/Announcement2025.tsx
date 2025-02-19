@@ -163,7 +163,7 @@ export default function Announcement2025() {
             muted
             playsInline
           >
-            <source src="/Untitled2.mov" type="video/quicktime" />
+            <source src="/Untitled2.mp4" type="video/quicktime" />
           </video>
           {/* Gradient Overlays */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
