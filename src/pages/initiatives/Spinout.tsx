@@ -237,8 +237,8 @@ export default function Spinout() {
           <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
 
           {/* Wednesday Section */}
-          <section className="flex flex-col md:flex-row items-center gap-16">
-            <div className="w-full md:w-2/3 space-y-8 text-center md:text-left">
+          <section className="flex flex-col-reverse md:flex-row items-center gap-16">
+            <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <h3 className="text-4xl font-medium text-zinc-100">wednesday.</h3>
