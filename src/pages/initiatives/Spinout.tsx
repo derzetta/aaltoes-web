@@ -9,26 +9,7 @@ const fadeIn = {
   transition: { duration: 0.5 }
 }
 
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  status: string;
-  delay?: number;
-}
 
-const ProjectCard = ({ title, description, status, delay = 0 }: ProjectCardProps) => (
-  <motion.div
-    className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-xl p-6"
-    {...fadeIn}
-    transition={{ ...fadeIn.transition, delay }}
-  >
-    <div className="flex items-start justify-between mb-4">
-      <h3 className="text-xl font-medium text-zinc-100">{title}</h3>
-      <span className="text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-900/50 rounded">{status}</span>
-    </div>
-    <p className="text-zinc-400 text-sm leading-relaxed">{description}</p>
-  </motion.div>
-)
 
 export default function Spinout() {
   const { pathname } = useLocation()
@@ -37,41 +18,7 @@ export default function Spinout() {
     window.scrollTo(0, 0)
   }, [pathname])
 
-  const projects = [
-    {
-      title: "Project Ignite",
-      description: "A revolutionary platform bridging academic research and practical applications in AI, making advanced tools accessible to developers worldwide.",
-      status: "Beta Testing"
-    },
-    {
-      title: "Strive",
-      description: "Comprehensive fitness technology combining hardware sensors with machine learning for real-time feedback and personalized training programs.",
-      status: "Development"
-    },
-    {
-      title: "wednesday",
-      description: "Innovative project management tool reimagining team collaboration with social networking and gamification elements.",
-      status: "Alpha"
-    }
-  ]
 
-  const supportServices = [
-    {
-      title: "Mentorship Program",
-      description: "Direct guidance from successful founders and industry experts who have built and scaled companies.",
-      status: "Active"
-    },
-    {
-      title: "Legal Support",
-      description: "Comprehensive legal and administrative assistance for company formation, IP protection, and contracts.",
-      status: "Available"
-    },
-    {
-      title: "Technical Resources",
-      description: "Access to development tools, cloud credits, and technical infrastructure needed to build and scale.",
-      status: "Available"
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-zinc-950">
