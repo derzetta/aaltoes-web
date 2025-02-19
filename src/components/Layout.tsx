@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Footer from './Footer'
 
 interface LayoutProps {
@@ -5,13 +7,26 @@ interface LayoutProps {
   className?: string
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 export default function Layout({ children, className = '' }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <div className={`page-container ${className}`}>
-        {children}
+    <>
+      <ScrollToTop />
+      <div className="min-h-screen bg-neutral-950 text-neutral-100">
+        <div className={`page-container ${className}`}>
+          {children}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   )
 } 

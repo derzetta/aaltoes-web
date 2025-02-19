@@ -1,60 +1,7 @@
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import Layout from '../components/Layout'
-
-function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  })
-
-  useEffect(() => {
-    const targetDate = new Date('2025-02-12T19:00:00+02:00') // Helsinki time (UTC+2)
-
-    const updateTimer = () => {
-      const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
-        const minutes = Math.floor((difference / 1000 / 60) % 60)
-        const seconds = Math.floor((difference / 1000) % 60)
-
-        setTimeLeft({ days, hours, minutes, seconds })
-      }
-    }
-
-    updateTimer()
-    const timer = setInterval(updateTimer, 1000)
-
-    return () => clearInterval(timer)
-  }, [])
-
-  return (
-    <div className="flex gap-8 justify-center items-center font-mono text-zinc-100">
-      <div className="text-center">
-        <div className="text-4xl font-normal">{timeLeft.days}</div>
-        <div className="text-sm text-zinc-400 uppercase tracking-wider">Days</div>
-      </div>
-      <div className="text-center">
-        <div className="text-4xl font-normal">{timeLeft.hours}</div>
-        <div className="text-sm text-zinc-400 uppercase tracking-wider">Hours</div>
-      </div>
-      <div className="text-center">
-        <div className="text-4xl font-normal">{timeLeft.minutes}</div>
-        <div className="text-sm text-zinc-400 uppercase tracking-wider">Minutes</div>
-      </div>
-      <div className="text-center">
-        <div className="text-4xl font-normal">{timeLeft.seconds}</div>
-        <div className="text-sm text-zinc-400 uppercase tracking-wider">Seconds</div>
-      </div>
-    </div>
-  )
-}
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -62,117 +9,284 @@ const fadeIn = {
   transition: { duration: 0.5 }
 }
 
+interface InitiativePreviewProps {
+  id: string
+  title: string
+  subtitle: string
+  description: string
+  imageUrl: string
+  isWide?: boolean
+  delay?: number
+  number?: number
+}
+
+const InitiativeCard = ({
+  id,
+  title,
+  subtitle,
+  isWide = false,
+  delay = 0,
+  number
+}: InitiativePreviewProps) => (
+  <motion.div
+    className={`relative group ${isWide ? 'md:col-span-2' : ''}`}
+    {...fadeIn}
+    transition={{ ...fadeIn.transition, delay }}
+  >
+    <Link
+      to={`/2025/${id}`}
+      className="block relative w-full h-64 rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65 hover:border-zinc-700/100 transition-all duration-300 group-hover:bg-zinc-900/30"
+    >
+      <div className="absolute inset-0 p-8 flex flex-col justify-between">
+        <div className="flex items-start justify-between">
+          {number && (
+            <div className="w-8 h-8 rounded-full bg-zinc-900/80 border border-zinc-700 flex items-center justify-center">
+              <span className="text-sm font-mono text-zinc-400">{number}</span>
+            </div>
+          )}
+        </div>
+        <div>
+          <p className="text-sm font-mono text-zinc-400 uppercase tracking-wide mb-3">
+            {title}
+          </p>
+          <h2 className="text-2xl font-medium text-zinc-100 leading-tight">
+            {subtitle}
+          </h2>
+        </div>
+      </div>
+    </Link>
+  </motion.div>
+)
+
 export default function Announcement2025() {
-  const [showNotification, setShowNotification] = useState(false)
+  const { pathname } = useLocation()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  const initiatives = [
+    {
+      id: "focus-topics",
+      title: "Focus Topics and Events",
+      subtitle: "Welcome to the most tech-driven year of Aaltoes",
+      description:
+        "From Computer Vision to Open Source AI, discover our key technological focus areas for 2025.",
+      imageUrl: "/bank/focus.jpg",
+      isWide: true,
+      number: 1
+    },
+    {
+      id: "international",
+      title: "Global Presence",
+      subtitle: "Going beyond Silicon Valley",
+      description:
+        "Expanding to Eastern and Southern Asia with Japan Expedition and Shibuya-Tokyo partnership.",
+      imageUrl: "/bank/global.jpg",
+      number: 2
+    },
+    {
+      id: "spinout",
+      title: "2024 Projects",
+      subtitle: "Continuing and spinning out",
+      description:
+        "Ignite, Strive, and wednesday - projects ready to take the next step.",
+      imageUrl: "/bank/spinout.jpg",
+      number: 3
+    },
+    {
+      id: "opensource",
+      title: "Open Source Infrastructure",
+      subtitle: "Pure innovation. Supercharged.",
+      description:
+        "Five foundational projects creating a new ecosystem for innovation.",
+      imageUrl: "/bank/opensource.jpg",
+      number: 4
+    },
+    {
+      id: "blueprint",
+      title: "The Blueprint Project",
+      subtitle: "Continuing the legacy",
+      description:
+        "A transparent, open-source archive of Aaltoes' history and operations.",
+      imageUrl: "/bank/blueprint.jpg",
+      number: 5
+    },
+    {
+      id: "robotics",
+      title: "Robotics Nation",
+      subtitle: "Powerhouse of future builders",
+      description:
+        "Our ambitious mission to host the World Robotics Championship this decade.",
+      imageUrl: "/bank/robotics.jpg",
+      isWide: true,
+      number: 6
+    }
+  ]
 
   return (
-    <Layout>
-      <AnimatePresence>
-        {showNotification && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-sm"
+    <div className="min-h-screen bg-zinc-950">
+      {/* Video Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
+          <div className="relative w-full max-w-7xl aspect-video">
+            <video
+              className="w-full h-full object-contain"
+              autoPlay
+              controls
+              playsInline
+            >
+              <source src="/Untitled2.mp4" type="video/quicktime" />
+            </video>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-white hover:text-zinc-300 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Hero Video Section - Full Width */}
+      <div className="relative w-full h-screen">
+        {/* Video Container */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            id="heroVideo"
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
           >
-            <div className="relative max-w-2xl w-full bg-zinc-900/80 border border-zinc-100/10 rounded-lg p-8 backdrop-blur-md">
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="w-3 h-3 rounded-full bg-zinc-100 animate-pulse" />
-                <p className="font-mono text-zinc-100 text-lg">
-                  Due to technical problems, our announcement has been postponed. Please join us for the live stream at the new time of February 12th, 18:00.
-                </p>
-                <button
-                  onClick={() => setShowNotification(false)}
-                  className="px-6 py-2 font-mono text-sm text-zinc-100 border border-zinc-100/10 rounded-lg hover:bg-zinc-100/10 transition-colors uppercase tracking-wider"
-                >
-                  Got it
-                </button>
-              </div>
+            <source src="/Untitled2.mov" type="video/quicktime" />
+          </video>
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_rgb(9,9,11)_100%)] pointer-events-none opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/20 via-transparent to-zinc-950/80 pointer-events-none" />
+        </div>
+
+        {/* Content Over the Video */}
+        <div className="relative h-full flex flex-col">
+          <div className="flex-grow" />
+          <motion.div
+            className="w-full max-w-3xl mx-auto text-center px-6 mb-24"
+            {...fadeIn}
+            transition={{ ...fadeIn.transition, delay: 0.2 }}
+          >
+            {/* Aaltoes Logo */}
+            <div className="flex justify-center mb-4">
+              <img
+                src="/bank/aaltoes_white.svg"
+                alt="Aaltoes Logo"
+                className="h-6"
+              />
+            </div>
+
+            <h1 className="tracking-tighter text-5xl font-geist font-[500] text-zinc-100 leading-tighter pb-1">
+              Paramount Year of Craft
+            </h1>
+            <p className="mt-6 text-lg font-normal text-zinc-400 max-w-xl mx-auto mb-8">
+              Groundbreaking initiatives to transform Aaltoes and Finland into
+              a powerhouse of builders.
+            </p>
+
+            {/* Two Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden"
+              >
+                <span className="relative z-10 uppercase flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  Watch Full Video
+                </span>
+                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </button>
+
+              <button
+                onClick={() => {
+                  const initiativesSection = document.querySelector(
+                    ".initiatives-grid"
+                  )
+                  initiativesSection?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden"
+              >
+                <span className="relative z-10 uppercase flex items-center gap-2">
+                  See The Plan
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                  </svg>
+                </span>
+                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </button>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </div>
 
-      <div className="space-y-12">
-        {/* Header */}
-        <motion.div 
-          className="flex items-center justify-between mb-8"
-          {...fadeIn}
-        >
-          <div className="flex items-center gap-4">
-            <Link to="/">
-              <img src="/bank/aaltoes_white.svg" alt="Aaltoes Logo" className="h-8" />
-            </Link>
-          </div>
-          <div className="text-right font-mono text-zinc-400 text-md tracking-wide">
-            <div className="hidden sm:block">FEBRUARY 11TH, TUESDAY, 19:00</div>
-            <div className="sm:hidden">
-              <div>FEB 11TH</div>
-              <div>19:00</div>
-            </div>
-          </div>
-        </motion.div>
+      {/* Contained Content Section */}
+      <div className="max-w-7xl mx-auto px-6 space-y-12 pb-24">
+        {/* Initiatives Grid */}
+        <div className="relative bg-zinc-950/95 backdrop-blur-sm rounded-2xl">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 initiatives-grid p-8"
+            {...fadeIn}
+            transition={{ ...fadeIn.transition, delay: 0.3 }}
+          >
+            {initiatives.map((initiative, index) => (
+              <InitiativeCard
+                key={initiative.id}
+                {...initiative}
+                delay={0.3 + index * 0.1}
+              />
+            ))}
+          </motion.div>
+        </div>
 
-        {/* Title */}
-        <motion.div 
-          className="text-center mb-12 pb-1"
-          {...fadeIn}
-          transition={{ ...fadeIn.transition, delay: 0.1 }}
-        >
-          <h1 className="tracking-tighter text-5xl font-geist font-[500] bg-gradient-to-b from-[#ffffff] to-[#e5e5e5] text-transparent bg-clip-text leading-tighter pb-1">
-            Paramount Year of Crafting
-          </h1>
-          <p className="mt-4 text-lg sm:text-xl font-normal text-zinc-400">Doni Peltojärvi on 2025 plans</p>
-        </motion.div>
-
-        {/* Video */}
-        <motion.div 
-          className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900 mb-6"
-          {...fadeIn}
-          transition={{ ...fadeIn.transition, delay: 0.2 }}
-        >
-          <iframe
-            src="https://www.youtube.com/embed/k2uiHDZe66k"
-            title="2025 Announcement"
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </motion.div>
-
-        {/* Video Note */}
+        {/* Back Button */}
         <motion.div
-          className="text-left mb-8"
+          className="flex justify-center pt-6"
           {...fadeIn}
-          transition={{ ...fadeIn.transition, delay: 0.25 }}
+          transition={{ ...fadeIn.transition, delay: 0.8 }}
         >
-          <p className="font-mono text-zinc-400 text-sm italic">
-            *we are publishing more raw version of our video, to make you be introduced with program asap. fixed one comes soon.
-          </p>
-          <p className="font-mono text-zinc-400 text-sm mt-2">
-            &lt;3 doni, tetsu, yera and vaneeza
-          </p>
-        </motion.div>
-
-        {/* Event Details */}
-        <motion.div 
-          className="mb-12"
-          {...fadeIn}
-          transition={{ ...fadeIn.transition, delay: 0.3 }}
-        >
-          <CountdownTimer />
-        </motion.div>
-
-        <div className="flex justify-center">
-          <Link 
+          <Link
             to="/"
-            className="base-button inline-flex items-center justify-center group"
+            className="base-button inline-flex items-center justify-center group relative overflow-hidden"
           >
             <span className="relative z-10 uppercase">Back to Homepage</span>
             <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </Link>
-        </div>
+        </motion.div>
       </div>
-    </Layout>
+    </div>
   )
-} 
+}
