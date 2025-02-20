@@ -212,9 +212,12 @@ export default function Spinout() {
             </div>
             <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-4xl font-medium text-zinc-100">Ignite</h3>
-                  <span className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">Continuing</span>
+                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-4xl font-medium text-zinc-100">Ignite</h3>
+                    <span className="md:hidden text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">Continuing</span>
+                  </div>
+                  <span className="hidden md:inline-block text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">Continuing</span>
                 </div>
                 <p className="text-zinc-400 leading-relaxed text-lg">
                   A pre-accelerator program helping first-time founders validate their ideas and build their first MVP.
@@ -240,9 +243,12 @@ export default function Spinout() {
           <section className="flex flex-col-reverse md:flex-row items-center gap-16">
             <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-4xl font-medium text-zinc-100">wednesday.</h3>
-                  <span className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
+                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-4xl font-medium text-zinc-100">wednesday.</h3>
+                    <span className="md:hidden text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
+                  </div>
+                  <span className="hidden md:inline-block text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
                 </div>
                 <p className="text-zinc-400 leading-relaxed text-lg">
                   Inspiring women every day of the week. A community and platform dedicated to empowering women in entrepreneurship.
@@ -286,9 +292,12 @@ export default function Spinout() {
             </div>
             <div className="w-full md:w-2/3 space-y-8 text-left">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-4xl font-medium text-zinc-100">Strive</h3>
-                  <span className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
+                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-4xl font-medium text-zinc-100">Strive</h3>
+                    <span className="md:hidden text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
+                  </div>
+                  <span className="hidden md:inline-block text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Spinning Out</span>
                 </div>
                 <p className="text-zinc-400 leading-relaxed text-lg">
                   Platform designed to help students and startups find the perfect match. Connecting talent with opportunities.

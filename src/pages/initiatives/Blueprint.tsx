@@ -1,12 +1,109 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5 }
+}
+
+// Blueprint Animation Component
+const BlueprintAnimation = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const pattern = 'BLUEPRINT'
+  const [time, setTime] = useState(0)
+  const [dimensions, setDimensions] = useState({ width: 800, height: 400 })
+
+  useEffect(() => {
+    const handleResize = () => {
+      const canvas = canvasRef.current
+      if (!canvas) return
+
+      const container = canvas.parentElement
+      if (!container) return
+
+      const { width, height } = container.getBoundingClientRect()
+      setDimensions({ width, height })
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    // Responsive grid size based on screen width
+    const getGridSize = () => {
+      const width = window.innerWidth
+      if (width < 768) return { cols: 20, rows: 10 } // Mobile
+      if (width < 1024) return { cols: 30, rows: 15 } // Tablet
+      return { cols: 40, rows: 20 } // Desktop
+    }
+
+    const { cols, rows } = getGridSize()
+    const cellSize = Math.min(canvas.width / cols, canvas.height / rows)
+
+    let animationFrameId: number
+
+    const render = () => {
+      if (!ctx || !canvas) return
+
+      ctx.fillStyle = '#09090b'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      const fontSize = Math.min(cellSize * 0.8, 24) // Cap the maximum font size
+      ctx.font = `${fontSize}px "Geist Mono"`
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const t = time * 0.000005
+          const o = Math.sin(y * Math.sin(t) * 0.2 + x * 0.04 + t) * 20
+          const i = Math.round(Math.abs(x + y + o)) % pattern.length
+          
+          // Adjusted opacity calculation for smoother fading
+          const baseOpacity = 0.15
+          const waveOpacity = Math.sin(x * 0.1 + y * 0.1 + time * 0.0003) * 0.05
+          const opacity = Math.max(baseOpacity + waveOpacity, 0.05)
+          
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`
+          ctx.fillText(
+            pattern[i],
+            x * cellSize + cellSize / 2,
+            y * cellSize + cellSize / 2
+          )
+        }
+      }
+
+      setTime(prev => prev + 16)
+      animationFrameId = requestAnimationFrame(render)
+    }
+
+    render()
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+    }
+  }, [time, dimensions])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={dimensions.width}
+      height={dimensions.height}
+      className="w-full h-full rounded-2xl bg-zinc-950 "
+      style={{ width: '100%', height: '100%' }}
+    />
+  )
 }
 
 // Timeline Component
@@ -47,11 +144,11 @@ const StatCard = ({ value, label, icon }: { value: string, label: string, icon: 
     className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-6"
     {...fadeIn}
   >
-    <div className="flex items-center gap-4">
-      <div className="h-12 w-12 rounded-lg bg-zinc-800/50 flex items-center justify-center text-zinc-400">
+    <div className="flex items-center">
+      <div className="h-12 w-12 rounded-lg bg-zinc-800/50 flex items-center justify-center text-zinc-400 flex-shrink-0">
         {icon}
       </div>
-      <div>
+      <div className="flex-grow text-center">
         <div className="text-2xl font-medium text-zinc-100">{value}</div>
         <div className="text-sm text-zinc-400">{label}</div>
       </div>
@@ -120,10 +217,15 @@ export default function Blueprint() {
               </p>
             </div>
 
+            {/* Blueprint Animation */}
+            <div className="aspect-[2/1] w-full max-w-4xl mx-auto">
+              <BlueprintAnimation />
+            </div>
+
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <StatCard 
-                value="10+"
+                value="15+"
                 label="Years of History"
                 icon={
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -146,7 +248,7 @@ export default function Blueprint() {
                 }
               />
               <StatCard 
-                value="50+"
+                value="100+"
                 label="Board Members"
                 icon={
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -221,14 +323,14 @@ export default function Blueprint() {
               ].map((feature, i) => (
                 <motion.div
                   key={feature.title}
-                  className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8 hover:bg-zinc-800/30 transition-colors"
+                  className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8 hover:bg-zinc-800/30 transition-colors flex flex-col h-full"
                   {...fadeIn}
                   transition={{ ...fadeIn.transition, delay: 0.1 * i }}
                 >
                   <div className="h-12 w-12 mb-6 text-zinc-400">
                     {feature.icon}
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 flex-grow">
                     <h3 className="text-xl font-medium text-zinc-100">{feature.title}</h3>
                     <p className="text-zinc-400">{feature.description}</p>
                   </div>
