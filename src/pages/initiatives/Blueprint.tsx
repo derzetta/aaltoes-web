@@ -188,6 +188,16 @@ const StatCard = ({ value, label, icon }: { value: string, label: string, icon: 
   </motion.div>
 )
 
+// Coming Soon Overlay Component
+const ComingSoonOverlay = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/90 backdrop-blur-xs rounded-xl border border-zinc-800/50">
+    <div className="text-center space-y-2">
+      <div className="text-2xl font-medium text-zinc-100">Coming Soon!</div>
+      <div className="text-sm text-zinc-400">This feature is currently under development</div>
+    </div>
+  </div>
+)
+
 export default function Blueprint() {
   const { pathname } = useLocation()
   const [activeTab, setActiveTab] = useState('documents')
@@ -226,7 +236,7 @@ export default function Blueprint() {
         </div>
 
         {/* Hero Section */}
-        <div className="space-y-16">
+        <div className="space-y-16 mt-8">
           <motion.div 
             className="text-center space-y-16"
             {...fadeIn}
@@ -400,61 +410,80 @@ export default function Blueprint() {
               ))}
             </div>
 
-            {/* Content */}
-            {activeTab === 'documents' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DocumentCard
-                  title="Board Meeting Minutes - January 2024"
-                  type="Meeting Minutes"
-                  date="January 15, 2024"
-                  status="Public"
-                />
-                <DocumentCard
-                  title="Budget Allocation Q1 2024"
-                  type="Financial Document"
-                  date="December 20, 2023"
-                  status="Members Only"
-                />
-                <DocumentCard
-                  title="Strategic Planning 2024"
-                  type="Strategy Document"
-                  date="December 1, 2023"
-                  status="Public"
-                />
-                <DocumentCard
-                  title="Community Guidelines Update"
-                  type="Policy Document"
-                  date="November 28, 2023"
-                  status="Public"
-                />
-              </div>
-            )}
+            {/* Content with Coming Soon Overlay */}
+            <div className="relative">
+              {activeTab === 'documents' && (
+                <motion.div 
+                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <DocumentCard
+                    title="Board Meeting Minutes - January 2024"
+                    type="Meeting Minutes"
+                    date="January 15, 2024"
+                    status="Public"
+                  />
+                  <DocumentCard
+                    title="Budget Allocation Q1 2024"
+                    type="Financial Document"
+                    date="December 20, 2023"
+                    status="Members Only"
+                  />
+                  <DocumentCard
+                    title="Strategic Planning 2024"
+                    type="Strategy Document"
+                    date="December 1, 2023"
+                    status="Public"
+                  />
+                  <DocumentCard
+                    title="Community Guidelines Update"
+                    type="Policy Document"
+                    date="November 28, 2023"
+                    status="Public"
+                  />
+                  <ComingSoonOverlay />
+                </motion.div>
+              )}
 
-            {activeTab === 'timeline' && (
-              <div className="max-w-2xl mx-auto">
-                <TimelineItem
-                  year="2024"
-                  title="Blueprint Launch"
-                  description="Initiated the Blueprint project to enhance transparency and knowledge preservation."
-                />
-                <TimelineItem
-                  year="2023"
-                  title="Digital Transformation"
-                  description="Moved all documentation to digital formats and implemented version control."
-                />
-                <TimelineItem
-                  year="2022"
-                  title="Transparency Initiative"
-                  description="Began regular public reporting of board decisions and budget allocations."
-                />
-              </div>
-            )}
+              {activeTab === 'timeline' && (
+                <motion.div 
+                  className="relative max-w-2xl mx-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <TimelineItem
+                    year="2024"
+                    title="Blueprint Launch"
+                    description="Initiated the Blueprint project to enhance transparency and knowledge preservation."
+                  />
+                  <TimelineItem
+                    year="2023"
+                    title="Digital Transformation"
+                    description="Moved all documentation to digital formats and implemented version control."
+                  />
+                  <TimelineItem
+                    year="2022"
+                    title="Transparency Initiative"
+                    description="Began regular public reporting of board decisions and budget allocations."
+                  />
+                  <ComingSoonOverlay />
+                </motion.div>
+              )}
 
-            {activeTab === 'statistics' && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Add statistics visualization components here */}
-              </div>
-            )}
+              {activeTab === 'statistics' && (
+                <motion.div 
+                  className="relative grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[300px]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ComingSoonOverlay />
+                </motion.div>
+              )}
+            </div>
           </section>
 
           {/* Divider */}
