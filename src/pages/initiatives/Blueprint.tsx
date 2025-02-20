@@ -13,94 +13,126 @@ const fadeIn = {
 const BlueprintAnimation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pattern = 'BLUEPRINT'
-  const [time, setTime] = useState(0)
-  const [dimensions, setDimensions] = useState({ width: 800, height: 400 })
-
-  useEffect(() => {
-    const handleResize = () => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-
-      const container = canvas.parentElement
-      if (!container) return
-
-      const { width, height } = container.getBoundingClientRect()
-      setDimensions({ width, height })
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  const timeRef = useRef(0)
+  const animationFrameRef = useRef<number>()
+  const lastRenderTimeRef = useRef(0)
+  const FPS = 60 // Increased FPS for smoother animation
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', { alpha: false })
     if (!ctx) return
 
-    // Responsive grid size based on screen width
+    // Responsive grid size based on screen width with increased density
     const getGridSize = () => {
       const width = window.innerWidth
-      if (width < 768) return { cols: 20, rows: 10 } // Mobile
-      if (width < 1024) return { cols: 30, rows: 15 } // Tablet
-      return { cols: 40, rows: 20 } // Desktop
+      if (width < 768) return { cols: 15, rows: 8 } // Mobile - increased from 12x6
+      if (width < 1024) return { cols: 20, rows: 10 } // Tablet - increased from 16x8
+      return { cols: 30, rows: 15 } // Desktop - increased from 25x12
     }
 
-    const { cols, rows } = getGridSize()
-    const cellSize = Math.min(canvas.width / cols, canvas.height / rows)
-
-    let animationFrameId: number
-
-    const render = () => {
+    const render = (timestamp: number) => {
       if (!ctx || !canvas) return
 
+      // Limit frame rate
+      const elapsed = timestamp - lastRenderTimeRef.current
+      if (elapsed < 1000 / FPS) {
+        animationFrameRef.current = requestAnimationFrame(render)
+        return
+      }
+      lastRenderTimeRef.current = timestamp
+
+      // Update dimensions and calculate cell size
+      const { cols, rows } = getGridSize()
+      const cellWidth = canvas.width / cols
+      const cellHeight = canvas.height / rows
+      const cellSize = Math.min(cellWidth, cellHeight)
+      
+      // Clear canvas
       ctx.fillStyle = '#09090b'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      const fontSize = Math.min(cellSize * 0.8, 24) // Cap the maximum font size
+      // Calculate font size based on cell size with padding
+      const fontSize = Math.min(cellSize * 0.7, 28) // Adjusted for better visibility
       ctx.font = `${fontSize}px "Geist Mono"`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
 
+      // Pre-calculate common values with faster animation
+      const t = timeRef.current * 0.001 // Increased from 0.0002 for faster animation
+      const baseOpacity = 0.15
+
+      // Center the grid in the canvas
+      const offsetX = (canvas.width - (cols * cellSize)) / 2
+      const offsetY = (canvas.height - (rows * cellSize)) / 2
+
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          const t = time * 0.000005
-          const o = Math.sin(y * Math.sin(t) * 0.2 + x * 0.04 + t) * 20
+          // More dynamic wave effect with faster changes
+          const waveX = Math.sin(y * 0.5 + t * 2) * 1.5
+          const waveY = Math.cos(x * 0.5 + t * 2) * 1.5
+          const o = Math.sin((x + waveX) * 0.8 + (y + waveY) * 0.8 + t * 3) * 12
           const i = Math.round(Math.abs(x + y + o)) % pattern.length
           
-          // Adjusted opacity calculation for smoother fading
-          const baseOpacity = 0.15
-          const waveOpacity = Math.sin(x * 0.1 + y * 0.1 + time * 0.0003) * 0.05
-          const opacity = Math.max(baseOpacity + waveOpacity, 0.05)
+          // More dynamic opacity with faster changes
+          const waveOpacity = Math.sin(x * 0.3 + y * 0.3 + t * 10) * 0.03
+          const opacity = Math.max(baseOpacity + waveOpacity, 0.08)
           
           ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`
+          
+          // Position with offset for centering
+          const posX = offsetX + x * cellSize + cellSize / 2
+          const posY = offsetY + y * cellSize + cellSize / 2
+          
           ctx.fillText(
             pattern[i],
-            x * cellSize + cellSize / 2,
-            y * cellSize + cellSize / 2
+            posX,
+            posY
           )
         }
       }
 
-      setTime(prev => prev + 16)
-      animationFrameId = requestAnimationFrame(render)
+      timeRef.current += 2 // Doubled from 1 for faster animation
+      animationFrameRef.current = requestAnimationFrame(render)
     }
 
-    render()
+    const handleResize = () => {
+      const container = canvas.parentElement
+      if (!container) return
+
+      const { width, height } = container.getBoundingClientRect()
+      canvas.width = width
+      canvas.height = height
+      
+      // Reset font after resize
+      const { cols, rows } = getGridSize()
+      const cellSize = Math.min(width / cols, height / rows)
+      const fontSize = Math.min(cellSize * 0.7, 28)
+      if (ctx) {
+        ctx.font = `${fontSize}px "Geist Mono"`
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    animationFrameRef.current = requestAnimationFrame(render)
 
     return () => {
-      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', handleResize)
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
     }
-  }, [time, dimensions])
+  }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      width={dimensions.width}
-      height={dimensions.height}
-      className="w-full h-full rounded-2xl bg-zinc-950 "
+      className="w-full h-full rounded-2xl bg-zinc-950"
       style={{ width: '100%', height: '100%' }}
     />
   )
