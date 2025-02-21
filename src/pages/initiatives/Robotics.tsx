@@ -492,48 +492,6 @@ export default function Robotics() {
     window.scrollTo(0, 0)
   }, [pathname])
 
-  const programs = [
-    {
-      title: "Robotics Fundamentals",
-      description: "Introduction to robotics principles, programming, and basic hardware components.",
-      level: "Beginner",
-      duration: "8 weeks"
-    },
-    {
-      title: "Advanced Automation",
-      description: "Deep dive into industrial automation, control systems, and advanced programming.",
-      level: "Advanced",
-      duration: "12 weeks"
-    },
-    {
-      title: "AI & Robotics",
-      description: "Integration of artificial intelligence and machine learning in robotics applications.",
-      level: "Intermediate",
-      duration: "10 weeks"
-    }
-  ]
-
-  const projects = [
-    {
-      title: "Smart Factory Lab",
-      description: "Hands-on experience with industrial robots and automation systems in a controlled environment.",
-      level: "Advanced",
-      duration: "Ongoing"
-    },
-    {
-      title: "Robotics Competition",
-      description: "Annual competition challenging teams to solve real-world problems using robotics.",
-      level: "All Levels",
-      duration: "3 months"
-    },
-    {
-      title: "Research Projects",
-      description: "Collaborative research opportunities with industry partners and academic institutions.",
-      level: "Expert",
-      duration: "6-12 months"
-    }
-  ]
-
   return (
     <div className="min-h-screen bg-zinc-950">
       <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16">
@@ -656,7 +614,7 @@ export default function Robotics() {
                     className="text-zinc-300 hover:text-zinc-100 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 19 11 5" />
                       <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                       <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
                     </svg>
@@ -711,56 +669,244 @@ export default function Robotics() {
           </div>
         </div>
 
-        {/* Training Programs */}
-        <section className="flex flex-col md:flex-row-reverse items-center gap-12">
-          <div className="w-full md:w-1/2 space-y-6">
-            <h2 className="text-3xl font-medium text-zinc-100">Training Programs</h2>
-            <p className="text-lg text-zinc-400 leading-relaxed">
-              Comprehensive courses designed to build expertise in robotics and automation.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {programs.map((program, index) => (
-                <ProgramCard
-                  key={program.title}
-                  {...program}
-                  delay={0.4 + index * 0.1}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
-
-        {/* Practical Projects */}
-        <section className="flex flex-col md:flex-row items-center gap-12">
-          <div className="w-full md:w-1/2 space-y-6">
-            <h2 className="text-3xl font-medium text-zinc-100">Practical Projects</h2>
-            <p className="text-lg text-zinc-400 leading-relaxed">
-              Real-world applications and hands-on experience with robotics technology.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {projects.map((project, index) => (
-                <ProgramCard
-                  key={project.title}
-                  {...project}
-                  delay={0.4 + index * 0.1}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Divider */}
         <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
 
         {/* World Map Section */}
         <WorldMapSection />
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+
+        {/* Vision Section */}
+        <section className="mt-24">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-medium text-zinc-100 mb-4">Robotics Nation</h2>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+              An umbrella initiative uniting Finland's leading robotics teams and innovators
+            </p>
+          </div>
+
+          {/* Linear Vision Cards */}
+          <div className="space-y-6">
+            {/* First Row - Two Columns */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Current Challenge */}
+              <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+                <div className="flex items-start gap-6">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2v20M2 12h20"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <div className="text-sm font-mono text-zinc-500">Current Challenge</div>
+                      <div className="text-sm font-mono text-zinc-500">Ranked #71 Globally</div>
+                    </div>
+                    <p className="mt-4 text-zinc-300 leading-relaxed">
+                      Despite strong educational foundations and individual achievements, Finland's competitive robotics ecosystem remains fragmented. Our current ranking doesn't reflect the true potential of our technical talent.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Our Vision */}
+              <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+                <div className="flex items-start gap-6">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <div className="text-sm font-mono text-zinc-500">Our Vision</div>
+                      <div className="text-sm font-mono text-zinc-500">Target: #1 in Europe</div>
+                    </div>
+                    <p className="mt-4 text-zinc-300 leading-relaxed">
+                      Uniting Finland's top robotics teams, educators, and industry partners under one umbrella to create a systematic approach for developing world-class technical talent through robotics.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Second Row - Full Width */}
+            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+              <div className="flex items-start gap-6">
+                <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="text-sm font-mono text-zinc-500">Current Team</div>
+                    <div className="text-sm font-mono text-zinc-500">Growing Daily</div>
+                  </div>
+                  <div className="mt-4 space-y-3">
+                    <p className="text-zinc-300 leading-relaxed">
+                      Our initiative brings together:
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <ul className="space-y-2 text-zinc-400">
+                        <li className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                          <span>3 World Champion Robotics Teams</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                          <span>5 University Research Labs</span>
+                        </li>
+                      </ul>
+                      <ul className="space-y-2 text-zinc-400">
+                        <li className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                          <span>12 Industry Partners</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                          <span>20+ Active Mentors</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+
+        {/* Timeline Section - Changelog Style */}
+        <section className="mt-24">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-medium text-zinc-100 mb-4">2024 Roadmap</h2>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+              A comprehensive plan to build Finland's robotics excellence
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <div className="space-y-12">
+              <div className="relative pl-8">
+                <div className="absolute left-0 top-0 h-full w-px bg-zinc-800" />
+                
+                <div className="space-y-12">
+                  <div className="relative">
+                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="pl-4">
+                      <div className="flex items-baseline gap-4 mb-6">
+                        <time className="text-sm font-mono text-zinc-500">MAY</time>
+                        <h3 className="text-lg font-medium text-zinc-200">Foundation Phase</h3>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                          <div className="text-sm font-mono text-zinc-500 mb-2">Infrastructure</div>
+                          <p className="text-zinc-400">Acquiring comprehensive robotics equipment: VEX, FIRST, and drone racing kits</p>
+                        </div>
+                        <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                          <div className="text-sm font-mono text-zinc-500 mb-2">Education</div>
+                          <p className="text-zinc-400">Establishing detailed curricula and training programs</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="pl-4">
+                      <div className="flex items-baseline gap-4 mb-6">
+                        <time className="text-sm font-mono text-zinc-500">JUNE-JULY</time>
+                        <h3 className="text-lg font-medium text-zinc-200">Training Launch</h3>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                          <div className="text-sm font-mono text-zinc-500 mb-2">Teacher Training</div>
+                          <p className="text-zinc-400">Intensive programs led by world champion coaches</p>
+                        </div>
+                        <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                          <div className="text-sm font-mono text-zinc-500 mb-2">Summer Camps</div>
+                          <p className="text-zinc-400">Advanced robotics training and team formation</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="pl-4">
+                      <div className="flex items-baseline gap-4 mb-6">
+                        <time className="text-sm font-mono text-zinc-500">AUGUST</time>
+                        <h3 className="text-lg font-medium text-zinc-200">Global Stage</h3>
+                      </div>
+                      <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                        <div className="text-sm font-mono text-zinc-500 mb-2">World Robot Conference</div>
+                        <p className="text-zinc-400">Selected teams represent Finland at WRC China</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="pl-4">
+                      <div className="flex items-baseline gap-4 mb-6">
+                        <time className="text-sm font-mono text-zinc-500">SEPTEMBER-DECEMBER</time>
+                        <h3 className="text-lg font-medium text-zinc-200">Competition Phase</h3>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                          <div className="text-sm font-mono text-zinc-500 mb-2">Local Events</div>
+                          <p className="text-zinc-400">Three qualification competitions across Finland</p>
+                        </div>
+                        <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+                          <div className="text-sm font-mono text-zinc-500 mb-2">Team Selection</div>
+                          <p className="text-zinc-400">Identifying top teams for international events</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+
+        {/* Partners Section */}
+        <section className="mt-24">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl font-medium text-zinc-100">
+              Supported by Global Leaders
+            </h2>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+              Partnering with the world's leading defense and technology companies
+            </p>
+          </div>
+
+          {/* Company Logos - 2 rows */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="flex items-center justify-center p-6 bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl">
+                <img 
+                  src={`/2025/partners/company${i + 1}.svg`}
+                  alt={`Partner Company ${i + 1}`}
+                  className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
 
         {/* Get Involved */}
         <section>
