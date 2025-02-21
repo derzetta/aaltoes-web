@@ -238,7 +238,7 @@ export default function International() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Asia Expansion */}
           <section className="flex flex-col md:flex-row items-center gap-12">
@@ -271,6 +271,7 @@ export default function International() {
             </div>
           </section>
 
+          {/* Fade overlay */}
 
           {/* Aaltoes Store */}
           <section>

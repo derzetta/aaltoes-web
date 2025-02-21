@@ -496,13 +496,13 @@ export default function Blueprint() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Document Browser */}
           <DocumentBrowser />
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Get Involved Section */}
           <section className="space-y-8">

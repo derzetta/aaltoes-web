@@ -237,7 +237,7 @@ export default function Spinout() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Wednesday Section */}
           <section className="flex flex-col-reverse md:flex-row items-center gap-16">
@@ -277,7 +277,7 @@ export default function Spinout() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Strive Section */}
           <section className="flex flex-col md:flex-row items-center gap-16">

@@ -254,7 +254,7 @@ export default function FocusTopics() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Events Evolution Section */}
           <section className="flex flex-col md:flex-row items-center gap-12">
@@ -322,7 +322,7 @@ export default function FocusTopics() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Ecosystem Coordinator Footer */}
           <section className="pt-0">

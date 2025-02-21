@@ -162,26 +162,26 @@ const AchievementCard = ({
   };
 
   return (
-    <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:border-zinc-700/50 transition-colors">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-2xl">{flag}</span>
-        <div>
-          <h3 className="font-mono uppercase text-zinc-200 font-medium">{location}</h3>
-          <div className="h-px w-full bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 mt-2" />
-        </div>
-      </div>
-      <div className="space-y-2">
-        {achievements.map((achievement, i) => (
-          <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
-            <span className="mt-0.5 shrink-0">
-              {getMedal(achievement, location)}
-            </span>
-            <span>{achievement}</span>
-          </div>
-        ))}
+  <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:border-zinc-700/50 transition-colors">
+    <div className="flex items-center gap-3 mb-4">
+      <span className="text-2xl">{flag}</span>
+      <div>
+        <h3 className="font-mono uppercase text-zinc-200 font-medium">{location}</h3>
+          <div className="h-px w-full bg-zinc-800 mt-2" />
       </div>
     </div>
-  )
+    <div className="space-y-2">
+      {achievements.map((achievement, i) => (
+        <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
+          <span className="mt-0.5 shrink-0">
+              {getMedal(achievement, location)}
+          </span>
+          <span>{achievement}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+)
 }
 
 // Add region types
@@ -194,194 +194,194 @@ const regions = {
 type Region = typeof regions[keyof typeof regions]
 
 // Consolidated achievements data
-const achievementsByRegion = {
-  [regions.AMERICAS]: [
-    {
-      location: "San-Jose",
-      flag: "🇨🇷",
+  const achievementsByRegion = {
+    [regions.AMERICAS]: [
+      {
+        location: "San-Jose",
+        flag: "🇨🇷",
       x: "8%",
       y: "75%",
-      achievements: [
-        "World Robot Olympiad 2017 - 4th place"
-      ]
-    },
-    {
-      location: "Dallas",
-      flag: "🇺🇸",
+        achievements: [
+          "World Robot Olympiad 2017 - 4th place"
+        ]
+      },
+      {
+        location: "Dallas",
+        flag: "🇺🇸",
       x: "11%",
       y: "45%",
-      achievements: [
-        "VEX Worlds Middle School Championship 2022 - 2nd place",
-        "VEX Worlds Middle School Championship 2022 - TOP 16"
-      ]
-    },
-    {
-      location: "Iowa",
-      flag: "🇺🇸",
+        achievements: [
+          "VEX Worlds Middle School Championship 2022 - 2nd place",
+          "VEX Worlds Middle School Championship 2022 - TOP 16"
+        ]
+      },
+      {
+        location: "Iowa",
+        flag: "🇺🇸",
       x: "20%",
       y: "30%",
-      achievements: [
-        "US Open 2022 - 1st place in total rankings",
-        "2nd place in individual"
-      ]
-    },
-    {
-      location: "Washington",
-      flag: "🇺🇸",
+        achievements: [
+          "US Open 2022 - 1st place in total rankings",
+          "2nd place in individual"
+        ]
+      },
+      {
+        location: "Washington",
+        flag: "🇺🇸",
       x: "20%",
       y: "40%",
-      achievements: [
-        "FIRST Global 2017 - 5th place"
-      ]
-    },
-    {
-      location: "Louisville",
-      flag: "🇺🇸",
+        achievements: [
+          "FIRST Global 2017 - 5th place"
+        ]
+      },
+      {
+        location: "Louisville",
+        flag: "🇺🇸",
       x: "5%",
       y: "35%",
-      achievements: [
-        "VEX Worlds Middle School Championship 2017",
-        "VEX Worlds Middle School Championship 2018 - TOP 16",
-        "VEX World 2020 - 8th",
-        "MS Programming Skills - Champion Sportsmanship Award"
-      ]
-    }
-  ],
-  [regions.EUROPE]: [
-    {
-      location: "London",
-      flag: "🇬🇧",
+        achievements: [
+          "VEX Worlds Middle School Championship 2017",
+          "VEX Worlds Middle School Championship 2018 - TOP 16",
+          "VEX World 2020 - 8th",
+          "MS Programming Skills - Champion Sportsmanship Award"
+        ]
+      }
+    ],
+    [regions.EUROPE]: [
+      {
+        location: "London",
+        flag: "🇬🇧",
       x: "42%",
       y: "25%",
-      achievements: [
-        "First Lego VEX Championship 2019",
-        "Judges Award, Tournament Finalist",
-        "Hartfordshire VEX 2020 - Judges Award"
-      ]
-    },
-    {
-      location: "Dortmund",
-      flag: "🇩🇪",
+        achievements: [
+          "First Lego VEX Championship 2019",
+          "Judges Award, Tournament Finalist",
+          "Hartfordshire VEX 2020 - Judges Award"
+        ]
+      },
+      {
+        location: "Dortmund",
+        flag: "🇩🇪",
       x: "50%",
       y: "30%",
-      achievements: [
-        "World Robot Olympiad 2021 - 1st place"
-      ]
-    },
-    {
-      location: "Geneva",
-      flag: "🇨🇭",
+        achievements: [
+          "World Robot Olympiad 2021 - 1st place"
+        ]
+      },
+      {
+        location: "Geneva",
+        flag: "🇨🇭",
       x: "47%",
       y: "37%",
-      achievements: [
-        "First Global 2022 - 1st place"
-      ]
-    },
-    {
-      location: "Athens",
-      flag: "🇬🇷",
+        achievements: [
+          "First Global 2022 - 1st place"
+        ]
+      },
+      {
+        location: "Athens",
+        flag: "🇬🇷",
       x: "52%",
       y: "45%",
-      achievements: [
-        "First Global 2024 - 1st place"
-      ]
-    },
-    {
-      location: "Istanbul",
-      flag: "🇹🇷",
+        achievements: [
+          "First Global 2024 - 1st place"
+        ]
+      },
+      {
+        location: "Istanbul",
+        flag: "🇹🇷",
       x: "58%",
       y: "50%",
-      achievements: [
-        "Turkey National VEX Competition 2018 - 1st place"
-      ]
-    },
-    {
-      location: "Moscow",
-      flag: "🇷🇺",
+        achievements: [
+          "Turkey National VEX Competition 2018 - 1st place"
+        ]
+      },
+      {
+        location: "Moscow",
+        flag: "🇷🇺",
       x: "60%",
       y: "25%",
-      achievements: [
-        "PROFEST 2017 - 1st place",
-        "PROFEST 2018 - 2nd place"
-      ]
-    }
-  ],
-  [regions.ASIA]: [
-    {
-      location: "Astana",
-      flag: "🇰🇿",
+        achievements: [
+          "PROFEST 2017 - 1st place",
+          "PROFEST 2018 - 2nd place"
+        ]
+      }
+    ],
+    [regions.ASIA]: [
+      {
+        location: "Astana",
+        flag: "🇰🇿",
       x: "65%",
       y: "40%",
-      achievements: [
-        "World Robot Olympiad Kazakhstan 2016 - 1st place",
-        "World Robot Olympiad Kazakhstan 2017 - 1st place",
-        "World Robot Olympiad Kazakhstan 2018 - 1st place"
-      ]
-    },
-    {
-      location: "Beijing",
-      flag: "🇨🇳",
+        achievements: [
+          "World Robot Olympiad Kazakhstan 2016 - 1st place",
+          "World Robot Olympiad Kazakhstan 2017 - 1st place",
+          "World Robot Olympiad Kazakhstan 2018 - 1st place"
+        ]
+      },
+      {
+        location: "Beijing",
+        flag: "🇨🇳",
       x: "85%",
       y: "35%",
-      achievements: [
-        "World Robot Olympiad 2019 - Sportsmanship Award"
-      ]
-    },
-    {
-      location: "Guangzhou",
-      flag: "🇨🇳",
+        achievements: [
+          "World Robot Olympiad 2019 - Sportsmanship Award"
+        ]
+      },
+      {
+        location: "Guangzhou",
+        flag: "🇨🇳",
       x: "87%",
       y: "50%",
-      achievements: [
+        achievements: [
         "Make World Championship 2019 - Excellence Award"
-      ]
-    },
-    {
-      location: "Macao",
-      flag: "🇲🇴",
+        ]
+      },
+      {
+        location: "Macao",
+        flag: "🇲🇴",
       x: "82%",
       y: "60%",
-      achievements: [
+        achievements: [
         "Pacific Asian VEX Championship 2019 - Excellence Award"
-      ]
-    },
-    {
-      location: "Singapore",
-      flag: "🇸🇬",
+        ]
+      },
+      {
+        location: "Singapore",
+        flag: "🇸🇬",
       x: "89%",
       y: "70%",
-      achievements: [
-        "First Global 2023 - 1st place"
-      ]
-    },
-    {
-      location: "New Delhi",
-      flag: "🇮🇳",
+        achievements: [
+          "First Global 2023 - 1st place"
+        ]
+      },
+      {
+        location: "New Delhi",
+        flag: "🇮🇳",
       x: "70%",
       y: "60%",
-      achievements: [
-        "World Robot Olympiad 2016 - Certificate of Excellence"
-      ]
-    },
-    {
-      location: "Bangkok",
-      flag: "🇹🇭",
+        achievements: [
+          "World Robot Olympiad 2016 - Certificate of Excellence"
+        ]
+      },
+      {
+        location: "Bangkok",
+        flag: "🇹🇭",
       x: "82%",
       y: "80%",
-      achievements: [
-        "Battle in Bangkok 2018 - 1st place"
-      ]
-    },
-    {
-      location: "Chiang-Mai",
-      flag: "🇹🇭",
+        achievements: [
+          "Battle in Bangkok 2018 - 1st place"
+        ]
+      },
+      {
+        location: "Chiang-Mai",
+        flag: "🇹🇭",
       x: "78%",
       y: "72%",
-      achievements: [
-        "World Robot Olympiad 2018 - Certificate of Excellence"
-      ]
-    }
-  ]
+        achievements: [
+          "World Robot Olympiad 2018 - Certificate of Excellence"
+        ]
+      }
+    ]
 };
 
 const WorldMapSection = () => {
@@ -401,7 +401,7 @@ const WorldMapSection = () => {
             
             {/* Map Markers */}
             {Object.values(achievementsByRegion).flat().map((city, index) => (
-              <AchievementMarker
+            <AchievementMarker
                 key={`${city.location}-${index}`}
                 x={city.x}
                 y={city.y}
@@ -644,13 +644,13 @@ export default function Robotics() {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* World Map Section */}
         <WorldMapSection />
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* Vision Section */}
         <section className="mt-24">
@@ -662,9 +662,12 @@ export default function Robotics() {
           </div>
 
           {/* Linear Vision with Dividers */}
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {/* First Row - Two Columns */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+            <div className="grid grid-cols-1 md:grid-cols-2 relative">
+              {/* Vertical Divider */}
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-zinc-800 -translate-x-1/2" />
+              
               {/* Current Challenge */}
               <div className="pb-8 md:pb-0 md:pr-8">
                 <div className="flex items-start gap-6">
@@ -690,7 +693,7 @@ export default function Robotics() {
                 <div className="flex items-start gap-6">
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-10-7Z"/>
                       <circle cx="12" cy="12" r="3"/>
                     </svg>
                   </div>
@@ -754,11 +757,129 @@ export default function Robotics() {
                 </div>
               </div>
             </div>
+
+            {/* Team Profiles */}
+            <div className="mt-12">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { 
+                    name: "Mikko Virtanen", 
+                    role: "Lead Engineer",
+                    achievements: ["Led 3 world champion teams", "12+ years robotics experience", "Pioneered AI-driven robotics"],
+                    previousRoles: ["Technical Director at VEX Robotics", "Research Lead at Aalto University"],
+                    contact: "mikko@robotics.fi"
+                  },
+                  { 
+                    name: "Laura Korhonen", 
+                    role: "Research Director",
+                    achievements: ["Published 15+ papers in robotics", "Founded 2 robotics labs", "Patent holder for autonomous systems"],
+                    previousRoles: ["Senior Researcher at TKK", "Visiting Scholar at MIT"],
+                    contact: "laura@robotics.fi"
+                  },
+                  { 
+                    name: "Antti Mäkelä", 
+                    role: "Competition Lead",
+                    achievements: ["Organized 20+ international competitions", "Trained 100+ teams", "World Champion Coach 2023"],
+                    previousRoles: ["Head Judge at World Robot Olympiad", "Competition Director"],
+                    contact: "antti@robotics.fi"
+                  },
+                  { 
+                    name: "Kristin Boyer", 
+                    role: "Project Manager",
+                    achievements: ["Managed $5M+ robotics projects", "Built 3 innovation labs", "Led 5 successful product launches"],
+                    previousRoles: ["Innovation Lead", "Strategy Consultant"],
+                    contact: "kristin@robotics.fi"
+                  },
+                  { 
+                    name: "Erik Lindström", 
+                    role: "Technical Lead",
+                    achievements: ["Developed award-winning control systems", "8+ years in industrial robotics", "IEEE Robotics Fellow"],
+                    previousRoles: ["Senior Engineer at ABB", "Research Scientist"],
+                    contact: "erik@robotics.fi"
+                  },
+                  { 
+                    name: "Maria Nieminen", 
+                    role: "Education Lead",
+                    achievements: ["Created national robotics curriculum", "Trained 200+ educators", "Education Innovation Award 2023"],
+                    previousRoles: ["STEM Education Director", "University Lecturer"],
+                    contact: "maria@robotics.fi"
+                  }
+                ].map((member, i) => (
+                  <div key={i} className="group relative">
+                    <div className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors">
+                      <div className="w-8 h-8 rounded-full overflow-hidden bg-zinc-800 shrink-0">
+                        <img 
+                          src={`/2025/team/member${i + 1}.jpg`}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
+                          {member.name}
+                        </div>
+                        <div className="text-xs font-mono text-zinc-500 uppercase truncate group-hover:text-zinc-300 transition-colors">
+                          {member.role}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Hover Card */}
+                    <div className="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute left-0 top-full mt-2 z-50 w-72 bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 shadow-xl transition-all duration-200">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                          <img 
+                            src={`/2025/team/member${i + 1}.jpg`}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <div className="font-medium text-zinc-200">{member.name}</div>
+                          <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div>
+                          <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Achievements</div>
+                          <ul className="space-y-1">
+                            {member.achievements.map((achievement, j) => (
+                              <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
+                                <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                                {achievement}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Previous Roles</div>
+                          <ul className="space-y-1">
+                            {member.previousRoles.map((role, j) => (
+                              <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
+                                <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                                {role}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Contact</div>
+                          <div className="text-sm text-zinc-300">{member.contact}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* Timeline Section - Changelog Style */}
         <section className="mt-24">
@@ -855,7 +976,7 @@ export default function Robotics() {
         </section>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* Partners Section */}
         <section className="mt-24">
@@ -883,7 +1004,7 @@ export default function Robotics() {
         </section>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* Get Involved */}
         <section>

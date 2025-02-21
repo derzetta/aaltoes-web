@@ -408,7 +408,7 @@ export default function OpenSource() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Community Infrastructure Section */}
           <section className="space-y-8">
@@ -523,7 +523,7 @@ export default function OpenSource() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Projects Grid */}
           <section className="space-y-16">
@@ -569,7 +569,7 @@ export default function OpenSource() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
+          <div className="w-full h-px bg-zinc-800" />
 
           {/* Community Section */}
           <section className="space-y-16">
