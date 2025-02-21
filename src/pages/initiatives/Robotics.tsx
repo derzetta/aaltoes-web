@@ -9,33 +9,7 @@ const fadeIn = {
   transition: { duration: 0.5 }
 }
 
-interface ProgramCardProps {
-  title: string;
-  description: string;
-  level: string;
-  duration: string;
-  delay?: number;
-}
 
-const ProgramCard = ({ title, description, level, duration, delay = 0 }: ProgramCardProps) => (
-  <motion.div
-    className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-xl p-6"
-    {...fadeIn}
-    transition={{ ...fadeIn.transition, delay }}
-  >
-    <div className="flex items-start justify-between mb-4">
-      <h3 className="text-xl font-medium text-zinc-100">{title}</h3>
-      <span className="text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-900/50 rounded">{level}</span>
-    </div>
-    <p className="text-zinc-400 text-sm leading-relaxed mb-4">{description}</p>
-    <div className="text-sm text-zinc-500">
-      <div className="flex items-center gap-1">
-        <div className="w-2 h-2 rounded-full bg-zinc-400" />
-        {duration}
-      </div>
-    </div>
-  </motion.div>
-)
 
 // Add medal emojis
 const MEDALS = {
