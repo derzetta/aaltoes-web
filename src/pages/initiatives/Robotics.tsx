@@ -59,6 +59,40 @@ const AchievementMarker = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const getMedal = (achievement: string, location: string) => {
+    // Special cases for New Delhi and Chiang Mai - no gold for Certificate of Excellence
+    if ((location === "New Delhi" || location === "Chiang-Mai") && 
+        achievement.includes("Certificate of Excellence")) {
+      return null;
+    }
+    
+    // Gold medals
+    if (achievement.includes("Excellence Award") ||
+        achievement.includes("Design Award") ||
+        achievement.includes("Judges Award")) {
+      return MEDALS.GOLD;
+    }
+
+    // Silver medals
+    if (achievement.toLowerCase().includes("finalist")) {
+      return MEDALS.SILVER;
+    }
+
+    // Keep existing logic for other cases
+    if (achievement.includes("1st place") || 
+        achievement.includes("Sportsmanship Award")) {
+      return MEDALS.GOLD;
+    }
+    if (achievement.includes("2nd place")) {
+      return MEDALS.SILVER;
+    }
+    if (achievement.includes("3rd place")) {
+      return MEDALS.BRONZE;
+    }
+
+    return null;
+  };
+
   return (
     <div 
       className="absolute text-left"
@@ -97,9 +131,7 @@ const AchievementMarker = ({
             {achievements.map((achievement, i) => (
               <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
                 <span className="mt-0.5 shrink-0">
-                  {(achievement.includes("1st place") || achievement.includes("Sportsmanship Award")) && MEDALS.GOLD}
-                  {achievement.includes("2nd place") && MEDALS.SILVER}
-                  {achievement.includes("3rd place") && MEDALS.BRONZE}
+                  {getMedal(achievement, location)}
                 </span>
                 <span>{achievement}</span>
               </div>
@@ -120,29 +152,63 @@ const AchievementCard = ({
   location: string,
   flag: string,
   achievements: string[]
-}) => (
-  <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:border-zinc-700/50 transition-colors">
-    <div className="flex items-center gap-3 mb-4">
-      <span className="text-2xl">{flag}</span>
-      <div>
-        <h3 className="font-mono uppercase text-zinc-200 font-medium">{location}</h3>
-        <div className="h-px w-full bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 mt-2" />
+}) => {
+  const getMedal = (achievement: string, location: string) => {
+    // Special cases for New Delhi and Chiang Mai - no gold for Certificate of Excellence
+    if ((location === "New Delhi" || location === "Chiang-Mai") && 
+        achievement.includes("Certificate of Excellence")) {
+      return null;
+    }
+    
+    // Gold medals
+    if (achievement.includes("Certificate of Excellence") ||
+        achievement.includes("Design Award") ||
+        achievement.includes("Judges Award")) {
+      return MEDALS.GOLD;
+    }
+
+    // Silver medals
+    if (achievement.toLowerCase().includes("finalist")) {
+      return MEDALS.SILVER;
+    }
+
+    // Keep existing logic for other cases
+    if (achievement.includes("1st place") || 
+        achievement.includes("Sportsmanship Award")) {
+      return MEDALS.GOLD;
+    }
+    if (achievement.includes("2nd place")) {
+      return MEDALS.SILVER;
+    }
+    if (achievement.includes("3rd place")) {
+      return MEDALS.BRONZE;
+    }
+
+    return null;
+  };
+
+  return (
+    <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:border-zinc-700/50 transition-colors">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-2xl">{flag}</span>
+        <div>
+          <h3 className="font-mono uppercase text-zinc-200 font-medium">{location}</h3>
+          <div className="h-px w-full bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 mt-2" />
+        </div>
+      </div>
+      <div className="space-y-2">
+        {achievements.map((achievement, i) => (
+          <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
+            <span className="mt-0.5 shrink-0">
+              {getMedal(achievement, location)}
+            </span>
+            <span>{achievement}</span>
+          </div>
+        ))}
       </div>
     </div>
-    <div className="space-y-2">
-      {achievements.map((achievement, i) => (
-        <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
-          <span className="mt-0.5 shrink-0">
-            {(achievement.includes("1st place") || achievement.includes("Sportsmanship Award")) && MEDALS.GOLD}
-            {achievement.includes("2nd place") && MEDALS.SILVER}
-            {achievement.includes("3rd place") && MEDALS.BRONZE}
-          </span>
-          <span>{achievement}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-)
+  )
+}
 
 // Add region types
 const regions = {
@@ -268,14 +334,14 @@ const WorldMapSection = () => {
         location: "Guangzhou",
         flag: "🇨🇳",
         achievements: [
-          "Make World Championship 2019 - Certificate of Excellence"
+          "Make World Championship 2019 - Excellence Award"
         ]
       },
       {
         location: "Macao",
         flag: "🇲🇴",
         achievements: [
-          "Pacific Asian VEX Championship 2019 - Certificate of Excellence"
+          "Pacific Asian VEX Championship 2019 - Excellence Award"
         ]
       },
       {
@@ -582,7 +648,7 @@ const WorldMapSection = () => {
         </div>
       </div>
 
-      <div className="relative z-20 text-center space-y-4 mt-16">
+      <div className="relative z-20 text-center space-y-4">
         <h2 className="text-3xl font-medium text-zinc-100">
           Worldwide Excellence
         </h2>
