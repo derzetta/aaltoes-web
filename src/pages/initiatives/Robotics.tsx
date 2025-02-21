@@ -687,12 +687,12 @@ export default function Robotics() {
             </p>
           </div>
 
-          {/* Linear Vision Cards */}
-          <div className="space-y-6">
+          {/* Linear Vision with Dividers */}
+          <div className="max-w-5xl mx-auto">
             {/* First Row - Two Columns */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
               {/* Current Challenge */}
-              <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+              <div className="pb-8 md:pb-0 md:pr-8">
                 <div className="flex items-start gap-6">
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -701,8 +701,8 @@ export default function Robotics() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline justify-between gap-4">
-                      <div className="text-sm font-mono text-zinc-500">Current Challenge</div>
-                      <div className="text-sm font-mono text-zinc-500">Ranked #71 Globally</div>
+                      <div className="text-sm font-mono text-zinc-500 uppercase">Current Challenge</div>
+                      <div className="text-sm font-mono text-zinc-500 uppercase">Ranked #71 Globally</div>
                     </div>
                     <p className="mt-4 text-zinc-300 leading-relaxed">
                       Despite strong educational foundations and individual achievements, Finland's competitive robotics ecosystem remains fragmented. Our current ranking doesn't reflect the true potential of our technical talent.
@@ -712,7 +712,7 @@ export default function Robotics() {
               </div>
 
               {/* Our Vision */}
-              <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+              <div className="pt-8 md:pt-0 md:pl-8">
                 <div className="flex items-start gap-6">
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -722,8 +722,8 @@ export default function Robotics() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline justify-between gap-4">
-                      <div className="text-sm font-mono text-zinc-500">Our Vision</div>
-                      <div className="text-sm font-mono text-zinc-500">Target: #1 in Europe</div>
+                      <div className="text-sm font-mono text-zinc-500 uppercase">Our Vision</div>
+                      <div className="text-sm font-mono text-zinc-500 uppercase">Target: #1 in Europe</div>
                     </div>
                     <p className="mt-4 text-zinc-300 leading-relaxed">
                       Uniting Finland's top robotics teams, educators, and industry partners under one umbrella to create a systematic approach for developing world-class technical talent through robotics.
@@ -733,8 +733,11 @@ export default function Robotics() {
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="w-full h-px bg-zinc-800 my-8" />
+
             {/* Second Row - Full Width */}
-            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+            <div>
               <div className="flex items-start gap-6">
                 <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -744,8 +747,8 @@ export default function Robotics() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-4">
-                    <div className="text-sm font-mono text-zinc-500">Current Team</div>
-                    <div className="text-sm font-mono text-zinc-500">Growing Daily</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase">Growing Daily</div>
                   </div>
                   <div className="mt-4 space-y-3">
                     <p className="text-zinc-300 leading-relaxed">
