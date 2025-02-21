@@ -190,7 +190,7 @@ const StatCard = ({ value, label, icon }: { value: string, label: string, icon: 
 
 // Coming Soon Overlay Component
 const ComingSoonOverlay = () => (
-  <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/90 backdrop-blur-xs rounded-xl border border-zinc-800/50">
+  <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/70 backdrop-blur-[2px] rounded-xl border-zinc-800/50">
     <div className="text-center space-y-2">
       <div className="text-2xl font-medium text-zinc-100">Coming Soon!</div>
       <div className="text-sm text-zinc-400">This feature is currently under development</div>
@@ -198,9 +198,123 @@ const ComingSoonOverlay = () => (
   </div>
 )
 
-export default function Blueprint() {
+const DocumentBrowser = () => {
   const { pathname } = useLocation()
   const [activeTab, setActiveTab] = useState('documents')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return (
+    <div className="relative w-full h-full">
+      {/* Blur effect */}
+      <div className="absolute inset-0 backdrop-blur-xl z-10" />
+      
+      <div className="relative z-20">
+        {/* Document Browser Section */}
+        <section className="space-y-8">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl font-medium text-zinc-100">Document Browser</h2>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+              Explore our archive of decisions, policies, and historical records.
+            </p>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex justify-center gap-4 mb-8">
+            {['documents', 'timeline', 'statistics'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  activeTab === tab
+                    ? 'bg-zinc-800 text-zinc-100'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {/* Content with Coming Soon Overlay */}
+          <div className="relative">
+            {activeTab === 'documents' && (
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+ 
+              >
+                <DocumentCard
+                  title="Board Meeting Minutes - January 2024"
+                  type="Meeting Minutes"
+                  date="January 15, 2024"
+                  status="Public"
+                />
+                <DocumentCard
+                  title="Budget Allocation Q1 2024"
+                  type="Financial Document"
+                  date="December 20, 2023"
+                  status="Members Only"
+                />
+                <DocumentCard
+                  title="Strategic Planning 2024"
+                  type="Strategy Document"
+                  date="December 1, 2023"
+                  status="Public"
+                />
+                <DocumentCard
+                  title="Community Guidelines Update"
+                  type="Policy Document"
+                  date="November 28, 2023"
+                  status="Public"
+                />
+                <ComingSoonOverlay />
+              </motion.div>
+            )}
+
+            {activeTab === 'timeline' && (
+              <motion.div 
+                className="relative max-w-2xl mx-auto"
+
+              >
+                <TimelineItem
+                  year="2024"
+                  title="Blueprint Launch"
+                  description="Initiated the Blueprint project to enhance transparency and knowledge preservation."
+                />
+                <TimelineItem
+                  year="2023"
+                  title="Digital Transformation"
+                  description="Moved all documentation to digital formats and implemented version control."
+                />
+                <TimelineItem
+                  year="2022"
+                  title="Transparency Initiative"
+                  description="Began regular public reporting of board decisions and budget allocations."
+                />
+                <ComingSoonOverlay />
+              </motion.div>
+            )}
+
+            {activeTab === 'statistics' && (
+              <motion.div 
+                className="relative grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[300px]"
+
+              >
+                <ComingSoonOverlay />
+              </motion.div>
+            )}
+          </div>
+        </section>
+      </div>
+    </div>
+  )
+}
+
+export default function Blueprint() {
+  const { pathname } = useLocation()
+  const [] = useState('documents')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -384,107 +498,8 @@ export default function Blueprint() {
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />
 
-          {/* Document Browser Section */}
-          <section className="space-y-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl font-medium text-zinc-100">Document Browser</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-                Explore our archive of decisions, policies, and historical records.
-              </p>
-            </div>
-
-            {/* Tabs */}
-            <div className="flex justify-center gap-4 mb-8">
-              {['documents', 'timeline', 'statistics'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    activeTab === tab
-                      ? 'bg-zinc-800 text-zinc-100'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </div>
-
-            {/* Content with Coming Soon Overlay */}
-            <div className="relative">
-              {activeTab === 'documents' && (
-                <motion.div 
-                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <DocumentCard
-                    title="Board Meeting Minutes - January 2024"
-                    type="Meeting Minutes"
-                    date="January 15, 2024"
-                    status="Public"
-                  />
-                  <DocumentCard
-                    title="Budget Allocation Q1 2024"
-                    type="Financial Document"
-                    date="December 20, 2023"
-                    status="Members Only"
-                  />
-                  <DocumentCard
-                    title="Strategic Planning 2024"
-                    type="Strategy Document"
-                    date="December 1, 2023"
-                    status="Public"
-                  />
-                  <DocumentCard
-                    title="Community Guidelines Update"
-                    type="Policy Document"
-                    date="November 28, 2023"
-                    status="Public"
-                  />
-                  <ComingSoonOverlay />
-                </motion.div>
-              )}
-
-              {activeTab === 'timeline' && (
-                <motion.div 
-                  className="relative max-w-2xl mx-auto"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <TimelineItem
-                    year="2024"
-                    title="Blueprint Launch"
-                    description="Initiated the Blueprint project to enhance transparency and knowledge preservation."
-                  />
-                  <TimelineItem
-                    year="2023"
-                    title="Digital Transformation"
-                    description="Moved all documentation to digital formats and implemented version control."
-                  />
-                  <TimelineItem
-                    year="2022"
-                    title="Transparency Initiative"
-                    description="Began regular public reporting of board decisions and budget allocations."
-                  />
-                  <ComingSoonOverlay />
-                </motion.div>
-              )}
-
-              {activeTab === 'statistics' && (
-                <motion.div 
-                  className="relative grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[300px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ComingSoonOverlay />
-                </motion.div>
-              )}
-            </div>
-          </section>
+          {/* Document Browser */}
+          <DocumentBrowser />
 
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950" />

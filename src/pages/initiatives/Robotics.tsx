@@ -37,6 +37,106 @@ const ProgramCard = ({ title, description, level, duration, delay = 0 }: Program
   </motion.div>
 )
 
+const AchievementMarker = ({ 
+  x, 
+  y, 
+  location, 
+  flag, 
+  achievements 
+}: { 
+  x: string, 
+  y: string, 
+  location: string, 
+  flag: string, 
+  achievements: string[] 
+}) => (
+  <div 
+    className="absolute group"
+    style={{ left: x, top: y }}
+  >
+    <div className="w-2 h-2 bg-zinc-400 rounded-full" />
+    <div className="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="bg-zinc-900/90 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-3 min-w-[200px]">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-lg">{flag}</span>
+          <span className="font-medium text-zinc-200">{location}</span>
+        </div>
+        <div className="space-y-1">
+          {achievements.map((achievement, i) => (
+            <div key={i} className="text-sm text-zinc-400">{achievement}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+const WorldMapSection = () => (
+  <section className="relative mt-24">
+    {/* Fixed height container with bottom margin */}
+    <div className="relative w-[150%] -mx-[25%] h-[500px] mb-32 bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
+      {/* Milder gradient overlay */}
+      
+      {/* Map Container - Centers and scales the map */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative w-full">
+          <img 
+            src="/2025/robots achievements.svg" 
+            alt="World Map"
+            className="w-full object-cover opacity-100 translate-y-[15%]"
+          />
+          
+          {/* Achievement markers */}
+          <AchievementMarker
+            x="15%"
+            y="30%"
+            location="Louisville"
+            flag="🇺🇸"
+            achievements={[
+              "VEX Worlds Middle School Championship 2018 - TOP 16",
+              "VEX World 2020 - 8th",
+              "MS Programming Skills - Champion"
+            ]}
+          />
+          
+          <AchievementMarker
+            x="45%"
+            y="25%"
+            location="London"
+            flag="🇬🇧"
+            achievements={[
+              "First Global VEX Championship 2019",
+              "Judges Award - Tournament Finalist",
+              "Judges Award"
+            ]}
+          />
+
+          <AchievementMarker
+            x="85%"
+            y="35%"
+            location="Beijing"
+            flag="🇨🇳"
+            achievements={[
+              "World Robot Olympiad 2019",
+              "Sportsmanship Award"
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Text content with fixed top margin */}
+    <div className="relative z-20 text-center space-y-4">
+      <h2 className="text-3xl font-medium text-zinc-100">
+        Global Achievement Record
+      </h2>
+      <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+        Our teams have competed and excelled in robotics competitions worldwide, from VEX Robotics to First Global challenges.
+      </p>
+    </div>
+  </section>
+)
+
 export default function Robotics() {
   const { pathname } = useLocation()
 
@@ -310,6 +410,9 @@ export default function Robotics() {
 
         {/* Divider */}
         <div className="w-full h-px bg-gradient-to-r from-zinc-950 via-zinc-700 to-zinc-950" />
+
+        {/* World Map Section */}
+        <WorldMapSection />
 
         {/* Get Involved */}
         <section>
