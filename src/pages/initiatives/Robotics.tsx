@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const fadeIn = {
@@ -37,6 +37,13 @@ const ProgramCard = ({ title, description, level, duration, delay = 0 }: Program
   </motion.div>
 )
 
+// Add medal emojis
+const MEDALS = {
+  GOLD: "🥇",
+  SILVER: "🥈",
+  BRONZE: "🥉",
+}
+
 const AchievementMarker = ({ 
   x, 
   y, 
@@ -49,93 +56,543 @@ const AchievementMarker = ({
   location: string, 
   flag: string, 
   achievements: string[] 
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div 
+      className="absolute text-left"
+      style={{ left: x, top: y }}
+    >
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="group flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors"
+      >
+        <span>{flag}</span>
+        <span className="font-mono uppercase relative">
+          {location}
+          <span className="absolute -bottom-1 left-0 w-full h-px bg-zinc-700 group-hover:bg-zinc-500 transition-colors" />
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="inline-block ml-1 -translate-y-[1px] group-hover:translate-x-0.5 transition-transform"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </button>
+
+      {isOpen && (
+        <div 
+          className="absolute left-0 top-full mt-2 z-50 bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 min-w-[240px] shadow-xl"
+        >
+          <div className="space-y-1.5">
+            {achievements.map((achievement, i) => (
+              <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
+                <span className="mt-0.5 shrink-0">
+                  {(achievement.includes("1st place") || achievement.includes("Sportsmanship Award")) && MEDALS.GOLD}
+                  {achievement.includes("2nd place") && MEDALS.SILVER}
+                  {achievement.includes("3rd place") && MEDALS.BRONZE}
+                </span>
+                <span>{achievement}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Mobile achievement card component
+const AchievementCard = ({
+  location,
+  flag,
+  achievements
+}: {
+  location: string,
+  flag: string,
+  achievements: string[]
 }) => (
-  <div 
-    className="absolute group"
-    style={{ left: x, top: y }}
-  >
-    <div className="w-2 h-2 bg-zinc-400 rounded-full" />
-    <div className="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
-      <div className="bg-zinc-900/90 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-3 min-w-[200px]">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-lg">{flag}</span>
-          <span className="font-medium text-zinc-200">{location}</span>
-        </div>
-        <div className="space-y-1">
-          {achievements.map((achievement, i) => (
-            <div key={i} className="text-sm text-zinc-400">{achievement}</div>
-          ))}
-        </div>
+  <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:border-zinc-700/50 transition-colors">
+    <div className="flex items-center gap-3 mb-4">
+      <span className="text-2xl">{flag}</span>
+      <div>
+        <h3 className="font-mono uppercase text-zinc-200 font-medium">{location}</h3>
+        <div className="h-px w-full bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 mt-2" />
       </div>
+    </div>
+    <div className="space-y-2">
+      {achievements.map((achievement, i) => (
+        <div key={i} className="text-sm font-mono text-zinc-400 leading-relaxed flex items-start gap-2">
+          <span className="mt-0.5 shrink-0">
+            {(achievement.includes("1st place") || achievement.includes("Sportsmanship Award")) && MEDALS.GOLD}
+            {achievement.includes("2nd place") && MEDALS.SILVER}
+            {achievement.includes("3rd place") && MEDALS.BRONZE}
+          </span>
+          <span>{achievement}</span>
+        </div>
+      ))}
     </div>
   </div>
 )
 
-const WorldMapSection = () => (
-  <section className="relative mt-24">
-    {/* Fixed height container with bottom margin */}
-    <div className="relative w-[150%] -mx-[25%] h-[500px] mb-32 bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
-      {/* Milder gradient overlay */}
-      
-      {/* Map Container - Centers and scales the map */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-full">
-          <img 
-            src="/2025/robots achievements.svg" 
-            alt="World Map"
-            className="w-full object-cover opacity-100 translate-y-[15%]"
-          />
-          
-          {/* Achievement markers */}
-          <AchievementMarker
-            x="15%"
-            y="30%"
-            location="Louisville"
-            flag="🇺🇸"
-            achievements={[
-              "VEX Worlds Middle School Championship 2018 - TOP 16",
-              "VEX World 2020 - 8th",
-              "MS Programming Skills - Champion"
-            ]}
-          />
-          
-          <AchievementMarker
-            x="45%"
-            y="25%"
-            location="London"
-            flag="🇬🇧"
-            achievements={[
-              "First Global VEX Championship 2019",
-              "Judges Award - Tournament Finalist",
-              "Judges Award"
-            ]}
-          />
+// Add region types
+const regions = {
+  AMERICAS: 'Americas',
+  EUROPE: 'Europe',
+  ASIA: 'Asia'
+} as const
 
-          <AchievementMarker
-            x="85%"
-            y="35%"
-            location="Beijing"
-            flag="🇨🇳"
-            achievements={[
-              "World Robot Olympiad 2019",
-              "Sportsmanship Award"
-            ]}
-          />
+type Region = typeof regions[keyof typeof regions]
+
+const WorldMapSection = () => {
+  const [activeRegion, setActiveRegion] = useState<Region>(regions.AMERICAS)
+
+  // Group achievements by region
+  const achievementsByRegion = {
+    [regions.AMERICAS]: [
+      {
+        location: "San-Jose",
+        flag: "🇨🇷",
+        achievements: [
+          "World Robot Olympiad 2017 - 4th place"
+        ]
+      },
+      {
+        location: "Dallas",
+        flag: "🇺🇸",
+        achievements: [
+          "VEX Worlds Middle School Championship 2022 - 2nd place",
+          "VEX Worlds Middle School Championship 2022 - TOP 16"
+        ]
+      },
+      {
+        location: "Iowa",
+        flag: "🇺🇸",
+        achievements: [
+          "US Open 2022 - 1st place in total rankings",
+          "2nd place in individual"
+        ]
+      },
+      {
+        location: "Washington",
+        flag: "🇺🇸",
+        achievements: [
+          "FIRST Global 2017 - 5th place"
+        ]
+      },
+      {
+        location: "Louisville",
+        flag: "🇺🇸",
+        achievements: [
+          "VEX Worlds Middle School Championship 2017",
+          "VEX Worlds Middle School Championship 2018 - TOP 16",
+          "VEX World 2020 - 8th",
+          "MS Programming Skills - Champion Sportsmanship Award"
+        ]
+      }
+    ],
+    [regions.EUROPE]: [
+      {
+        location: "London",
+        flag: "🇬🇧",
+        achievements: [
+          "First Lego VEX Championship 2019",
+          "Judges Award, Tournament Finalist",
+          "Hartfordshire VEX 2020 - Judges Award"
+        ]
+      },
+      {
+        location: "Dortmund",
+        flag: "🇩🇪",
+        achievements: [
+          "World Robot Olympiad 2021 - 1st place"
+        ]
+      },
+      {
+        location: "Geneva",
+        flag: "🇨🇭",
+        achievements: [
+          "First Global 2022 - 1st place"
+        ]
+      },
+      {
+        location: "Athens",
+        flag: "🇬🇷",
+        achievements: [
+          "First Global 2024 - 1st place"
+        ]
+      },
+      {
+        location: "Istanbul",
+        flag: "🇹🇷",
+        achievements: [
+          "Turkey National VEX Competition 2018 - 1st place"
+        ]
+      },
+      {
+        location: "Moscow",
+        flag: "🇷🇺",
+        achievements: [
+          "PROFEST 2017 - 1st place",
+          "PROFEST 2018 - 2nd place"
+        ]
+      }
+    ],
+    [regions.ASIA]: [
+      {
+        location: "Astana",
+        flag: "🇰🇿",
+        achievements: [
+          "World Robot Olympiad Kazakhstan 2016 - 1st place",
+          "World Robot Olympiad Kazakhstan 2017 - 1st place",
+          "World Robot Olympiad Kazakhstan 2018 - 1st place"
+        ]
+      },
+      {
+        location: "Beijing",
+        flag: "🇨🇳",
+        achievements: [
+          "World Robot Olympiad 2019 - Sportsmanship Award"
+        ]
+      },
+      {
+        location: "Guangzhou",
+        flag: "🇨🇳",
+        achievements: [
+          "Make World Championship 2019 - Certificate of Excellence"
+        ]
+      },
+      {
+        location: "Macao",
+        flag: "🇲🇴",
+        achievements: [
+          "Pacific Asian VEX Championship 2019 - Certificate of Excellence"
+        ]
+      },
+      {
+        location: "Singapore",
+        flag: "🇸🇬",
+        achievements: [
+          "First Global 2023 - 1st place"
+        ]
+      },
+      {
+        location: "New Delhi",
+        flag: "🇮🇳",
+        achievements: [
+          "World Robot Olympiad 2016 - Certificate of Excellence"
+        ]
+      },
+      {
+        location: "Bangkok",
+        flag: "🇹🇭",
+        achievements: [
+          "Battle in Bangkok 2018 - 1st place"
+        ]
+      },
+      {
+        location: "Chiang-Mai",
+        flag: "🇹🇭",
+        achievements: [
+          "World Robot Olympiad 2018 - Certificate of Excellence"
+        ]
+      }
+    ]
+  }
+
+  return (
+    <section className="relative mt-24">
+      {/* Desktop Map View */}
+      <div className="hidden md:block relative w-[120%] -mx-[10%] h-[500px] bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-full">
+            <img 
+              src="/2025/robots achievements.svg" 
+              alt="World Map"
+              className="w-full object-cover opacity-100"
+            />
+            
+            {/* Americas */}
+            <AchievementMarker
+              x="8%"
+              y="75%"
+              location="San-Jose"
+              flag="🇨🇷"
+              achievements={[
+                "World Robot Olympiad 2017 -",
+                "4th place"
+              ]}
+            />
+
+            <AchievementMarker
+              x="11%"
+              y="45%"
+              location="Dallas"
+              flag="🇺🇸"
+              achievements={[
+                "VEX Worlds Middle School",
+                "Championship 2022 - 2nd place",
+                "VEX Worlds Middle School",
+                "Championship 2022 - TOP 16"
+              ]}
+            />
+
+            <AchievementMarker
+              x="20%"
+              y="30%"
+              location="Iowa"
+              flag="🇺🇸"
+              achievements={[
+                "US Open 2022 -",
+                "1st place in total rankings",
+                "2nd place in individual"
+              ]}
+            />
+
+            <AchievementMarker
+              x="20%"
+              y="40%"
+              location="Washington"
+              flag="🇺🇸"
+              achievements={[
+                "FIRST Global 2017 -",
+                "5th place"
+              ]}
+            />
+
+            <AchievementMarker
+              x="5%"
+              y="35%"
+              location="Louisville"
+              flag="🇺🇸"
+              achievements={[
+                "VEX Worlds Middle School",
+                "Championship 2017",
+                "VEX Worlds Middle School",
+                "Championship 2018 - TOP 16",
+                "VEX World 2020 - 8th",
+                "MS Programming Skills -",
+                "Champion Sportsmanship Award"
+              ]}
+            />
+
+            {/* European Cities */}
+            <AchievementMarker
+              x="42%"
+              y="25%"
+              location="London"
+              flag="🇬🇧"
+              achievements={[
+                "First Lego VEX Championship",
+                "2019",
+                "Judges Award, Tournament",
+                "Finalist",
+                "Hartfordshire VEX 2020 -",
+                "Judges Award"
+              ]}
+            />
+
+            <AchievementMarker
+              x="50%"
+              y="30%"
+              location="Dortmund"
+              flag="🇩🇪"
+              achievements={[
+                "World Robot Olympiad",
+                "2021 - 1st place"
+              ]}
+            />
+
+            <AchievementMarker
+              x="47%"
+              y="37%"
+              location="Geneva"
+              flag="🇨🇭"
+              achievements={[
+                "First Global 2022 -",
+                "1st place"
+              ]}
+            />
+
+            <AchievementMarker
+              x="52%"
+              y="45%"
+              location="Athens"
+              flag="🇬🇷"
+              achievements={[
+                "First Global 2024 -",
+                "1st place"
+              ]}
+            />
+
+            {/* Eastern Europe & Asia */}
+            <AchievementMarker
+              x="58%"
+              y="50%"
+              location="Istanbul"
+              flag="🇹🇷"
+              achievements={[
+                "Turkey National VEX",
+                "Competition 2018 - 1st place"
+              ]}
+            />
+
+            <AchievementMarker
+              x="60%"
+              y="25%"
+              location="Moscow"
+              flag="🇷🇺"
+              achievements={[
+                "PROFEST 2017 - 1st place",
+                "PROFEST 2018 - 2nd place"
+              ]}
+            />
+
+            <AchievementMarker
+              x="65%"
+              y="40%"
+              location="Astana"
+              flag="🇰🇿"
+              achievements={[
+                "World Robot Olympiad",
+                "Kazakhstan 2016, 2017,",
+                "2018 - 1st place"
+              ]}
+            />
+
+            {/* East & Southeast Asia - spread more */}
+            <AchievementMarker
+              x="85%"
+              y="35%"
+              location="Beijing"
+              flag="🇨🇳"
+              achievements={[
+                "World Robot Olympiad 2019",
+                "Sportsmanship Award"
+              ]}
+            />
+            
+
+            <AchievementMarker
+              x="87%"
+              y="50%"
+              location="Guangzhou"
+              flag="🇨🇳"
+              achievements={[
+                "Make World Championship",
+                "2019 - Certificate of",
+                "Excellence"
+              ]}
+            />
+            <AchievementMarker
+              x="82%"
+              y="60%"
+              location="Macao"
+              flag="🇲🇴"
+              achievements={[
+                "Pacific Asian VEX Championship 2019",
+                "Certificate of Excellence",
+              ]}
+            />
+
+            <AchievementMarker
+              x="89%"
+              y="70%"
+              location="Singapore"
+              flag="🇸🇬"
+              achievements={[
+                "First Global 2023 -",
+                "1st place"
+              ]}
+            />
+             <AchievementMarker
+              x="70%"
+              y="60%"
+              location="New Delhi"
+              flag="🇮🇳"
+              achievements={[
+                "World Robot Olympiad 2016 -",
+                "Certificate of Excellence"
+              ]}
+            />
+
+            <AchievementMarker
+              x="82%"
+              y="80%"
+              location="Bangkok"
+              flag="🇹🇭"
+              achievements={[
+                "Battle in Bangkok 2018 -",
+                "1st place"
+              ]}
+            />
+            <AchievementMarker
+              x="78%"
+              y="72%"
+              location="Chiang-Mai"
+              flag="🇹🇭"
+              achievements={[
+                "World Robot Olympiad 2018 -",
+                "Certificate of Excellence"
+              ]}
+            />
+          </div>
         </div>
       </div>
-    </div>
 
-    {/* Text content with fixed top margin */}
-    <div className="relative z-20 text-center space-y-4">
-      <h2 className="text-3xl font-medium text-zinc-100">
-        Global Achievement Record
-      </h2>
-      <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-        Our teams have competed and excelled in robotics competitions worldwide, from VEX Robotics to First Global challenges.
-      </p>
-    </div>
-  </section>
-)
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-8">
+        {/* Note about desktop version */}
+        <div className="px-4 py-3 bg-zinc-900/50 border border-zinc-800/50 rounded-lg text-sm text-zinc-400">
+          💡 <span className="text-zinc-300">Pro tip:</span> View on desktop for an interactive world map of our achievements
+        </div>
+
+        {/* Region Tabs */}
+        <div className="flex overflow-x-auto scrollbar-hide px-4 gap-2">
+          {Object.values(regions).map((region) => (
+            <button
+              key={region}
+              onClick={() => setActiveRegion(region)}
+              className={`
+                px-4 py-2 rounded-lg font-mono text-sm whitespace-nowrap transition-colors
+                ${activeRegion === region 
+                  ? 'bg-zinc-800 text-zinc-200' 
+                  : 'bg-zinc-900/50 text-zinc-400 hover:text-zinc-300'}
+              `}
+            >
+              {region}
+            </button>
+          ))}
+        </div>
+
+        {/* Achievement Cards */}
+        <div className="px-4 space-y-4">
+          {achievementsByRegion[activeRegion].map((city, i) => (
+            <AchievementCard key={i} {...city} />
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-20 text-center space-y-4 mt-16">
+        <h2 className="text-3xl font-medium text-zinc-100">
+          Worldwide Excellence
+        </h2>
+        <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          From Dallas to Singapore, our teams have achieved remarkable success across the globe.
+        </p>
+      </div>
+    </section>
+  )
+}
 
 export default function Robotics() {
   const { pathname } = useLocation()
