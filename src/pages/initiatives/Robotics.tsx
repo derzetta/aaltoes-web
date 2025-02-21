@@ -219,161 +219,199 @@ const regions = {
 
 type Region = typeof regions[keyof typeof regions]
 
+// Consolidated achievements data
+const achievementsByRegion = {
+  [regions.AMERICAS]: [
+    {
+      location: "San-Jose",
+      flag: "🇨🇷",
+      x: "8%",
+      y: "75%",
+      achievements: [
+        "World Robot Olympiad 2017 - 4th place"
+      ]
+    },
+    {
+      location: "Dallas",
+      flag: "🇺🇸",
+      x: "11%",
+      y: "45%",
+      achievements: [
+        "VEX Worlds Middle School Championship 2022 - 2nd place",
+        "VEX Worlds Middle School Championship 2022 - TOP 16"
+      ]
+    },
+    {
+      location: "Iowa",
+      flag: "🇺🇸",
+      x: "20%",
+      y: "30%",
+      achievements: [
+        "US Open 2022 - 1st place in total rankings",
+        "2nd place in individual"
+      ]
+    },
+    {
+      location: "Washington",
+      flag: "🇺🇸",
+      x: "20%",
+      y: "40%",
+      achievements: [
+        "FIRST Global 2017 - 5th place"
+      ]
+    },
+    {
+      location: "Louisville",
+      flag: "🇺🇸",
+      x: "5%",
+      y: "35%",
+      achievements: [
+        "VEX Worlds Middle School Championship 2017",
+        "VEX Worlds Middle School Championship 2018 - TOP 16",
+        "VEX World 2020 - 8th",
+        "MS Programming Skills - Champion Sportsmanship Award"
+      ]
+    }
+  ],
+  [regions.EUROPE]: [
+    {
+      location: "London",
+      flag: "🇬🇧",
+      x: "42%",
+      y: "25%",
+      achievements: [
+        "First Lego VEX Championship 2019",
+        "Judges Award, Tournament Finalist",
+        "Hartfordshire VEX 2020 - Judges Award"
+      ]
+    },
+    {
+      location: "Dortmund",
+      flag: "🇩🇪",
+      x: "50%",
+      y: "30%",
+      achievements: [
+        "World Robot Olympiad 2021 - 1st place"
+      ]
+    },
+    {
+      location: "Geneva",
+      flag: "🇨🇭",
+      x: "47%",
+      y: "37%",
+      achievements: [
+        "First Global 2022 - 1st place"
+      ]
+    },
+    {
+      location: "Athens",
+      flag: "🇬🇷",
+      x: "52%",
+      y: "45%",
+      achievements: [
+        "First Global 2024 - 1st place"
+      ]
+    },
+    {
+      location: "Istanbul",
+      flag: "🇹🇷",
+      x: "58%",
+      y: "50%",
+      achievements: [
+        "Turkey National VEX Competition 2018 - 1st place"
+      ]
+    },
+    {
+      location: "Moscow",
+      flag: "🇷🇺",
+      x: "60%",
+      y: "25%",
+      achievements: [
+        "PROFEST 2017 - 1st place",
+        "PROFEST 2018 - 2nd place"
+      ]
+    }
+  ],
+  [regions.ASIA]: [
+    {
+      location: "Astana",
+      flag: "🇰🇿",
+      x: "65%",
+      y: "40%",
+      achievements: [
+        "World Robot Olympiad Kazakhstan 2016 - 1st place",
+        "World Robot Olympiad Kazakhstan 2017 - 1st place",
+        "World Robot Olympiad Kazakhstan 2018 - 1st place"
+      ]
+    },
+    {
+      location: "Beijing",
+      flag: "🇨🇳",
+      x: "85%",
+      y: "35%",
+      achievements: [
+        "World Robot Olympiad 2019 - Sportsmanship Award"
+      ]
+    },
+    {
+      location: "Guangzhou",
+      flag: "🇨🇳",
+      x: "87%",
+      y: "50%",
+      achievements: [
+        "Make World Championship 2019 - Excellence Award"
+      ]
+    },
+    {
+      location: "Macao",
+      flag: "🇲🇴",
+      x: "82%",
+      y: "60%",
+      achievements: [
+        "Pacific Asian VEX Championship 2019 - Excellence Award"
+      ]
+    },
+    {
+      location: "Singapore",
+      flag: "🇸🇬",
+      x: "89%",
+      y: "70%",
+      achievements: [
+        "First Global 2023 - 1st place"
+      ]
+    },
+    {
+      location: "New Delhi",
+      flag: "🇮🇳",
+      x: "70%",
+      y: "60%",
+      achievements: [
+        "World Robot Olympiad 2016 - Certificate of Excellence"
+      ]
+    },
+    {
+      location: "Bangkok",
+      flag: "🇹🇭",
+      x: "82%",
+      y: "80%",
+      achievements: [
+        "Battle in Bangkok 2018 - 1st place"
+      ]
+    },
+    {
+      location: "Chiang-Mai",
+      flag: "🇹🇭",
+      x: "78%",
+      y: "72%",
+      achievements: [
+        "World Robot Olympiad 2018 - Certificate of Excellence"
+      ]
+    }
+  ]
+};
+
 const WorldMapSection = () => {
   const [activeRegion, setActiveRegion] = useState<Region>(regions.AMERICAS)
-
-  // Group achievements by region
-  const achievementsByRegion = {
-    [regions.AMERICAS]: [
-      {
-        location: "San-Jose",
-        flag: "🇨🇷",
-        achievements: [
-          "World Robot Olympiad 2017 - 4th place"
-        ]
-      },
-      {
-        location: "Dallas",
-        flag: "🇺🇸",
-        achievements: [
-          "VEX Worlds Middle School Championship 2022 - 2nd place",
-          "VEX Worlds Middle School Championship 2022 - TOP 16"
-        ]
-      },
-      {
-        location: "Iowa",
-        flag: "🇺🇸",
-        achievements: [
-          "US Open 2022 - 1st place in total rankings",
-          "2nd place in individual"
-        ]
-      },
-      {
-        location: "Washington",
-        flag: "🇺🇸",
-        achievements: [
-          "FIRST Global 2017 - 5th place"
-        ]
-      },
-      {
-        location: "Louisville",
-        flag: "🇺🇸",
-        achievements: [
-          "VEX Worlds Middle School Championship 2017",
-          "VEX Worlds Middle School Championship 2018 - TOP 16",
-          "VEX World 2020 - 8th",
-          "MS Programming Skills - Champion Sportsmanship Award"
-        ]
-      }
-    ],
-    [regions.EUROPE]: [
-      {
-        location: "London",
-        flag: "🇬🇧",
-        achievements: [
-          "First Lego VEX Championship 2019",
-          "Judges Award, Tournament Finalist",
-          "Hartfordshire VEX 2020 - Judges Award"
-        ]
-      },
-      {
-        location: "Dortmund",
-        flag: "🇩🇪",
-        achievements: [
-          "World Robot Olympiad 2021 - 1st place"
-        ]
-      },
-      {
-        location: "Geneva",
-        flag: "🇨🇭",
-        achievements: [
-          "First Global 2022 - 1st place"
-        ]
-      },
-      {
-        location: "Athens",
-        flag: "🇬🇷",
-        achievements: [
-          "First Global 2024 - 1st place"
-        ]
-      },
-      {
-        location: "Istanbul",
-        flag: "🇹🇷",
-        achievements: [
-          "Turkey National VEX Competition 2018 - 1st place"
-        ]
-      },
-      {
-        location: "Moscow",
-        flag: "🇷🇺",
-        achievements: [
-          "PROFEST 2017 - 1st place",
-          "PROFEST 2018 - 2nd place"
-        ]
-      }
-    ],
-    [regions.ASIA]: [
-      {
-        location: "Astana",
-        flag: "🇰🇿",
-        achievements: [
-          "World Robot Olympiad Kazakhstan 2016 - 1st place",
-          "World Robot Olympiad Kazakhstan 2017 - 1st place",
-          "World Robot Olympiad Kazakhstan 2018 - 1st place"
-        ]
-      },
-      {
-        location: "Beijing",
-        flag: "🇨🇳",
-        achievements: [
-          "World Robot Olympiad 2019 - Sportsmanship Award"
-        ]
-      },
-      {
-        location: "Guangzhou",
-        flag: "🇨🇳",
-        achievements: [
-          "Make World Championship 2019 - Excellence Award"
-        ]
-      },
-      {
-        location: "Macao",
-        flag: "🇲🇴",
-        achievements: [
-          "Pacific Asian VEX Championship 2019 - Excellence Award"
-        ]
-      },
-      {
-        location: "Singapore",
-        flag: "🇸🇬",
-        achievements: [
-          "First Global 2023 - 1st place"
-        ]
-      },
-      {
-        location: "New Delhi",
-        flag: "🇮🇳",
-        achievements: [
-          "World Robot Olympiad 2016 - Certificate of Excellence"
-        ]
-      },
-      {
-        location: "Bangkok",
-        flag: "🇹🇭",
-        achievements: [
-          "Battle in Bangkok 2018 - 1st place"
-        ]
-      },
-      {
-        location: "Chiang-Mai",
-        flag: "🇹🇭",
-        achievements: [
-          "World Robot Olympiad 2018 - Certificate of Excellence"
-        ]
-      }
-    ]
-  }
 
   return (
     <section className="relative mt-24">
@@ -387,230 +425,17 @@ const WorldMapSection = () => {
               className="w-full object-cover opacity-100"
             />
             
-            {/* Americas */}
-            <AchievementMarker
-              x="8%"
-              y="75%"
-              location="San-Jose"
-              flag="🇨🇷"
-              achievements={[
-                "World Robot Olympiad 2017 -",
-                "4th place"
-              ]}
-            />
-
-            <AchievementMarker
-              x="11%"
-              y="45%"
-              location="Dallas"
-              flag="🇺🇸"
-              achievements={[
-                "VEX Worlds Middle School",
-                "Championship 2022 - 2nd place",
-                "VEX Worlds Middle School",
-                "Championship 2022 - TOP 16"
-              ]}
-            />
-
-            <AchievementMarker
-              x="20%"
-              y="30%"
-              location="Iowa"
-              flag="🇺🇸"
-              achievements={[
-                "US Open 2022 -",
-                "1st place in total rankings",
-                "2nd place in individual"
-              ]}
-            />
-
-            <AchievementMarker
-              x="20%"
-              y="40%"
-              location="Washington"
-              flag="🇺🇸"
-              achievements={[
-                "FIRST Global 2017 -",
-                "5th place"
-              ]}
-            />
-
-            <AchievementMarker
-              x="5%"
-              y="35%"
-              location="Louisville"
-              flag="🇺🇸"
-              achievements={[
-                "VEX Worlds Middle School",
-                "Championship 2017",
-                "VEX Worlds Middle School",
-                "Championship 2018 - TOP 16",
-                "VEX World 2020 - 8th",
-                "MS Programming Skills -",
-                "Champion Sportsmanship Award"
-              ]}
-            />
-
-            {/* European Cities */}
-            <AchievementMarker
-              x="42%"
-              y="25%"
-              location="London"
-              flag="🇬🇧"
-              achievements={[
-                "First Lego VEX Championship",
-                "2019",
-                "Judges Award, Tournament",
-                "Finalist",
-                "Hartfordshire VEX 2020 -",
-                "Judges Award"
-              ]}
-            />
-
-            <AchievementMarker
-              x="50%"
-              y="30%"
-              location="Dortmund"
-              flag="🇩🇪"
-              achievements={[
-                "World Robot Olympiad",
-                "2021 - 1st place"
-              ]}
-            />
-
-            <AchievementMarker
-              x="47%"
-              y="37%"
-              location="Geneva"
-              flag="🇨🇭"
-              achievements={[
-                "First Global 2022 -",
-                "1st place"
-              ]}
-            />
-
-            <AchievementMarker
-              x="52%"
-              y="45%"
-              location="Athens"
-              flag="🇬🇷"
-              achievements={[
-                "First Global 2024 -",
-                "1st place"
-              ]}
-            />
-
-            {/* Eastern Europe & Asia */}
-            <AchievementMarker
-              x="58%"
-              y="50%"
-              location="Istanbul"
-              flag="🇹🇷"
-              achievements={[
-                "Turkey National VEX",
-                "Competition 2018 - 1st place"
-              ]}
-            />
-
-            <AchievementMarker
-              x="60%"
-              y="25%"
-              location="Moscow"
-              flag="🇷🇺"
-              achievements={[
-                "PROFEST 2017 - 1st place",
-                "PROFEST 2018 - 2nd place"
-              ]}
-            />
-
-            <AchievementMarker
-              x="65%"
-              y="40%"
-              location="Astana"
-              flag="🇰🇿"
-              achievements={[
-                "World Robot Olympiad",
-                "Kazakhstan 2016, 2017,",
-                "2018 - 1st place"
-              ]}
-            />
-
-            {/* East & Southeast Asia - spread more */}
-            <AchievementMarker
-              x="85%"
-              y="35%"
-              location="Beijing"
-              flag="🇨🇳"
-              achievements={[
-                "World Robot Olympiad 2019",
-                "Sportsmanship Award"
-              ]}
-            />
-            
-
-            <AchievementMarker
-              x="87%"
-              y="50%"
-              location="Guangzhou"
-              flag="🇨🇳"
-              achievements={[
-                "Make World Championship",
-                "2019 - Certificate of",
-                "Excellence"
-              ]}
-            />
-            <AchievementMarker
-              x="82%"
-              y="60%"
-              location="Macao"
-              flag="🇲🇴"
-              achievements={[
-                "Pacific Asian VEX Championship 2019",
-                "Certificate of Excellence",
-              ]}
-            />
-
-            <AchievementMarker
-              x="89%"
-              y="70%"
-              location="Singapore"
-              flag="🇸🇬"
-              achievements={[
-                "First Global 2023 -",
-                "1st place"
-              ]}
-            />
-             <AchievementMarker
-              x="70%"
-              y="60%"
-              location="New Delhi"
-              flag="🇮🇳"
-              achievements={[
-                "World Robot Olympiad 2016 -",
-                "Certificate of Excellence"
-              ]}
-            />
-
-            <AchievementMarker
-              x="82%"
-              y="80%"
-              location="Bangkok"
-              flag="🇹🇭"
-              achievements={[
-                "Battle in Bangkok 2018 -",
-                "1st place"
-              ]}
-            />
-            <AchievementMarker
-              x="78%"
-              y="72%"
-              location="Chiang-Mai"
-              flag="🇹🇭"
-              achievements={[
-                "World Robot Olympiad 2018 -",
-                "Certificate of Excellence"
-              ]}
-            />
+            {/* Map Markers */}
+            {Object.values(achievementsByRegion).flat().map((city, index) => (
+              <AchievementMarker
+                key={`${city.location}-${index}`}
+                x={city.x}
+                y={city.y}
+                location={city.location}
+                flag={city.flag}
+                achievements={city.achievements}
+              />
+            ))}
           </div>
         </div>
       </div>
