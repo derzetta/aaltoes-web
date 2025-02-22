@@ -246,7 +246,7 @@ const SpinoutCardDemo = () => {
   }, [])
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center -mt-8">
       <div className="relative h-16 w-48">
         {logos.map((logo, index) => (
           <div
