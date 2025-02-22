@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import Navbar from '../../components/Navbar'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -43,33 +44,9 @@ export default function OpenSource() {
 
   return (
     <div className="min-h-screen bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-6 pb-16">
-        {/* Topic Navigation - Moved to top */}
-        <div className="flex items-center justify-center gap-8 pt-8 pb-8">
-          <Link 
-            to="/2025/spinout"
-            className="base-button inline-flex items-center justify-center group"
-          >
-            <span className="relative z-10 uppercase flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-              </svg>
-              Spinout Projects
-            </span>
-          </Link>
-          <Link 
-            to="/2025/blueprint"
-            className="base-button inline-flex items-center justify-center group"
-          >
-            <span className="relative z-10 uppercase flex items-center gap-2">
-              Blueprint
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </Link>
-        </div>
+      <Navbar />
 
+      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16 pt-32">
         {/* Project Showcase */}
         <motion.div 
           className="relative h-[320px] md:h-[400px] w-full overflow-hidden"

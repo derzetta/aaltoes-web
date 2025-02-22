@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Navbar from '../../components/Navbar'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -389,6 +390,15 @@ const WorldMapSection = () => {
 
   return (
     <section className="relative mt-24">
+      <div className="text-center space-y-4 mb-8">
+        <h2 className="text-3xl font-medium text-zinc-100">
+          Worldwide Excellence
+        </h2>
+        <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          From Dallas to Singapore, our teams have achieved remarkable success across the globe.
+        </p>
+      </div>
+
       {/* Desktop Map View */}
       <div className="hidden md:block relative w-[120%] -mx-[10%] h-[500px] bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
         <div className="absolute inset-0 flex items-center justify-center">
@@ -446,15 +456,6 @@ const WorldMapSection = () => {
           ))}
         </div>
       </div>
-
-      <div className="relative z-20 text-center space-y-4">
-        <h2 className="text-3xl font-medium text-zinc-100">
-          Worldwide Excellence
-        </h2>
-        <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-          From Dallas to Singapore, our teams have achieved remarkable success across the globe.
-        </p>
-      </div>
     </section>
   )
 }
@@ -468,33 +469,9 @@ export default function Robotics() {
 
   return (
     <div className="min-h-screen bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16">
-        {/* Topic Navigation */}
-        <div className="flex items-center justify-center gap-8 pt-8">
-          <Link 
-            to="/2025/blueprint"
-            className="base-button inline-flex items-center justify-center group"
-          >
-            <span className="relative z-10 uppercase flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-              </svg>
-              Blueprint Project
-            </span>
-          </Link>
-          <Link 
-            to="/2025/focus-topics"
-            className="base-button inline-flex items-center justify-center group"
-          >
-            <span className="relative z-10 uppercase flex items-center gap-2">
-              Focus Topics
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </Link>
-        </div>
+      <Navbar />
 
+      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16 pt-32">
         {/* Hero Section */}
         <div className="space-y-16">
           {/* Heading and Description */}
@@ -503,161 +480,35 @@ export default function Robotics() {
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
           >
+            <div className="space-y-6">
             <Link 
               to="/2025"
-              className="inline-block text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
+                className="inline-flex items-center gap-4 text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
             >
               Paramount Year of Craft
+                <span className="h-4 w-px bg-zinc-800"></span>
+                <span className="text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
+                  NEW PROJECT
+                </span>
             </Link>
-            <h1 className="text-5xl font-medium text-zinc-100 mb-6">Robotics Nation</h1>
+              <h1 className="text-5xl font-medium text-zinc-100">Robotics Nation</h1>
             <p className="text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Building the future of robotics through education, innovation, and hands-on experience.
             </p>
+            </div>
           </motion.div>
-
-          {/* Video Section */}
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65 group">
-            <video
-              id="heroVideo"
-              className="w-full h-full object-cover"
-              playsInline
-            >
-              <source src="/fr.mov" type="video/quicktime" />
-            </video>
-
-            {/* Video Overlay - Play State */}
-            <div className="absolute inset-0 bg-zinc-950/50 transition-opacity duration-200 group-hover:opacity-0 group-[.playing]:opacity-0">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    const container = video?.closest('.group');
-                    if (video) {
-                      if (video.paused) {
-                        video.play();
-                        container?.classList.add('playing');
-                      } else {
-                        video.pause();
-                        container?.classList.remove('playing');
-                      }
-                    }
-                  }}
-                  className="w-16 h-16 rounded-full bg-zinc-100/10 backdrop-blur-sm flex items-center justify-center hover:bg-zinc-100/20 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Video Controls */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-zinc-950 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <div className="flex items-center gap-6">
-                {/* Play/Pause */}
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    const container = video?.closest('.group');
-                    if (video) {
-                      if (video.paused) {
-                        video.play();
-                        container?.classList.add('playing');
-                      } else {
-                        video.pause();
-                        container?.classList.remove('playing');
-                      }
-                    }
-                  }}
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </button>
-
-                {/* Volume Control */}
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => {
-                      const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                      if (video) {
-                        video.muted = !video.muted;
-                      }
-                    }}
-                    className="text-zinc-300 hover:text-zinc-100 transition-colors"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 19 11 5" />
-                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                    </svg>
-                  </button>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="1" 
-                    step="0.1"
-                    defaultValue="1"
-                    onChange={(e) => {
-                      const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                      if (video) {
-                        video.volume = parseFloat(e.target.value);
-                      }
-                    }}
-                    className="w-24 accent-zinc-100"
-                  />
-                </div>
-
-                {/* Fullscreen */}
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    if (video) {
-                      if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                      } else {
-                        video.classList.remove('object-cover');
-                        video.classList.add('object-contain');
-                        video.requestFullscreen();
-                        
-                        const handleFullscreenChange = () => {
-                          if (!document.fullscreenElement) {
-                            video.classList.remove('object-contain');
-                            video.classList.add('object-cover');
-                            document.removeEventListener('fullscreenchange', handleFullscreenChange);
-                          }
-                        };
-                        document.addEventListener('fullscreenchange', handleFullscreenChange);
-                      }
-                    }
-                  }}
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors ml-auto"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
-        {/* World Map Section */}
-        <WorldMapSection />
-
-        {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
 
         {/* Vision Section */}
         <section className="mt-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-medium text-zinc-100 mb-4">Robotics Nation</h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              An umbrella initiative uniting Finland's leading robotics teams and innovators
+            <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+              Equipping Finnish youth with technical skills and hands-on engineering experience for an era of technological innovation.
             </p>
           </div>
 
@@ -666,7 +517,7 @@ export default function Robotics() {
             {/* First Row - Two Columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 relative">
               {/* Vertical Divider */}
-              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-zinc-800 -translate-x-1/2" />
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-zinc-900 -translate-x-1/2" />
               
               {/* Current Challenge */}
               <div className="pb-8 md:pb-0 md:pr-8">
@@ -674,7 +525,7 @@ export default function Robotics() {
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 2v20M2 12h20"/>
-                    </svg>
+                  </svg>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline justify-between gap-4">
@@ -685,17 +536,17 @@ export default function Robotics() {
                       Despite strong educational foundations and individual achievements, Finland's competitive robotics ecosystem remains fragmented. Our current ranking doesn't reflect the true potential of our technical talent.
                     </p>
                   </div>
-                </div>
               </div>
+            </div>
 
               {/* Our Vision */}
               <div className="pt-8 md:pt-0 md:pl-8">
                 <div className="flex items-start gap-6">
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-10-7Z"/>
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
                       <circle cx="12" cy="12" r="3"/>
-                    </svg>
+                  </svg>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline justify-between gap-4">
@@ -705,55 +556,102 @@ export default function Robotics() {
                     <p className="mt-4 text-zinc-300 leading-relaxed">
                       Uniting Finland's top robotics teams, educators, and industry partners under one umbrella to create a systematic approach for developing world-class technical talent through robotics.
                     </p>
+                    <div className="mt-4 flex items-center gap-4">
+                      <img src="/2025/logos/yc.svg" alt="Y Combinator" className="h-4 opacity-70" />
+                      <img src="/2025/logos/ivy.svg" alt="Ivy League" className="h-4 opacity-70" />
+                      <img src="/2025/logos/stanford.svg" alt="Stanford" className="h-4 opacity-70" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+                </div>
+
 
             {/* Divider */}
-            <div className="w-full h-px bg-zinc-800 my-8" />
+            <div className="w-full h-px bg-zinc-900 my-8" />
 
-            {/* Second Row - Full Width */}
-            <div>
+            {/* Program Tracks */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Foundations Track */}
               <div className="flex items-start gap-6">
                 <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+              </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="text-sm font-mono text-zinc-500 uppercase">Foundations Track</div>
+                    <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">Active</div>
+            </div>
+                  <p className="mt-4 text-zinc-300 leading-relaxed">
+                    Our core program focused on competitive robotics, preparing students through hands-on experience and international competitions. This track has already demonstrated success, with alumni advancing to prestigious institutions and founding successful startups.
+                  </p>
+          </div>
+        </div>
+
+              {/* Frontier Track */}
+              <div className="flex items-start gap-6">
+                <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-4">
-                    <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
-                    <div className="text-sm font-mono text-zinc-500 uppercase">Growing Daily</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase">Frontier Track</div>
+                    <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Coming Soon</div>
                   </div>
-                  <div className="mt-4 space-y-3">
-                    <p className="text-zinc-300 leading-relaxed">
-                      Our initiative brings together:
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <ul className="space-y-2 text-zinc-400">
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                          <span>3 World Champion Robotics Teams</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                          <span>5 University Research Labs</span>
-                        </li>
-                      </ul>
-                      <ul className="space-y-2 text-zinc-400">
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                          <span>12 Industry Partners</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                          <span>20+ Active Mentors</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <p className="mt-4 text-zinc-300 leading-relaxed">
+                    An advanced program focusing on industrial robotics and automation, designed for university students and industry professionals. This track will bridge the gap between academic robotics and real-world applications in the startup ecosystem.
+            </p>
+          </div>
+            </div>
+          </div>
+
+        {/* Divider */}
+            <div className="w-full h-px bg-zinc-900 my-8" />
+
+            {/* Current Team */}
+            <div className="flex items-start gap-6">
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-baseline justify-between gap-4">
+                  <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
+                  <div className="text-sm font-mono text-zinc-500 uppercase">Growing Daily</div>
+                </div>
+                <div className="mt-4 space-y-3">
+                  <p className="text-zinc-300 leading-relaxed">
+                    Our initiative brings together:
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <ul className="space-y-2 text-zinc-400">
+                      <li className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                        <span>3 World Champion Robotics Teams</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                        <span>5 University Research Labs</span>
+                      </li>
+                    </ul>
+                    <ul className="space-y-2 text-zinc-400">
+                      <li className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                        <span>12 Industry Partners</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                        <span>20+ Active Mentors</span>
+                      </li>
+                    </ul>
+          </div>
                 </div>
               </div>
             </div>
@@ -877,6 +775,13 @@ export default function Robotics() {
             </div>
           </div>
         </section>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-zinc-800" />
+
+
+        {/* World Map Section */}
+        <WorldMapSection />
 
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
