@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 
@@ -386,8 +386,9 @@ const WorldMapSection = () => {
 
   return (
     <section className="relative mt-24">
-      <div className="text-center space-y-4 mb-8">
-        <h2 className="text-3xl font-medium text-zinc-100">
+      {/* Mobile Heading - Always on top */}
+      <div className="text-left md:hidden space-y-4 mb-4">
+        <h2 className="text-2xl font-medium text-zinc-100">
           Worldwide Excellence
         </h2>
         <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
@@ -396,26 +397,39 @@ const WorldMapSection = () => {
       </div>
 
       {/* Desktop Map View */}
-      <div className="hidden md:block relative w-[120%] -mx-[10%] h-[500px] bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-full">
-            <img 
-              src="/2025/robots achievements.svg" 
-              alt="World Map"
-              className="w-full object-cover opacity-100"
-            />
-            
-            {/* Map Markers */}
-            {Object.values(achievementsByRegion).flat().map((city, index) => (
-            <AchievementMarker
-                key={`${city.location}-${index}`}
-                x={city.x}
-                y={city.y}
-                location={city.location}
-                flag={city.flag}
-                achievements={city.achievements}
+      <div className="hidden md:flex flex-col-reverse gap-16">
+        {/* Desktop Heading - Below Map */}
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl font-medium text-zinc-100">
+            Worldwide Excellence
+          </h2>
+          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            From Dallas to Singapore, our teams have achieved remarkable success across the globe.
+          </p>
+        </div>
+
+        {/* Map */}
+        <div className="relative w-[120%] -mx-[10%] -mb-[5%] h-[500px] bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative w-full">
+              <img 
+                src="/2025/robots achievements.svg" 
+                alt="World Map"
+                className="w-full object-cover opacity-100"
               />
-            ))}
+              
+              {/* Map Markers */}
+              {Object.values(achievementsByRegion).flat().map((city, index) => (
+                <AchievementMarker
+                  key={`${city.location}-${index}`}
+                  x={city.x}
+                  y={city.y}
+                  location={city.location}
+                  flag={city.flag}
+                  achievements={city.achievements}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -428,13 +442,13 @@ const WorldMapSection = () => {
         </div>
 
         {/* Region Tabs */}
-        <div className="flex overflow-x-auto scrollbar-hide px-4 gap-2">
+        <div className="flex overflow-x-auto scrollbar-hide gap-2">
           {Object.values(regions).map((region) => (
             <button
               key={region}
               onClick={() => setActiveRegion(region)}
               className={`
-                px-4 py-2 rounded-lg font-mono text-sm whitespace-nowrap transition-colors
+                px-4 py-2 rounded-lg font-sans text-sm whitespace-nowrap transition-colors
                 ${activeRegion === region 
                   ? 'bg-zinc-800 text-zinc-200' 
                   : 'bg-zinc-900/50 text-zinc-400 hover:text-zinc-300'}
@@ -446,7 +460,7 @@ const WorldMapSection = () => {
         </div>
 
         {/* Achievement Cards */}
-        <div className="px-4 space-y-4">
+        <div className="space-y-4">
           {achievementsByRegion[activeRegion].map((city, i) => (
             <AchievementCard key={i} {...city} />
           ))}
@@ -457,40 +471,6 @@ const WorldMapSection = () => {
 }
 
 // Robotics Card Demo
-const RoboticsCardDemo = () => {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    // Ensure video plays
-    const video = videoRef.current
-    if (video) {
-      video.play().catch(error => {
-        console.log("Video autoplay failed:", error)
-      })
-    }
-  }, [])
-
-  return (
-    <div className="w-full h-full overflow-hidden">
-      <div className="absolute inset-0 w-full h-full">
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/robotics.mp4" type="video/mp4" />
-        </video>
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_rgb(9,9,11)_100%)] pointer-events-none opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/20 via-transparent to-zinc-950/80 pointer-events-none" />
-      </div>
-    </div>
-  )
-}
 
 export default function Robotics() {
   const { pathname } = useLocation()
@@ -722,8 +702,8 @@ export default function Robotics() {
                           src={`/2025/team/member${i + 1}.jpg`}
                           alt={member.name}
                           className="w-full h-full object-cover"
-                        />
-                      </div>
+                  />
+                </div>
                       <div className="min-w-0 flex-1">
                         <div className="text-sm font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
                           {member.name}
@@ -731,10 +711,10 @@ export default function Robotics() {
                         <div className="text-xs font-mono text-zinc-500 uppercase truncate group-hover:text-zinc-300 transition-colors">
                           {member.role}
                         </div>
-                      </div>
+                </div>
 
-                      {/* Hover Popup */}
-                      <div className="absolute left-full top-0 ml-2 hidden group-hover:block z-50">
+                      {/* Desktop: Hover Popup */}
+                      <div className="absolute left-full top-0 ml-2 hidden group-hover:md:block z-50">
                         <div className="w-[320px] bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 shadow-xl">
                           <div className="flex items-start gap-4 mb-4">
                             <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
@@ -782,6 +762,80 @@ export default function Robotics() {
                           </div>
                         </div>
                       </div>
+
+                      {/* Mobile: Click Modal */}
+                      {activeProfile === i && (
+                        <div 
+                          className="md:hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/90"
+                          onClick={(e) => {
+                            // Close modal when clicking the backdrop
+                            if (e.target === e.currentTarget) {
+                              setActiveProfile(null);
+                            }
+                          }}
+                        >
+                          <div className="relative w-full max-w-lg bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 shadow-xl">
+                            {/* Close Button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveProfile(null);
+                              }}
+                              className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-200 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 6L6 18M6 6l12 12"/>
+                  </svg>
+                </button>
+
+                            {/* Profile Content */}
+                            <div className="flex items-start gap-4 mb-6">
+                              <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-800">
+                                <img 
+                                  src={`/2025/team/member${i + 1}.jpg`}
+                                  alt={member.name}
+                                  className="w-full h-full object-cover"
+                                />
+              </div>
+                              <div>
+                                <div className="text-xl font-medium text-zinc-100">{member.name}</div>
+                                <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
+            </div>
+          </div>
+
+                            <div className="space-y-6">
+                              <div>
+                                <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Achievements</div>
+                                <ul className="space-y-2">
+                                  {member.achievements.map((achievement, j) => (
+                                    <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
+                                      <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                                      {achievement}
+                                    </li>
+                                  ))}
+                                </ul>
+        </div>
+
+                              <div>
+                                <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Previous Roles</div>
+                                <ul className="space-y-2">
+                                  {member.previousRoles.map((role, j) => (
+                                    <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
+                                      <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                                      {role}
+                                    </li>
+                                  ))}
+                                </ul>
+          </div>
+
+                              <div>
+                                <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
+                                <div className="text-sm text-zinc-300">{member.contact}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </button>
                   </div>
                 ))}
@@ -795,8 +849,8 @@ export default function Robotics() {
 
         {/* Covering Full Spectrum of Skills */}
         <section className="mt-24">
-          <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Covering Full Spectrum of Skills</h2>
+          <div className="text-left md:text-center space-y-4 mb-16">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Full Spectrum of Skills</h2>
             <p className="text-base md:text-lg text-zinc-400 max-w-3xl mx-auto">
               From foundational robotics to cutting-edge industrial applications, our comprehensive tracks ensure complete coverage of the robotics landscape.
             </p>
@@ -804,39 +858,41 @@ export default function Robotics() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Foundations Track Card */}
-            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8 hover:bg-zinc-800/30 transition-colors">
-              <div className="flex items-start justify-between mb-6">
+            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden">
+              <div className="p-8 space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
                       <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                  </svg>
-              </div>
+                    </svg>
+                  </div>
                   <div>
                     <h3 className="text-xl font-medium text-zinc-100">Foundations Track</h3>
-                    <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase mt-2">Active</div>
+                    <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase mt-2 inline-block">Active</div>
+                  </div>
+                </div>
+                <p className="text-zinc-300 leading-relaxed">
+                  Our core program focused on competitive robotics, preparing students through hands-on experience and international competitions. This track has already demonstrated success, with alumni advancing to prestigious institutions and founding successful startups.
+                </p>
+              </div>
+              <div className="border-t border-zinc-800">
+                <div className="grid grid-cols-2">
+                  <div className="p-6 text-center">
+                    <div className="text-2xl font-medium text-zinc-100">85%</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Success Rate</div>
+                  </div>
+                  <div className="p-6 text-center border-l border-zinc-800">
+                    <div className="text-2xl font-medium text-zinc-100">200+</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Alumni Network</div>
                   </div>
                 </div>
               </div>
-              <p className="text-zinc-300 leading-relaxed">
-                Our core program focused on competitive robotics, preparing students through hands-on experience and international competitions. This track has already demonstrated success, with alumni advancing to prestigious institutions and founding successful startups.
-              </p>
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                <div className="bg-zinc-900/50 rounded-lg p-4">
-                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Success Rate</div>
-                  <div className="text-2xl font-medium text-zinc-100">85%</div>
-                </div>
-                <div className="bg-zinc-900/50 rounded-lg p-4">
-                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Alumni Network</div>
-                  <div className="text-2xl font-medium text-zinc-100">200+</div>
             </div>
-          </div>
-        </div>
 
             {/* Frontier Track Card */}
-            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8 hover:bg-zinc-800/30 transition-colors">
-              <div className="flex items-start justify-between mb-6">
+            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden">
+              <div className="p-8 space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -845,21 +901,23 @@ export default function Robotics() {
                   </div>
                   <div>
                     <h3 className="text-xl font-medium text-zinc-100">Frontier Track</h3>
-                    <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase mt-2">Coming Soon</div>
+                    <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase mt-2 inline-block">Coming Soon</div>
                   </div>
                 </div>
+                <p className="text-zinc-300 leading-relaxed">
+                  An advanced program focusing on industrial robotics and automation, designed for university students and industry professionals. This track will bridge the gap between academic robotics and real-world applications in the startup ecosystem.
+                </p>
               </div>
-              <p className="text-zinc-300 leading-relaxed">
-                An advanced program focusing on industrial robotics and automation, designed for university students and industry professionals. This track will bridge the gap between academic robotics and real-world applications in the startup ecosystem.
-              </p>
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                <div className="bg-zinc-900/50 rounded-lg p-4">
-                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Industry Partners</div>
-                  <div className="text-2xl font-medium text-zinc-100">15+</div>
-          </div>
-                <div className="bg-zinc-900/50 rounded-lg p-4">
-                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Launch Date</div>
-                  <div className="text-2xl font-medium text-zinc-100">Q3 2024</div>
+              <div className="border-t border-zinc-800">
+                <div className="grid grid-cols-2">
+                  <div className="p-6 text-center">
+                    <div className="text-2xl font-medium text-zinc-100">15+</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Industry Partners</div>
+                  </div>
+                  <div className="p-6 text-center border-l border-zinc-800">
+                    <div className="text-2xl font-medium text-zinc-100">Q3 2024</div>
+                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Launch Date</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -891,7 +949,7 @@ export default function Robotics() {
                 
                 <div className="space-y-12">
                   <div className="relative">
-                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="absolute -left-10 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
                     <div className="pl-4">
                       <div className="flex items-baseline gap-4 mb-6">
                         <time className="text-sm font-mono text-zinc-500">MAY</time>
@@ -911,7 +969,7 @@ export default function Robotics() {
                   </div>
 
                   <div className="relative">
-                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="absolute -left-10 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
                     <div className="pl-4">
                       <div className="flex items-baseline gap-4 mb-6">
                         <time className="text-sm font-mono text-zinc-500">JUNE-JULY</time>
@@ -931,7 +989,7 @@ export default function Robotics() {
                   </div>
 
                   <div className="relative">
-                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="absolute -left-10 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
                     <div className="pl-4">
                       <div className="flex items-baseline gap-4 mb-6">
                         <time className="text-sm font-mono text-zinc-500">AUGUST</time>
@@ -945,7 +1003,7 @@ export default function Robotics() {
                   </div>
 
                   <div className="relative">
-                    <div className="absolute -left-8 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
+                    <div className="absolute -left-10 top-[22px] w-4 h-4 rounded-full border-2 border-zinc-700 bg-zinc-900" />
                     <div className="pl-4">
                       <div className="flex items-baseline gap-4 mb-6">
                         <time className="text-sm font-mono text-zinc-500">SEPTEMBER-DECEMBER</time>
