@@ -472,7 +472,7 @@ export default function Announcement2025() {
         <div className="relative h-full flex flex-col">
           <div className="flex-grow" />
           <motion.div
-            className="w-full max-w-3xl mx-auto text-center px-6 mb-24"
+            className="w-full max-w-3xl mx-auto text-center px-6 mb-20"
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
           >
