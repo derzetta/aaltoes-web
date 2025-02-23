@@ -410,17 +410,17 @@ const WorldMapSection = () => {
 
         {/* Map */}
         <div className="relative w-[120%] -mx-[10%] -mb-[5%] h-[500px] bg-gradient-to-b from-zinc-900/0 to-zinc-950/50">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative w-full">
-              <img 
-                src="/2025/robots achievements.svg" 
-                alt="World Map"
-                className="w-full object-cover opacity-100"
-              />
-              
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-full">
+            <img 
+              src="/2025/robots achievements.svg" 
+              alt="World Map"
+              className="w-full object-cover opacity-100"
+            />
+            
               {/* Map Markers */}
               {Object.values(achievementsByRegion).flat().map((city, index) => (
-                <AchievementMarker
+            <AchievementMarker
                   key={`${city.location}-${index}`}
                   x={city.x}
                   y={city.y}
@@ -558,7 +558,7 @@ export default function Robotics() {
                   <div className="shrink-0 w-10 md:w-12 h-10 md:h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400 w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 2v20M2 12h20"/>
-                    </svg>
+                  </svg>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
@@ -569,8 +569,8 @@ export default function Robotics() {
                       Despite strong educational foundations and individual achievements, Finland's competitive robotics ecosystem remains fragmented. Our current ranking doesn't reflect the true potential of our technical talent.
                     </p>
                   </div>
-                </div>
               </div>
+            </div>
 
               {/* Our Vision */}
               <div className="pt-8 md:pt-0 md:pl-8">
@@ -579,7 +579,7 @@ export default function Robotics() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400 w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
                       <circle cx="12" cy="12" r="3"/>
-                    </svg>
+                  </svg>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
@@ -608,7 +608,7 @@ export default function Robotics() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400 w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                   <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
+                    </svg>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">

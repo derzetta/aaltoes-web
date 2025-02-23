@@ -434,7 +434,7 @@ export default function Announcement2025() {
               controls
               playsInline
             >
-              <source src="/Untitled22.mp4" type="video/quicktime" />
+              <source src="/Untitled22.mp4" type="video/mp4" />
             </video>
             <button
               onClick={() => setIsModalOpen(false)}
@@ -460,7 +460,7 @@ export default function Announcement2025() {
             muted
             playsInline
           >
-            <source src="/Untitled2.mp4" type="video/quicktime" />
+            <source src="/Untitled22.mp4" type="video/mp4" />
           </video>
           {/* Gradient Overlays */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
