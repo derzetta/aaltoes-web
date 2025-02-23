@@ -336,11 +336,11 @@ export default function Blueprint() {
             <div className="space-y-6">
               <Link 
                 to="/2025"
-                className="inline-flex items-center gap-4 text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
+                className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
               >
                 Paramount Year of Craft
                 <span className="h-4 w-px bg-zinc-800"></span>
-                <span className="text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
+                <span className="text-xs sm:text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
                   NEW PROJECT
                 </span>
               </Link>
@@ -489,12 +489,12 @@ export default function Blueprint() {
                 Blueprint is an open-source project, and we welcome contributions from the community.
               </p>
             </div>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full">
               <a 
                 href="https://github.com/aaltoes/blueprint"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="base-button inline-flex items-center justify-center group h-12 px-6"
+                className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
               >
                 <span className="relative z-10 uppercase">View on GitHub</span>
               </a>
@@ -502,7 +502,7 @@ export default function Blueprint() {
                 href="https://docs.blueprint.aaltoes.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="base-button inline-flex items-center justify-center group h-12 px-6"
+                className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
               >
                 <span className="relative z-10 uppercase">Documentation</span>
               </a>
@@ -510,7 +510,7 @@ export default function Blueprint() {
                 href="https://discord.gg/aaltoes"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="base-button inline-flex items-center justify-center group h-12 px-6"
+                className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
               >
                 <span className="relative z-10 uppercase">Join Discord</span>
               </a>

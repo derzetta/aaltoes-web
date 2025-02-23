@@ -75,7 +75,7 @@ export default function Spinout() {
           >
             <Link 
               to="/2025"
-              className="inline-block text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
+              className="inline-block text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
             >
               Paramount Year of Craft
             </Link>
@@ -115,12 +115,12 @@ export default function Spinout() {
                   A pre-accelerator program helping first-time founders validate their ideas and build their first MVP.
                 </p>
               </div>
-              <div className="flex justify-start">
+              <div className="flex justify-start w-full">
                 <a 
                   href="https://ignite.aaltoes.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-12 px-6"
+                  className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase">Visit Website</span>
                 </a>
@@ -146,12 +146,12 @@ export default function Spinout() {
                   Inspiring women every day of the week. A community and platform dedicated to empowering women in entrepreneurship.
                 </p>
               </div>
-              <div className="flex justify-start">
+              <div className="flex justify-start w-full">
                 <a 
                   href="https://wednesday.aaltoes.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-12 px-6"
+                  className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase">Visit Website</span>
                 </a>
@@ -195,12 +195,12 @@ export default function Spinout() {
                   Platform designed to help students and startups find the perfect match. Connecting talent with opportunities.
                 </p>
               </div>
-              <div className="flex justify-start">
+              <div className="flex justify-start w-full">
                 <a 
                   href="https://striveforstartups.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-12 px-6"
+                  className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase">Visit Website</span>
                 </a>

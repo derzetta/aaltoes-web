@@ -158,11 +158,11 @@ export default function OpenSource() {
             <div className="space-y-6">
             <Link 
               to="/2025"
-              className="inline-flex items-center gap-4 text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
+              className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
             >
               Paramount Year of Craft
               <span className="h-4 w-px bg-zinc-800"></span>
-              <span className="text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
+              <span className="text-xs sm:text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
                 NEW PROJECT
               </span>
             </Link>
@@ -646,12 +646,12 @@ export default function OpenSource() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:ml-auto">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:ml-auto w-full">
                 <a 
                   href="https://github.com/aaltoes"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -665,7 +665,7 @@ export default function OpenSource() {
                   href="https://discord.gg/aaltoes"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -679,7 +679,7 @@ export default function OpenSource() {
                   href="https://aaltoes.com/events"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

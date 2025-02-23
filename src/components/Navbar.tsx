@@ -44,8 +44,8 @@ export default function Navbar() {
         {/* Left: Text (Visible on both Mobile and Desktop) */}
         <Link to="/2025" className="group">
           <div className="leading-[1.05]">
-            <div className="text-base md:text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors">Paramount Year</div>
-            <div className="text-base md:text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors -mt-1">of Craft</div>
+            <div className="text-xl md:text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors">Paramount Year</div>
+            <div className="text-xl md:text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors -mt-1">of Craft</div>
           </div>
         </Link>
 

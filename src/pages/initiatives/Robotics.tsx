@@ -483,11 +483,11 @@ export default function Robotics() {
             <div className="space-y-6">
             <Link 
               to="/2025"
-                className="inline-flex items-center gap-4 text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
+                className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
             >
               Paramount Year of Craft
                 <span className="h-4 w-px bg-zinc-800"></span>
-                <span className="text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
+                <span className="text-xs sm:text-sm font-mono text-zinc-400 px-2 py-1 bg-zinc-950/50 rounded border border-zinc-400/20">
                   NEW PROJECT
                 </span>
             </Link>

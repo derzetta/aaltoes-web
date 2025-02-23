@@ -144,7 +144,7 @@ export default function FocusTopics() {
           >
             <Link 
               to="/2025"
-              className="inline-block text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
+              className="inline-block text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
             >
               Paramount Year of Craft
             </Link>
@@ -282,7 +282,7 @@ export default function FocusTopics() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:ml-auto w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:ml-auto w-full">
                 <a 
                   href="https://aaltoes.com/events"
                   target="_blank"

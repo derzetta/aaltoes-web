@@ -485,7 +485,7 @@ export default function Announcement2025() {
               />
             </div>
 
-            <h1 className="tracking-tighter text-4xl md:text-6xl font-geist font-[500] text-zinc-100 leading-tighter pb-1">
+            <h1 className="tracking-tighter text-3xl md:text-6xl font-geist font-[500] text-zinc-100 leading-tighter pb-1">
               Paramount Year of Craft
             </h1>
             <p className="mt-4 text-base md:text-lg text-zinc-400 max-w-xl mx-auto mb-8">
@@ -494,10 +494,10 @@ export default function Announcement2025() {
             </p>
 
             {/* Two Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full"
               >
                 <span className="relative z-10 uppercase flex items-center gap-2">
                   <svg
@@ -525,7 +525,7 @@ export default function Announcement2025() {
                   )
                   initiativesSection?.scrollIntoView({ behavior: "smooth" })
                 }}
-                className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full"
               >
                 <span className="relative z-10 uppercase flex items-center gap-2">
                   See The Plan
