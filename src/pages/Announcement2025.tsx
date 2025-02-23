@@ -42,7 +42,7 @@ const InitiativeCard = ({
       className="block relative w-full h-64 rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65 hover:border-zinc-700/100 transition-all duration-300 group-hover:bg-zinc-900/30 overflow-hidden"
     >
       {demo && (
-        <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300 grayscale">
+        <div className="absolute inset-0 opacity-50 group-hover:opacity-80 transition-opacity duration-300 grayscale">
           {demo}
         </div>
       )}
@@ -60,10 +60,10 @@ const InitiativeCard = ({
           )}
         </div>
         <div>
-          <p className="text-sm font-mono text-zinc-400 uppercase tracking-wide mb-3">
+          <p className="text-xs md:text-sm font-mono text-zinc-400 uppercase tracking-wide mb-2">
             {title}
           </p>
-          <h2 className="text-2xl font-medium text-zinc-100 leading-tight">
+          <h2 className="text-xl md:text-2xl font-medium text-zinc-100 leading-tight">
             {subtitle}
           </h2>
         </div>
@@ -312,34 +312,12 @@ const FocusTopicsDemo = () => {
       <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
       <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
       <line x1="12" y1="22.08" x2="12" y2="12"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="2" y1="12" x2="22" y2="12"/>
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-      <polyline points="22,6 12,13 2,6"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="16 18 22 12 16 6"/>
-      <polyline points="8 6 2 12 8 18"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
     </svg>
   ]
 
   return (
-    <div className="w-full h-full grid grid-cols-8 gap-x-1 gap-y-6 p-8">
-      {[...Array(24)].map((_, i) => {
+    <div className="w-full h-full grid grid-cols-4 md:grid-cols-8 gap-x-1 gap-y-6 p-8">
+      {[...Array(12)].map((_, i) => {
         const iconIndex = i % icons.length
         const row = Math.floor(i / 4)
         const col = i % 4
@@ -347,7 +325,7 @@ const FocusTopicsDemo = () => {
         return (
           <div
             key={i}
-            className="flex items-center justify-center"
+            className={`flex items-center justify-center ${i >= 8 ? 'hidden md:flex' : ''}`}
             style={{
               transform: `translate(${Math.sin((row + col) * 0.5 + time * 0.1) * 4}px, ${Math.cos((row + col) * 0.5 + time * 0.1) * 4}px)`,
               transition: 'transform 0.5s ease-out'
@@ -507,10 +485,10 @@ export default function Announcement2025() {
               />
             </div>
 
-            <h1 className="tracking-tighter text-5xl font-geist font-[500] text-zinc-100 leading-tighter pb-1">
+            <h1 className="tracking-tighter text-4xl md:text-6xl font-geist font-[500] text-zinc-100 leading-tighter pb-1">
               Paramount Year of Craft
             </h1>
-            <p className="mt-6 text-lg font-normal text-zinc-400 max-w-xl mx-auto mb-8">
+            <p className="mt-4 text-base md:text-lg text-zinc-400 max-w-xl mx-auto mb-8">
               Groundbreaking initiatives to transform Aaltoes and Finland into
               a powerhouse of builders.
             </p>
@@ -519,7 +497,7 @@ export default function Announcement2025() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="base-button inline-flex items-center justify-center group relative overflow-hidden"
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10 uppercase flex items-center gap-2">
                   <svg
@@ -547,7 +525,7 @@ export default function Announcement2025() {
                   )
                   initiativesSection?.scrollIntoView({ behavior: "smooth" })
                 }}
-                className="base-button inline-flex items-center justify-center group relative overflow-hidden"
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10 uppercase flex items-center gap-2">
                   See The Plan
@@ -573,7 +551,7 @@ export default function Announcement2025() {
       </div>
 
       {/* Contained Content Section */}
-      <div className="max-w-7xl mx-auto px-6 space-y-12 pb-24">
+      <div className="max-w-7xl mx-auto space-y-12 pb-24">
         {/* Initiatives Grid */}
         <div className="relative bg-zinc-950/95 backdrop-blur-sm rounded-2xl">
           <motion.div

@@ -41,20 +41,20 @@ export default function Navbar() {
 
       {/* Content Layer - Above Blur */}
       <div className="relative z-10 max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
-        {/* Left: Two-row Text (Hidden on Mobile) */}
-        <Link to="/2025" className="hidden md:block group">
+        {/* Left: Text (Visible on both Mobile and Desktop) */}
+        <Link to="/2025" className="group">
           <div className="leading-[1.05]">
-            <div className="text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors">Paramount Year</div>
-            <div className="text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors -mt-1">of Craft</div>
+            <div className="text-base md:text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors">Paramount Year</div>
+            <div className="text-base md:text-2xl font-medium tracking-tight text-white group-hover:text-zinc-200 transition-colors -mt-1">of Craft</div>
           </div>
         </Link>
 
         {/* Right: Navigation Arrows */}
-        <div className="flex items-center gap-6 ml-auto">
+        <div className="flex items-center gap-2 md:gap-6">
           {prevPage && (
             <Link 
               to={prevPage.path}
-              className="base-button inline-flex items-center justify-center group px-4 h-10 bg-zinc-900/50"
+              className="base-button inline-flex items-center justify-center group px-2 md:px-4 h-10 bg-zinc-900/50"
             >
               <span className="relative z-10 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -67,7 +67,7 @@ export default function Navbar() {
           {nextPage && (
             <Link 
               to={nextPage.path}
-              className="base-button inline-flex items-center justify-center group px-4 h-10 bg-zinc-900/50"
+              className="base-button inline-flex items-center justify-center group px-2 md:px-4 h-10 bg-zinc-900/50"
             >
               <span className="relative z-10 flex items-center gap-2">
                 <span className="hidden md:inline uppercase">{nextPage.label}</span>

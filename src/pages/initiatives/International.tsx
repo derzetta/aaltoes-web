@@ -36,8 +36,8 @@ export default function International() {
             >
               Paramount Year of Craft
             </Link>
-            <h1 className="text-5xl font-medium text-zinc-100 mb-6">Global Presence</h1>
-            <p className="text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+            <h1 className="text-3xl md:text-5xl font-medium text-zinc-100 mb-6">Global Presence</h1>
+            <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Not only Startup Sauna, but making Finland the main friction point to build startups is our vision this year.
             </p>
           </motion.div>
@@ -175,8 +175,8 @@ export default function International() {
           {/* EU Initiatives */}
           <section className="flex flex-col md:flex-row-reverse items-center gap-12">
             <div className="w-full md:w-1/2 space-y-6">
-              <h2 className="text-3xl font-medium text-zinc-100">European Initiatives</h2>
-              <p className="text-lg text-zinc-400 leading-relaxed">
+              <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">European Initiatives</h2>
+              <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                 We know that Europe has great infrastructure to be worked on to attract more builders, and we announce our full support to EU Inc and EU/Acceleration initiatives.
               </p>
             </div>
@@ -217,11 +217,11 @@ export default function International() {
           {/* Asia Expansion */}
           <section className="flex flex-col md:flex-row items-center gap-12">
             <div className="w-full md:w-1/2 space-y-6">
-              <h2 className="text-3xl font-medium text-zinc-100">Beyond Silicon Valley</h2>
-              <p className="text-lg text-zinc-400 leading-relaxed">
+              <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Beyond Silicon Valley</h2>
+              <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                 While Silicon Valley was a good handbook to play for the last years, we decided not to limit ourselves with it. Aaltoes this year expands its cooperation to the countries of Eastern and Southern Asia.
               </p>
-              <p className="text-lg text-zinc-400 leading-relaxed">
+              <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                 We are on route to have a Japan Expedition, and we signed global work cooperation with Shibuya-Tokyo.
               </p>
             </div>
@@ -266,7 +266,7 @@ export default function International() {
               {/* Content */}
               <div className="relative z-10 md:ml-auto md:w-1/2 text-left">
                 <h2 className="text-2xl font-medium text-zinc-100 mb-4">Aaltoes Store</h2>
-                <p className="text-lg text-zinc-400 mb-8">
+                <p className="text-base text-zinc-400 mb-8">
                   For you, to support our vision, we are launching Aaltoes Store, with first designs ready to pre-order for Aaltoes members.
                 </p>
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3">

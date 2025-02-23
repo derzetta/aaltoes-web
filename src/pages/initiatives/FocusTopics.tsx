@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 
 const fadeIn = {
@@ -9,6 +9,83 @@ const fadeIn = {
   transition: { duration: 0.5 }
 }
 
+// Focus Topics Demo Component
+const FocusTopicsHeroDemo = () => {
+  const [time, setTime] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(t => t + 1)
+    }, 50)
+    return () => clearInterval(interval)
+  }, [])
+
+  const icons = [
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>,
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2"/>
+      <path d="M6 4a2 2 0 0 1 2-2"/>
+      <path d="M18 4a2 2 0 0 0-2-2"/>
+      <path d="M12 2v20"/>
+      <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+    </svg>,
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2"/>
+      <path d="M7 7h10"/>
+      <path d="M7 12h10"/>
+      <path d="M7 17h10"/>
+    </svg>,
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>,
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+    </svg>,
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+      <line x1="12" y1="22.08" x2="12" y2="12"/>
+    </svg>
+  ]
+
+  return (
+    <div className="relative aspect-[2/1] w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65">
+      <div className="absolute inset-0 grid grid-cols-8 gap-x-1 gap-y-6 p-8">
+        {[...Array(32)].map((_, i) => {
+          const iconIndex = i % icons.length
+          const row = Math.floor(i / 8)
+          const col = i % 8
+          
+          return (
+            <div
+              key={i}
+              className="flex items-center justify-center"
+              style={{
+                transform: `translate(${Math.sin((row + col) * 0.5 + time * 0.1) * 4}px, ${Math.cos((row + col) * 0.5 + time * 0.1) * 4}px)`,
+                transition: 'transform 0.5s ease-out'
+              }}
+            >
+              <div 
+                className="w-12 h-12 rounded-xl bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center text-zinc-500"
+                style={{
+                  opacity: Math.abs(Math.sin(time * 0.1 + i)) * 0.5 + 0.5
+                }}
+              >
+                {icons[iconIndex]}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
 
 export default function FocusTopics() {
   const { pathname } = useLocation()
@@ -71,138 +148,19 @@ export default function FocusTopics() {
             >
               Paramount Year of Craft
             </Link>
-            <h1 className="text-5xl font-medium text-zinc-100 mb-6">Focus Topics</h1>
-            <p className="text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-medium text-zinc-100 mb-6">Focus Topics</h1>
+            <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
               After listening to our community, partners, and funders, we're making this the most technologically driven year in Aaltoes history.
             </p>
           </motion.div>
 
-          {/* Video Section */}
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65 group">
-            <video
-              id="heroVideo"
-              className="w-full h-full object-cover"
-              playsInline
-            >
-              <source src="/fr.mov" type="video/quicktime" />
-            </video>
-
-            {/* Video Overlay - Play State */}
-            <div className="absolute inset-0 bg-zinc-950/50 transition-opacity duration-200 group-hover:opacity-0 group-[.playing]:opacity-0">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    const container = video?.closest('.group');
-                    if (video) {
-                      if (video.paused) {
-                        video.play();
-                        container?.classList.add('playing');
-                      } else {
-                        video.pause();
-                        container?.classList.remove('playing');
-                      }
-                    }
-                  }}
-                  className="w-16 h-16 rounded-full bg-zinc-100/10 backdrop-blur-sm flex items-center justify-center hover:bg-zinc-100/20 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Video Controls */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-zinc-950 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <div className="flex items-center gap-6">
-                {/* Play/Pause */}
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    const container = video?.closest('.group');
-                    if (video) {
-                      if (video.paused) {
-                        video.play();
-                        container?.classList.add('playing');
-                      } else {
-                        video.pause();
-                        container?.classList.remove('playing');
-                      }
-                    }
-                  }}
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </button>
-
-                {/* Volume Control */}
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => {
-                      const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                      if (video) {
-                        video.muted = !video.muted;
-                      }
-                    }}
-                    className="text-zinc-300 hover:text-zinc-100 transition-colors"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                    </svg>
-                  </button>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="1" 
-                    step="0.1"
-                    defaultValue="1"
-                    onChange={(e) => {
-                      const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                      if (video) {
-                        video.volume = parseFloat(e.target.value);
-                      }
-                    }}
-                    className="w-24 accent-zinc-100"
-                  />
-                </div>
-
-                {/* Fullscreen */}
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    if (video) {
-                      if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                      } else {
-                        video.classList.remove('object-cover');
-                        video.classList.add('object-contain');
-                        video.requestFullscreen();
-                        
-                        const handleFullscreenChange = () => {
-                          if (!document.fullscreenElement) {
-                            video.classList.remove('object-contain');
-                            video.classList.add('object-cover');
-                            document.removeEventListener('fullscreenchange', handleFullscreenChange);
-                          }
-                        };
-                        document.addEventListener('fullscreenchange', handleFullscreenChange);
-                      }
-                    }
-                  }}
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors ml-auto"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
+          {/* Demo Section */}
+          <motion.div
+            {...fadeIn}
+            transition={{ ...fadeIn.transition, delay: 0.3 }}
+          >
+            <FocusTopicsHeroDemo />
+          </motion.div>
         </div>
 
         {/* Main Content */}
@@ -210,21 +168,23 @@ export default function FocusTopics() {
           {/* Focus Topics Section */}
           <section className="flex flex-col md:flex-row-reverse items-center gap-12">
             <div className="w-full md:w-1/2 space-y-6">
-              <h2 className="text-3xl font-medium text-zinc-100">Our Focus Projects</h2>
-              <p className="text-lg text-zinc-400 leading-relaxed">
-                We're concentrating our efforts on cutting-edge technologies that will shape the future of innovation.
-              </p>
+              <div className="text-left md:text-center space-y-4">
+                <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our Focus Projects</h2>
+                <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
+                  We're concentrating our efforts on cutting-edge technologies that will shape the future of innovation.
+                </p>
+              </div>
             </div>
-            <div className="w-full md:w-1/2 grid grid-cols-2 gap-4">
+            <div className="w-full md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {technologies.map((tech, index) => (
                 <motion.div
                   key={tech.title}
-                  className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800 rounded-lg p-4"
+                  className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:bg-zinc-800/30 transition-colors"
                   {...fadeIn}
                   transition={{ ...fadeIn.transition, delay: 0.2 + index * 0.1 }}
                 >
-                  <h3 className="text-zinc-100 font-medium mb-2">{tech.title}</h3>
-                  <p className="text-sm text-zinc-400">{tech.description}</p>
+                  <h3 className="text-base md:text-lg font-medium text-zinc-100 mb-2">{tech.title}</h3>
+                  <p className="text-sm md:text-base text-zinc-400">{tech.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -236,16 +196,18 @@ export default function FocusTopics() {
           {/* Events Evolution Section */}
           <section className="flex flex-col md:flex-row items-center gap-12">
             <div className="w-full md:w-1/2 space-y-6">
-              <h2 className="text-3xl font-medium text-zinc-100">Events Evolution</h2>
-              <p className="text-lg text-zinc-400 leading-relaxed">
-                Events have been the cornerstone of Aaltoes since 2009. We've hosted countless speaker sessions on startup operations - from raising pre-seed to project management and scaling. While this was exactly what our ecosystem needed then, the landscape has fundamentally shifted.
-              </p>
-              <p className="text-lg text-zinc-400 leading-relaxed">
+              <div className="text-left md:text-center space-y-4">
+                <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Events Evolution</h2>
+                <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
+                  Events have been the cornerstone of Aaltoes since 2009.
+                </p>
+              </div>
+              <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                 Today, the focus is on building and shipping. That's why we are making a gentle shift. While maintaining our traditional speaker events, we're increasing our hackathon funding tenfold. We aim to have 70% of events delegated to hacking and building.
               </p>
             </div>
             <div className="w-full md:w-1/2">
-              <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8">
+              <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
                 <div className="space-y-8">
                   {/* Event Distribution Visualization */}
                   <div className="space-y-6">
@@ -256,7 +218,7 @@ export default function FocusTopics() {
                           <div className="w-3 h-3 rounded-full bg-gradient-to-r from-zinc-100 to-zinc-300" />
                           <span className="text-sm text-zinc-400">Building & Hackathons</span>
                         </div>
-                        <span className="text-sm font-mono text-zinc-400">70%</span>
+                        <span className="text-sm font-mono text-zinc-500">70%</span>
                       </div>
                       <div className="h-4 w-full bg-zinc-900/50 rounded-full overflow-hidden">
                         <motion.div

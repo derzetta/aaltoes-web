@@ -215,9 +215,9 @@ const DocumentBrowser = () => {
       <div className="relative z-20">
         {/* Document Browser Section */}
         <section className="space-y-8">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-medium text-zinc-100">Document Browser</h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          <div className="text-left md:text-center space-y-4">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Document Browser</h2>
+            <p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto">
               Explore our archive of decisions, policies, and historical records.
             </p>
           </div>
@@ -344,8 +344,8 @@ export default function Blueprint() {
                   NEW PROJECT
                 </span>
               </Link>
-              <h1 className="text-5xl font-medium text-zinc-100">Blueprint</h1>
-              <p className="text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+              <h1 className="text-3xl md:text-5xl font-medium text-zinc-100">Blueprint</h1>
+              <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
                 An open-source initiative to enhance transparency and preserve institutional knowledge within Aaltoes.
               </p>
             </div>
@@ -410,9 +410,9 @@ export default function Blueprint() {
         <div className="space-y-24 mt-16">
           {/* Features Section */}
           <section className="space-y-16">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl font-medium text-zinc-100">Key Features</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            <div className="text-left md:text-center space-y-4">
+              <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Key Features</h2>
+              <p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto">
                 Empowering transparency and knowledge preservation through modern tools.
               </p>
             </div>
@@ -464,8 +464,8 @@ export default function Blueprint() {
                     {feature.icon}
                   </div>
                   <div className="space-y-2 flex-grow">
-                    <h3 className="text-xl font-medium text-zinc-100">{feature.title}</h3>
-                    <p className="text-zinc-400">{feature.description}</p>
+                    <h3 className="text-lg md:text-xl font-medium text-zinc-100">{feature.title}</h3>
+                    <p className="text-sm md:text-base text-zinc-400">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -483,7 +483,7 @@ export default function Blueprint() {
 
           {/* Get Involved Section */}
           <section className="space-y-8">
-            <div className="text-center space-y-4">
+            <div className="text-left md:text-center space-y-4">
               <h2 className="text-3xl font-medium text-zinc-100">Get Involved</h2>
               <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
                 Blueprint is an open-source project, and we welcome contributions from the community.

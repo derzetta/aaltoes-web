@@ -491,8 +491,8 @@ export default function Robotics() {
                   NEW PROJECT
                 </span>
             </Link>
-              <h1 className="text-5xl font-medium text-zinc-100">Robotics Nation</h1>
-            <p className="text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+              <h1 className="text-3xl md:text-5xl font-medium text-zinc-100">Robotics Nation</h1>
+            <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Building the future of robotics through education, innovation, and hands-on experience.
             </p>
             </div>
@@ -506,8 +506,8 @@ export default function Robotics() {
         {/* Vision Section */}
         <section className="mt-24">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-medium text-zinc-100 mb-4">Robotics Nation</h2>
-            <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Robotics Nation</h2>
+            <p className="text-base md:text-lg text-zinc-400 max-w-3xl mx-auto">
               Equipping Finnish youth with technical skills and hands-on engineering experience for an era of technological innovation.
             </p>
           </div>
