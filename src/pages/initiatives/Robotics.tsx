@@ -538,11 +538,9 @@ export default function Robotics() {
 
         {/* Vision Section */}
         <section className="mt-24">
-          <div className="text-left md:text-center space-y-4 mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our Vision</h2>
-            <p className="text-base md:text-lg text-zinc-400 max-w-3xl mx-auto">
-              Equipping Finnish youth with technical skills and hands-on engineering experience for an era of technological innovation.
-            </p>
+          <div className="text-left md:text-center space-y-2 mb-16">
+          <h2 className="text-xl md:text-2xl font-medium text-zinc-100">Robotics is an ultimate future of startups.</h2>
+          <h2 className="text-xl md:text-2xl font-medium text-zinc-100">Our youth is yet to be ready for that.</h2>
           </div>
 
           {/* Linear Vision with Dividers */}
