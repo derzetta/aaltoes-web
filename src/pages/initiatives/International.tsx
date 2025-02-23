@@ -30,16 +30,19 @@ export default function International() {
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
           >
-            <Link 
-              to="/2025"
-              className="inline-block text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
-            >
-              Paramount Year of Craft
-            </Link>
-            <h1 className="text-3xl md:text-4xl font-medium text-zinc-100 mb-6">Global Presence</h1>
-            <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-              Not only Startup Sauna, but making Finland the main friction point to build startups is our vision this year.
-            </p>
+            <div className="space-y-6">
+              <Link 
+                to="/2025"
+                className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
+              >
+                Paramount Year of Craft
+    
+              </Link>
+              <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Global Presence</h1>
+              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+                Not only Startup Sauna, but making Finland the main friction point to build startups is our vision this year.
+              </p>
+            </div>
           </motion.div>
 
           {/* Video Section */}

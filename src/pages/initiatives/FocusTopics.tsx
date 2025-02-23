@@ -142,16 +142,19 @@ export default function FocusTopics() {
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
           >
-            <Link 
-              to="/2025"
-              className="inline-block text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
-            >
-              Paramount Year of Craft
-            </Link>
-            <h1 className="text-3xl md:text-4xl font-medium text-zinc-100 mb-6">Focus Topics</h1>
-            <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
-              After listening to our community, partners, and funders, we're making this the most technologically driven year in Aaltoes history.
-            </p>
+            <div className="space-y-6">
+              <Link 
+                to="/2025"
+                className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
+              >
+                Paramount Year of Craft
+               
+              </Link>
+              <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Focus Topics</h1>
+              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+                After listening to our community, partners, and funders, we're making this the most technologically driven year in Aaltoes history.
+              </p>
+            </div>
           </motion.div>
 
           {/* Demo Section */}
@@ -168,7 +171,7 @@ export default function FocusTopics() {
           {/* Focus Topics Section */}
           <section className="flex flex-col md:flex-row-reverse items-center gap-12">
             <div className="w-full md:w-1/2 space-y-6">
-              <div className="text-left md:text-center space-y-4">
+              <div className="text-left space-y-4">
                 <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our Focus Projects</h2>
                 <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                   We're concentrating our efforts on cutting-edge technologies that will shape the future of innovation.
@@ -196,7 +199,7 @@ export default function FocusTopics() {
           {/* Events Evolution Section */}
           <section className="flex flex-col md:flex-row items-center gap-12">
             <div className="w-full md:w-1/2 space-y-6">
-              <div className="text-left md:text-center space-y-4">
+              <div className="text-left space-y-4">
                 <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Events Evolution</h2>
                 <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                   Events have been the cornerstone of Aaltoes since 2009.

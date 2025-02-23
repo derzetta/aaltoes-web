@@ -73,16 +73,19 @@ export default function Spinout() {
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
           >
-            <Link 
-              to="/2025"
-              className="inline-block text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide mb-4 hover:text-zinc-200 transition-colors"
-            >
-              Paramount Year of Craft
-            </Link>
-            <h1 className="text-3xl md:text-4xl font-medium text-zinc-100 mb-6">Spinout Projects</h1>
-            <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
-              Supporting and scaling innovative projects from our community.
-            </p>
+            <div className="space-y-6">
+              <Link 
+                to="/2025"
+                className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
+              >
+                Paramount Year of Craft
+
+              </Link>
+              <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Spinout Projects</h1>
+              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+                Supporting and scaling innovative projects from our community.
+              </p>
+            </div>
           </motion.div>
 
           {/* Demo Section */}
