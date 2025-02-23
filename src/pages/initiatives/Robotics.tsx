@@ -391,7 +391,7 @@ const WorldMapSection = () => {
         <h2 className="text-2xl font-medium text-zinc-100">
           Worldwide Excellence
         </h2>
-        <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+        <p className="text-md text-zinc-400 max-w-2xl mx-auto">
           From Dallas to Singapore, our teams have achieved remarkable success across the globe.
         </p>
       </div>
@@ -855,11 +855,11 @@ export default function Robotics() {
 
         {/* Partners Section - Moved Up */}
         <section className="mt-24">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-medium text-zinc-100">
+          <div className="text-left md:text-center space-y-4 mb-16">
+            <h2 className="text-2xl font-medium text-zinc-100">
               Supported by Global Leaders
             </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-md text-zinc-400 max-w-2xl mx-auto">
               Partnering with the world's leading defense and technology companies
             </p>
           </div>
