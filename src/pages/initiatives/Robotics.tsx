@@ -554,45 +554,45 @@ export default function Robotics() {
               
               {/* Current Challenge */}
               <div className="pb-8 md:pb-0 md:pr-8">
-                <div className="flex items-start gap-6">
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-10 md:w-12 h-10 md:h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400 w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 2v20M2 12h20"/>
-                  </svg>
+                    </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
                       <div className="text-sm font-mono text-zinc-500 uppercase">Current Challenge</div>
                       <div className="text-sm font-mono text-zinc-500 uppercase">Ranked #71 Globally</div>
                     </div>
-                    <p className="mt-4 text-zinc-300 leading-relaxed">
+                    <p className="mt-3 md:mt-4 text-sm md:text-base text-zinc-300 leading-relaxed">
                       Despite strong educational foundations and individual achievements, Finland's competitive robotics ecosystem remains fragmented. Our current ranking doesn't reflect the true potential of our technical talent.
                     </p>
                   </div>
+                </div>
               </div>
-            </div>
 
               {/* Our Vision */}
               <div className="pt-8 md:pt-0 md:pl-8">
-                <div className="flex items-start gap-6">
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-10 md:w-12 h-10 md:h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400 w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
                       <circle cx="12" cy="12" r="3"/>
-                  </svg>
+                    </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
                       <div className="text-sm font-mono text-zinc-500 uppercase">Our Vision</div>
                       <div className="text-sm font-mono text-zinc-500 uppercase">Target: #1 in Europe</div>
                     </div>
-                    <p className="mt-4 text-zinc-300 leading-relaxed">
+                    <p className="mt-3 md:mt-4 text-sm md:text-base text-zinc-300 leading-relaxed">
                       Uniting Finland's top robotics teams, educators, and industry partners under one umbrella to create a systematic approach for developing world-class technical talent through robotics.
                     </p>
-                    <div className="mt-4 flex items-center gap-4">
-                      <img src="/2025/logos/yc.svg" alt="Y Combinator" className="h-4 opacity-70" />
-                      <img src="/2025/logos/ivy.svg" alt="Ivy League" className="h-4 opacity-70" />
-                      <img src="/2025/logos/stanford.svg" alt="Stanford" className="h-4 opacity-70" />
+                    <div className="mt-4 flex items-center gap-3 md:gap-4">
+                      <img src="/2025/logos/yc.svg" alt="Y Combinator" className="h-3 md:h-4 opacity-70" />
+                      <img src="/2025/logos/ivy.svg" alt="Ivy League" className="h-3 md:h-4 opacity-70" />
+                      <img src="/2025/logos/stanford.svg" alt="Stanford" className="h-3 md:h-4 opacity-70" />
                     </div>
                   </div>
                 </div>
@@ -603,24 +603,24 @@ export default function Robotics() {
             <div className="w-full h-px bg-zinc-900 my-8" />
 
             {/* Current Team */}
-            <div className="flex items-start gap-6">
-              <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-10 md:w-12 h-10 md:h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400 w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                   <polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
-                </div>
+                </svg>
+              </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-baseline justify-between gap-4">
+                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
                   <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
                   <div className="text-sm font-mono text-zinc-500 uppercase">Growing Daily</div>
                 </div>
-                <div className="mt-4 space-y-3">
-                  <p className="text-zinc-300 leading-relaxed">
+                <div className="mt-3 md:mt-4 space-y-3">
+                  <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
                     Our initiative brings together:
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <ul className="space-y-2 text-zinc-400">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                    <ul className="space-y-2 text-sm md:text-base text-zinc-400">
                       <li className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
                         <span>3 World Champion Robotics Teams</span>
@@ -630,7 +630,7 @@ export default function Robotics() {
                         <span>5 University Research Labs</span>
                       </li>
                     </ul>
-                    <ul className="space-y-2 text-zinc-400">
+                    <ul className="space-y-2 text-sm md:text-base text-zinc-400">
                       <li className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
                         <span>12 Industry Partners</span>
