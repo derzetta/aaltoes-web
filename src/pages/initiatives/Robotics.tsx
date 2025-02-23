@@ -704,7 +704,16 @@ export default function Robotics() {
                   }
                 ].map((member, i) => (
                   <div key={i} className="group relative">
-                    <div className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors">
+                    <button 
+                      onClick={() => {
+                        const popup = document.getElementById(`member-popup-${i}`);
+                        if (popup) {
+                          popup.classList.remove('opacity-0', 'invisible');
+                          popup.classList.add('opacity-100', 'visible');
+                        }
+                      }}
+                      className="w-full flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors"
+                    >
                       <div className="w-8 h-8 rounded-full overflow-hidden bg-zinc-800 shrink-0">
                         <img 
                           src={`/2025/team/member${i + 1}.jpg`}
@@ -720,52 +729,80 @@ export default function Robotics() {
                           {member.role}
                         </div>
                       </div>
-                    </div>
+                    </button>
 
-                    {/* Hover Card */}
-                    <div className="opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute left-0 top-full mt-2 z-50 w-72 bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 shadow-xl transition-all duration-200">
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
-                          <img 
-                            src={`/2025/team/member${i + 1}.jpg`}
-                            alt={member.name}
-                            className="w-full h-full object-cover"
-                          />
+                    {/* Popup Card */}
+                    <div 
+                      id={`member-popup-${i}`}
+                      className="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-200"
+                    >
+                      <div className="absolute inset-0 bg-zinc-950/90" onClick={() => {
+                        const popup = document.getElementById(`member-popup-${i}`);
+                        if (popup) {
+                          popup.classList.remove('opacity-100', 'visible');
+                          popup.classList.add('opacity-0', 'invisible');
+                        }
+                      }}></div>
+                      <div className="relative z-10 w-full max-w-lg bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 shadow-xl">
+                        <button 
+                          onClick={() => {
+                            const popup = document.getElementById(`member-popup-${i}`);
+                            if (popup) {
+                              popup.classList.remove('opacity-100', 'visible');
+                              popup.classList.add('opacity-0', 'invisible');
+                            }
+                          }}
+                          className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-200 transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                        </button>
+                        
+                        <div className="flex items-start gap-4 mb-6">
+                          <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-800">
+                            <img 
+                              src={`/2025/team/member${i + 1}.jpg`}
+                              alt={member.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div>
+                            <div className="text-xl font-medium text-zinc-100">{member.name}</div>
+                            <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-medium text-zinc-200">{member.name}</div>
-                          <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
-                        </div>
-                      </div>
 
-                      <div className="space-y-3">
-                        <div>
-                          <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Achievements</div>
-                          <ul className="space-y-1">
-                            {member.achievements.map((achievement, j) => (
-                              <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
-                                <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                                {achievement}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        <div className="space-y-6">
+                          <div>
+                            <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Achievements</div>
+                            <ul className="space-y-2">
+                              {member.achievements.map((achievement, j) => (
+                                <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
+                                  <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                                  {achievement}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                        <div>
-                          <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Previous Roles</div>
-                          <ul className="space-y-1">
-                            {member.previousRoles.map((role, j) => (
-                              <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
-                                <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                                {role}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                          <div>
+                            <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Previous Roles</div>
+                            <ul className="space-y-2">
+                              {member.previousRoles.map((role, j) => (
+                                <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
+                                  <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                                  {role}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                        <div>
-                          <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Contact</div>
-                          <div className="text-sm text-zinc-300">{member.contact}</div>
+                          <div>
+                            <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
+                            <div className="text-sm text-zinc-300">{member.contact}</div>
+                          </div>
                         </div>
                       </div>
                     </div>
