@@ -317,7 +317,7 @@ const FocusTopicsDemo = () => {
 
   return (
     <div className="w-full h-full grid grid-cols-4 md:grid-cols-8 gap-x-1 gap-y-6 p-8">
-      {[...Array(12)].map((_, i) => {
+      {[...Array(24)].map((_, i) => {
         const iconIndex = i % icons.length
         const row = Math.floor(i / 4)
         const col = i % 4

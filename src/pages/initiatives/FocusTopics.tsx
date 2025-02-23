@@ -56,16 +56,16 @@ const FocusTopicsHeroDemo = () => {
 
   return (
     <div className="relative aspect-[2/1] w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65">
-      <div className="absolute inset-0 grid grid-cols-8 gap-x-1 gap-y-6 p-8">
+      <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-8 gap-x-1 gap-y-6 p-8">
         {[...Array(32)].map((_, i) => {
           const iconIndex = i % icons.length
-          const row = Math.floor(i / 8)
-          const col = i % 8
+          const row = Math.floor(i / (window.innerWidth >= 768 ? 8 : 4))
+          const col = i % (window.innerWidth >= 768 ? 8 : 4)
           
           return (
             <div
               key={i}
-              className="flex items-center justify-center"
+              className={`flex items-center justify-center ${i >= 12 ? 'hidden md:flex' : ''}`}
               style={{
                 transform: `translate(${Math.sin((row + col) * 0.5 + time * 0.1) * 4}px, ${Math.cos((row + col) * 0.5 + time * 0.1) * 4}px)`,
                 transition: 'transform 0.5s ease-out'
