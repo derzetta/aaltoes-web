@@ -79,7 +79,7 @@ export default function Spinout() {
             >
               Paramount Year of Craft
             </Link>
-            <h1 className="text-4xl md:text-5xl font-medium text-zinc-100 mb-6">Spinout Projects</h1>
+            <h1 className="text-3xl md:text-4xl font-medium text-zinc-100 mb-6">Spinout Projects</h1>
             <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
               Supporting and scaling innovative projects from our community.
             </p>

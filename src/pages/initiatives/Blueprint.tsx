@@ -344,7 +344,7 @@ export default function Blueprint() {
                   NEW PROJECT
                 </span>
               </Link>
-              <h1 className="text-3xl md:text-5xl font-medium text-zinc-100">Blueprint</h1>
+              <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Blueprint</h1>
               <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
                 An open-source initiative to enhance transparency and preserve institutional knowledge within Aaltoes.
               </p>

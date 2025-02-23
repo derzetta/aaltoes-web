@@ -148,7 +148,7 @@ export default function FocusTopics() {
             >
               Paramount Year of Craft
             </Link>
-            <h1 className="text-4xl md:text-5xl font-medium text-zinc-100 mb-6">Focus Topics</h1>
+            <h1 className="text-3xl md:text-4xl font-medium text-zinc-100 mb-6">Focus Topics</h1>
             <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
               After listening to our community, partners, and funders, we're making this the most technologically driven year in Aaltoes history.
             </p>

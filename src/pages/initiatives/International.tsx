@@ -36,7 +36,7 @@ export default function International() {
             >
               Paramount Year of Craft
             </Link>
-            <h1 className="text-3xl md:text-5xl font-medium text-zinc-100 mb-6">Global Presence</h1>
+            <h1 className="text-3xl md:text-4xl font-medium text-zinc-100 mb-6">Global Presence</h1>
             <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Not only Startup Sauna, but making Finland the main friction point to build startups is our vision this year.
             </p>
