@@ -434,7 +434,7 @@ export default function Announcement2025() {
               controls
               playsInline
             >
-              <source src="/Untitled2.mp4" type="video/quicktime" />
+              <source src="/Untitled22.mp4" type="video/quicktime" />
             </video>
             <button
               onClick={() => setIsModalOpen(false)}
