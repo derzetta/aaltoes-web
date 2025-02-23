@@ -287,8 +287,12 @@ export default function International() {
             </motion.div>
           </section>
           {/* Ecosystem Coordinator Footer */}
-          <section className="pt-0">
-            <div className="flex flex-col md:flex-row items-center gap-8">
+          <section>
+            <motion.div
+              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8 space-y-8"
+              {...fadeIn}
+              transition={{ ...fadeIn.transition, delay: 0.3 }}
+            >
               {/* Profile Info */}
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden">
@@ -305,7 +309,7 @@ export default function International() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:ml-auto w-full">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                 <a 
                   href="https://aaltoes.com/events"
                   target="_blank"
@@ -354,7 +358,7 @@ export default function International() {
                   </span>
                 </a>
               </div>
-            </div>
+            </motion.div>
           </section>
         </div>
       </div>

@@ -407,7 +407,7 @@ export default function Blueprint() {
         </div>
 
         {/* Main Content */}
-        <div className="space-y-24 mt-16">
+        <div className="space-y-16 mt-16">
           {/* Features Section */}
           <section className="space-y-16">
             <div className="text-left md:text-center space-y-4">
@@ -481,40 +481,79 @@ export default function Blueprint() {
           {/* Divider */}
           <div className="w-full h-px bg-zinc-800" />
 
-          {/* Get Involved Section */}
-          <section className="space-y-8">
-            <div className="text-left md:text-center space-y-4">
-              <h2 className="text-3xl font-medium text-zinc-100">Get Involved</h2>
-              <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-                Blueprint is an open-source project, and we welcome contributions from the community.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full">
-              <a 
-                href="https://github.com/aaltoes/blueprint"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
-              >
-                <span className="relative z-10 uppercase">View on GitHub</span>
-              </a>
-              <a 
-                href="https://docs.blueprint.aaltoes.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
-              >
-                <span className="relative z-10 uppercase">Documentation</span>
-              </a>
-              <a 
-                href="https://discord.gg/aaltoes"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="base-button inline-flex items-center justify-center group h-12 px-6 w-full sm:w-auto"
-              >
-                <span className="relative z-10 uppercase">Join Discord</span>
-              </a>
-            </div>
+          {/* Responsible Person Card */}
+          <section>
+            <motion.div
+              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8 space-y-8"
+              {...fadeIn}
+              transition={{ ...fadeIn.transition, delay: 0.3 }}
+            >
+              {/* Profile Info */}
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 rounded-full overflow-hidden">
+                  <img 
+                    src="/board/vaneeza.png" 
+                    alt="Vaneeza Maqsood"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-medium text-zinc-100">Vaneeza Maqsood</h3>
+                  <p className="text-zinc-400 font-normal">Ecosystem Responsible</p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                <a 
+                  href="https://aaltoes.com/events"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                >
+                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    Events
+                  </span>
+                </a>
+                
+                <a 
+                  href="https://form.typeform.com/to/mGQRO8Te"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                >
+                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Volunteer
+                  </span>
+                </a>
+
+                <a 
+                  href="https://t.me/+1P42HmirI81lYTMy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                >
+                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    Chat
+                  </span>
+                </a>
+              </div>
+            </motion.div>
           </section>
         </div>
       </div>

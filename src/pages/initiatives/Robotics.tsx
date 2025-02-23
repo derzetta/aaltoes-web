@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 
@@ -32,8 +32,6 @@ const AchievementMarker = ({
   flag: string, 
   achievements: string[] 
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const getMedal = (achievement: string, location: string) => {
     // Special cases for New Delhi and Chiang Mai - no gold for Certificate of Excellence
     if ((location === "New Delhi" || location === "Chiang-Mai") && 
@@ -73,9 +71,8 @@ const AchievementMarker = ({
       className="absolute text-left"
       style={{ left: x, top: y }}
     >
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="group flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors"
+      <div 
+        className="group relative flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
       >
         <span>{flag}</span>
         <span className="font-mono uppercase relative">
@@ -96,11 +93,10 @@ const AchievementMarker = ({
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </span>
-      </button>
 
-      {isOpen && (
+        {/* Hover Popup */}
         <div 
-          className="absolute left-0 top-full mt-2 z-50 bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 min-w-[240px] shadow-xl"
+          className="absolute left-0 top-full mt-2 z-50 bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 min-w-[240px] shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
         >
           <div className="space-y-1.5">
             {achievements.map((achievement, i) => (
@@ -113,7 +109,7 @@ const AchievementMarker = ({
             ))}
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
@@ -460,6 +456,42 @@ const WorldMapSection = () => {
   )
 }
 
+// Robotics Card Demo
+const RoboticsCardDemo = () => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    // Ensure video plays
+    const video = videoRef.current
+    if (video) {
+      video.play().catch(error => {
+        console.log("Video autoplay failed:", error)
+      })
+    }
+  }, [])
+
+  return (
+    <div className="w-full h-full overflow-hidden">
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/robotics.mp4" type="video/mp4" />
+        </video>
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_rgb(9,9,11)_100%)] pointer-events-none opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/20 via-transparent to-zinc-950/80 pointer-events-none" />
+      </div>
+    </div>
+  )
+}
+
 export default function Robotics() {
   const { pathname } = useLocation()
   const [activeProfile, setActiveProfile] = useState<number | null>(null)
@@ -472,12 +504,31 @@ export default function Robotics() {
     <div className="min-h-screen bg-zinc-950">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16 pt-32">
-        {/* Hero Section */}
-        <div className="space-y-16">
-          {/* Heading and Description */}
+      {/* Hero Video Section - Full Width */}
+      <div className="relative w-full h-[75vh]">
+        {/* Video Container */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            id="heroVideo"
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/robotics.mp4" type="video/mp4" />
+          </video>
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_rgb(9,9,11)_100%)] pointer-events-none opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/20 via-transparent to-zinc-950/80 pointer-events-none" />
+        </div>
+
+        {/* Content Over the Video */}
+        <div className="relative h-full flex flex-col">
+          <div className="flex-grow" />
           <motion.div 
-            className="text-center"
+            className="w-full max-w-3xl mx-auto text-center px-6 mb-24"
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
           >
@@ -493,21 +544,22 @@ export default function Robotics() {
                 </span>
             </Link>
               <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Robotics Nation</h1>
-            <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Building the future of robotics through education, innovation, and hands-on experience.
             </p>
             </div>
           </motion.div>
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16">
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
-
         {/* Vision Section */}
         <section className="mt-24">
-          <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Robotics Nation</h2>
+          <div className="text-left md:text-center space-y-4 mb-16">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our Vision</h2>
             <p className="text-base md:text-lg text-zinc-400 max-w-3xl mx-auto">
               Equipping Finnish youth with technical skills and hands-on engineering experience for an era of technological innovation.
             </p>
@@ -565,53 +617,9 @@ export default function Robotics() {
                   </div>
                 </div>
               </div>
-                </div>
-
+            </div>
 
             {/* Divider */}
-            <div className="w-full h-px bg-zinc-900 my-8" />
-
-            {/* Program Tracks */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Foundations Track */}
-              <div className="flex items-start gap-6">
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                  </svg>
-              </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <div className="text-sm font-mono text-zinc-500 uppercase">Foundations Track</div>
-                    <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">Active</div>
-            </div>
-                  <p className="mt-4 text-zinc-300 leading-relaxed">
-                    Our core program focused on competitive robotics, preparing students through hands-on experience and international competitions. This track has already demonstrated success, with alumni advancing to prestigious institutions and founding successful startups.
-                  </p>
-          </div>
-        </div>
-
-              {/* Frontier Track */}
-              <div className="flex items-start gap-6">
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <div className="text-sm font-mono text-zinc-500 uppercase">Frontier Track</div>
-                    <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">Coming Soon</div>
-                  </div>
-                  <p className="mt-4 text-zinc-300 leading-relaxed">
-                    An advanced program focusing on industrial robotics and automation, designed for university students and industry professionals. This track will bridge the gap between academic robotics and real-world applications in the startup ecosystem.
-            </p>
-          </div>
-            </div>
-          </div>
-
-        {/* Divider */}
             <div className="w-full h-px bg-zinc-900 my-8" />
 
             {/* Current Team */}
@@ -620,8 +628,8 @@ export default function Robotics() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                   <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
+                    </svg>
+                </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline justify-between gap-4">
                   <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
@@ -652,7 +660,7 @@ export default function Robotics() {
                         <span>20+ Active Mentors</span>
                       </li>
                     </ul>
-          </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -707,7 +715,7 @@ export default function Robotics() {
                   <div key={i} className="group relative">
                     <button 
                       onClick={() => setActiveProfile(i)}
-                      className="w-full flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors text-left"
+                      className="w-full flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors text-left group relative"
                     >
                       <div className="w-8 h-8 rounded-full overflow-hidden bg-zinc-800 shrink-0">
                         <img 
@@ -724,25 +732,12 @@ export default function Robotics() {
                           {member.role}
                         </div>
                       </div>
-                    </button>
 
-                    {/* Profile Popup */}
-                    {activeProfile === i && (
-                      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/90">
-                        <div className="relative w-full max-w-lg bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 shadow-xl">
-                          {/* Close Button */}
-                          <button
-                            onClick={() => setActiveProfile(null)}
-                            className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-200 transition-colors"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M18 6L6 18M6 6l12 12"/>
-                            </svg>
-                          </button>
-
-                          {/* Profile Content */}
-                          <div className="flex items-start gap-4 mb-6">
-                            <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-800">
+                      {/* Hover Popup */}
+                      <div className="absolute left-full top-0 ml-2 hidden group-hover:block z-50">
+                        <div className="w-[320px] bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 shadow-xl">
+                          <div className="flex items-start gap-4 mb-4">
+                            <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
                               <img 
                                 src={`/2025/team/member${i + 1}.jpg`}
                                 alt={member.name}
@@ -750,15 +745,15 @@ export default function Robotics() {
                               />
                             </div>
                             <div>
-                              <div className="text-xl font-medium text-zinc-100">{member.name}</div>
+                              <div className="text-base font-medium text-zinc-100">{member.name}</div>
                               <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
                             </div>
                           </div>
 
-                          <div className="space-y-6">
+                          <div className="space-y-4">
                             <div>
                               <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Achievements</div>
-                              <ul className="space-y-2">
+                              <ul className="space-y-1">
                                 {member.achievements.map((achievement, j) => (
                                   <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
                                     <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
@@ -770,7 +765,7 @@ export default function Robotics() {
 
                             <div>
                               <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Previous Roles</div>
-                              <ul className="space-y-2">
+                              <ul className="space-y-1">
                                 {member.previousRoles.map((role, j) => (
                                   <li key={j} className="text-sm text-zinc-300 flex items-center gap-2">
                                     <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
@@ -787,7 +782,7 @@ export default function Robotics() {
                           </div>
                         </div>
                       </div>
-                    )}
+                    </button>
                   </div>
                 ))}
               </div>
@@ -798,6 +793,81 @@ export default function Robotics() {
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
+        {/* Covering Full Spectrum of Skills */}
+        <section className="mt-24">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Covering Full Spectrum of Skills</h2>
+            <p className="text-base md:text-lg text-zinc-400 max-w-3xl mx-auto">
+              From foundational robotics to cutting-edge industrial applications, our comprehensive tracks ensure complete coverage of the robotics landscape.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Foundations Track Card */}
+            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8 hover:bg-zinc-800/30 transition-colors">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+              </div>
+                  <div>
+                    <h3 className="text-xl font-medium text-zinc-100">Foundations Track</h3>
+                    <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase mt-2">Active</div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-zinc-300 leading-relaxed">
+                Our core program focused on competitive robotics, preparing students through hands-on experience and international competitions. This track has already demonstrated success, with alumni advancing to prestigious institutions and founding successful startups.
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="bg-zinc-900/50 rounded-lg p-4">
+                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Success Rate</div>
+                  <div className="text-2xl font-medium text-zinc-100">85%</div>
+                </div>
+                <div className="bg-zinc-900/50 rounded-lg p-4">
+                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Alumni Network</div>
+                  <div className="text-2xl font-medium text-zinc-100">200+</div>
+            </div>
+          </div>
+        </div>
+
+            {/* Frontier Track Card */}
+            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8 hover:bg-zinc-800/30 transition-colors">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-medium text-zinc-100">Frontier Track</h3>
+                    <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase mt-2">Coming Soon</div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-zinc-300 leading-relaxed">
+                An advanced program focusing on industrial robotics and automation, designed for university students and industry professionals. This track will bridge the gap between academic robotics and real-world applications in the startup ecosystem.
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="bg-zinc-900/50 rounded-lg p-4">
+                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Industry Partners</div>
+                  <div className="text-2xl font-medium text-zinc-100">15+</div>
+          </div>
+                <div className="bg-zinc-900/50 rounded-lg p-4">
+                  <div className="text-sm font-mono text-zinc-500 uppercase mb-1">Launch Date</div>
+                  <div className="text-2xl font-medium text-zinc-100">Q3 2024</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* World Map Section */}
         <WorldMapSection />
@@ -930,35 +1000,78 @@ export default function Robotics() {
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
-        {/* Get Involved */}
+
+
+        {/* Responsible Person Card */}
         <section>
           <motion.div
-            className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-2xl p-12 text-center"
+              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8 space-y-8"
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.3 }}
           >
-            <h2 className="text-2xl font-medium text-zinc-100 mb-4">Join the Revolution</h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto mb-8">
-              Be part of Finland's robotics future. Whether you're a beginner or expert, there's a place for you in our program.
-            </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center w-full sm:w-auto">
+              {/* Profile Info */}
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 rounded-full overflow-hidden">
+                  <img 
+                    src="/board/vaneeza.png" 
+                    alt="Vaneeza Maqsood"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-medium text-zinc-100">Vaneeza Maqsood</h3>
+                  <p className="text-zinc-400 font-normal">Ecosystem Responsible</p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                <a 
+                  href="https://aaltoes.com/events"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                >
+                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    Events
+                  </span>
+                </a>
+                
               <a 
                 href="https://form.typeform.com/to/mGQRO8Te"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
               >
-                <span className="relative z-10 uppercase">Apply Now</span>
-                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </a>
+                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Volunteer
+                  </span>
+                </a>
+
               <a 
                 href="https://t.me/+1P42HmirI81lYTMy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
               >
-                <span className="relative z-10 uppercase">Robotics Chat</span>
-                <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    Chat
+                  </span>
               </a>
             </div>
           </motion.div>

@@ -223,7 +223,7 @@ const RoboticsCardDemo = () => {
         muted
         playsInline
       >
-        <source src="/fr.mov" type="video/quicktime" />
+        <source src="/robotics.mp4" type="video/mp4" />
       </video>
     </div>
   )
