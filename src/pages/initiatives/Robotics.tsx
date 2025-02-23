@@ -847,93 +847,41 @@ export default function Robotics() {
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
-        {/* Covering Full Spectrum of Skills */}
-        <section className="mt-24">
-          <div className="text-left md:text-center space-y-4 mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Full Spectrum of Skills</h2>
-            <p className="text-base md:text-lg text-zinc-400 max-w-3xl mx-auto">
-              From foundational robotics to cutting-edge industrial applications, our comprehensive tracks ensure complete coverage of the robotics landscape.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Foundations Track Card */}
-            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden">
-              <div className="p-8 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium text-zinc-100">Foundations Track</h3>
-                    <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase mt-2 inline-block">Active</div>
-                  </div>
-                </div>
-                <p className="text-zinc-300 leading-relaxed">
-                  Our core program focused on competitive robotics, preparing students through hands-on experience and international competitions. This track has already demonstrated success, with alumni advancing to prestigious institutions and founding successful startups.
-                </p>
-              </div>
-              <div className="border-t border-zinc-800">
-                <div className="grid grid-cols-2">
-                  <div className="p-6 text-center">
-                    <div className="text-2xl font-medium text-zinc-100">85%</div>
-                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Success Rate</div>
-                  </div>
-                  <div className="p-6 text-center border-l border-zinc-800">
-                    <div className="text-2xl font-medium text-zinc-100">200+</div>
-                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Alumni Network</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Frontier Track Card */}
-            <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden">
-              <div className="p-8 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="text-zinc-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium text-zinc-100">Frontier Track</h3>
-                    <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase mt-2 inline-block">Coming Soon</div>
-                  </div>
-                </div>
-                <p className="text-zinc-300 leading-relaxed">
-                  An advanced program focusing on industrial robotics and automation, designed for university students and industry professionals. This track will bridge the gap between academic robotics and real-world applications in the startup ecosystem.
-                </p>
-              </div>
-              <div className="border-t border-zinc-800">
-                <div className="grid grid-cols-2">
-                  <div className="p-6 text-center">
-                    <div className="text-2xl font-medium text-zinc-100">15+</div>
-                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Industry Partners</div>
-                  </div>
-                  <div className="p-6 text-center border-l border-zinc-800">
-                    <div className="text-2xl font-medium text-zinc-100">Q3 2024</div>
-                    <div className="text-sm font-mono text-zinc-500 uppercase mt-1">Launch Date</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
-
         {/* World Map Section */}
         <WorldMapSection />
 
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
-        {/* Timeline Section - Changelog Style */}
+        {/* Partners Section - Moved Up */}
+        <section className="mt-24">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl font-medium text-zinc-100">
+              Supported by Global Leaders
+            </h2>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+              Partnering with the world's leading defense and technology companies
+            </p>
+          </div>
+
+          {/* Company Logos - 2 rows */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="flex items-center justify-center p-6 bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl">
+                <img 
+                  src={`/2025/partners/company${i + 1}.svg`}
+                  alt={`Partner Company ${i + 1}`}
+                  className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-zinc-800" />
+
+        {/* Timeline Section - Changelog Style - Moved Down */}
         <section className="mt-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-medium text-zinc-100 mb-4">2024 Roadmap</h2>
@@ -1029,36 +977,6 @@ export default function Robotics() {
 
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
-
-        {/* Partners Section */}
-        <section className="mt-24">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl font-medium text-zinc-100">
-              Supported by Global Leaders
-            </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              Partnering with the world's leading defense and technology companies
-            </p>
-          </div>
-
-          {/* Company Logos - 2 rows */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="flex items-center justify-center p-6 bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl">
-                <img 
-                  src={`/2025/partners/company${i + 1}.svg`}
-                  alt={`Partner Company ${i + 1}`}
-                  className="h-8 opacity-70 hover:opacity-100 transition-opacity"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
-
-
 
         {/* Responsible Person Card */}
         <section>
