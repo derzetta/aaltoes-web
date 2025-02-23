@@ -32,21 +32,7 @@ const ProjectCard = ({ title, description, status, tech }: { title: string, desc
   </div>
 )
 
-const LifecycleCard = ({ title, description }: { title: string; description: string }) => (
-  <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:bg-zinc-800/30 transition-colors">
-    <h3 className="text-lg md:text-xl font-medium text-zinc-100 mb-2">{title}</h3>
-    <p className="text-sm md:text-base text-zinc-400">{description}</p>
-  </div>
-);
 
-const StatCard = ({ title, value }: { title: string; value: string }) => (
-  <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6 hover:bg-zinc-800/30 transition-colors">
-    <div className="space-y-1">
-      <h3 className="text-3xl font-medium text-zinc-100">{value}</h3>
-      <p className="text-sm text-zinc-400">{title}</p>
-    </div>
-  </div>
-);
 
 export default function OpenSource() {
   const { pathname } = useLocation()
