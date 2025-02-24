@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
+import VideoPlayer from '../../components/VideoPlayer'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -27,9 +28,9 @@ const SpinoutHeroDemo = () => {
   }, [])
 
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65">
+    <div className="relative aspect-[3/1] w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative h-32 w-96">
+        <div className="relative h-10 w-64">
           {logos.map((logo, index) => (
             <div
               key={index}
@@ -67,6 +68,9 @@ export default function Spinout() {
       <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16 pt-32">
         {/* Hero Section */}
         <div className="space-y-16">
+          {/* Demo Section */}
+          <SpinoutHeroDemo />
+
           {/* Heading and Description */}
           <motion.div 
             className="text-center"
@@ -79,7 +83,6 @@ export default function Spinout() {
                 className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
               >
                 Paramount Year of Craft
-
               </Link>
               <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Spinout Projects</h1>
               <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
@@ -88,8 +91,10 @@ export default function Spinout() {
             </div>
           </motion.div>
 
-          {/* Demo Section */}
-          <SpinoutHeroDemo />
+          {/* Video Section */}
+          <div className="max-w-4xl mx-auto">
+            <VideoPlayer src="/2025/video_extracts/3.mov" />
+          </div>
         </div>
 
         {/* Main Content */}

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
+import VideoPlayer from '../../components/VideoPlayer'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -36,7 +37,6 @@ export default function International() {
                 className="inline-flex items-center gap-4 text-xs sm:text-sm font-mono text-zinc-400 uppercase tracking-wide hover:text-zinc-200 transition-colors"
               >
                 Paramount Year of Craft
-    
               </Link>
               <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Global Presence</h1>
               <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
@@ -46,7 +46,9 @@ export default function International() {
           </motion.div>
 
           {/* Video Section */}
-          
+          <div className="max-w-4xl mx-auto">
+            <VideoPlayer src="/2025/video_extracts/2.mov" />
+          </div>
         </div>
 
         {/* Main Content */}
@@ -83,7 +85,7 @@ export default function International() {
                   transition={{ ...fadeIn.transition, delay: 0.4 }}
                 >
                   <div className="h-12 flex items-center justify-center">
-                    <img src="/2025/euacc.jpg" alt="EU Acceleration Logo" className="h-full w-auto object-contain group-hover:opacity-80 transition-opacity" />
+                    <img src="/2025/euacc.png" alt="EU Acceleration Logo" className="h-full w-auto object-contain group-hover:opacity-80 transition-opacity" />
                   </div>
                 </motion.a>
               </div>

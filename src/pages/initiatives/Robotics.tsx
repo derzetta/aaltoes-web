@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
+import VideoPlayer from '../../components/VideoPlayer'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -536,6 +537,11 @@ export default function Robotics() {
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
+        {/* Video Section */}
+        <div className="max-w-4xl mx-auto">
+          <VideoPlayer src="/2025/video_extracts/6.mov" />
+        </div>
+
         {/* Vision Section */}
         <section className="mt-24">
           <div className="text-left md:text-center space-y-1 tracking-tight mb-16">
@@ -851,8 +857,8 @@ export default function Robotics() {
                 <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Two Tracks for Different Skill Levels</h2>
                 <p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto">
                   Tailored programs to support robotics enthusiasts at every stage of their journey.
-                </p>
-              </div>
+            </p>
+          </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Foundations Track */}
@@ -862,10 +868,10 @@ export default function Robotics() {
                       <div>
                         <h3 className="text-xl font-medium text-zinc-100">Foundations Track</h3>
                         <p className="text-sm font-mono text-zinc-500 uppercase mt-1">Ages 14-21</p>
-                      </div>
+            </div>
                       <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">
                         IN PROCESS
-                      </div>
+          </div>
                     </div>
 
                     <div className="space-y-4">
@@ -963,7 +969,7 @@ export default function Robotics() {
               </div>
             </div>
 
-            {/* Divider */}
+        {/* Divider */}
             <div className="w-full h-px bg-zinc-800 my-16" />
 
         {/* World Map Section */}
@@ -985,15 +991,72 @@ export default function Robotics() {
 
           {/* Company Logos - 2 rows */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="flex items-center justify-center p-6 bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl">
+            {/* BAE Systems */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/BAE Systems_idsCz6Vk7R_0.svg"
+                alt="BAE Systems"
+                className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+              />
+            </div>
+            {/* Google */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/Google_Logo_0.svg"
+                alt="Google"
+                className="h-8 opacity-70 hover:opacity-100 transition-opacity [filter:brightness(0)_saturate(100%)_invert(47%)_sepia(7%)_saturate(446%)_hue-rotate(182deg)_brightness(92%)_contrast(86%)]"
+              />
+            </div>
+            {/* NASA */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/NASA_Logo_0.svg"
+                alt="NASA"
+                className="h-14 opacity-70 hover:opacity-100 transition-opacity [filter:grayscale(100%)]"
+              />
+            </div>
+            {/* Northrop Grumman */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/Northrop Grumman_idJXPyT8hC_0.svg"
+                alt="Northrop Grumman"
+                className="h-8 opacity-70 hover:opacity-100 transition-opacity [filter:brightness(0)_saturate(100%)_invert(47%)_sepia(7%)_saturate(446%)_hue-rotate(182deg)_brightness(92%)_contrast(86%)]"
+              />
+            </div>
+            {/* RTX */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+
                 <img 
-                  src={`/2025/partners/company${i + 1}.svg`}
-                  alt={`Partner Company ${i + 1}`}
-                  className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+                  src="/2025/logos/RTX_idMWUH8QNp_1.svg"
+                  alt="RTX"
+                  className="h-10 opacity-70 hover:opacity-100 transition-opacity [filter:brightness(0)_saturate(100%)_invert(47%)_sepia(7%)_saturate(446%)_hue-rotate(182deg)_brightness(92%)_contrast(86%)]"
                 />
-              </div>
-            ))}
+
+            </div>
+            {/* Tesla */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/Tesla_Logo_0.svg"
+                alt="Tesla"
+                className="h-4 opacity-70 hover:opacity-100 transition-opacity [filter:brightness(0)_saturate(100%)_invert(47%)_sepia(7%)_saturate(446%)_hue-rotate(182deg)_brightness(92%)_contrast(86%)]"
+              />
+            </div>
+            {/* Texas Instruments */}
+            <div className="h-24 flex items-center justify-center p-6 backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/Texas Instruments_idAI8YVxv__0.svg"
+                alt="Texas Instruments"
+                className="h-8 opacity-70 hover:opacity-100 transition-opacity [filter:brightness(0)_saturate(100%)_invert(47%)_sepia(7%)_saturate(446%)_hue-rotate(182deg)_brightness(92%)_contrast(86%)]"
+              />
+            </div>
+            {/* PNG Logo */}
+            <div className="h-24 flex items-center justify-center p-6  backdrop-blur-sm rounded-xl">
+              <img 
+                src="/2025/logos/idSA89Jfoq_1740405498627.png"
+                alt="Additional Partner"
+                className="h-8 opacity-70 hover:opacity-100 transition-opacity [filter:brightness(0)_saturate(100%)_invert(47%)_sepia(7%)_saturate(446%)_hue-rotate(182deg)_brightness(92%)_contrast(86%)]"
+              />
+            </div>
           </div>
         </section>
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
+import VideoPlayer from '../../components/VideoPlayer'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
@@ -328,6 +329,15 @@ export default function Blueprint() {
       <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16 pt-32">
         {/* Hero Section */}
         <div className="space-y-16">
+          {/* Demo Section */}
+          <motion.div 
+            className="aspect-[2/1] w-full max-w-4xl mx-auto"
+            {...fadeIn}
+          >
+            <BlueprintAnimation />
+          </motion.div>
+
+          {/* Heading and Description */}
           <motion.div 
             className="text-center space-y-16"
             {...fadeIn}
@@ -349,13 +359,12 @@ export default function Blueprint() {
                 An open-source initiative to enhance transparency and preserve institutional knowledge within Aaltoes.
               </p>
             </div>
+            
 
-            {/* Blueprint Animation */}
-            <div className="aspect-[2/1] w-full max-w-4xl mx-auto">
-              <BlueprintAnimation />
+            {/* Video Section */}
+            <div className="max-w-4xl mx-auto">
+              <VideoPlayer src="/2025/video_extracts/5.mov" />
             </div>
-
-            {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <StatCard 
                 value="15+"
