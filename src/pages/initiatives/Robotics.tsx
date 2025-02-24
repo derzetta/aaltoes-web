@@ -654,84 +654,47 @@ export default function Robotics() {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {[
                   { 
-                    name: "Mikko Virtanen", 
-                    role: "Lead Engineer",
-                    achievements: ["Led 3 world champion teams", "12+ years robotics experience", "Pioneered AI-driven robotics"],
-                    previousRoles: ["Technical Director at VEX Robotics", "Research Lead at Aalto University"],
-                    contact: "mikko@robotics.fi"
+                    name: "Doni Peltojärvi", 
+                    achievements: ["3x Kazakhstan Robotics Champion", "4th Place in World Championship 2017", "National Robotics Coach 2019-2022"],
+                    previousRoles: ["Technical Lead at VEX Robotics", "National Team Coach"],
+                    contact: "doni@doni.fi"
                   },
                   { 
-                    name: "Laura Korhonen", 
-                    role: "Research Director",
-                    achievements: ["Published 15+ papers in robotics", "Founded 2 robotics labs", "Patent holder for autonomous systems"],
-                    previousRoles: ["Senior Researcher at TKK", "Visiting Scholar at MIT"],
-                    contact: "laura@robotics.fi"
+                    name: "Tom Loome", 
+                    achievements: ["3x World Champion Coach", "VEX Robotics Director in Kazakhstan & Arabia since 2013", "Led teams in 20+ international competitions"],
+                    previousRoles: ["International Teacher in Kazakhstan for 8 years", "Internationally recognized robotics coach"],
+
                   },
                   { 
-                    name: "Antti Mäkelä", 
-                    role: "Competition Lead",
-                    achievements: ["Organized 20+ international competitions", "Trained 100+ teams", "World Champion Coach 2023"],
-                    previousRoles: ["Head Judge at World Robot Olympiad", "Competition Director"],
-                    contact: "antti@robotics.fi"
-                  },
-                  { 
-                    name: "Kristin Boyer", 
-                    role: "Project Manager",
-                    achievements: ["Managed $5M+ robotics projects", "Built 3 innovation labs", "Led 5 successful product launches"],
-                    previousRoles: ["Innovation Lead", "Strategy Consultant"],
-                    contact: "kristin@robotics.fi"
-                  },
-                  { 
-                    name: "Erik Lindström", 
-                    role: "Technical Lead",
-                    achievements: ["Developed award-winning control systems", "8+ years in industrial robotics", "IEEE Robotics Fellow"],
-                    previousRoles: ["Senior Engineer at ABB", "Research Scientist"],
-                    contact: "erik@robotics.fi"
-                  },
-                  { 
-                    name: "Maria Nieminen", 
-                    role: "Education Lead",
-                    achievements: ["Created national robotics curriculum", "Trained 200+ educators", "Education Innovation Award 2023"],
-                    previousRoles: ["STEM Education Director", "University Lecturer"],
-                    contact: "maria@robotics.fi"
+                    name: "Juho Kostet", 
+                    achievements: ["Robot Uprising Co-Founder", "European Robotics Competition Organizer for 7 years", "Competition Director"],
+                    previousRoles: ["Technical Director", "Event Coordinator"],
+
                   }
                 ].map((member, i) => (
                   <div key={i} className="group relative">
                     <button 
                       onClick={() => setActiveProfile(i)}
-                      className="w-full flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors text-left group relative"
+                      className="w-full flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-zinc-800/50 transition-colors text-left group relative"
                     >
-                      <div className="w-8 h-8 rounded-full overflow-hidden bg-zinc-800 shrink-0">
+                      <div className="w-6 h-6 rounded-full overflow-hidden bg-zinc-800 shrink-0">
                         <img 
-                          src={`/2025/team/member${i + 1}.jpg`}
+                          src={`/2025/team/member${i + 1}.png`}
                           alt={member.name}
-                          className="w-full h-full object-cover"
-                  />
-                </div>
+                          className="w-full h-full object-cover grayscale"
+                        />
+                      </div>
                       <div className="min-w-0 flex-1">
                         <div className="text-sm font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
                           {member.name}
                         </div>
-                        <div className="text-xs font-mono text-zinc-500 uppercase truncate group-hover:text-zinc-300 transition-colors">
-                          {member.role}
-                        </div>
-                </div>
+                      </div>
 
                       {/* Desktop: Hover Popup */}
                       <div className="absolute left-full top-0 ml-2 hidden group-hover:md:block z-50">
                         <div className="w-[320px] bg-zinc-900/95 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 shadow-xl">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
-                              <img 
-                                src={`/2025/team/member${i + 1}.jpg`}
-                                alt={member.name}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                            <div>
-                              <div className="text-base font-medium text-zinc-100">{member.name}</div>
-                              <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
-                            </div>
+                          <div className="mb-4">
+                            <div className="text-base font-medium text-zinc-100">{member.name}</div>
                           </div>
 
                           <div className="space-y-4">
@@ -759,10 +722,12 @@ export default function Robotics() {
                               </ul>
                             </div>
 
-                            <div>
-                              <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
-                              <div className="text-sm text-zinc-300">{member.contact}</div>
-                            </div>
+                            {member.contact && (
+                              <div>
+                                <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
+                                <div className="text-sm text-zinc-300">{member.contact}</div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -786,26 +751,16 @@ export default function Robotics() {
                                 setActiveProfile(null);
                               }}
                               className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-200 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 6L6 18M6 6l12 12"/>
-                  </svg>
-                </button>
+                              </svg>
+                            </button>
 
                             {/* Profile Content */}
-                            <div className="flex items-start gap-4 mb-6">
-                              <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-800">
-                                <img 
-                                  src={`/2025/team/member${i + 1}.jpg`}
-                                  alt={member.name}
-                                  className="w-full h-full object-cover"
-                                />
-              </div>
-                              <div>
-                                <div className="text-xl font-medium text-zinc-100">{member.name}</div>
-                                <div className="text-sm font-mono text-zinc-500 uppercase">{member.role}</div>
-            </div>
-          </div>
+                            <div className="mb-6">
+                              <div className="text-xl font-medium text-zinc-100">{member.name}</div>
+                            </div>
 
                             <div className="space-y-6">
                               <div>
@@ -818,7 +773,7 @@ export default function Robotics() {
                                     </li>
                                   ))}
                                 </ul>
-        </div>
+                              </div>
 
                               <div>
                                 <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Previous Roles</div>
@@ -830,7 +785,7 @@ export default function Robotics() {
                                     </li>
                                   ))}
                                 </ul>
-          </div>
+                              </div>
 
                               <div>
                                 <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
@@ -892,24 +847,12 @@ export default function Robotics() {
                           </li>
                           <li className="flex items-center gap-2 text-zinc-300">
                             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                            <span>Local and national competitions</span>
+                            <span>Local, national, and international competitions</span>
                           </li>
                         </ul>
                       </div>
 
-                      <div>
-                        <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Success Metrics</div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <div className="text-2xl font-medium text-zinc-100">80%</div>
-                            <div className="text-sm text-zinc-400">Success Rate</div>
-                          </div>
-                          <div>
-                            <div className="text-2xl font-medium text-zinc-100">500+</div>
-                            <div className="text-sm text-zinc-400">Alumni Network</div>
-                          </div>
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -950,19 +893,7 @@ export default function Robotics() {
                         </ul>
                       </div>
 
-                      <div>
-                        <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Success Metrics</div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <div className="text-2xl font-medium text-zinc-100">92%</div>
-                            <div className="text-sm text-zinc-400">Success Rate</div>
-                          </div>
-                          <div>
-                            <div className="text-2xl font-medium text-zinc-100">200+</div>
-                            <div className="text-sm text-zinc-400">Alumni Network</div>
-                          </div>
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -1189,14 +1120,15 @@ export default function Robotics() {
                 {/* Contact Button */}
                 <div>
                   <a 
-                    href="https://t.me/donijar"
+                    href="mailto:doni.peltojarvi@aaltoes.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="base-button inline-flex items-center justify-center group h-10 px-4"
                   >
                     <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
                       </svg>
                       Contact
                     </span>
@@ -1231,14 +1163,15 @@ export default function Robotics() {
                 {/* Contact Button */}
                 <div>
                   <a 
-                    href="https://t.me/yeralkhan"
+                    href="mailto:yera.slam@aaltoes.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="base-button inline-flex items-center justify-center group h-10 px-4"
                   >
                     <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
                       </svg>
                       Contact
                     </span>
