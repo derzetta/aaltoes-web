@@ -23,11 +23,16 @@ import Spinout from './pages/initiatives/Spinout'
 import OpenSource from './pages/initiatives/OpenSource'
 import Blueprint from './pages/initiatives/Blueprint'
 import Robotics from './pages/initiatives/Robotics'
+import Explore from './pages/Explore'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/explore",
+    element: <Explore />,
   },
   {
     path: "/2025",

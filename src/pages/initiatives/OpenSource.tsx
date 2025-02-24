@@ -632,11 +632,13 @@ export default function OpenSource() {
 
           {/* Responsible Person Card */}
           <section>
-            <motion.div
-              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8 space-y-8"
-              {...fadeIn}
-              transition={{ ...fadeIn.transition, delay: 0.3 }}
-            >
+          <motion.div
+            className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
+            {...fadeIn}
+            transition={{ ...fadeIn.transition, delay: 0.3 }}
+          >
+            {/* Container for profile and buttons */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
               {/* Profile Info */}
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden">
@@ -653,7 +655,7 @@ export default function OpenSource() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <a 
                   href="https://aaltoes.com/events"
                   target="_blank"
@@ -702,8 +704,9 @@ export default function OpenSource() {
                   </span>
                 </a>
               </div>
-            </motion.div>
-          </section>
+            </div>
+          </motion.div>
+        </section>
         </div>
       </div>
     </div>

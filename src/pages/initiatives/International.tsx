@@ -46,131 +46,7 @@ export default function International() {
           </motion.div>
 
           {/* Video Section */}
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65 group">
-            <video
-              id="heroVideo"
-              className="w-full h-full object-cover"
-              playsInline
-            >
-              <source src="/fr.mov" type="video/quicktime" />
-            </video>
-
-            {/* Video Overlay - Play State */}
-            <div className="absolute inset-0 bg-zinc-950/50 transition-opacity duration-200 group-hover:opacity-0 group-[.playing]:opacity-0">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    const container = video?.closest('.group');
-                    if (video) {
-                      if (video.paused) {
-                        video.play();
-                        container?.classList.add('playing');
-                      } else {
-                        video.pause();
-                        container?.classList.remove('playing');
-                      }
-                    }
-                  }}
-                  className="w-16 h-16 rounded-full bg-zinc-100/10 backdrop-blur-sm flex items-center justify-center hover:bg-zinc-100/20 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Video Controls */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-zinc-950 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <div className="flex items-center gap-6">
-                {/* Play/Pause */}
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    const container = video?.closest('.group');
-                    if (video) {
-                      if (video.paused) {
-                        video.play();
-                        container?.classList.add('playing');
-                      } else {
-                        video.pause();
-                        container?.classList.remove('playing');
-                      }
-                    }
-                  }}
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </button>
-
-                {/* Volume Control */}
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => {
-                      const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                      if (video) {
-                        video.muted = !video.muted;
-                      }
-                    }}
-                    className="text-zinc-300 hover:text-zinc-100 transition-colors"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                    </svg>
-                  </button>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="1" 
-                    step="0.1"
-                    defaultValue="1"
-                    onChange={(e) => {
-                      const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                      if (video) {
-                        video.volume = parseFloat(e.target.value);
-                      }
-                    }}
-                    className="w-24 accent-zinc-100"
-                  />
-                </div>
-
-                {/* Fullscreen */}
-                <button 
-                  onClick={() => {
-                    const video = document.getElementById('heroVideo') as HTMLVideoElement;
-                    if (video) {
-                      if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                      } else {
-                        video.classList.remove('object-cover');
-                        video.classList.add('object-contain');
-                        video.requestFullscreen();
-                        
-                        const handleFullscreenChange = () => {
-                          if (!document.fullscreenElement) {
-                            video.classList.remove('object-contain');
-                            video.classList.add('object-cover');
-                            document.removeEventListener('fullscreenchange', handleFullscreenChange);
-                          }
-                        };
-                        document.addEventListener('fullscreenchange', handleFullscreenChange);
-                      }
-                    }
-                  }}
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors ml-auto"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         {/* Main Content */}
@@ -287,12 +163,14 @@ export default function International() {
             </motion.div>
           </section>
           {/* Ecosystem Coordinator Footer */}
-          <section>
-            <motion.div
-              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8 space-y-8"
-              {...fadeIn}
-              transition={{ ...fadeIn.transition, delay: 0.3 }}
-            >
+        <section>
+          <motion.div
+            className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
+            {...fadeIn}
+            transition={{ ...fadeIn.transition, delay: 0.3 }}
+          >
+            {/* Container for profile and buttons */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
               {/* Profile Info */}
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden">
@@ -309,7 +187,7 @@ export default function International() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <a 
                   href="https://aaltoes.com/events"
                   target="_blank"
@@ -358,8 +236,9 @@ export default function International() {
                   </span>
                 </a>
               </div>
-            </motion.div>
-          </section>
+            </div>
+          </motion.div>
+        </section>
         </div>
       </div>
     </div>

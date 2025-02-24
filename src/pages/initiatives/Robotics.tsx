@@ -538,9 +538,9 @@ export default function Robotics() {
 
         {/* Vision Section */}
         <section className="mt-24">
-          <div className="text-left md:text-center space-y-2 mb-16">
-          <h2 className="text-xl md:text-2xl font-medium text-zinc-100">Robotics is an ultimate future of startups.</h2>
-          <h2 className="text-xl md:text-2xl font-medium text-zinc-100">Our youth is yet to be ready for that.</h2>
+          <div className="text-left md:text-center space-y-1 tracking-tight mb-16">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Robotics is an ultimate future of startups.</h2>
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our youth is yet to be ready for that.</h2>
           </div>
 
           {/* Linear Vision with Dividers */}
@@ -845,6 +845,127 @@ export default function Robotics() {
         {/* Divider */}
         <div className="w-full h-px bg-zinc-800" />
 
+            {/* Tracks Section */}
+            <div className="space-y-8">
+              <div className="text-left md:text-center space-y-4">
+                <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Two Tracks for Different Skill Levels</h2>
+                <p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto">
+                  Tailored programs to support robotics enthusiasts at every stage of their journey.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Foundations Track */}
+                <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+                  <div className="space-y-6">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="text-xl font-medium text-zinc-100">Foundations Track</h3>
+                        <p className="text-sm font-mono text-zinc-500 uppercase mt-1">Ages 14-21</p>
+                      </div>
+                      <div className="text-sm font-mono text-emerald-400 px-2 py-1 bg-emerald-950/50 rounded border border-emerald-400/20 uppercase">
+                        IN PROCESS
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Focus Areas</div>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Basic robotics principles and mechanics</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Programming fundamentals</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Team collaboration skills</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Local and national competitions</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Success Metrics</div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <div className="text-2xl font-medium text-zinc-100">80%</div>
+                            <div className="text-sm text-zinc-400">Success Rate</div>
+                          </div>
+                          <div>
+                            <div className="text-2xl font-medium text-zinc-100">500+</div>
+                            <div className="text-sm text-zinc-400">Alumni Network</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Frontier Track */}
+                <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8">
+                  <div className="space-y-6">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="text-xl font-medium text-zinc-100">Frontier Track</h3>
+                        <p className="text-sm font-mono text-zinc-500 uppercase mt-1">Ages 15-27</p>
+                      </div>
+                      <div className="text-sm font-mono text-amber-400 px-2 py-1 bg-amber-950/50 rounded border border-amber-400/20 uppercase">
+                        COMING SOON
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Focus Areas</div>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Advanced AI and machine learning</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Computer vision and sensor fusion</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>International competitions</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-zinc-300">
+                            <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
+                            <span>Research and innovation projects</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Success Metrics</div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <div className="text-2xl font-medium text-zinc-100">92%</div>
+                            <div className="text-sm text-zinc-400">Success Rate</div>
+                          </div>
+                          <div>
+                            <div className="text-2xl font-medium text-zinc-100">200+</div>
+                            <div className="text-sm text-zinc-400">Alumni Network</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="w-full h-px bg-zinc-800 my-16" />
+
         {/* World Map Section */}
         <WorldMapSection />
 
@@ -854,7 +975,7 @@ export default function Robotics() {
         {/* Partners Section - Moved Up */}
         <section className="mt-24">
           <div className="text-left md:text-center space-y-4 mb-16">
-            <h2 className="text-2xl font-medium text-zinc-100">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">
               Supported by Global Leaders
             </h2>
             <p className="text-md text-zinc-400 max-w-2xl mx-auto">
@@ -979,10 +1100,12 @@ export default function Robotics() {
         {/* Responsible Person Card */}
         <section>
           <motion.div
-              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8 space-y-8"
+            className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.3 }}
           >
+            {/* Container for profile and buttons */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
               {/* Profile Info */}
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden">
@@ -999,7 +1122,7 @@ export default function Robotics() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <a 
                   href="https://aaltoes.com/events"
                   target="_blank"
@@ -1046,7 +1169,8 @@ export default function Robotics() {
                     </svg>
                     Chat
                   </span>
-              </a>
+                </a>
+              </div>
             </div>
           </motion.div>
         </section>
