@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import VideoPlayer from '../../components/VideoPlayer'
@@ -12,47 +12,6 @@ const fadeIn = {
 }
 
 // Spinout Hero Demo
-const SpinoutHeroDemo = () => {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const logos = [
-    { src: "/2025/ignite.svg", alt: "Ignite Logo" },
-    { src: "/2025/wednesday.svg", alt: "Wednesday Logo" },
-    { src: "/2025/strive.svg", alt: "Strive Logo" }
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex(current => (current + 1) % logos.length)
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div className="relative aspect-[3/1] w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative h-10 w-64">
-          {logos.map((logo, index) => (
-            <div
-              key={index}
-              className="absolute inset-0 flex items-center justify-center transition-all duration-1000"
-              style={{
-                opacity: index === activeIndex ? 1 : 0,
-                transform: `scale(${index === activeIndex ? 1 : 0.8}) translateY(${index === activeIndex ? 0 : 10}px)`,
-                zIndex: index === activeIndex ? 1 : 0
-              }}
-            >
-              <img 
-                src={logo.src} 
-                alt={logo.alt} 
-                className="h-24 opacity-70"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export default function Spinout() {
   const { pathname } = useLocation()
@@ -69,7 +28,7 @@ export default function Spinout() {
         {/* Hero Section */}
         <div className="space-y-16">
           {/* Demo Section */}
-          <SpinoutHeroDemo />
+
 
           {/* Heading and Description */}
           <motion.div 

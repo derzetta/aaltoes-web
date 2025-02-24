@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Navbar from '../../components/Navbar'
 import VideoPlayer from '../../components/VideoPlayer'
 
@@ -11,82 +11,6 @@ const fadeIn = {
 }
 
 // Focus Topics Demo Component
-const FocusTopicsHeroDemo = () => {
-  const [time, setTime] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(t => t + 1)
-    }, 50)
-    return () => clearInterval(interval)
-  }, [])
-
-  const icons = [
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2"/>
-      <path d="M6 4a2 2 0 0 1 2-2"/>
-      <path d="M18 4a2 2 0 0 0-2-2"/>
-      <path d="M12 2v20"/>
-      <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="18" height="18" x="3" y="3" rx="2"/>
-      <path d="M7 7h10"/>
-      <path d="M7 12h10"/>
-      <path d="M7 17h10"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
-    </svg>,
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-      <line x1="12" y1="22.08" x2="12" y2="12"/>
-    </svg>
-  ]
-
-  return (
-    <div className="relative aspect-[3/1] w-full overflow-hidden rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65">
-      <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-8 gap-x-1 gap-y-6 p-8">
-        {[...Array(32)].map((_, i) => {
-          const iconIndex = i % icons.length
-          const row = Math.floor(i / (window.innerWidth >= 768 ? 8 : 4))
-          const col = i % (window.innerWidth >= 768 ? 8 : 4)
-          
-          return (
-            <div
-              key={i}
-              className={`flex items-center justify-center ${i >= 12 ? 'hidden md:flex' : ''}`}
-              style={{
-                transform: `translate(${Math.sin((row + col) * 0.5 + time * 0.1) * 4}px, ${Math.cos((row + col) * 0.5 + time * 0.1) * 4}px)`,
-                transition: 'transform 0.5s ease-out'
-              }}
-            >
-              <div 
-                className="w-12 h-12 rounded-xl bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center text-zinc-500"
-                style={{
-                  opacity: Math.abs(Math.sin(time * 0.1 + i)) * 0.5 + 0.5
-                }}
-              >
-                {icons[iconIndex]}
-              </div>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
 
 export default function FocusTopics() {
   const { pathname } = useLocation()
@@ -136,12 +60,7 @@ export default function FocusTopics() {
         {/* Hero Section */}
         <div className="space-y-16">
           {/* Demo Section */}
-          <motion.div
-            {...fadeIn}
-            transition={{ ...fadeIn.transition, delay: 0.3 }}
-          >
-            <FocusTopicsHeroDemo />
-          </motion.div>
+
 
           {/* Heading and Description */}
           <motion.div 
