@@ -682,8 +682,8 @@ export default function Robotics() {
                           src={`/2025/team/member${i + 1}.png`}
                           alt={member.name}
                           className="w-full h-full object-cover grayscale"
-                        />
-                      </div>
+                  />
+                </div>
                       <div className="min-w-0 flex-1">
                         <div className="text-sm font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
                           {member.name}
@@ -751,16 +751,16 @@ export default function Robotics() {
                                 setActiveProfile(null);
                               }}
                               className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-200 transition-colors"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 6L6 18M6 6l12 12"/>
-                              </svg>
-                            </button>
+                  </svg>
+                </button>
 
                             {/* Profile Content */}
                             <div className="mb-6">
                               <div className="text-xl font-medium text-zinc-100">{member.name}</div>
-                            </div>
+              </div>
 
                             <div className="space-y-6">
                               <div>
@@ -773,7 +773,7 @@ export default function Robotics() {
                                     </li>
                                   ))}
                                 </ul>
-                              </div>
+            </div>
 
                               <div>
                                 <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Previous Roles</div>
@@ -785,12 +785,12 @@ export default function Robotics() {
                                     </li>
                                   ))}
                                 </ul>
-                              </div>
+        </div>
 
                               <div>
                                 <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
                                 <div className="text-sm text-zinc-300">{member.contact}</div>
-                              </div>
+          </div>
                             </div>
                           </div>
                         </div>
@@ -1095,11 +1095,11 @@ export default function Robotics() {
         <section>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Doni's Card */}
-            <motion.div
+          <motion.div
               className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
-              {...fadeIn}
-              transition={{ ...fadeIn.transition, delay: 0.3 }}
-            >
+            {...fadeIn}
+            transition={{ ...fadeIn.transition, delay: 0.3 }}
+          >
               {/* Container for profile and button */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
                 {/* Profile Info */}
@@ -1121,8 +1121,8 @@ export default function Robotics() {
                 <div>
                   <a 
                     href="mailto:doni.peltojarvi@aaltoes.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                     className="base-button inline-flex items-center justify-center group h-10 px-4"
                   >
                     <span className="relative z-10 uppercase text-sm flex items-center gap-2">
@@ -1164,8 +1164,8 @@ export default function Robotics() {
                 <div>
                   <a 
                     href="mailto:yera.slam@aaltoes.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                     className="base-button inline-flex items-center justify-center group h-10 px-4"
                   >
                     <span className="relative z-10 uppercase text-sm flex items-center gap-2">
@@ -1177,8 +1177,8 @@ export default function Robotics() {
                     </span>
                   </a>
                 </div>
-              </div>
-            </motion.div>
+            </div>
+          </motion.div>
           </div>
         </section>
       </div>
