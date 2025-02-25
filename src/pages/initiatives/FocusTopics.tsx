@@ -189,6 +189,60 @@ export default function FocusTopics() {
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
+          {/* Explore Startup Sauna 2025 Card */}
+          <section>
+            <motion.div
+              className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden"
+              {...fadeIn}
+              transition={{ ...fadeIn.transition, delay: 0.3 }}
+            >
+              <div className="flex flex-col md:flex-row">
+                {/* Image with gradient */}
+                <div className="relative w-full md:w-1/3 h-60 md:h-auto">
+                  <div className="absolute inset-0">
+                    <img 
+                      src="/explore.png" 
+                      alt="Explore Startup Sauna 2025"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-zinc-950 md:block hidden"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent md:hidden"></div>
+                </div>
+                
+                {/* Content */}
+                <div className="w-full md:w-2/3 p-8 flex flex-col justify-center">
+                  <div className="space-y-4">
+                    <div className="text-sm font-mono text-zinc-500">13 MARCH 2025</div>
+                    <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Explore Startup Sauna 2025</h2>
+                    <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
+                      Join us to hear more about the exciting opportunities and innovations coming to Startup Sauna in 2025.
+                    </p>
+                    <div className="pt-4">
+                      <a 
+                        href="https://aaltoes.com/explore"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="base-button inline-flex items-center justify-center group h-10 px-4 relative overflow-hidden"
+                      >
+                        <span className="relative z-10 uppercase text-sm flex items-center gap-2">
+                          Secure the seat
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          </svg>
+                        </span>
+                        <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* Divider */}
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
           {/* Responsible Person Card */}
           <section>
           <motion.div
