@@ -192,7 +192,7 @@ export default function FocusTopics() {
           {/* Explore Startup Sauna 2025 Card */}
           <section>
             <motion.div
-              className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden"
+              className="bg-zinc-950 backdrop-blur-sm border border-zinc-800/50 rounded-xl overflow-hidden"
               {...fadeIn}
               transition={{ ...fadeIn.transition, delay: 0.3 }}
             >
