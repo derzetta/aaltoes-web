@@ -361,11 +361,11 @@ export default function Log() {
                 {entries.map((entry, index) => (
                   <LogEntry
                     key={index}
-                    date={entry.date}
-                    title={entry.title}
-                    description={entry.description}
-                    type={entry.type}
-                    initiative={entry.initiative}
+                    date={entry.date ?? ''}
+                    title={entry.title ?? ''}
+                    description={entry.description ?? ''}
+                    type={entry.type ?? ''}
+                    initiative={entry.initiative ?? ''}
                   />
                 ))}
               </MonthSection>
