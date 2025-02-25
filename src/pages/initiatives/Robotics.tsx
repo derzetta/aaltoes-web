@@ -1000,9 +1000,9 @@ export default function Robotics() {
 
         {/* Timeline Section - Changelog Style - Moved Down */}
         <section className="mt-24">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-medium text-zinc-100 mb-4">2025 Roadmap</h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          <div className="text-left md:text-center space-y-4 mb-16">
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">2025 Roadmap</h2>
+            <p className="text-md text-zinc-400 max-w-2xl mx-auto">
               A comprehensive plan to build Finland's robotics excellence
             </p>
           </div>
