@@ -17,6 +17,13 @@ import FoodChart from './pages/FoodChart'
 import Brand from './pages/Brand'
 import Announcement2025 from './pages/Announcement2025'
 import Tokyo2025Task from './pages/Tokyo2025Task'
+import FocusTopics from './pages/initiatives/FocusTopics'
+import International from './pages/initiatives/International'
+import Spinout from './pages/initiatives/Spinout'
+import OpenSource from './pages/initiatives/OpenSource'
+import Blueprint from './pages/initiatives/Blueprint'
+import Robotics from './pages/initiatives/Robotics'
+import Explore from './pages/Explore'
 
 const router = createBrowserRouter([
   {
@@ -24,8 +31,36 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: "/explore",
+    element: <Explore />,
+  },
+  {
     path: "/2025",
     element: <Announcement2025 />,
+  },
+  {
+    path: "/2025/focus-topics",
+    element: <FocusTopics />,
+  },
+  {
+    path: "/2025/international",
+    element: <International />,
+  },
+  {
+    path: "/2025/spinout",
+    element: <Spinout />,
+  },
+  {
+    path: "/2025/opensource",
+    element: <OpenSource />,
+  },
+  {
+    path: "/2025/blueprint",
+    element: <Blueprint />,
+  },
+  {
+    path: "/2025/robotics",
+    element: <Robotics />,
   },
   {
     path: "/tokyo2025task",

@@ -44,13 +44,7 @@ const teamMembers = [
     telegram: "siirilautamies",
     linkedin: "https://linkedin.com/in/siirilautamies"
   },
-  {
-    name: "Lauri Loyttyniemi",
-    role: "Projects",
-    image: "/board/lauri.png",
-    email: "lauri.loyttyniemi@aaltoes.com",
-    telegram: "lauriloyttyniemi",
-  },
+
   {
     name: "Yera Slam",
     role: "Partnerships & Finance",
@@ -66,6 +60,14 @@ const teamMembers = [
     email: "doni.peltojarvi@aaltoes.com",
     telegram: "donijar",
     linkedin: "https://linkedin.com/in/donipeltojarvi"
+  },
+  {
+    name: "Santtu",
+    role: "Mental Health Specialist",
+    image: "/board/santtu.png",
+    email: "doni.peltojarvi@aaltoes.com",
+    telegram: "donijar",
+    linkedin: "https://linkedin.com/in/donipeltojarvi"
   }
 ]
 
@@ -77,7 +79,7 @@ function TeamMember({ name, role, image }: TeamMemberProps) {
           <img 
             src={image} 
             alt={name} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover [filter:brightness(0.95)_contrast(1)_grayscale(0)_saturate(0)]"
           />
         </div>
         <div>

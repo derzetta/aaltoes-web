@@ -19,11 +19,21 @@ export default {
       },
       animation: {
         'loading-bar': 'loading-bar 1.5s ease-in-out infinite',
+        'scroll-left': 'scroll-left 40s linear infinite',
+        'scroll-right': 'scroll-right 40s linear infinite',
       },
       keyframes: {
         'loading-bar': {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(100%)' }
+        },
+        'scroll-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
+        },
+        'scroll-right': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' }
         }
       },
       textShadow: {

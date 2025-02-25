@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
+    "@radix-ui/react-hover-card": "^1.1.6",
     "@react-three/drei": "^9.120.6",
     "@react-three/fiber": "^8.17.12",
     "@react-three/postprocessing": "^2.16.6",
@@ -23,7 +24,6 @@
     "framer-motion": "^11.16.4",
     "html2pdf.js": "^0.10.2",
     "js-cookie": "^3.0.5",
-    "motion": "^11.16.4",
     "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
