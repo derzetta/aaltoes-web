@@ -617,7 +617,7 @@ export default function Robotics() {
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
                   <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
-                  <div className="text-sm font-mono text-zinc-500 uppercase">By 24 Feb., 2024</div>
+                  <div className="text-sm font-mono text-zinc-500 uppercase">By 24 Feb., 2025</div>
                 </div>
                 <div className="mt-3 md:mt-4 space-y-3">
                   <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
@@ -1001,7 +1001,7 @@ export default function Robotics() {
         {/* Timeline Section - Changelog Style - Moved Down */}
         <section className="mt-24">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-medium text-zinc-100 mb-4">2024 Roadmap</h2>
+            <h2 className="text-3xl font-medium text-zinc-100 mb-4">2025 Roadmap</h2>
             <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
               A comprehensive plan to build Finland's robotics excellence
             </p>
