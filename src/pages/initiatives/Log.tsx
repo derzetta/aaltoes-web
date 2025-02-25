@@ -22,22 +22,22 @@ interface LogEntryProps {
 const LogEntry = ({ date, title, description, type, initiative }: LogEntryProps) => {
   // Define colors based on initiative
   const initiativeColors = {
-    Robotics: 'bg-purple-500',
-    Blueprint: 'bg-cyan-500',
-    OpenSource: 'bg-green-500',
-    International: 'bg-yellow-500',
-    FocusTopics: 'bg-pink-500',
-    Spinout: 'bg-orange-500'
+    Robotics: 'bg-purple-800',
+    Blueprint: 'bg-cyan-800',
+    OpenSource: 'bg-green-800',
+    International: 'bg-yellow-800',
+    FocusTopics: 'bg-pink-800',
+    Spinout: 'bg-orange-800'
   }
 
   // Define text colors based on initiative
   const initiativeTextColors = {
-    Robotics: 'text-purple-400',
-    Blueprint: 'text-cyan-400',
-    OpenSource: 'text-green-400',
-    International: 'text-yellow-400',
-    FocusTopics: 'text-pink-400',
-    Spinout: 'text-orange-400'
+    Robotics: 'text-purple-800',
+    Blueprint: 'text-cyan-800',
+    OpenSource: 'text-green-800',
+    International: 'text-yellow-800',
+    FocusTopics: 'text-pink-800',
+    Spinout: 'text-orange-800'
   }
 
   // Determine dot color - use initiative color if available
@@ -327,29 +327,35 @@ export default function Log() {
         {/* Main Content */}
         <div className="space-y-16">
           {/* Filters */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 px-0">
             <button
               onClick={() => setFilter(null)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors relative group overflow-hidden ${
                 filter === null 
                   ? 'bg-zinc-800 text-zinc-100' 
-                  : 'bg-zinc-900/50 text-zinc-400 hover:text-zinc-300'
+                  : 'bg-zinc-900/50 text-zinc-400'
               }`}
             >
-              All Updates
+              <span className="relative z-10">All Updates</span>
+              {filter !== null && (
+                <div className="absolute inset-0 bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              )}
             </button>
             
             {initiatives.map((initiative) => (
               <button
                 key={initiative}
                 onClick={() => setFilter(initiative)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors relative group overflow-hidden ${
                   filter === initiative 
                     ? 'bg-zinc-800 text-zinc-100' 
-                    : 'bg-zinc-900/50 text-zinc-400 hover:text-zinc-300'
+                    : 'bg-zinc-900/50 text-zinc-400'
                 }`}
               >
-                {initiative}
+                <span className="relative z-10">{initiative}</span>
+                {filter !== initiative && (
+                  <div className="absolute inset-0 bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                )}
               </button>
             ))}
           </div>
@@ -401,12 +407,12 @@ export default function Log() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 px-0">
                 <a 
                   href="https://github.com/aaltoes-tech"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto relative overflow-hidden"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -414,13 +420,14 @@ export default function Log() {
                     </svg>
                     GitHub
                   </span>
+                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </a>
                 
                 <a 
                   href="mailto:siiri.lautamies@aaltoes.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto relative overflow-hidden"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -429,6 +436,7 @@ export default function Log() {
                     </svg>
                     Contact
                   </span>
+                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </a>
               </div>
             </div>

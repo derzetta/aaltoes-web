@@ -615,7 +615,7 @@ export default function Announcement2025() {
 
         {/* Navigation Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6"
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 px-4 sm:px-0"
           {...fadeIn}
           transition={{ ...fadeIn.transition, delay: 0.6 }}
         >
@@ -633,7 +633,7 @@ export default function Announcement2025() {
               </svg>
               View Change Log
             </span>
-            <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
           
           <Link
@@ -641,7 +641,7 @@ export default function Announcement2025() {
             className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
           >
             <span className="relative z-10 uppercase">Back to Homepage</span>
-            <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
         </motion.div>
       </div>
