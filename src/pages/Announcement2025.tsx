@@ -346,6 +346,47 @@ const FocusTopicsDemo = () => {
   )
 }
 
+// Recommended Reading Card Component
+const RecommendedReadingCard = () => (
+  <motion.div
+    className="relative group md:col-span-2"
+    {...fadeIn}
+    transition={{ ...fadeIn.transition, delay: 0.2 }}
+  >
+    <a
+      href="https://aaltoes.doni.fi"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block relative w-full h-24 rounded-2xl bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/65 hover:border-zinc-700/100 transition-all duration-300 group-hover:bg-zinc-900/30 overflow-hidden"
+    >
+      <div className="absolute inset-0 p-6 flex items-center">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-zinc-900/80 border border-zinc-800/50 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+          <div>
+            <p className="text-xs font-mono text-zinc-400 uppercase tracking-wide">
+              Recommended Reading
+            </p>
+            <h2 className="text-base md:text-lg font-medium text-zinc-100 leading-tight">
+              Last Year's Presidential Campaign
+            </h2>
+          </div>
+        </div>
+        <div className="ml-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 17L17 7"></path>
+            <path d="M7 7h10v10"></path>
+          </svg>
+        </div>
+      </div>
+    </a>
+  </motion.div>
+)
+
 export default function Announcement2025() {
   const { pathname } = useLocation()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -559,6 +600,7 @@ export default function Announcement2025() {
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.3 }}
           >
+            <RecommendedReadingCard />
             {initiatives.map((initiative, index) => (
               <InitiativeCard
                 key={initiative.id}
