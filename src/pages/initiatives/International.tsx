@@ -195,7 +195,7 @@ export default function International() {
                   {/* Contact Button */}
                   <div>
                     <a 
-                      href="https://t.me/tetsufujimura"
+                      href="mailto:tetsu.fujimura@aaltoes.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="base-button inline-flex items-center justify-center group h-10 px-4"
@@ -237,7 +237,7 @@ export default function International() {
                   {/* Contact Button */}
                   <div>
                     <a 
-                      href="https://t.me/donijar"
+                      href="mailto:doni.peltojarvi@aaltoes.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="base-button inline-flex items-center justify-center group h-10 px-4"
