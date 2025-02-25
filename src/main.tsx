@@ -23,6 +23,7 @@ import Spinout from './pages/initiatives/Spinout'
 import OpenSource from './pages/initiatives/OpenSource'
 import Blueprint from './pages/initiatives/Blueprint'
 import Robotics from './pages/initiatives/Robotics'
+import Log from './pages/initiatives/Log'
 import Explore from './pages/Explore'
 
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/2025/robotics",
     element: <Robotics />,
+  },
+  {
+    path: "/2025/log",
+    element: <Log />,
   },
   {
     path: "/tokyo2025task",

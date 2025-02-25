@@ -118,7 +118,7 @@ export default function Team() {
         </div>
 
         <p className="text-neutral-100/60 text-center mt-12">
-          Write us at firstname.lastname@aaltoes.com
+          Write us at firstname.lastname @ aaltoes.com
         </p>
 
         <div className="mt-24">
