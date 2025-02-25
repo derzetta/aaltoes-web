@@ -144,7 +144,7 @@ export default function OpenSource() {
           </div>
 
           {/* Gradient Overlays */}
-          <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-b from-zinc-950 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-l from-transparent to-zinc-950" />
           <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-zinc-950 to-transparent" />
         </motion.div>
 

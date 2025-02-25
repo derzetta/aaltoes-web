@@ -229,6 +229,8 @@ const RoboticsCardDemo = () => {
   )
 }
 
+// Log Card Demo
+
 // Spinout Card Demo
 const SpinoutCardDemo = () => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -611,15 +613,32 @@ export default function Announcement2025() {
           </motion.div>
         </div>
 
-        {/* Back Button */}
+        {/* Navigation Buttons */}
         <motion.div
-          className="flex justify-center pt-6"
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6"
           {...fadeIn}
-          transition={{ ...fadeIn.transition, delay: 0.8 }}
+          transition={{ ...fadeIn.transition, delay: 0.6 }}
         >
           <Link
+            to="/2025/log"
+            className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
+          >
+            <span className="relative z-10 uppercase flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+                <path d="M10 9H8"/>
+              </svg>
+              View Change Log
+            </span>
+            <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          </Link>
+          
+          <Link
             to="/"
-            className="base-button inline-flex items-center justify-center group relative overflow-hidden"
+            className="base-button inline-flex items-center justify-center group relative overflow-hidden w-full sm:w-auto"
           >
             <span className="relative z-10 uppercase">Back to Homepage</span>
             <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
