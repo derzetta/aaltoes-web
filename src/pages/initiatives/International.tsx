@@ -47,7 +47,7 @@ export default function International() {
 
           {/* Video Section */}
           <div className="max-w-4xl mx-auto">
-            <VideoPlayer src="/2025/video_extracts/2.mov" />
+            <VideoPlayer src="/2025/video_extracts/2.mov" poster="/2025/logos/e2.png" />
           </div>
         </div>
         <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />

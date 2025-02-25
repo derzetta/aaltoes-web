@@ -175,7 +175,7 @@ export default function OpenSource() {
 
           {/* Video Section */}
             <div className="max-w-4xl mx-auto">
-              <VideoPlayer src="/2025/video_extracts/4.mov" />
+              <VideoPlayer src="/2025/video_extracts/4.mov" poster="/2025/logos/e4.png" />
           </div>
           </motion.div>
         </div>

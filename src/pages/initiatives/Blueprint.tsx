@@ -371,7 +371,7 @@ export default function Blueprint() {
 
             {/* Video Section */}
             <div className="max-w-4xl mx-auto">
-              <VideoPlayer src="/2025/video_extracts/5.mov" />
+              <VideoPlayer src="/2025/video_extracts/5.mov" poster="/2025/logos/e5.png" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <StatCard 

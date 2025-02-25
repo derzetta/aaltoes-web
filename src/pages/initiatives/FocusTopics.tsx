@@ -84,7 +84,7 @@ export default function FocusTopics() {
 
           {/* Video Section */}
           <div className="max-w-4xl mx-auto">
-            <VideoPlayer src="/2025/video_extracts/1.mov" />
+            <VideoPlayer src="/2025/video_extracts/1.mov" poster="/2025/logos/e1.png" />
           </div>
         </div>
         <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />

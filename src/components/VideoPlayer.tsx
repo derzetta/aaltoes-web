@@ -2,10 +2,11 @@ import { useRef, useState } from 'react'
 
 interface VideoPlayerProps {
   src: string
+  poster?: string
   className?: string
 }
 
-export default function VideoPlayer({ src, className = '' }: VideoPlayerProps) {
+export default function VideoPlayer({ src, poster, className = '' }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
@@ -35,6 +36,7 @@ export default function VideoPlayer({ src, className = '' }: VideoPlayerProps) {
         ref={videoRef}
         className="w-full h-full object-cover"
         playsInline
+        poster={poster}
       >
         <source src={src} type="video/mp4" />
       </video>

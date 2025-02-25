@@ -540,7 +540,7 @@ export default function Robotics() {
 
           {/* Video Section */}
         <div className="max-w-4xl mx-auto">
-          <VideoPlayer src="/2025/video_extracts/6.mov" />
+          <VideoPlayer src="/2025/video_extracts/6.mov" poster="/2025/logos/e6.png" />
         </div>
 
         {/* Vision Section */}
