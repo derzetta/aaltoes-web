@@ -184,31 +184,7 @@ function LoadingScreen() {
 }
 
 function LivestreamBanner() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  })
   const [isTabletOrMobile] = useState(window.innerWidth <= 1024)
-
-  useEffect(() => {
-    const targetDate = new Date('2025-02-12T19:00:00+02:00')
-    const updateTimer = () => {
-      const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
-        const minutes = Math.floor((difference / 1000 / 60) % 60)
-        const seconds = Math.floor((difference / 1000) % 60)
-        setTimeLeft({ days, hours, minutes, seconds })
-      }
-    }
-    updateTimer()
-    const timer = setInterval(updateTimer, 1000)
-    return () => clearInterval(timer)
-  }, [])
 
   return (
     <motion.div
@@ -220,7 +196,7 @@ function LivestreamBanner() {
         <div className="relative flex flex-col sm:flex-row items-center p-3.5 px-5 gap-3.5 rounded-lg border border-zinc-800 bg-zinc-900/30 backdrop-blur-md transition-colors duration-200 hover:bg-zinc-800/30">
           <div className="flex justify-center sm:justify-start items-center">
             <h2 className="font-geist text-zinc-100 text-base tracking-wide">
-              Paramount Year of Crafting
+              Paramount Year of Craft
             </h2>
           </div>
 
@@ -230,14 +206,14 @@ function LivestreamBanner() {
 
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-              <span className="font-mono text-zinc-400 text-sm uppercase tracking-wider">Livestream in</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="font-mono text-zinc-400 text-sm uppercase tracking-wider">Full Plan & Log Released</span>
             </div>
-            <div className="flex items-center gap-3 font-mono text-sm uppercase">
-              <div className="text-zinc-100">{timeLeft.days}D</div>
-              <div className="text-zinc-100">{timeLeft.hours}H</div>
-              <div className="text-zinc-100">{timeLeft.minutes}M</div>
-              <div className="text-zinc-100">{timeLeft.seconds}S</div>
+            <div className="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
             </div>
           </div>
         </div>
