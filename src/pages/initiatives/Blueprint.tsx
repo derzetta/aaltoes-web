@@ -422,11 +422,11 @@ export default function Blueprint() {
             </div>
           </motion.div>
         </div>
-
+        <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950 my-16" />
         {/* Main Content */}
-        <div className="space-y-16 mt-16">
+        <div className="space-y-20 mt-16">
           {/* Features Section */}
-          <section className="space-y-16">
+          <section className="space-y-10">
             <div className="text-left md:text-center space-y-4">
               <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Key Features</h2>
               <p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto">
@@ -434,7 +434,7 @@ export default function Blueprint() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   title: "Decision Archive",
@@ -490,13 +490,15 @@ export default function Blueprint() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
           {/* Document Browser */}
-          <DocumentBrowser />
+          <section className="space-y-10">
+            <DocumentBrowser />
+          </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
           {/* Responsible Person Cards */}
           <section>
@@ -506,7 +508,7 @@ export default function Blueprint() {
 
               {/* Yera's Card */}
               <motion.div
-                className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
+                className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8"
                 {...fadeIn}
                 transition={{ ...fadeIn.transition, delay: 0.4 }}
               >
@@ -536,7 +538,7 @@ export default function Blueprint() {
                       className="base-button inline-flex items-center justify-center group h-10 px-4"
                     >
                       <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                           <polyline points="22,6 12,13 2,6"/>
                         </svg>
@@ -548,7 +550,7 @@ export default function Blueprint() {
               </motion.div>
 
               <motion.div
-                className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
+                className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8"
                 {...fadeIn}
                 transition={{ ...fadeIn.transition, delay: 0.3 }}
               >
@@ -578,7 +580,7 @@ export default function Blueprint() {
                       className="base-button inline-flex items-center justify-center group h-10 px-4"
                     >
                       <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                           <polyline points="22,6 12,13 2,6"/>
                         </svg>

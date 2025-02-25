@@ -502,7 +502,7 @@ export default function Robotics() {
           {/* Gradient Overlays */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_rgb(9,9,11)_100%)] pointer-events-none opacity-90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/20 via-transparent to-zinc-950/80 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/20 via-transparent to-zinc-950/80 pointer-events-none" />
         </div>
 
         {/* Content Over the Video */}
@@ -525,9 +525,9 @@ export default function Robotics() {
                 </span>
             </Link>
               <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Robotics Nation</h1>
-              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-              Building the future of robotics through education, innovation, and hands-on experience.
-            </p>
+              <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
+                Building the future of hardware startups through robotics education, technical innovation, and hands-on entrepreneurial experience.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -535,7 +535,8 @@ export default function Robotics() {
 
       <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16">
         {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
+                  <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
           {/* Video Section */}
         <div className="max-w-4xl mx-auto">
@@ -545,8 +546,8 @@ export default function Robotics() {
         {/* Vision Section */}
         <section className="mt-24">
           <div className="text-left md:text-center space-y-1 tracking-tight mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Robotics is an ultimate future of startups.</h2>
-            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our youth is yet to be ready for that.</h2>
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Robotics is the ultimate frontier for next-gen startups.</h2>
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Finland's technical talent is ready to lead this revolution.</h2>
           </div>
 
           {/* Linear Vision with Dividers */}
@@ -570,7 +571,7 @@ export default function Robotics() {
                       <div className="text-sm font-mono text-zinc-500 uppercase">Ranked #71 Globally</div>
                     </div>
                     <p className="mt-3 md:mt-4 text-sm md:text-base text-zinc-300 leading-relaxed">
-                      Despite strong educational foundations and individual achievements, Finland's competitive robotics ecosystem remains fragmented. Our current ranking doesn't reflect the true potential of our technical talent.
+                      Despite Finland's strong technical education and individual achievements, our hardware startup ecosystem remains fragmented. The current global ranking doesn't reflect our potential to create world-class robotics ventures and deep tech innovations.
                     </p>
                   </div>
               </div>
@@ -591,12 +592,11 @@ export default function Robotics() {
                       <div className="text-sm font-mono text-zinc-500 uppercase">Target: #1 in Europe</div>
                     </div>
                     <p className="mt-3 md:mt-4 text-sm md:text-base text-zinc-300 leading-relaxed">
-                      Uniting Finland's top robotics teams, educators, and industry partners under one umbrella to create a systematic approach for developing world-class technical talent through robotics.
+                      Creating a unified ecosystem where Finland's top robotics teams, students, university units and industry partners to work together on, including the next generation of hardware startups. Our alumni have proven their excellence, being featured in:
                     </p>
-                    <div className="mt-4 flex items-center gap-3 md:gap-4">
-                      <img src="/2025/logos/yc.svg" alt="Y Combinator" className="h-3 md:h-4 opacity-70" />
-                      <img src="/2025/logos/ivy.svg" alt="Ivy League" className="h-3 md:h-4 opacity-70" />
-                      <img src="/2025/logos/stanford.svg" alt="Stanford" className="h-3 md:h-4 opacity-70" />
+                    <div className="mt-6 flex items-center gap-3 md:gap-5">
+                      <img src="/2025/logos/Y Combinator_id-5KfjQKW_0.svg" alt="Y Combinator" className="h-5 md:h-5 opacity-50" />
+                      <img src="/2025/logos/TechCrunch_id6oS-JaEO_0.svg" alt="TechCrunch" className="h-5 md:h-5 opacity-50" />
                     </div>
                   </div>
                 </div>
@@ -617,7 +617,7 @@ export default function Robotics() {
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
                   <div className="text-sm font-mono text-zinc-500 uppercase">Current Team</div>
-                  <div className="text-sm font-mono text-zinc-500 uppercase">Growing Daily</div>
+                  <div className="text-sm font-mono text-zinc-500 uppercase">By 24 Feb., 2024</div>
                 </div>
                 <div className="mt-3 md:mt-4 space-y-3">
                   <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
@@ -631,17 +631,17 @@ export default function Robotics() {
                       </li>
                       <li className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                        <span>5 University Research Labs</span>
+                        <span>2 National Organizers</span>
                       </li>
                     </ul>
                     <ul className="space-y-2 text-sm md:text-base text-zinc-400">
                       <li className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                        <span>12 Industry Partners</span>
+                        <span>10+ Active Mentors</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                        <span>20+ Active Mentors</span>
+                        <span>1 University Unit</span>
                       </li>
                     </ul>
                   </div>
@@ -688,7 +688,7 @@ export default function Robotics() {
                         <div className="text-sm font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
                           {member.name}
                         </div>
-                      </div>
+                </div>
 
                       {/* Desktop: Hover Popup */}
                       <div className="absolute left-full top-0 ml-2 hidden group-hover:md:block z-50">
@@ -785,12 +785,12 @@ export default function Robotics() {
                                     </li>
                                   ))}
                                 </ul>
-        </div>
+          </div>
 
                               <div>
                                 <div className="text-xs font-mono text-zinc-500 uppercase mb-2">Contact</div>
                                 <div className="text-sm text-zinc-300">{member.contact}</div>
-          </div>
+        </div>
                             </div>
                           </div>
                         </div>
@@ -804,12 +804,13 @@ export default function Robotics() {
         </section>
 
         {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
+                  <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
             {/* Tracks Section */}
             <div className="space-y-8">
               <div className="text-left md:text-center space-y-4">
-                <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Two Tracks for Different Skill Levels</h2>
+                <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Tracks for Different Skill Levels</h2>
                 <p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto">
                   Tailored programs to support robotics enthusiasts at every stage of their journey.
             </p>
@@ -835,15 +836,15 @@ export default function Robotics() {
                         <ul className="space-y-2">
                           <li className="flex items-center gap-2 text-zinc-300">
                             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                            <span>Basic robotics principles and mechanics</span>
+                            <span>Robotics principles and mechanics</span>
                           </li>
                           <li className="flex items-center gap-2 text-zinc-300">
                             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                            <span>Programming fundamentals</span>
+                            <span>Programming</span>
                           </li>
                           <li className="flex items-center gap-2 text-zinc-300">
                             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
-                            <span>Team collaboration skills</span>
+                            <span>Competetive robotics projects</span>
                           </li>
                           <li className="flex items-center gap-2 text-zinc-300">
                             <div className="w-1 h-1 rounded-full bg-zinc-600"></div>
@@ -901,19 +902,21 @@ export default function Robotics() {
             </div>
 
         {/* Divider */}
-            <div className="w-full h-px bg-zinc-800 my-16" />
+                      <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
         {/* World Map Section */}
         <WorldMapSection />
 
         {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
+                  <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
         {/* Partners Section - Moved Up */}
         <section className="mt-24">
           <div className="text-left md:text-center space-y-4 mb-16">
             <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">
-              Supported by Global Leaders
+              Supported by Tech Giants
             </h2>
             <p className="text-md text-zinc-400 max-w-2xl mx-auto">
               Partnering with the world's leading defense and technology companies
@@ -992,7 +995,8 @@ export default function Robotics() {
         </section>
 
         {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
+                  <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
         {/* Timeline Section - Changelog Style - Moved Down */}
         <section className="mt-24">
@@ -1068,7 +1072,7 @@ export default function Robotics() {
                     <div className="pl-4">
                       <div className="flex items-baseline gap-4 mb-6">
                         <time className="text-sm font-mono text-zinc-500">SEPTEMBER-DECEMBER</time>
-                        <h3 className="text-lg font-medium text-zinc-200">Competition Phase</h3>
+                        <h3 className="text-lg font-medium text-zinc-200">Competitions</h3>
                       </div>
                       <div className="space-y-4">
                         <div className="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
@@ -1089,7 +1093,8 @@ export default function Robotics() {
         </section>
 
         {/* Divider */}
-        <div className="w-full h-px bg-zinc-800" />
+                  <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
         {/* Responsible Person Cards */}
         <section>
@@ -1120,15 +1125,14 @@ export default function Robotics() {
                 {/* Contact Button */}
                 <div>
                   <a 
-                    href="mailto:doni.peltojarvi@aaltoes.com"
+                    href="https://t.me/donijar"
                 target="_blank"
                 rel="noopener noreferrer"
                     className="base-button inline-flex items-center justify-center group h-10 px-4"
                   >
                     <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                       </svg>
                       Contact
                     </span>
@@ -1163,15 +1167,14 @@ export default function Robotics() {
                 {/* Contact Button */}
                 <div>
                   <a 
-                    href="mailto:yera.slam@aaltoes.com"
+                    href="https://t.me/yeralkhan"
                 target="_blank"
                 rel="noopener noreferrer"
                     className="base-button inline-flex items-center justify-center group h-10 px-4"
                   >
                     <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                       </svg>
                       Contact
                     </span>

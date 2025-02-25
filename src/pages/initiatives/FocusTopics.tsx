@@ -76,7 +76,7 @@ export default function FocusTopics() {
                 Paramount Year of Craft
               </Link>
               <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Focus Topics</h1>
-              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
                 After listening to our community, partners, and funders, we're making this the most technologically driven year in Aaltoes history.
               </p>
             </div>
@@ -87,11 +87,12 @@ export default function FocusTopics() {
             <VideoPlayer src="/2025/video_extracts/1.mov" />
           </div>
         </div>
+        <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
         {/* Main Content */}
-        <div className="space-y-16">
+        <div className="space-y-20">
           {/* Focus Topics Section */}
-          <section className="flex flex-col md:flex-row-reverse items-center gap-12">
+          <section className="flex flex-col md:flex-row-reverse items-center gap-16">
             <div className="w-full md:w-1/2 space-y-6">
               <div className="text-left space-y-4">
                 <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Our Focus Projects</h2>
@@ -100,7 +101,7 @@ export default function FocusTopics() {
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="w-full md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {technologies.map((tech, index) => (
                 <motion.div
                   key={tech.title}
@@ -116,10 +117,10 @@ export default function FocusTopics() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
           {/* Events Evolution Section */}
-          <section className="flex flex-col md:flex-row items-center gap-12">
+          <section className="flex flex-col md:flex-row items-center gap-16">
             <div className="w-full md:w-1/2 space-y-6">
               <div className="text-left space-y-4">
                 <h2 className="text-2xl md:text-3xl font-medium text-zinc-100">Events Evolution</h2>
@@ -140,14 +141,14 @@ export default function FocusTopics() {
                       {/* Building & Hackathons Bar */}
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-zinc-100 to-zinc-300" />
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-b from-zinc-100 to-zinc-300" />
                           <span className="text-sm text-zinc-400">Building & Hackathons</span>
                         </div>
                         <span className="text-sm font-mono text-zinc-500">70%</span>
                       </div>
                       <div className="h-4 w-full bg-zinc-900/50 rounded-full overflow-hidden">
                         <motion.div
-                          className="h-full bg-gradient-to-r from-zinc-100 to-zinc-300"
+                          className="h-full bg-gradient-to-b from-zinc-100 to-zinc-300"
                           initial={{ width: "0%" }}
                           animate={{ width: "70%" }}
                           transition={{ duration: 1, ease: "easeOut" }}
@@ -186,12 +187,12 @@ export default function FocusTopics() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
           {/* Responsible Person Card */}
           <section>
           <motion.div
-            className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8"
+            className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8"
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.3 }}
           >
@@ -199,7 +200,7 @@ export default function FocusTopics() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
               {/* Profile Info */}
               <div className="flex items-center gap-6">
-                <div className="w-20 h-20 rounded-full overflow-hidden">
+                <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                   <img 
                     src="/board/vaneeza.png" 
                     alt="Vaneeza Maqsood"
@@ -221,7 +222,7 @@ export default function FocusTopics() {
                   className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                       <line x1="16" y1="2" x2="16" y2="6"/>
                       <line x1="8" y1="2" x2="8" y2="6"/>
@@ -238,7 +239,7 @@ export default function FocusTopics() {
                   className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                       <circle cx="9" cy="7" r="4"/>
                       <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
@@ -255,7 +256,7 @@ export default function FocusTopics() {
                   className="base-button inline-flex items-center justify-center group h-10 px-4"
                 >
                   <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                       <polyline points="22,6 12,13 2,6"/>
                     </svg>

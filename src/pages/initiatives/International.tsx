@@ -39,7 +39,7 @@ export default function International() {
                 Paramount Year of Craft
               </Link>
               <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Global Presence</h1>
-              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
                 Not only Startup Sauna, but making Finland the main friction point to build startups is our vision this year.
               </p>
             </div>
@@ -50,6 +50,7 @@ export default function International() {
             <VideoPlayer src="/2025/video_extracts/2.mov" />
           </div>
         </div>
+        <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
         {/* Main Content */}
         <div className="space-y-16">
@@ -93,7 +94,8 @@ export default function International() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
           {/* Asia Expansion */}
           <section className="flex flex-col md:flex-row items-center gap-12">
@@ -113,7 +115,7 @@ export default function International() {
                 transition={{ ...fadeIn.transition, delay: 0.3 }}
               >
                 {/* Gradient Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none z-8" />
+                <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none z-8" />
                 <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/50 via-transparent to-zinc-950/50 pointer-events-none z-10" />                
                 <div className="relative h-full flex items-center">
                   <img 
@@ -158,7 +160,7 @@ export default function International() {
                     className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
                   >
                     <span className="relative z-10 uppercase">Visit Store</span>
-                    <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute inset-0 -m-[1px] rounded-lg bg-gradient-to-b from-white/0 via-white/10 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   </a>
                 </div>
               </div>
@@ -193,15 +195,14 @@ export default function International() {
                   {/* Contact Button */}
                   <div>
                     <a 
-                      href="mailto:tetsu.fujimura@aaltoes.com"
+                      href="https://t.me/tetsufujimura"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="base-button inline-flex items-center justify-center group h-10 px-4"
                     >
                       <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                          <polyline points="22,6 12,13 2,6"/>
+                          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                         </svg>
                         Contact
                       </span>
@@ -236,15 +237,14 @@ export default function International() {
                   {/* Contact Button */}
                   <div>
                     <a 
-                      href="mailto:doni.peltojarvi@aaltoes.com"
+                      href="https://t.me/donijar"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="base-button inline-flex items-center justify-center group h-10 px-4"
                     >
                       <span className="relative z-10 uppercase text-sm flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                          <polyline points="22,6 12,13 2,6"/>
+                          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                         </svg>
                         Contact
                       </span>

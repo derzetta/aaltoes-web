@@ -43,9 +43,9 @@ export default function Spinout() {
               >
                 Paramount Year of Craft
               </Link>
-              <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Spinout Projects</h1>
-              <p className="text-base md:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-                Supporting and scaling innovative projects from our community.
+              <h1 className="text-3xl md:text-4xl font-medium text-zinc-100">Continuing and spinning out projects</h1>
+              <p className="text-base md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
+                Supporting and scaling projects from the last year.
               </p>
             </div>
           </motion.div>
@@ -55,6 +55,7 @@ export default function Spinout() {
             <VideoPlayer src="/2025/video_extracts/3.mov" />
           </div>
         </div>
+        <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
 
         {/* Main Content */}
         <div className="space-y-16">
@@ -96,7 +97,8 @@ export default function Spinout() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
           {/* Wednesday Section */}
           <section className="flex flex-col-reverse md:flex-row items-center gap-16">
@@ -136,7 +138,8 @@ export default function Spinout() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
           {/* Strive Section */}
           <section className="flex flex-col md:flex-row items-center gap-16">
@@ -176,7 +179,8 @@ export default function Spinout() {
           </section>
 
           {/* Divider */}
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+
 
           {/* Responsible Person Cards */}
           <section>
