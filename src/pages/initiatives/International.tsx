@@ -65,7 +65,7 @@ export default function International() {
             <div className="w-full md:w-1/2">
               <div className="flex flex-col gap-6">
                 <motion.a 
-                  href="https://eu-inc.com" 
+                  href="https://eu-inc.org" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-xl p-6 hover:bg-zinc-900/30 transition-colors group"
