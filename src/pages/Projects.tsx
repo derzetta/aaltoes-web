@@ -104,12 +104,21 @@ export default function Projects() {
       name: "Open Source",
       description: "Fueling innovation together—our open-source projects are built for collaboration, creativity, and impact.",
       status: 'planned',
+      url: "https://aaltoes.com/2025",
       category: 'brewing'
     },
     {
       name: "Blueprint",
       description: "Aaltoes Ecosystem continuity project.",
       status: 'planned',
+      url: "https://aaltoes.com/2025",
+      category: 'brewing'
+    },
+    {
+      name: "Robotics Nation",
+      description: "The powerhouse of the builders of the future.",
+      status: 'planned',
+      url: "https://aaltoes.com/2025",
       category: 'brewing'
     },
     {
