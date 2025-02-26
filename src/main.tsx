@@ -25,6 +25,7 @@ import Blueprint from './pages/initiatives/Blueprint'
 import Robotics from './pages/initiatives/Robotics'
 import Log from './pages/initiatives/Log'
 import Explore from './pages/Explore'
+import ZeroBullshit from './pages/ZeroBullshit'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/explore",
     element: <Explore />,
+  },
+  {
+    path: "/zerobullshit",
+    element: <ZeroBullshit />,
   },
   {
     path: "/2025",

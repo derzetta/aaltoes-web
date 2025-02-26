@@ -21,6 +21,7 @@ export default {
         'loading-bar': 'loading-bar 1.5s ease-in-out infinite',
         'scroll-left': 'scroll-left 40s linear infinite',
         'scroll-right': 'scroll-right 40s linear infinite',
+        'twinkle': 'twinkle 10s ease-in-out infinite',
       },
       keyframes: {
         'loading-bar': {
@@ -34,6 +35,11 @@ export default {
         'scroll-right': {
           '0%': { transform: 'translateX(-50%)' },
           '100%': { transform: 'translateX(0)' }
+        },
+        'twinkle': {
+          '0%': { opacity: 0 },
+          '50%': { opacity: 0.8 },
+          '100%': { opacity: 0 }
         }
       },
       textShadow: {
