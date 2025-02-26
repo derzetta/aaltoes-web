@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 /**
  * @author ertdfgcvb
@@ -164,15 +165,24 @@ export default function ZeroBullshit() {
               <p className="text-white font-mono">Startup Sauna, Puumiehenkuja 5a</p>
               <p className="text-white font-mono">Otaniemi, Espoo</p>
             </div>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <a 
                 href="https://aaltoes.com/zerobullshitevent" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-white text-black px-6 py-3 font-mono font-bold hover:bg-zinc-200 transition-colors"
+                className="base-button inline-flex items-center bg-white hover:bg-white justify-center group relative overflow-hidden rounded-lg"
               >
-                APPLY NOW
+                <span className="relative z-10 uppercase text-black font-medium">Apply Now</span>
+                <div className="absolute inset-0 -m-[1px] duration-500 group-hover:opacity-100" />
               </a>
+              
+              <Link 
+                to="/explore"
+                className="base-button inline-flex items-center justify-center group relative overflow-hidden"
+              >
+                <span className="relative z-10 uppercase">Explore Startup Sauna</span>
+                <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </Link>
             </div>
             <div className="mt-12">
               <p className="text-zinc-400 font-mono text-sm">Hosted by</p>
