@@ -161,7 +161,7 @@ export default function ZeroBullshit() {
               HACKATHON
             </h1>
             <div className="space-y-2 mt-8">
-              <p className="text-white font-mono">Friday, 21st March - 24 March</p>
+              <p className="text-white font-mono">Friday, March 21st - March 24th</p>
               <p className="text-white font-mono">Startup Sauna, Puumiehenkuja 5a</p>
               <p className="text-white font-mono">Otaniemi, Espoo</p>
             </div>
