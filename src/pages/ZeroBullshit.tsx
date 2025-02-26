@@ -234,7 +234,6 @@ export default function ZeroBullshit() {
                   </div>
                   <h2 className="text-sm font-mono text-white uppercase">Aalto AI Hack '25</h2>
                 </div>
-                <span className="text-xs font-mono text-white px-2 py-0.5 bg-zinc-800 rounded border border-zinc-700 uppercase">Intermediate</span>
               </div>
               
               <p className="text-white font-mono mb-4">
