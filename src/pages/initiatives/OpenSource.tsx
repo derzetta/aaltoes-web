@@ -287,7 +287,7 @@ export default function OpenSource() {
                   Finland has a rich history in open source development, from Linux to MySQL. We're building on this foundation to create the next generation of open source innovation.
                 </p>
                 <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
-                  In collaboration with Cloudnative Foundation Finland, we're making open source development a central focus for students and emerging developers.
+                  Joining forces with Cloudnative Foundation Finland, we're making open source development a central focus for students and emerging developers.
                 </p>
               </div>
             </div>
