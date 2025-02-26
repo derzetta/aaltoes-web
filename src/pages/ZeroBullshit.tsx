@@ -186,9 +186,13 @@ export default function ZeroBullshit() {
             </div>
             <div className="mt-12">
               <p className="text-zinc-400 font-mono text-sm">Hosted by</p>
-              <div className="flex items-center mt-4">
-                <div className="h-10">
-                  <img src="/bank/aaltoes_white.svg" alt="Aaltoes 2025" className="h-full" />
+              <div className="flex items-center mt-4 space-x-6">
+                <div className="h-7">
+                  <img src="/bank/aaltoes_white.svg" alt="Aaltoes" className="h-full" />
+                </div>
+                <span className="text-zinc-400">+</span>
+                <div className="h-7">
+                  <img src="/AaltoAI Wordmark White.svg" alt="AaltoAI" className="h-full" />
                 </div>
               </div>
             </div>
@@ -200,7 +204,7 @@ export default function ZeroBullshit() {
             <div className="p-8 md:p-10 border-b border-zinc-800">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12">
+                  <div className="h-10 w-10">
                     <img src="/bank/aaltoes_white.svg" alt="Aaltoes Logo" className="h-full w-full" />
                   </div>
                   <h2 className="text-sm font-mono text-white uppercase">Aaltoes Tech Track</h2>
@@ -225,8 +229,8 @@ export default function ZeroBullshit() {
             <div className="p-8 md:p-10">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12">
-                    <img src="/bank/aaltoes_white.svg" alt="Aaltoes Logo" className="h-full w-full" />
+                  <div className="h-10 w-10">
+                    <img src="/AaltoAI Wordmark White.svg" alt="AaltoAI Logo" className="h-full w-full" />
                   </div>
                   <h2 className="text-sm font-mono text-white uppercase">Aalto AI Hack '25</h2>
                 </div>
