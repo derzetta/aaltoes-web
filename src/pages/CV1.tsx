@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-/**
- * @author ertdfgcvb
- * @title  Time: milliseconds
- * @desc   Use of context.time
- * 
- * Background animation adapted from the original ASCII art animation
- * that uses sine waves to create a flowing text pattern.
- */
 
-// Animation pattern
 const pattern = 'AALTOES CV '
 
 interface AnimationContext {

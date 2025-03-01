@@ -25,7 +25,7 @@ import Blueprint from './pages/initiatives/Blueprint'
 import Robotics from './pages/initiatives/Robotics'
 import Log from './pages/initiatives/Log'
 import Explore from './pages/Explore'
-import ZeroBullshit from './pages/ZeroBullshit'
+import ZeroBullshit from './pages/CV1.tsx'
 
 const router = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element: <Explore />,
   },
   {
-    path: "/zerobullshit",
+    path: "/cv1",
     element: <ZeroBullshit />,
   },
   {
