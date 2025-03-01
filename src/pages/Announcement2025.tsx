@@ -392,10 +392,36 @@ const RecommendedReadingCard = () => (
 export default function Announcement2025() {
   const { pathname } = useLocation()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      // Event listeners for video loading
+      const handleCanPlay = () => {
+        // Add a small delay to ensure smooth transition
+        setTimeout(() => {
+          setIsVideoLoaded(true)
+        }, 500)
+      }
+
+      video.addEventListener('canplay', handleCanPlay)
+      
+      // If video is already loaded (e.g. from cache)
+      if (video.readyState >= 3) {
+        handleCanPlay()
+      }
+
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay)
+      }
+    }
+  }, [])
 
   const initiatives = [
     {
@@ -467,6 +493,18 @@ export default function Announcement2025() {
 
   return (
     <div className="min-h-screen bg-zinc-950">
+      {/* Loading Screen */}
+      {!isVideoLoaded && (
+        <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center">
+          <img
+            src="/bank/aaltoes_white.svg"
+            alt="Aaltoes Logo"
+            className="h-8 mb-8 animate-pulse"
+          />
+          <div className="w-16 h-16 border-t-2 border-white rounded-full animate-spin"></div>
+        </div>
+      )}
+
       {/* Video Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
@@ -497,6 +535,7 @@ export default function Announcement2025() {
         <div className="absolute inset-0 w-full h-full">
           <video
             id="heroVideo"
+            ref={videoRef}
             className="w-full h-full object-cover"
             autoPlay
             loop
@@ -512,7 +551,7 @@ export default function Announcement2025() {
         </div>
 
         {/* Content Over the Video */}
-        <div className="relative h-full flex flex-col">
+        <div className={`relative h-full flex flex-col transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}>
           <div className="flex-grow" />
           <motion.div
             className="w-full max-w-3xl mx-auto text-center px-6 mb-20"
@@ -594,7 +633,7 @@ export default function Announcement2025() {
       </div>
 
       {/* Contained Content Section */}
-      <div className="max-w-7xl mx-auto space-y-12 pb-24">
+      <div className={`max-w-7xl mx-auto space-y-12 pb-24 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}>
         {/* Initiatives Grid */}
         <div className="relative bg-zinc-950/95 backdrop-blur-sm rounded-2xl">
           <motion.div
