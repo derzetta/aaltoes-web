@@ -224,8 +224,8 @@ export default function ZeroBullshit() {
               </div>
               
               <div className="mt-auto pt-6">
-                <div className="text-2xl font-mono text-white font-bold">
-                  $10,000
+                <div className="text-xl font-mono text-white font-bold">
+                €10,000
                 </div>
                 <div className="text-zinc-400 font-mono text-sm">
                   Cash Prize, No strings attached
