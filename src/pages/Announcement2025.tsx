@@ -499,9 +499,8 @@ export default function Announcement2025() {
           <img
             src="/bank/aaltoes_white.svg"
             alt="Aaltoes Logo"
-            className="h-8 mb-8 animate-pulse"
+            className="h-8 animate-pulse"
           />
-          <div className="w-16 h-16 border-t-2 border-white rounded-full animate-spin"></div>
         </div>
       )}
 
