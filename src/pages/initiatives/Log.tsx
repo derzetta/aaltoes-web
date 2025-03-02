@@ -127,6 +127,15 @@ export default function Log() {
 
   // Sample log data
   const logEntries = [
+    // March 2025
+    {
+      date: "Mar 1, 2025",
+      title: "Port_25 Hackathon",
+      description: "Port_25 hackathon was organised on March 1-2.",
+      type: "added" as const,
+      initiative: "FocusTopics"
+    },
+    
     // February 2025
     {
       date: "Feb 25, 2025",
