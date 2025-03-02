@@ -221,6 +221,7 @@ export default function ZeroBullshit() {
                 <p className="text-white font-mono text-sm">- Must be attended physically</p>
                 <p className="text-white font-mono text-sm">- You must be confirmed to the event</p>
                 <p className="text-white font-mono text-sm">- Receive live mentoring from CV experts for your team</p>
+                <p className="text-white font-mono text-sm">- Visit <Link to="/explore" className="underline hover:text-zinc-300">Explore Startup Sauna on March 13th</Link> for a good karma</p>
               </div>
               
               <div className="mt-auto pt-6">
