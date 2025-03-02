@@ -42,7 +42,7 @@ export default function VideoPlayer({ src, poster, className = '' }: VideoPlayer
       </video>
 
       {/* Video Overlay - Play State */}
-      <div className={`absolute inset-0 bg-zinc-950/50 transition-opacity duration-200 ${isPlaying ? 'opacity-0' : 'group-hover:opacity-0'}`}>
+      <div className={`absolute inset-0 bg-zinc-950/50 transition-opacity duration-200 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}>
         <div className="absolute inset-0 flex items-center justify-center">
           <button 
             onClick={togglePlay}
