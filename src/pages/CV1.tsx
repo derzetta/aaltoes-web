@@ -180,7 +180,7 @@ export default function ZeroBullshit() {
             </div>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <a 
-                href="https://aaltoes.com/cv1event" 
+                href="https://lu.ma/xo5onsy7" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="base-button inline-flex items-center bg-white hover:bg-white justify-center group relative overflow-hidden rounded-lg"
