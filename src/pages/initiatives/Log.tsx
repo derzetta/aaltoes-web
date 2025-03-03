@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState, useRef, useMemo, useCallback, memo } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 
 const fadeIn = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.3 }
+  transition: { duration: 0.5 }
 }
 
 // Log Entry Component
@@ -22,8 +22,7 @@ interface LogEntryProps {
   month?: string
 }
 
-// Memoize LogEntry component to prevent unnecessary re-renders
-const LogEntry = memo(({ date, title, description, type, initiative }: LogEntryProps) => {
+const LogEntry = ({ date, title, description, type, initiative }: LogEntryProps) => {
   // Define colors based on initiative
   const initiativeColors = {
     Robotics: 'bg-purple-700',
@@ -134,7 +133,7 @@ const LogEntry = memo(({ date, title, description, type, initiative }: LogEntryP
       </div>
     </div>
   )
-})
+}
 
 // Month Header Component
 interface MonthHeaderProps {
@@ -142,8 +141,7 @@ interface MonthHeaderProps {
   id: string;
 }
 
-// Memoize MonthHeader component
-const MonthHeader = memo(({ month, id }: MonthHeaderProps) => (
+const MonthHeader = ({ month, id }: MonthHeaderProps) => (
   <div id={id} className="mb-3 sticky top-36 z-10">
     <div className="inline-block">
       <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider bg-zinc-950/90 backdrop-blur-sm py-2 px-2 
@@ -153,51 +151,49 @@ const MonthHeader = memo(({ month, id }: MonthHeaderProps) => (
       </div>
     </div>
   </div>
-));
+);
 
 export default function Log() {
   const { pathname } = useLocation()
   const [filter, setFilter] = useState<string | null>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
-  const [activeMonth, setActiveMonth] = useState<string | null>(null)
+  const [, setActiveMonth] = useState<string | null>(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
 
-  // Optimize scroll handler with useCallback
-  const handleScroll = useCallback(() => {
-    if (timelineRef.current) {
-      const monthHeaders = timelineRef.current.querySelectorAll('[id^="month-"]');
-      
-      // Find the current visible month
-      for (let i = 0; i < monthHeaders.length; i++) {
-        const header = monthHeaders[i];
-        const rect = header.getBoundingClientRect();
+  useEffect(() => {
+    const handleScroll = () => {
+      if (timelineRef.current) {
+        const monthHeaders = timelineRef.current.querySelectorAll('[id^="month-"]');
         
-        // If the header is in view or just above the viewport
-        if (rect.top <= 160) {
-          setActiveMonth(header.id);
+        // Find the current visible month
+        for (let i = 0; i < monthHeaders.length; i++) {
+          const header = monthHeaders[i];
+          const rect = header.getBoundingClientRect();
           
-          // Check if the next month header is about to come into view
-          if (i < monthHeaders.length - 1) {
-            const nextHeader = monthHeaders[i + 1];
-            const nextRect = nextHeader.getBoundingClientRect();
+          // If the header is in view or just above the viewport
+          if (rect.top <= 160) {
+            setActiveMonth(header.id);
             
-            if (nextRect.top <= 160) {
-              setActiveMonth(nextHeader.id);
+            // Check if the next month header is about to come into view
+            if (i < monthHeaders.length - 1) {
+              const nextHeader = monthHeaders[i + 1];
+              const nextRect = nextHeader.getBoundingClientRect();
+              
+              if (nextRect.top <= 160) {
+                setActiveMonth(nextHeader.id);
+              }
             }
           }
         }
       }
-    }
-  }, []);
-
-  useEffect(() => {
-    // Use passive event listener for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    };
+    
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   // Sample log data
   const logEntries = [
@@ -381,8 +377,8 @@ export default function Log() {
     }, 200);
   }, [filter]);
 
-  // Memoize the timeline creation to prevent recalculation on every render
-  const createContinuousTimeline = useCallback(() => {
+  // Create a continuous timeline with all days
+  const createContinuousTimeline = () => {
     // Sort entries by date (newest first)
     const sortedEntries = [...filteredEntries].sort((a, b) => {
       const dateA = new Date(a.date);
@@ -391,8 +387,11 @@ export default function Log() {
     });
 
     if (sortedEntries.length === 0) {
+      console.log("No entries found for the selected filter");
       return [];
     }
+
+    console.log("Sorted entries:", sortedEntries.map(e => e.title));
 
     // Find the earliest and latest dates
     const latestDate = new Date(sortedEntries[0].date);
@@ -410,12 +409,7 @@ export default function Log() {
     const timeline: Array<any> = [];
     const currentDate = new Date(latestDate);
     
-    // Limit the number of days to reduce rendering load
-    const maxDays = 60; // Limit to 60 days to improve performance
-    let dayCount = 0;
-    
-    while (currentDate >= earliestDate && dayCount < maxDays) {
-      dayCount++;
+    while (currentDate >= earliestDate) {
       const dateStr = currentDate.toLocaleDateString('en-US', { 
         month: 'short', 
         day: 'numeric', 
@@ -463,40 +457,36 @@ export default function Log() {
     }
     
     return timeline;
-  }, [filteredEntries]);
+  };
 
   const timelineEntries = createContinuousTimeline();
 
-  // Memoize the entries by month to prevent recalculation
-  const entriesByMonth = useMemo(() => {
-    const result: Record<string, any[]> = {};
+  // Group timeline entries by month
+  const entriesByMonth: Record<string, any[]> = {};
+  
+  timelineEntries.forEach(entry => {
+    const date = new Date(entry.date);
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
     
-    timelineEntries.forEach(entry => {
-      const date = new Date(entry.date);
-      const month = date.toLocaleDateString('en-US', { month: 'long' });
-      
-      if (!result[month]) {
-        result[month] = [];
-      }
-      
-      result[month].push(entry);
-    });
-    
-    // If no entries are grouped by month but we have filtered entries, create a group for them
-    if (Object.keys(result).length === 0 && filteredEntries.length > 0) {
-      const firstEntry = filteredEntries[0];
-      const date = new Date(firstEntry.date);
-      const month = date.toLocaleDateString('en-US', { month: 'long' });
-      
-      result[month] = filteredEntries.map(entry => ({
-        ...entry,
-        hasEntry: true,
-        month
-      }));
+    if (!entriesByMonth[month]) {
+      entriesByMonth[month] = [];
     }
     
-    return result;
-  }, [timelineEntries, filteredEntries]);
+    entriesByMonth[month].push(entry);
+  });
+  
+  // If no entries are grouped by month but we have filtered entries, create a group for them
+  if (Object.keys(entriesByMonth).length === 0 && filteredEntries.length > 0) {
+    const firstEntry = filteredEntries[0];
+    const date = new Date(firstEntry.date);
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    
+    entriesByMonth[month] = filteredEntries.map(entry => ({
+      ...entry,
+      hasEntry: true,
+      month
+    }));
+  }
 
   // Get unique initiatives for filter
   const initiatives = Array.from(new Set(logEntries.filter(entry => entry.initiative).map(entry => entry.initiative))) as string[]
