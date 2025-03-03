@@ -169,7 +169,7 @@ export default function ZeroBullshit() {
               
             </h1>
             <div className="space-y-1 mt-6">
-              {['Friday, March 21st - Monday, March 24th', 'Startup Sauna, Puumiehenkuja 5a', 'Otaniemi, Espoo.'].map((text, index) => (
+              {['Friday, March 21st - Sunday, March 23th', 'Startup Sauna, Puumiehenkuja 5a', 'Otaniemi, Espoo.'].map((text, index) => (
                 <p 
                   key={index}
                   className="text-white font-mono text-sm"
