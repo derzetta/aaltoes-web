@@ -55,7 +55,7 @@ export default function About() {
                   href="https://form.typeform.com/to/T93m5bJm"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="base-button-highlight inline-flex items-center justify-center"
+                  className="base-button inline-flex items-center justify-center"
                 >
                   <span className="relative z-10 uppercase">Become a Member</span>
                 </a>

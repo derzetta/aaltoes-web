@@ -26,6 +26,7 @@ import Robotics from './pages/initiatives/Robotics'
 import Log from './pages/initiatives/Log'
 import Explore from './pages/Explore'
 import ZeroBullshit from './pages/CV1.tsx'
+import GetInvolved from './pages/GetInvolved'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/cv1",
     element: <ZeroBullshit />,
+  },
+  {
+    path: "/get-involved",
+    element: <GetInvolved />,
   },
   {
     path: "/2025",

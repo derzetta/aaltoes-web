@@ -621,7 +621,7 @@ module.exports = {
                 onClick={() => scrollToSection(section.id)}
                 className={`w-full text-left px-3 py-2 rounded-md text-sm font-mono uppercase tracking-wider transition-colors ${
                   activeSection === section.id
-                    ? 'bg-zinc-100/10 text-zinc-100'
+                    ? 'bg-zinc-100/10 text-zinc-100 hover:text-zinc-100'
                     : 'text-zinc-100/50 hover:text-zinc-100/70 hover:bg-zinc-100/5'
                 }`}
               >

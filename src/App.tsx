@@ -183,45 +183,6 @@ function LoadingScreen() {
   )
 }
 
-function LivestreamBanner() {
-  const [isTabletOrMobile] = useState(window.innerWidth <= 1024)
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed top-6 left-0 right-0 z-50 flex justify-center mx-4"
-    >
-      <Link to="/2025" className="group">
-        <div className="relative flex flex-col sm:flex-row items-center p-3.5 px-5 gap-3.5 rounded-lg border border-zinc-800 bg-zinc-900/30 backdrop-blur-md transition-colors duration-200 hover:bg-zinc-800/30">
-          <div className="flex justify-center sm:justify-start items-center">
-            <h2 className="font-geist text-zinc-100 text-base tracking-wide">
-              Paramount Year of Craft
-            </h2>
-          </div>
-
-          {!isTabletOrMobile && (
-            <div className="h-4 w-px bg-zinc-700/50 mx-2" />
-          )}
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="font-mono text-zinc-400 text-sm uppercase tracking-wider">Full Plan & Log Released</span>
-            </div>
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
-
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const words = ["builders", "innovators", "misfits", "openings", "brave", "strivers", "mavericks","open source", "explorers", "igniters"]
@@ -290,7 +251,7 @@ function App() {
   return (
     <FooterScrollProvider>
       <div className="relative h-[calc(100vh-96px)] flex flex-col justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-zinc-950 bg-grid-zinc-100 bg-grid -z-10 sm:h-auto h-[50vh]" />
+        <div className="absolute inset-0 bg-zinc-900 bg-grid-zinc-100 -z-10 sm:h-auto h-[50vh]" />
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/0 via-zinc-950/80 to-zinc-950 -z-10" />
         <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent -z-10 sm:hidden" />
         
@@ -301,8 +262,8 @@ function App() {
             style={{
               transform: 'perspective(1000px) rotateX(60deg) translateY(-50%) translateZ(-100px)',
               backgroundImage: `
-                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.8) 0px, rgba(163, 163, 163, 0.8) 1px, transparent 1px, transparent 70px),
-                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.8) 0px, rgba(163, 163, 163, 0.8) 1px, transparent 5px, transparent 150px)
+                repeating-linear-gradient(90deg, rgba(163, 163, 163, 0.5) 0px, rgba(163, 163, 163, 0.7) 1px, transparent 1px, transparent 70px),
+                repeating-linear-gradient(0deg, rgba(163, 163, 163, 0.5) 0px, rgba(163, 163, 163, 0.7) 1px, transparent 5px, transparent 150px)
               `,
               opacity: 1,
             }}
@@ -321,7 +282,7 @@ function App() {
         {/* Main content container */}
         <div className="flex flex-col items-center gap-6 relative z-10" style={{ 
           width: '100%',
-          maxWidth: '1400px',
+          maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 1rem',
         }}>
@@ -446,30 +407,19 @@ function App() {
                 width: isTabletOrMobile ? '100%' : 'auto',
                 minWidth: isTabletOrMobile ? 'auto' : 'fit-content',
               }}>
-                <a 
-                  href="https://lu.ma/aaltoes-calendar"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                
+                <Link 
+                  to="/2025"
                   className="base-button inline-flex items-center justify-center"
                 >
-                  <span className="relative z-10 uppercase">2025 Events</span>
-                </a>
-                <a 
-                  href="https://t.me/+1P42HmirI81lYTMy"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  <span className="relative z-10 uppercase">Our 2025 Plans</span>
+                </Link>
+                <Link 
+                  to="/get-involved"
                   className="base-button inline-flex items-center justify-center"
                 >
-                  <span className="relative z-10 uppercase">2025 Chat</span>
-                </a>
-                <a 
-                  href="https://form.typeform.com/to/mGQRO8Te"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center"
-                >
-                  <span className="relative z-10 uppercase font-medium">Become a volunteer</span>
-                </a>
+                  <span className="relative z-10 uppercase">Get Involved</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -478,7 +428,6 @@ function App() {
         <Footer />
       </div>
       <Analytics />
-      <LivestreamBanner />
     </FooterScrollProvider>
   )
 }

@@ -34,7 +34,7 @@ export default function Authors() {
           </div>
 
           <div>
-            <p className="text-zinc-100/60">
+            <p className="text-zinc-100/60 tracking-wide">
               Noticed a mistake? Please let us know at{' '}
               <a href="mailto:board@aaltoes.com" className="hover:text-zinc-100/90 transition-colors">
                 board@aaltoes.com
