@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AnimatedText from '../components/AnimatedText'
 
 
 const pattern = 'AALTOES CV '
@@ -37,10 +38,9 @@ function AnimatedTextBackground() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       
-      // Calculate exact number of columns and rows to fill the screen
-      // Use larger character size for better performance
-      const charWidth = width < 768 ? 14 : 16;  // Slightly smaller on mobile
-      const charHeight = width < 768 ? 20 : 24;
+      // Keep the same character size for density
+      const charWidth = width < 768 ? 12 : 14;
+      const charHeight = width < 768 ? 18 : 20;
       
       // Calculate exact number of columns and rows needed to fill the screen
       const cols = Math.ceil(width / charWidth);
@@ -56,55 +56,69 @@ function AnimatedTextBackground() {
     };
 
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
+    
+    // Use a simple throttled resize handler instead of debounce
+    let resizeTimeout: number | null = null;
+    const handleResize = () => {
+      if (!resizeTimeout) {
+        resizeTimeout = window.setTimeout(() => {
+          resizeTimeout = null;
+          updateDimensions();
+        }, 100);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
 
-    // Use a slower interval for better performance
+    // Use direct interval instead of requestAnimationFrame for more consistent timing
+    // This matches the approach in the non-lagging example
     const interval = setInterval(() => {
       setContext(prev => ({
         ...prev,
         time: prev.time + 16,
         frame: prev.frame + 1
       }));
-    }, 50); // 20fps instead of 60fps
+    }, 16);
 
     return () => {
-      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
       clearInterval(interval);
     };
   }, []);
 
-  // Animation calculation function
+  // Simplified cell calculation with minimal operations
   const calculateCell = (coord: Coord, context: AnimationContext) => {
     const t = context.time * 0.0001;
     const x = coord.x;
     const y = coord.y;
+    
+    // Simplified wave calculation similar to the non-lagging example
     const o = Math.sin(y * Math.sin(t) * 0.2 + x * 0.04 + t) * 20;
     const i = Math.round(Math.abs(x + y + o)) % pattern.length;
     
     return {
       char: pattern[i],
-      opacity: 0.15 // Fixed low opacity for better performance
+      opacity: 0.15
     };
   };
 
-  // For performance, limit the maximum number of characters rendered
-  // but still ensure full screen coverage
-  const maxVisibleRows = 40; // Increased for better coverage
-  const maxVisibleCols = 80; // Increased for better coverage
+  // Keep the same number of rows and columns
+  const maxVisibleRows = 40;
+  const maxVisibleCols = 70;
   
-  // Calculate how many rows/cols to skip to maintain performance while covering the screen
+  // Calculate actual visible rows/cols after applying skip factor
   const rowSkip = context.rows > maxVisibleRows ? Math.floor(context.rows / maxVisibleRows) : 1;
   const colSkip = context.cols > maxVisibleCols ? Math.floor(context.cols / maxVisibleCols) : 1;
   
-  // Calculate actual visible rows/cols after applying skip factor
   const visibleRows = Math.ceil(context.rows / rowSkip);
   const visibleCols = Math.ceil(context.cols / colSkip);
 
   return (
     <div className="fixed inset-0 font-mono text-xs leading-none select-none overflow-hidden z-0 bg-black">
-      <div className="transform-gpu m-0 p-0 w-screen h-screen flex flex-col justify-start">
+      <pre className="transform-gpu m-0 p-0 w-screen h-screen">
         {Array.from({ length: visibleRows }).map((_, y) => (
-          <div key={y} className="flex whitespace-pre" style={{ height: `${100 / visibleRows}vh` }}>
+          <div key={y} className="flex whitespace-pre">
             {Array.from({ length: visibleCols }).map((_, x) => {
               const actualX = x * colSkip;
               const actualY = y * rowSkip;
@@ -119,12 +133,9 @@ function AnimatedTextBackground() {
                   key={x}
                   style={{ 
                     opacity: cell.opacity,
-                    fontWeight: '100',
-                    width: `${100 / visibleCols}vw`,
-                    display: 'inline-block',
-                    textAlign: 'center'
+                    fontWeight: '100'
                   }}
-                  className="text-white"
+                  className="text-white/70"
                 >
                   {cell.char}
                 </span>
@@ -132,7 +143,7 @@ function AnimatedTextBackground() {
             })}
           </div>
         ))}
-      </div>
+      </pre>
     </div>
   );
 }
@@ -155,9 +166,9 @@ export default function ZeroBullshit() {
   }, [isMobile]);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative">
-      {/* Animated text background */}
-      <AnimatedTextBackground />
+    <div className="min-h-screen w-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated text background - full screen */}
+      <AnimatedText pattern="AALTOES CV " className="absolute inset-0" />
       
       <div className="max-w-5xl w-full border border-zinc-800 rounded-lg overflow-hidden relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2">
@@ -221,7 +232,7 @@ export default function ZeroBullshit() {
                 <p className="text-white font-mono text-sm">- Must be attended physically</p>
                 <p className="text-white font-mono text-sm">- You must be confirmed to the event</p>
                 <p className="text-white font-mono text-sm">- Receive live mentoring from CV experts for your team</p>
-                <p className="text-white font-mono text-sm">- Visit <Link to="/explore" className="underline hover:text-zinc-300">Explore Startup Sauna on March 13th</Link> for a good karma</p>
+                <p className="text-white font-mono text-sm">- Visit <Link to="/explore" className="underline hover:text-zinc-300">Explore Startup Sauna</Link> for a good karma</p>
               </div>
               
               <div className="mt-auto pt-6">
