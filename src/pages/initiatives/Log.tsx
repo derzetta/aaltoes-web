@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 
@@ -17,38 +17,53 @@ interface LogEntryProps {
   description: string
   type: 'added' | 'updated' | 'fixed' | 'removed'
   initiative?: string
+  index: number
+  isFirstOfMonth?: boolean
+  month?: string
 }
 
 const LogEntry = ({ date, title, description, type, initiative }: LogEntryProps) => {
   // Define colors based on initiative
   const initiativeColors = {
-    Robotics: 'bg-purple-800',
-    Blueprint: 'bg-cyan-800',
-    OpenSource: 'bg-green-800',
-    International: 'bg-yellow-800',
-    FocusTopics: 'bg-pink-800',
-    Spinout: 'bg-orange-800'
+    Robotics: 'bg-purple-700',
+    Blueprint: 'bg-cyan-700',
+    OpenSource: 'bg-green-700',
+    International: 'bg-yellow-700',
+    FocusTopics: 'bg-pink-700',
+    Spinout: 'bg-orange-700'
   }
 
   // Define text colors based on initiative
   const initiativeTextColors = {
-    Robotics: 'text-purple-800',
-    Blueprint: 'text-cyan-800',
-    OpenSource: 'text-green-800',
-    International: 'text-yellow-800',
-    FocusTopics: 'text-pink-800',
-    Spinout: 'text-orange-800'
+    Robotics: 'text-purple-300',
+    Blueprint: 'text-cyan-300',
+    OpenSource: 'text-green-300',
+    International: 'text-yellow-300',
+    FocusTopics: 'text-pink-300',
+    Spinout: 'text-orange-300'
+  }
+
+  // Define border colors based on initiative
+  const initiativeBorderColors = {
+    Robotics: 'border-purple-700',
+    Blueprint: 'border-cyan-700',
+    OpenSource: 'border-green-700',
+    International: 'border-yellow-700',
+    FocusTopics: 'border-pink-700',
+    Spinout: 'border-orange-700'
   }
 
   // Determine dot color - use initiative color if available
-  const dotColor = initiative && initiativeColors[initiative as keyof typeof initiativeColors]
-    ? initiativeColors[initiative as keyof typeof initiativeColors]
-    : 'bg-zinc-500' // Default gray for entries without initiative
 
   // Determine icon color - use initiative text color if available, otherwise use white
   const iconColor = initiative && initiativeTextColors[initiative as keyof typeof initiativeTextColors]
     ? initiativeTextColors[initiative as keyof typeof initiativeTextColors]
     : 'text-zinc-100' // Default white for entries without initiative
+
+  // Determine border color - use initiative border color if available, otherwise use default
+  const borderColor = initiative && initiativeBorderColors[initiative as keyof typeof initiativeBorderColors]
+    ? initiativeBorderColors[initiative as keyof typeof initiativeBorderColors]
+    : 'border-zinc-800' // Default for entries without initiative
 
   // Define icons based on type with dynamic color
   const getTypeIcon = (type: 'added' | 'updated' | 'fixed' | 'removed') => {
@@ -82,48 +97,103 @@ const LogEntry = ({ date, title, description, type, initiative }: LogEntryProps)
     }
   };
 
+  // Extract day from date
+  const day = date.split(' ')[1].replace(',', '')
+
   return (
-    <div className="border-l-2 border-zinc-800 pl-6 pb-12 relative">
-      {/* Dot on timeline */}
-      <div className={`absolute left-[-5px] top-0 w-2 h-2 rounded-full ${dotColor}`}></div>
-      
-      <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
-        <time className="text-sm font-mono text-zinc-500">{date}</time>
-        <h3 className="text-xl font-medium text-zinc-100">{title}</h3>
-        <div className="md:ml-auto flex items-center gap-2">
-          {getTypeIcon(type)}
-        </div>
+    <div className="relative">
+      {/* Day marker on y-axis */}
+      <div className="absolute left-0 top-0 w-8 h-8 flex items-center justify-center">
+        <div className="text-xs font-mono text-zinc-400">{day}</div>
       </div>
       
-      <div className="mt-4">
-        <p className="text-base text-zinc-400 leading-relaxed">{description}</p>
+      {/* Content Card */}
+      <div className="ml-10 md:ml-14 relative">
+        <div className={`bg-zinc-900/40 backdrop-blur-sm border ${borderColor} rounded-lg p-4 hover:bg-zinc-900/60 transition-colors duration-200`}>
+          <div className="flex flex-col gap-2">
+            {/* Header */}
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-base font-medium text-zinc-100">{title}</h3>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {initiative && (
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${initiativeColors[initiative as keyof typeof initiativeColors]} bg-opacity-20 ${initiativeTextColors[initiative as keyof typeof initiativeTextColors]}`}>
+                    {initiative}
+                  </span>
+                )}
+                <span className="flex items-center justify-center w-5 h-5">
+                  {getTypeIcon(type)}
+                </span>
+              </div>
+            </div>
+            
+            {/* Description */}
+            <p className="text-sm text-zinc-400 leading-relaxed">{description}</p>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
-// Month Section Component
-interface MonthSectionProps {
-  month: string
-  children: React.ReactNode
+// Month Header Component
+interface MonthHeaderProps {
+  month: string;
+  id: string;
 }
 
-const MonthSection = ({ month, children }: MonthSectionProps) => (
-  <div className="mb-16">
-    <h2 className="text-2xl font-medium text-zinc-100 mb-8">{month}</h2>
-    <div className="space-y-2">
-      {children}
+const MonthHeader = ({ month, id }: MonthHeaderProps) => (
+  <div id={id} className="mb-3 sticky top-36 z-10">
+    <div className="inline-block">
+      <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider bg-zinc-950/90 backdrop-blur-sm py-2 px-2 
+      md:transform-none md:absolute md:-left-24 md:top-0
+      transform -rotate-90 origin-bottom-left absolute -left-2 top-16">
+        {month}
+      </div>
     </div>
   </div>
-)
+);
 
 export default function Log() {
   const { pathname } = useLocation()
   const [filter, setFilter] = useState<string | null>(null)
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const [, setActiveMonth] = useState<string | null>(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (timelineRef.current) {
+        const monthHeaders = timelineRef.current.querySelectorAll('[id^="month-"]');
+        
+        // Find the current visible month
+        for (let i = 0; i < monthHeaders.length; i++) {
+          const header = monthHeaders[i];
+          const rect = header.getBoundingClientRect();
+          
+          // If the header is in view or just above the viewport
+          if (rect.top <= 160) {
+            setActiveMonth(header.id);
+            
+            // Check if the next month header is about to come into view
+            if (i < monthHeaders.length - 1) {
+              const nextHeader = monthHeaders[i + 1];
+              const nextRect = nextHeader.getBoundingClientRect();
+              
+              if (nextRect.top <= 160) {
+                setActiveMonth(nextHeader.id);
+              }
+            }
+          }
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Sample log data
   const logEntries = [
@@ -131,7 +201,7 @@ export default function Log() {
     {
       date: "Mar 1, 2025",
       title: "Port_25 Hackathon",
-      description: "Port_25 hackathon was organised on March 1-2.",
+      description: "Port_25 hackathon was organised on March 1-2, bringing together developers and innovators to collaborate on cutting-edge technology solutions.",
       type: "added" as const,
       initiative: "FocusTopics"
     },
@@ -140,6 +210,7 @@ export default function Log() {
     {
       date: "Feb 25, 2025",
       title: "Launch of Robotics Nation Program",
+      description: "Launched the Robotics Nation Program, a comprehensive initiative to advance robotics education and innovation across Finland.",
       type: "added" as const,
       initiative: "Robotics"
     },
@@ -288,27 +359,148 @@ export default function Log() {
 
   // Filter entries based on selected initiative
   const filteredEntries = filter 
-    ? logEntries.filter(entry => entry.initiative === filter)
+    ? logEntries.filter(entry => entry.initiative && entry.initiative.toLowerCase() === filter.toLowerCase())
     : logEntries
 
-  // Group entries by month
-  const entriesByMonth: Record<string, typeof logEntries> = {}
-  filteredEntries.forEach(entry => {
-    const month = entry.date.split(' ')[0] + ' ' + entry.date.split(' ')[2] // e.g., "Feb 2025"
-    if (!entriesByMonth[month]) {
-      entriesByMonth[month] = []
+  // Reset active month when filter changes
+  useEffect(() => {
+    setActiveMonth(null);
+    // Force recalculation of timeline
+    setTimeout(() => {
+      if (timelineRef.current) {
+        const monthHeaders = timelineRef.current.querySelectorAll('[id^="month-"]');
+        if (monthHeaders.length > 0) {
+          const firstHeader = monthHeaders[0];
+          setActiveMonth(firstHeader.id);
+        }
+      }
+    }, 200);
+  }, [filter]);
+
+  // Create a continuous timeline with all days
+  const createContinuousTimeline = () => {
+    // Sort entries by date (newest first)
+    const sortedEntries = [...filteredEntries].sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime();
+    });
+
+    if (sortedEntries.length === 0) {
+      console.log("No entries found for the selected filter");
+      return [];
     }
-    entriesByMonth[month].push(entry)
-  })
+
+    console.log("Sorted entries:", sortedEntries.map(e => e.title));
+
+    // Find the earliest and latest dates
+    const latestDate = new Date(sortedEntries[0].date);
+    const earliestDate = new Date(sortedEntries[sortedEntries.length - 1].date);
+    
+    // Create a map to store entries by date string
+    const entriesByDate = new Map();
+    sortedEntries.forEach(entry => {
+      const date = new Date(entry.date);
+      const month = date.toLocaleDateString('en-US', { month: 'long' });
+      entriesByDate.set(entry.date, {...entry, month});
+    });
+    
+    // Create a continuous timeline with all days
+    const timeline: Array<any> = [];
+    const currentDate = new Date(latestDate);
+    
+    while (currentDate >= earliestDate) {
+      const dateStr = currentDate.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric' 
+      });
+      
+      // Check if there's an entry for this date
+      const entry = entriesByDate.get(dateStr);
+      
+      // Add the date to the timeline (with or without an entry)
+      if (entry) {
+        // Check if this is the first day of a month
+        const isFirstOfMonth: boolean = currentDate.getDate() === 1 || 
+                             (timeline.length > 0 && 
+                              new Date(timeline[timeline.length - 1].date).getMonth() !== currentDate.getMonth());
+        
+        const monthStr: string = currentDate.toLocaleDateString('en-US', { month: 'long' });
+        
+        timeline.push({
+          ...entry,
+          isFirstOfMonth,
+          month: monthStr
+        });
+      } else {
+        // Create an empty day marker
+        const isFirstOfMonth: boolean = currentDate.getDate() === 1 || 
+                             (timeline.length > 0 && 
+                              new Date(timeline[timeline.length - 1].date).getMonth() !== currentDate.getMonth());
+        
+        const monthStr: string = currentDate.toLocaleDateString('en-US', { month: 'long' });
+        
+        timeline.push({
+          date: dateStr,
+          title: "",
+          description: "",
+          type: "added" as const,
+          isEmptyDay: true,
+          isFirstOfMonth,
+          month: monthStr
+        });
+      }
+      
+      // Move to the previous day
+      currentDate.setDate(currentDate.getDate() - 1);
+    }
+    
+    return timeline;
+  };
+
+  const timelineEntries = createContinuousTimeline();
+
+  // Group timeline entries by month
+  const entriesByMonth: Record<string, any[]> = {};
+  
+  timelineEntries.forEach(entry => {
+    const date = new Date(entry.date);
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    
+    if (!entriesByMonth[month]) {
+      entriesByMonth[month] = [];
+    }
+    
+    entriesByMonth[month].push(entry);
+  });
+  
+  // If no entries are grouped by month but we have filtered entries, create a group for them
+  if (Object.keys(entriesByMonth).length === 0 && filteredEntries.length > 0) {
+    const firstEntry = filteredEntries[0];
+    const date = new Date(firstEntry.date);
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    
+    entriesByMonth[month] = filteredEntries.map(entry => ({
+      ...entry,
+      hasEntry: true,
+      month
+    }));
+  }
 
   // Get unique initiatives for filter
   const initiatives = Array.from(new Set(logEntries.filter(entry => entry.initiative).map(entry => entry.initiative))) as string[]
+  
+  // Debug log to check initiatives
+  console.log("Available initiatives:", initiatives);
+  console.log("Current filter:", filter);
+  console.log("Filtered entries:", filteredEntries.length);
 
   return (
     <div className="min-h-screen bg-zinc-950">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-16 pt-32">
+      <div className="max-w-4xl mx-auto px-6 space-y-16 pb-16 pt-32">
         {/* Hero Section */}
         <div className="space-y-8">
           {/* Heading and Description */}
@@ -331,73 +523,108 @@ export default function Log() {
             </div>
           </motion.div>
         </div>
-        <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* Main Content */}
-        <div className="space-y-16">
+        <div className="space-y-12">
           {/* Filters */}
-          <div className="flex flex-wrap gap-3 px-0">
+          <div className="flex flex-wrap gap-2 px-0 sticky top-0 z-30 bg-zinc-950/90 backdrop-blur-sm py-4">
             <button
               onClick={() => setFilter(null)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors relative group overflow-hidden ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
                 filter === null 
-                  ? 'bg-zinc-800 text-zinc-100' 
-                  : 'bg-zinc-900/50 text-zinc-400'
+                  ? 'bg-zinc-800 text-zinc-100 border-zinc-700' 
+                  : 'bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-zinc-300'
               }`}
             >
-              <span className="relative z-10">All Updates</span>
-              {filter !== null && (
-                <div className="absolute inset-0 bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              )}
+              <span>All Updates</span>
             </button>
             
             {initiatives.map((initiative) => (
               <button
                 key={initiative}
                 onClick={() => setFilter(initiative)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors relative group overflow-hidden ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
                   filter === initiative 
-                    ? 'bg-zinc-800 text-zinc-100' 
-                    : 'bg-zinc-900/50 text-zinc-400'
+                    ? 'bg-zinc-800 text-zinc-100 border-zinc-700' 
+                    : 'bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-zinc-300'
                 }`}
               >
-                <span className="relative z-10">{initiative}</span>
-                {filter !== initiative && (
-                  <div className="absolute inset-0 bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                )}
+                <span>{initiative}</span>
               </button>
             ))}
           </div>
 
           {/* Timeline */}
-          <div className="space-y-16">
-            {Object.entries(entriesByMonth).map(([month, entries]) => (
-              <MonthSection key={month} month={month}>
-                {entries.map((entry, index) => (
-                  <LogEntry
-                    key={index}
-                    date={entry.date ?? ''}
-                    title={entry.title ?? ''}
-                    description={entry.description ?? ''}
-                    type={entry.type ?? ''}
-                    initiative={entry.initiative ?? ''}
+          <div className="pl-6 md:pl-10 relative" ref={timelineRef}>
+            {/* Vertical timeline axis */}
+            <div className="absolute left-6 md:left-10 top-0 bottom-0 w-px bg-zinc-800"></div>
+            
+            <AnimatePresence>
+              {Object.entries(entriesByMonth).map(([month, entries]) => (
+                <div key={`month-group-${month}`} className="mb-8">
+                  {/* Month Header */}
+                  <MonthHeader 
+                    month={month} 
+                    id={`month-${month.replace(/\s+/g, '-')}`} 
                   />
-                ))}
-              </MonthSection>
-            ))}
+                  
+                  {/* Month Entries */}
+                  <div className="space-y-4 mt-4">
+                    {entries.map((entry, index) => (
+                      !entry.isEmptyDay ? (
+                        <motion.div
+                          key={`${entry.date}-${entry.title || index}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <LogEntry
+                            date={entry.date ?? ''}
+                            title={entry.title ?? ''}
+                            description={entry.description ?? ''}
+                            type={entry.type ?? ''}
+                            initiative={entry.initiative ?? ''}
+                            index={index}
+                            isFirstOfMonth={entry.isFirstOfMonth}
+                            month={entry.month}
+                          />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key={`empty-${entry.date}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="relative h-6"
+                        >
+                          {/* Day marker on y-axis for empty days */}
+                          <div className="absolute left-0 top-0 w-8 h-6 flex items-center justify-center">
+                            <div className="text-xs font-mono text-zinc-600">{entry.date.split(' ')[1].replace(',', '')}</div>
+                          </div>
+                          
+                          {/* Empty day marker */}
+                          <div className="ml-12 relative h-6">
+                            <div className="absolute left-[-4px] top-[11px] w-1 h-1 rounded-full bg-zinc-800"></div>
+                          </div>
+                        </motion.div>
+                      )
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-950" />
+        <div className="w-full h-px bg-zinc-800" />
 
         {/* Responsible Person Card */}
         <section>
-          <motion.div
-            className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-800/50 rounded-xl p-8"
-            {...fadeIn}
-            transition={{ ...fadeIn.transition, delay: 0.3 }}
-          >
+          <div className="bg-zinc-950 backdrop-blur-sm border border-zinc-800 rounded-xl p-8">
             {/* Container for profile and buttons */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
               {/* Profile Info */}
@@ -416,40 +643,40 @@ export default function Log() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 px-0">
-                <a 
-                  href="https://github.com/aaltoes-tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto relative overflow-hidden"
-                >
-                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                    GitHub
-                  </span>
-                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                </a>
-                
-                <a 
-                  href="mailto:siiri.lautamies@aaltoes.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto relative overflow-hidden"
-                >
-                  <span className="relative z-10 uppercase text-sm flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    Contact
-                  </span>
-                  <div className="absolute inset-0 -m-[1px] rounded-lg bg-zinc-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                </a>
+              <div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <a 
+                    href="https://github.com/aaltoes-tech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                  >
+                    <span className="uppercase flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                      </svg>
+                      GitHub
+                    </span>
+                  </a>
+                  
+                  <a 
+                    href="mailto:siiri.lautamies@aaltoes.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="base-button inline-flex items-center justify-center group h-10 px-4 w-full sm:w-auto"
+                  >
+                    <span className="uppercase flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                      </svg>
+                      Contact
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </section>
       </div>
     </div>
