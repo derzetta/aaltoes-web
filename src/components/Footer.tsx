@@ -20,6 +20,11 @@ function Footer() {
   const isResourcesClickingRef = useRef(false)
   const isLegalClickingRef = useRef(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024)
+  const navLinkRefs = useRef<{[key: string]: HTMLAnchorElement | null}>({})
+  // Add a flag to track programmatic navigation
+  const isNavigatingRef = useRef(false)
+  // Track the target path for navigation
+  const targetPathRef = useRef<string | null>(null)
 
   // For dropdown links
   const getDropdownClassName = (path: string) => {
@@ -51,20 +56,48 @@ function Footer() {
     if (!container) return
 
     const handleScroll = () => {
-      scrollPosition.current = container.scrollLeft
+      // Only update scroll position if we're not in the middle of a navigation
+      if (!isNavigatingRef.current) {
+        scrollPosition.current = container.scrollLeft
+      }
     }
 
     container.addEventListener('scroll', handleScroll)
     return () => container.removeEventListener('scroll', handleScroll)
   }, [scrollPosition])
 
-  // Restore scroll position after navigation
+  // Center the active link when the component mounts or the path changes
   useEffect(() => {
     const container = scrollContainerRef.current
-    if (!container) return
+    if (!container || !isMobile) return
     
-    container.scrollLeft = scrollPosition.current
-  }, [location.pathname, scrollPosition])
+    // If we're in the middle of a programmatic navigation to a specific path
+    if (isNavigatingRef.current && targetPathRef.current === location.pathname) {
+      // The scroll position has already been set in handleNavLinkClick
+      // Just reset the navigation flag
+      isNavigatingRef.current = false
+      targetPathRef.current = null
+      return
+    }
+    
+    // Otherwise, find the active link and center it
+    const activeLink = navLinkRefs.current[location.pathname]
+    if (activeLink) {
+      const containerWidth = container.offsetWidth
+      const elementWidth = activeLink.offsetWidth
+      const elementLeft = activeLink.offsetLeft
+      
+      // Calculate position to center the element
+      const scrollTo = elementLeft - (containerWidth / 2) + (elementWidth / 2)
+      
+      // Set scroll position without animation for initial load
+      container.scrollLeft = scrollTo
+      scrollPosition.current = scrollTo
+    } else {
+      // If no active link is found, restore the saved scroll position
+      container.scrollLeft = scrollPosition.current
+    }
+  }, [location.pathname, isMobile, scrollPosition])
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -169,27 +202,103 @@ function Footer() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Handle navigation and centering of clicked link
+  const handleNavLinkClick = (path: string, e: React.MouseEvent) => {
+    if (isMobile) {
+      e.preventDefault()
+      
+      // Get the clicked element
+      const clickedElement = navLinkRefs.current[path]
+      const container = scrollContainerRef.current
+      
+      if (clickedElement && container) {
+        // Calculate the center position
+        const containerWidth = container.offsetWidth
+        const elementWidth = clickedElement.offsetWidth
+        const elementLeft = clickedElement.offsetLeft
+        
+        // Calculate scroll position to center the element
+        const scrollTo = elementLeft - (containerWidth / 2) + (elementWidth / 2)
+        
+        // Set the navigation flags
+        isNavigatingRef.current = true
+        targetPathRef.current = path
+        
+        // Update the stored scroll position
+        scrollPosition.current = scrollTo
+        
+        // Animate scroll
+        container.scrollTo({
+          left: scrollTo,
+          behavior: 'smooth'
+        })
+        
+        // Navigate after a short delay to allow animation
+        setTimeout(() => {
+          navigate(path)
+        }, 300)
+      } else {
+        navigate(path)
+      }
+    } else {
+      // On desktop, just navigate normally
+      navigate(path)
+    }
+  }
+
   return (
     <footer className="fixed bottom-0 left-0 right-0 bg-zinc-950/70 backdrop-blur-sm border-t border-zinc-100/10 z-[60]">
-      <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hide py-6">
-        <div className="container w-[1200px] mx-auto flex flex-nowrap justify-between items-center text-sm px-6" style={{ minWidth: '1200px' }}>
-          <Link to="/" className={getClassName('/')}>
+      <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hide py-6 relative">
+        {/* Scroll hint gradients - only visible on mobile */}
+        <div className="fixed bottom-0 right-0 h-[56px] w-24 bg-gradient-to-l from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none z-[70] lg:hidden" />
+        <div className="fixed bottom-0 left-0 h-[56px] w-24 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none z-[70] lg:hidden" />
+        
+        <div className="w-full max-w-[1200px] mx-auto flex flex-nowrap items-center text-sm pl-[calc(50%-54px)] lg:justify-between lg:px-6 lg:min-w-[1200px]">
+          <Link 
+            to="/" 
+            className={getClassName('/')}
+            onClick={(e) => handleNavLinkClick('/', e)}
+            ref={(el) => navLinkRefs.current['/'] = el}
+          >
             AALTOES 2025
           </Link>
-          <div className="h-6 w-px bg-zinc-800" />
-          <Link to="/about" className={getClassName('/about')}>
+          <div className="h-6 w-px bg-zinc-800 mx-6 lg:mx-0" />
+          <Link 
+            to="/about" 
+            className={getClassName('/about')}
+            onClick={(e) => handleNavLinkClick('/about', e)}
+            ref={(el) => navLinkRefs.current['/about'] = el}
+          >
             About
           </Link>
-          <Link to="/team" className={getClassName('/team')}>
+          <div className="mx-6 lg:hidden" />
+          <Link 
+            to="/team" 
+            className={getClassName('/team')}
+            onClick={(e) => handleNavLinkClick('/team', e)}
+            ref={(el) => navLinkRefs.current['/team'] = el}
+          >
             Team
           </Link>
-          <Link to="/projects" className={getClassName('/projects')}>
+          <div className="mx-6 lg:hidden" />
+          <Link 
+            to="/projects" 
+            className={getClassName('/projects')}
+            onClick={(e) => handleNavLinkClick('/projects', e)}
+            ref={(el) => navLinkRefs.current['/projects'] = el}
+          >
             Projects
           </Link>
-          <Link to="/events" className={getClassName('/events')}>
+          <div className="mx-6 lg:hidden" />
+          <Link 
+            to="/events" 
+            className={getClassName('/events')}
+            onClick={(e) => handleNavLinkClick('/events', e)}
+            ref={(el) => navLinkRefs.current['/events'] = el}
+          >
             Events
           </Link>
-          <div className="h-6 w-px bg-zinc-100/10" />
+          <div className="h-6 w-px bg-zinc-100/10 mx-6 lg:mx-0" />
           
           {/* Legal Dropdown */}
           <div 
@@ -230,6 +339,33 @@ function Footer() {
                       onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
+                        
+                        // Center around the Legal dropdown if on mobile
+                        if (isMobile && legalDropdownRef.current && scrollContainerRef.current) {
+                          const container = scrollContainerRef.current
+                          const dropdownButton = legalDropdownRef.current
+                          
+                          const containerWidth = container.offsetWidth
+                          const elementWidth = dropdownButton.offsetWidth
+                          const elementLeft = dropdownButton.offsetLeft
+                          
+                          // Calculate scroll position to center the dropdown
+                          const scrollTo = elementLeft - (containerWidth / 2) + (elementWidth / 2)
+                          
+                          // Set the navigation flags
+                          isNavigatingRef.current = true
+                          targetPathRef.current = link.path
+                          
+                          // Update the stored scroll position
+                          scrollPosition.current = scrollTo
+                          
+                          // Animate scroll
+                          container.scrollTo({
+                            left: scrollTo,
+                            behavior: 'smooth'
+                          })
+                        }
+                        
                         navigate(link.path)
                         setTimeout(() => setIsLegalOpen(false), 200)
                       }}
@@ -242,7 +378,7 @@ function Footer() {
             )}
           </div>
 
-          <div className="h-6 w-px bg-zinc-100/10" />
+          <div className="h-6 w-px bg-zinc-100/10 mx-6 lg:mx-0" />
           <div 
             ref={resourcesDropdownRef} 
             className="relative"
@@ -279,6 +415,33 @@ function Footer() {
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
+                      
+                      // Center around the Resources dropdown if on mobile
+                      if (isMobile && resourcesDropdownRef.current && scrollContainerRef.current) {
+                        const container = scrollContainerRef.current
+                        const dropdownButton = resourcesDropdownRef.current
+                        
+                        const containerWidth = container.offsetWidth
+                        const elementWidth = dropdownButton.offsetWidth
+                        const elementLeft = dropdownButton.offsetLeft
+                        
+                        // Calculate scroll position to center the dropdown
+                        const scrollTo = elementLeft - (containerWidth / 2) + (elementWidth / 2)
+                        
+                        // Set the navigation flags
+                        isNavigatingRef.current = true
+                        targetPathRef.current = '/resources/authors'
+                        
+                        // Update the stored scroll position
+                        scrollPosition.current = scrollTo
+                        
+                        // Animate scroll
+                        container.scrollTo({
+                          left: scrollTo,
+                          behavior: 'smooth'
+                        })
+                      }
+                      
                       const href = '/resources/authors'
                       navigate(href)
                       setTimeout(() => setIsResourcesOpen(false), 200)
@@ -292,6 +455,33 @@ function Footer() {
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
+                      
+                      // Center around the Resources dropdown if on mobile
+                      if (isMobile && resourcesDropdownRef.current && scrollContainerRef.current) {
+                        const container = scrollContainerRef.current
+                        const dropdownButton = resourcesDropdownRef.current
+                        
+                        const containerWidth = container.offsetWidth
+                        const elementWidth = dropdownButton.offsetWidth
+                        const elementLeft = dropdownButton.offsetLeft
+                        
+                        // Calculate scroll position to center the dropdown
+                        const scrollTo = elementLeft - (containerWidth / 2) + (elementWidth / 2)
+                        
+                        // Set the navigation flags
+                        isNavigatingRef.current = true
+                        targetPathRef.current = '/brand'
+                        
+                        // Update the stored scroll position
+                        scrollPosition.current = scrollTo
+                        
+                        // Animate scroll
+                        container.scrollTo({
+                          left: scrollTo,
+                          behavior: 'smooth'
+                        })
+                      }
+                      
                       const href = '/brand'
                       navigate(href)
                       setTimeout(() => setIsResourcesOpen(false), 200)
@@ -303,8 +493,8 @@ function Footer() {
               </Portal>
             )}
           </div>
-          <div className="h-6 w-px bg-zinc-100/10" />
-          <div className="flex items-center gap-8">
+          <div className="h-6 w-px bg-zinc-100/10 mx-6 lg:mx-0" />
+          <div className="flex items-center gap-6 lg:gap-8 pr-[calc(50%)] lg:pr-0">
             {socialLinks.map((link) => (
               <a
                 key={link.url}

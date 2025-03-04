@@ -117,3 +117,14 @@
 html {
   scrollbar-gutter: stable;
 }
+
+/* Custom animations */
+@keyframes pulseOpacity {
+  0% { opacity: 0.85; }
+  50% { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+.footer-scroll-hint {
+  animation: pulseOpacity 3s ease-in-out infinite;
+}

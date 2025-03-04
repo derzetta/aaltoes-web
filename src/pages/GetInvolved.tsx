@@ -111,25 +111,7 @@ export default function GetInvolved() {
             </div>
           </div>
 
-          <div>
-            <h2 className="section-title">Benefits of Involvement</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-lg p-6">
-                <h3 className="subsection-title">For Students</h3>
-                <p className="text-content">
-                  Gain practical experience in entrepreneurship, expand your professional network, and develop skills that will set you apart in your career. 
-                  Our community provides a supportive environment to explore your interests and potential.
-                </p>
-              </div>
-              <div className="bg-zinc-950/30 backdrop-blur-sm border border-zinc-100/10 rounded-lg p-6">
-                <h3 className="subsection-title">For Entrepreneurs</h3>
-                <p className="text-content">
-                  Connect with like-minded founders, access resources and mentorship, and find potential co-founders or team members. 
-                  Leverage our network to accelerate your startup journey and overcome challenges.
-                </p>
-              </div>
-            </div>
-          </div>
+         
 
           <div className="flex justify-center relative z-0">
             <Link 
