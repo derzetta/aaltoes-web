@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Layout from '../components/Layout'
-import EarlyAccessBanner from '../components/EarlyAccessBanner'
 import CompanyLogos from '../components/CompanyLogos'
+import { Link } from 'react-router-dom'
 
 export default function About() {
   useEffect(() => {
@@ -12,7 +12,6 @@ export default function About() {
     <Layout>
       <h1 className="page-title">About Aaltoes</h1>
       <div className="title-divider" />
-      <EarlyAccessBanner />
       
       <div className="content-section">
         <div className="space-y-12">
@@ -31,6 +30,31 @@ export default function About() {
               </p>
             </div>
           </div>
+          
+          {/* Key Stats Section - moved under mission */}
+          <div className="mt-36">
+            <h2 className="section-title">#1 student-led entrepreneurship community of Europe</h2>
+            
+            <div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-zinc-800">
+                <div className="py-6 px-4 text-center">
+                  <h3 className="text-3xl font-bold text-zinc-100 mb-3 font-mono tracking-tight">~600</h3>
+                  <p className="text-zinc-400 uppercase tracking-wider text-sm font-mono">MEMBERS</p>
+                </div>
+                
+                <div className="py-6 px-4 text-center">
+                  <h3 className="text-3xl font-bold text-zinc-100 mb-3 font-mono tracking-tight">€1,2B+</h3>
+                  <p className="text-zinc-400 uppercase tracking-wider text-sm font-mono">RAISED BY ALUMNI</p>
+                </div>
+                
+                <div className="py-6 px-4 text-center">
+                  <h3 className="text-3xl font-bold text-zinc-100 mb-3 font-mono tracking-tight">11000+</h3>
+                  <p className="text-zinc-400 uppercase tracking-wider text-sm font-mono">JOBS CREATED</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div className="mt-36">
             <h2 className="section-title">Founded by our alumni</h2>
             <CompanyLogos />
@@ -59,6 +83,12 @@ export default function About() {
                 >
                   <span className="relative z-10 uppercase">Become a Member</span>
                 </a>
+                <Link 
+                  to="/team" 
+                  className="base-button inline-flex items-center justify-center"
+                >
+                  <span className="relative z-10 uppercase">Meet the Team 2025</span>
+                </Link>
               </div>
             </div>
           </div>
