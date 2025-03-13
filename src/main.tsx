@@ -27,6 +27,19 @@ import Log from './pages/initiatives/Log'
 import Explore from './pages/Explore'
 import ZeroBullshit from './pages/CV1.tsx'
 import GetInvolved from './pages/GetInvolved'
+import Robo from './pages/Robo'
+import { useEffect } from 'react'
+
+// Component for external redirect
+const ExternalRedirect = ({ to }: { to: string }) => {
+  useEffect(() => {
+    window.location.href = to;
+  }, [to]);
+  
+  return <div className="min-h-screen bg-zinc-900 flex items-center justify-center">
+    <p className="text-zinc-300 text-lg">Redirecting to {to}...</p>
+  </div>;
+};
 
 const router = createBrowserRouter([
   {
@@ -140,6 +153,14 @@ const router = createBrowserRouter([
   {
     path: "/brand",
     element: <Brand />
+  },
+  {
+    path: "/robo",
+    element: <Robo />
+  },
+  {
+    path: "/robots",
+    element: <ExternalRedirect to="https://aaltoes.com/2025/robotics" />
   },
   {
     path: "*",

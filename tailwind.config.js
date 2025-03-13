@@ -22,6 +22,8 @@ export default {
         'scroll-left': 'scroll-left 40s linear infinite',
         'scroll-right': 'scroll-right 40s linear infinite',
         'twinkle': 'twinkle 10s ease-in-out infinite',
+        'flag-wave': 'flag-wave 8s ease-in-out infinite',
+        'flag-segment': 'flag-segment 3s ease-in-out infinite',
       },
       keyframes: {
         'loading-bar': {
@@ -40,6 +42,28 @@ export default {
           '0%': { opacity: 0 },
           '50%': { opacity: 0.8 },
           '100%': { opacity: 0 }
+        },
+        'flag-wave': {
+          '0%': { 
+            transform: 'perspective(1000px) rotateX(13deg) rotateY(0deg)'
+          },
+          '50%': {
+            transform: 'perspective(1000px) rotateX(13deg) rotateY(10deg)'
+          },
+          '100%': {
+            transform: 'perspective(1000px) rotateX(13deg) rotateY(0deg)'
+          }
+        },
+        'flag-segment': {
+          '0%': { 
+            transform: 'perspective(1000px) rotateY(0deg) translateZ(0px)'
+          },
+          '50%': {
+            transform: 'perspective(1000px) rotateY(15deg) translateZ(20px)'
+          },
+          '100%': {
+            transform: 'perspective(1000px) rotateY(0deg) translateZ(0px)'
+          }
         }
       },
       textShadow: {
