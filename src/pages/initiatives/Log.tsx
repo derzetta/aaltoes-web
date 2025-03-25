@@ -215,7 +215,7 @@ export default function Log() {
     {
       date: "Mar 23, 2025",
       title: "First Computer Vision Hackathon",
-      description: "Organized the first-ever computer vision hackathon with 50 teams competing, showcasing innovation in AI and computer vision technology.",
+      description: "Organized the first-ever computer vision hackathon with 50 teams competing, featuring fake vs real segmentation challenge.",
       type: "added" as const,
       initiative: "FocusTopics"
     },
@@ -240,7 +240,12 @@ export default function Log() {
       type: "added" as const,
       initiative: "FocusTopics"
     },
-    
+    {
+      date: "Mar 7, 2025",
+      title: "Aaltoes 2025 Patches Added to Store",
+      description: "Added exclusive Aaltoes 2025 patches to the Aaltoes store, celebrating the Paramount Year of Crafting initiative.",
+      type: "added" as const
+    },
     {
       date: "Mar 1, 2025",
       title: "Port_25 Hackathon",
