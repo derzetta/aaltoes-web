@@ -199,6 +199,49 @@ export default function Log() {
   const logEntries = [
     // March 2025
     {
+      date: "Mar 25, 2025",
+      title: "European Robotics Championship Support",
+      description: "Aaltoes 2025 co-organizes and supports the European Robotics Championship in Riihimäki, marking a significant milestone in Finnish robotics.",
+      type: "added" as const,
+      initiative: "Robotics"
+    },
+    {
+      date: "Mar 24, 2025",
+      title: "Open Source Projects Expansion",
+      description: "Added 8 new computer open source projects to the Aaltoes GitHub repository, enhancing our contribution to the open source community.",
+      type: "added" as const,
+      initiative: "OpenSource"
+    },
+    {
+      date: "Mar 23, 2025",
+      title: "First Computer Vision Hackathon",
+      description: "Organized the first-ever computer vision hackathon with 50 teams competing, showcasing innovation in AI and computer vision technology.",
+      type: "added" as const,
+      initiative: "FocusTopics"
+    },
+    {
+      date: "Mar 21, 2025",
+      title: "First English Vaalilöylyt Election Panel",
+      description: "Hosted the first-ever English language Vaalilöylyt Election panel featuring top-tier Finnish politicians, making politics more accessible to international community.",
+      type: "added" as const,
+      initiative: "International"
+    },
+    {
+      date: "Mar 16, 2025",
+      title: "Robotics Nation Expansion",
+      description: "Robot Uprising and Riihimäki Robotikkakampus join the Robotics Nation project, strengthening the robotics ecosystem in Finland.",
+      type: "updated" as const,
+      initiative: "Robotics"
+    },
+    {
+      date: "Mar 13, 2025",
+      title: "Explore Startup Sauna Event",
+      description: "Successfully organized the Explore Startup Sauna event, fostering entrepreneurship and innovation in the startup ecosystem.",
+      type: "added" as const,
+      initiative: "FocusTopics"
+    },
+    
+    {
       date: "Mar 1, 2025",
       title: "Port_25 Hackathon",
       description: "Port_25 hackathon was organised on March 1-2, bringing together developers and innovators to collaborate on cutting-edge technology solutions.",
