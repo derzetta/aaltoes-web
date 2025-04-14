@@ -129,8 +129,8 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
   return (
     <div className="font-['Geist_Mono'] mt-6">
       <div className="text-sm mb-2">
-        <span className="text-green-400">silkway@aaltoes:~$</span> <span>{typingPrompt}</span>
-        {!typingComplete && <span className={`ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
+        <span className="text-blue-400">silkway@aaltoes:~$</span> <span>{typingPrompt}</span>
+        {!typingComplete && <span className={`ml-1 text-blue-400 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
       </div>
       
       {typingComplete && (
@@ -148,12 +148,12 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
             return (
               <div key={option.text} className="flex items-center">
                 <div 
-                  className={`w-full flex items-center px-1 ${isSelected ? 'bg-white text-[#0000FF] font-bold' : 'text-white'}`}
+                  className={`w-full flex items-center px-1 ${isSelected ? 'bg-blue-500 text-white font-bold' : 'text-white'}`}
                 >
                   <LinkComponent>
                     <div className="flex w-full">
                       <span>{option.text}</span>
-                      {isSelected && <span className={`ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
+                      {isSelected && <span className={`ml-1 text-blue-200 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
                     </div>
                   </LinkComponent>
                 </div>
@@ -183,11 +183,11 @@ export default function Silkway() {
     style.innerHTML = `
       .silkway-page ::selection {
         background-color: white;
-        color: #0000FF;
+        color: #18181b;
       }
       .silkway-page ::-moz-selection {
         background-color: white;
-        color: #0000FF;
+        color: #18181b;
       }
 
       /* CRT Scanlines */
@@ -219,7 +219,7 @@ export default function Silkway() {
         pointer-events: none;
         background-image: radial-gradient(
           ellipse at center,
-          rgba(0, 0, 200, 0.04) 0%,
+          rgba(0, 0, 150, 0.04) 0%,
           rgba(0, 0, 0, 0.2) 100%
         );
         z-index: 1;
@@ -242,18 +242,15 @@ export default function Silkway() {
 
   return (
     <div
-      className="min-h-screen bg-[#0000FF] text-white p-6 flex flex-col text-sm leading-tight silkway-page scanlines relative"
+      className="min-h-screen bg-zinc-950 text-white p-6 flex flex-col text-sm leading-tight silkway-page scanlines relative"
       style={{ fontFamily: "'Geist Mono', monospace" }}
     >
       <div className="max-w-3xl mx-auto w-full pt-16 px-8 relative z-10">
         <header className="flex justify-between items-center mb-10">
           <h1 className="text-sm font-bold tracking-wide font-['Geist_Mono']">
             <TypedText text="PROJECT SILKWAY" speed={30} />
-            {cursorVisible ? <span className="ml-1">_</span> : <span className="ml-1 opacity-0">_</span>}
+            {cursorVisible ? <span className="ml-1 text-blue-400">_</span> : <span className="ml-1 opacity-0">_</span>}
           </h1>
-          <div className="text-sm font-normal font-['Geist_Mono'] flex">
-            <TypedText text="FALL 25" speed={30} delay={600} />
-          </div>
         </header>
 
         {showContent && (
@@ -280,10 +277,10 @@ export default function Silkway() {
                 <h2 className="font-normal mb-1.5 font-['Geist_Mono']">
                   <TypedText text="HANGZHOU ECOSYSTEM" speed={10} delay={2500} />
                 </h2>
-                <p><TypedText text="• Alibaba: E-commerce empire" speed={3} delay={2750} /></p>
+                <p><TypedText text="• Alibaba: Multinational tech giant" speed={3} delay={2750} /></p>
                 <p><TypedText text="• DeepSeek: True Open-Source AI" speed={3} delay={2850} /></p>
                 <p><TypedText text="• Unitree: Robotics that dominate the market" speed={3} delay={2950} /></p>
-                <p><TypedText text="• Plus emerging 'Little Dragons' reshaping global tech" speed={3} delay={3050} /></p>
+                <p><TypedText text="• + other emerging 'Little Dragons' reshaping global tech" speed={3} delay={3050} /></p>
               </section>
 
               <section className="space-y-1.5">
