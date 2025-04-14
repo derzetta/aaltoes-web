@@ -287,7 +287,7 @@ export default function Silkway() {
                     rel="noopener noreferrer" 
                     className="hover:underline"
                   >
-                    <TypedText text="• + other emerging 'Little Dragons' reshaping global tech" speed={3} delay={3050} />
+                    <TypedText text="+ other emerging 'Little Dragons' reshaping global tech" speed={3} delay={3050} />
                   </a>
                 </p>
               </section>
