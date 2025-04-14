@@ -28,6 +28,7 @@ import Explore from './pages/Explore'
 import ZeroBullshit from './pages/CV1.tsx'
 import GetInvolved from './pages/GetInvolved'
 import Robo from './pages/Robo'
+import Silkway from './pages/Silkway'
 import { useEffect } from 'react'
 
 // Component for external redirect
@@ -161,6 +162,10 @@ const router = createBrowserRouter([
   {
     path: "/robots",
     element: <ExternalRedirect to="https://aaltoes.com/2025/robotics" />
+  },
+  {
+    path: "/silkway",
+    element: <Silkway />,
   },
   {
     path: "*",
