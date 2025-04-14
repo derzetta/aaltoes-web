@@ -39,6 +39,133 @@ const TypedText: React.FC<TypedTextProps> = ({ text, speed = 20, delay = 0 }) =>
   return <span>{displayedText}{!isDone && <span className="opacity-0">_</span>}</span>;
 };
 
+// Terminal Interface component
+interface TerminalInterfaceProps {
+  options: {
+    text: string;
+    link: string;
+    isExternal?: boolean;
+  }[];
+  promptText?: string;
+  delay?: number;
+}
+
+const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ 
+  options, 
+  promptText = "Select an option:",
+  delay = 4000
+}) => {
+  const [visible, setVisible] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const [typingPrompt, setTypingPrompt] = useState('');
+  const [typingComplete, setTypingComplete] = useState(false);
+  
+  // Type out the prompt
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    let currentIndex = 0;
+    
+    const startTyping = () => {
+      if (currentIndex <= promptText.length) {
+        setTypingPrompt(promptText.substring(0, currentIndex));
+        currentIndex++;
+        timeout = setTimeout(startTyping, 40);
+      } else {
+        setTypingComplete(true);
+      }
+    };
+    
+    const showTimer = setTimeout(() => {
+      setVisible(true);
+      startTyping();
+    }, delay);
+    
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(showTimer);
+    };
+  }, [delay, promptText]);
+  
+  // Blink cursor
+  useEffect(() => {
+    if (!visible) return;
+    
+    const interval = setInterval(() => {
+      setCursorVisible(prev => !prev);
+    }, 530);
+    
+    return () => clearInterval(interval);
+  }, [visible]);
+  
+  // Handle keyboard navigation
+  useEffect(() => {
+    if (!typingComplete) return;
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev > 0 ? prev - 1 : options.length - 1));
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev < options.length - 1 ? prev + 1 : 0));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const selectedOption = options[selectedIndex];
+        if (selectedOption.isExternal) {
+          window.open(selectedOption.link, '_blank');
+        } else {
+          window.location.href = selectedOption.link;
+        }
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [options, selectedIndex, typingComplete]);
+  
+  if (!visible) return null;
+  
+  return (
+    <div className="font-['Geist_Mono'] mt-6">
+      <div className="text-sm mb-2">
+        <span className="text-green-400">silkway@aaltoes:~$</span> <span>{typingPrompt}</span>
+        {!typingComplete && <span className={`ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
+      </div>
+      
+      {typingComplete && (
+        <div className="pl-2 space-y-1">
+          {options.map((option, index) => {
+            const isSelected = index === selectedIndex;
+            const LinkComponent = option.isExternal ? 
+              ({ children }: { children: React.ReactNode }) => (
+                <a href={option.link} target="_blank" rel="noopener noreferrer" className="block">{children}</a>
+              ) :
+              ({ children }: { children: React.ReactNode }) => (
+                <Link to={option.link} className="block">{children}</Link>
+              );
+            
+            return (
+              <div key={option.text} className="flex items-center">
+                <div 
+                  className={`w-full flex items-center px-1 ${isSelected ? 'bg-white text-[#0000FF] font-bold' : 'text-white'}`}
+                >
+                  <LinkComponent>
+                    <div className="flex w-full">
+                      <span>{option.text}</span>
+                      {isSelected && <span className={`ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
+                    </div>
+                  </LinkComponent>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function Silkway() {
   const [cursorVisible, setCursorVisible] = useState(true)
   const [showContent, setShowContent] = useState(false);
@@ -62,6 +189,42 @@ export default function Silkway() {
         background-color: white;
         color: #0000FF;
       }
+
+      /* CRT Scanlines */
+      .scanlines::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          rgba(255, 255, 255, 0.02) 50%, 
+          rgba(0, 0, 0, 0.04) 50%
+        );
+        background-size: 100% 2px;
+        z-index: 2;
+        opacity: 0.4;
+      }
+      
+      /* Additional subtle CRT effect */
+      .scanlines::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        background-image: radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 200, 0.04) 0%,
+          rgba(0, 0, 0, 0.2) 100%
+        );
+        z-index: 1;
+        opacity: 0.3;
+      }
     `
     document.head.appendChild(style)
     
@@ -79,18 +242,18 @@ export default function Silkway() {
 
   return (
     <div
-      className="min-h-screen bg-[#0000FF] text-white p-6 flex flex-col text-sm leading-tight silkway-page"
+      className="min-h-screen bg-[#0000FF] text-white p-6 flex flex-col text-sm leading-tight silkway-page scanlines relative"
       style={{ fontFamily: "'Geist Mono', monospace" }}
     >
-      <div className="max-w-3xl mx-auto w-full pt-16 px-8">
+      <div className="max-w-3xl mx-auto w-full pt-16 px-8 relative z-10">
         <header className="flex justify-between items-center mb-10">
           <h1 className="text-sm font-bold tracking-wide font-['Geist_Mono']">
             <TypedText text="PROJECT SILKWAY" speed={30} />
             {cursorVisible ? <span className="ml-1">_</span> : <span className="ml-1 opacity-0">_</span>}
           </h1>
-          <span className="text-sm font-normal font-['Geist_Mono']">
+          <div className="text-sm font-normal font-['Geist_Mono'] flex">
             <TypedText text="FALL 25" speed={30} delay={600} />
-          </span>
+          </div>
         </header>
 
         {showContent && (
@@ -148,11 +311,14 @@ export default function Silkway() {
                 />
               </p>
 
-              <div>
-                <Link to="/apply" className="inline-block underline hover:no-underline" id="apply">
-                  <TypedText text="Apply here" speed={10} delay={4200} />
-                </Link>
-              </div>
+              <TerminalInterface
+                promptText="Please select an option:"
+                delay={4200}
+                options={[
+                  { text: "APPLY", link: "/apply" },
+                  { text: "VIEW OTHER PROJECTS", link: "/2025" }
+                ]}
+              />
             </div>
 
             <div className="my-8 border-t border-dashed border-white"></div>
