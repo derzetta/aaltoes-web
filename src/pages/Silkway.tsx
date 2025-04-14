@@ -280,7 +280,16 @@ export default function Silkway() {
                 <p><TypedText text="• Alibaba: Multinational tech giant" speed={3} delay={2750} /></p>
                 <p><TypedText text="• DeepSeek: True Open-Source AI" speed={3} delay={2850} /></p>
                 <p><TypedText text="• Unitree: Robotics that dominate the market" speed={3} delay={2950} /></p>
-                <p><TypedText text="• + other emerging 'Little Dragons' reshaping global tech" speed={3} delay={3050} /></p>
+                <p>
+                  <a 
+                    href="https://www.sixthtone.com/news/1016770" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:underline"
+                  >
+                    <TypedText text="• + other emerging 'Little Dragons' reshaping global tech" speed={3} delay={3050} />
+                  </a>
+                </p>
               </section>
 
               <section className="space-y-1.5">
@@ -318,7 +327,7 @@ export default function Silkway() {
               />
             </div>
 
-            <div className="my-8 border-t border-dashed border-white"></div>
+            <div className="my-8 border-t border-zinc-800"></div>
 
             <footer className="text-sm mb-8">
               <TypedText text="Powered by " speed={5} delay={4400} />
