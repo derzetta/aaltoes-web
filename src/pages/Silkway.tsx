@@ -146,9 +146,13 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
               );
             
             return (
-              <div key={option.text} className="flex items-center">
+              <div 
+                key={option.text} 
+                className="flex items-center"
+                onMouseEnter={() => setSelectedIndex(index)}
+              >
                 <div 
-                  className={`w-full flex items-center px-1 ${isSelected ? 'bg-blue-500 text-white font-bold' : 'text-white'}`}
+                  className={`w-full flex items-center px-1 ${isSelected ? 'bg-blue-500 text-white font-bold' : 'text-white hover:bg-blue-500/30'}`}
                 >
                   <LinkComponent>
                     <div className="flex w-full">
