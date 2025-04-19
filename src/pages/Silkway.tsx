@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, FormEvent, useRef } from "react"
 import { Link } from "react-router-dom"
+import { submitSilkwayApplication } from '../lib/db/actions'
 
 // Component for typing animation
 interface TypedTextProps {
@@ -39,12 +40,287 @@ const TypedText: React.FC<TypedTextProps> = ({ text, speed = 20, delay = 0 }) =>
   return <span>{displayedText}{!isDone && <span className="opacity-0">_</span>}</span>;
 };
 
+// Field group interfaces for type safety
+interface BaseField {
+  name: string;
+  label: string;
+  type: string;
+  required?: boolean;
+}
+
+interface TextField extends BaseField {
+  type: 'text' | 'email';
+  placeholder: string;
+  ref?: React.RefObject<HTMLInputElement>;
+}
+
+interface TextareaField extends BaseField {
+  type: 'textarea';
+  placeholder: string;
+  rows?: number;
+}
+
+interface SelectField extends BaseField {
+  type: 'select';
+  options: Array<{ value: string; label: string }>;
+}
+
+type FormField = TextField | TextareaField | SelectField;
+
+interface FieldGroup {
+  section: string;
+  fields: FormField[];
+}
+
+// Terminal Form component
+interface TerminalFormProps {
+  onClose: () => void;
+}
+
+const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    project: '',
+    about: '',
+    china: ''
+  });
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const [success, setSuccess] = useState(false);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  // Blink cursor
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible(prev => !prev);
+    }, 530);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  // Focus first input on mount
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+  }, []);
+
+  // Handle form submission
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name || !formData.email) {
+      return; // Don't proceed if required fields are empty
+    }
+    
+    // Submit form
+    setLoading(true);
+    
+    try {
+      // Submit to database
+      const result = await submitSilkwayApplication({
+        name: formData.name,
+        email: formData.email,
+        project: formData.project || "",
+        about: formData.about || "",
+        chinaInterest: formData.china || "",
+      });
+      
+      if (result.success) {
+        setSuccess(true);
+        
+        // Close form after delay
+        setTimeout(() => {
+          onClose();
+        }, 3000);
+      } else {
+        console.error("Submission failed:", result.error);
+        alert("Failed to submit application. Please try again later.");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error during submission:", error);
+      alert("An error occurred. Please try again later.");
+      setLoading(false);
+    }
+  };
+
+  const handleEscape = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Field groups with labels and descriptions
+  const fieldGroups: FieldGroup[] = [
+    {
+      section: "",
+      fields: [
+        {
+          name: "name",
+          label: "NAME",
+          type: "text",
+          placeholder: "Your name",
+          required: true,
+          ref: nameInputRef
+        } as TextField,
+        {
+          name: "email",
+          label: "EMAIL",
+          type: "email",
+          placeholder: "Your email",
+          required: true
+        } as TextField,
+        {
+          name: "project",
+          label: "PROJECT",
+          type: "textarea",
+          placeholder: "What are you building? (AI/Robotics/Game/Tech)",
+          required: true,
+          rows: 2
+        } as TextareaField,
+        {
+          name: "about",
+          label: "ABOUT YOU",
+          type: "textarea",
+          placeholder: "Tell us something about yourself that you want us to know",
+          required: true,
+          rows: 2
+        } as TextareaField,
+        {
+          name: "china",
+          label: "CHINA INTEREST",
+          type: "textarea",
+          placeholder: "How could working in China benefit your project?",
+          required: true,
+          rows: 2
+        } as TextareaField
+      ]
+    }
+  ];
+
+  // Auto-resize textarea handler
+  const handleTextareaInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const textarea = e.currentTarget;
+    // Reset height to auto to properly calculate the new height
+    textarea.style.height = 'auto';
+    // Set height to scrollHeight to accommodate all content
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  };
+
+  return (
+    <div className="font-['Geist_Mono'] mt-8 border-t border-zinc-800 pt-6">
+      <div className="text-blue-400 text-base pb-2 sticky top-0 bg-transparent z-10 flex justify-between items-center">
+        <TypedText text="APPLY TO PROJECT SILKWAY" speed={30} />
+        <div className="text-xs text-zinc-400">Press ESC to cancel</div>
+      </div>
+
+      {!loading && !success ? (
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+          <div className="space-y-3">
+            {fieldGroups[0].fields.map((field, fieldIndex) => (
+              <div key={field.name} className="flex flex-col">
+                <div className="text-xs text-zinc-300 flex items-center mb-2">
+                  {field.label}
+                  {field.required && <span className="text-red-500 ml-1">*</span>}
+                </div>
+                
+                <div className="flex items-start border-b border-zinc-700 pb-1">
+                  {field.type === 'textarea' ? (
+                    <textarea
+                      name={field.name}
+                      value={formData[field.name as keyof typeof formData]}
+                      onChange={handleChange}
+                      onInput={handleTextareaInput}
+                      className="w-full bg-transparent border-none outline-none text-white font-['Geist_Mono'] text-sm resize-none overflow-hidden min-h-[3em]"
+                      placeholder={(field as TextareaField).placeholder}
+                      required={field.required}
+                      rows={(field as TextareaField).rows || 2}
+                      onKeyDown={handleEscape}
+                    />
+                  ) : (
+                    <input
+                      ref={field.name === 'name' ? nameInputRef : undefined}
+                      type={field.type}
+                      name={field.name}
+                      value={formData[field.name as keyof typeof formData]}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-none outline-none text-white font-['Geist_Mono'] text-sm"
+                      placeholder={(field as TextField).placeholder}
+                      required={field.required}
+                      autoFocus={fieldIndex === 0}
+                      onKeyDown={handleEscape}
+                      autoComplete={field.name === 'email' ? 'email' : 'off'}
+                    />
+                  )}
+                  
+                  {/* Blinking cursor for empty first field */}
+                  {fieldIndex === 0 && formData.name.length === 0 && (
+                    <span className={`text-blue-400 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="pt-4 flex justify-between items-center">
+            <div className="text-xs text-zinc-400">
+              Contact: <a href="mailto:doni.peltojarvi@aaltoes.com" className="text-blue-400 hover:underline">doni.peltojarvi@aaltoes.com</a>
+            </div>
+            <div className="flex space-x-3">
+              <button 
+                type="button" 
+                onClick={onClose}
+                className="border border-zinc-700 hover:border-zinc-500 text-white font-['Geist_Mono'] text-sm py-2 px-4 rounded focus:outline-none"
+              >
+                CANCEL
+              </button>
+              <button 
+                type="submit" 
+                className="border border-blue-700 bg-transparent hover:border-blue-500 text-blue-400 font-['Geist_Mono'] text-sm py-2 px-4 rounded focus:outline-none"
+              >
+                SUBMIT
+              </button>
+            </div>
+          </div>
+        </form>
+      ) : loading ? (
+        <div className="py-6 text-center">
+          <div className="text-sm animate-pulse">
+            <span className="text-blue-400">$</span> <span className="text-white">Submitting...</span>
+          </div>
+        </div>
+      ) : success ? (
+        <div className="py-6 text-center">
+          <div className="text-green-400 text-sm">
+            Application submitted successfully!
+          </div>
+          <div className="text-sm text-zinc-300">
+            We'll be in touch via email soon.
+          </div>
+          <div className="text-sm text-zinc-400 mt-3">
+            Questions? Contact <a href="mailto:doni.peltojarvi@aaltoes.com" className="text-blue-400 hover:underline">doni.peltojarvi@aaltoes.com</a>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
 // Terminal Interface component
 interface TerminalInterfaceProps {
   options: {
     text: string;
     link: string;
     isExternal?: boolean;
+    action?: () => void;
   }[];
   promptText?: string;
   delay?: number;
@@ -112,7 +388,10 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
       } else if (e.key === 'Enter') {
         e.preventDefault();
         const selectedOption = options[selectedIndex];
-        if (selectedOption.isExternal) {
+        
+        if (selectedOption.action) {
+          selectedOption.action();
+        } else if (selectedOption.isExternal) {
           window.open(selectedOption.link, '_blank');
         } else {
           window.location.href = selectedOption.link;
@@ -137,29 +416,30 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
         <div className="pl-2 space-y-1">
           {options.map((option, index) => {
             const isSelected = index === selectedIndex;
-            const LinkComponent = option.isExternal ? 
-              ({ children }: { children: React.ReactNode }) => (
-                <a href={option.link} target="_blank" rel="noopener noreferrer" className="block">{children}</a>
-              ) :
-              ({ children }: { children: React.ReactNode }) => (
-                <Link to={option.link} className="block">{children}</Link>
-              );
+            const handleClick = () => {
+              if (option.action) {
+                option.action();
+              } else if (option.isExternal) {
+                window.open(option.link, '_blank');
+              } else {
+                window.location.href = option.link;
+              }
+            };
             
             return (
               <div 
                 key={option.text} 
                 className="flex items-center"
                 onMouseEnter={() => setSelectedIndex(index)}
+                onClick={handleClick}
               >
                 <div 
-                  className={`w-full flex items-center px-1 ${isSelected ? 'bg-blue-500 text-white font-bold' : 'text-white hover:bg-blue-500/30'}`}
+                  className={`w-full flex items-center px-1 cursor-pointer ${isSelected ? 'bg-blue-500 text-white font-bold' : 'text-white hover:bg-blue-500/30'}`}
                 >
-                  <LinkComponent>
-                    <div className="flex w-full">
-                      <span>{option.text}</span>
-                      {isSelected && <span className={`ml-1 text-blue-200 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
-                    </div>
-                  </LinkComponent>
+                  <div className="flex w-full">
+                    <span>{option.text}</span>
+                    {isSelected && <span className={`ml-1 text-blue-200 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>}
+                  </div>
                 </div>
               </div>
             );
@@ -173,6 +453,7 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
 export default function Silkway() {
   const [cursorVisible, setCursorVisible] = useState(true)
   const [showContent, setShowContent] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -244,6 +525,52 @@ export default function Silkway() {
     }
   }, [])
 
+  // Handle ESC key to close form
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showForm) {
+        setShowForm(false);
+      }
+    };
+    
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [showForm]);
+
+  const handleApply = () => {
+    setShowForm(true);
+    
+    // Scroll to the form after a brief delay to allow it to render
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  // Separate delay values for initial load vs returning from form
+  const getTerminalDelay = () => {
+    // If returning from form (not initial load), use a short delay
+    if (showContent && showForm === false && formWasShown.current) {
+      return 300; // Short delay after canceling
+    }
+    // Initial load - delay should be slightly longer than the final paragraph
+    return 4050; // Slightly longer than the 3900 + typing duration of final paragraph
+  };
+
+  // Track if form was previously shown
+  const formWasShown = useRef(false);
+  useEffect(() => {
+    if (showForm) {
+      formWasShown.current = true;
+    }
+  }, [showForm]);
+
   return (
     <div
       className="min-h-screen bg-zinc-950 text-white p-6 flex flex-col text-sm leading-tight silkway-page scanlines relative"
@@ -300,9 +627,10 @@ export default function Silkway() {
                 <h2 className="font-normal mb-1.5 font-['Geist_Mono']">
                   <TypedText text="WE ARE LOOKING FOR" speed={10} delay={3200} />
                 </h2>
-                <p><TypedText text="• OSAI that ships" speed={3} delay={3350} /></p>
+                <p><TypedText text="• OS AI that ships" speed={3} delay={3350} /></p>
                 <p><TypedText text="• Robotics that works" speed={3} delay={3400} /></p>
-                <p><TypedText text="• Tech with traction" speed={3} delay={3450} /></p>
+                <p><TypedText text="• Game dev that innovates" speed={3} delay={3450} /></p>
+                <p><TypedText text="• Tech with traction" speed={3} delay={3500} /></p>
               </section>
 
               <section className="space-y-1.5">
@@ -321,15 +649,26 @@ export default function Silkway() {
                 />
               </p>
 
-              <TerminalInterface
-                promptText="Please select an option:"
-                delay={4200}
-                options={[
-                  { text: "APPLY", link: "/apply" },
-                  { text: "VIEW OTHER PROJECTS", link: "/2025" }
-                ]}
-              />
+              {!showForm && (
+                <TerminalInterface
+                  promptText="Please select an option:"
+                  delay={getTerminalDelay()}
+                  options={[
+                    { 
+                      text: "APPLY", 
+                      link: "#", 
+                      action: handleApply 
+                    },
+                    { 
+                      text: "VIEW OTHER PROJECTS", 
+                      link: "/2025" 
+                    }
+                  ]}
+                />
+              )}
             </div>
+
+            {showForm && <TerminalForm onClose={handleCloseForm} />}
 
             <div className="my-8 border-t border-zinc-800"></div>
 
