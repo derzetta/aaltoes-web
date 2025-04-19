@@ -1,6 +1,5 @@
 import { useState, useEffect, FormEvent, useRef } from "react"
 import { Link } from "react-router-dom"
-import { submitSilkwayApplication } from '../lib/db/actions'
 
 // Component for typing animation
 interface TypedTextProps {
@@ -88,6 +87,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
   });
   const [cursorVisible, setCursorVisible] = useState(true);
   const [success, setSuccess] = useState(false);
+  const [focusedField, setFocusedField] = useState('');
   const nameInputRef = useRef<HTMLInputElement>(null);
 
   // Blink cursor
@@ -103,8 +103,18 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
   useEffect(() => {
     if (nameInputRef.current) {
       nameInputRef.current.focus();
+      setFocusedField('name');
     }
   }, []);
+
+  // Textarea and input blur/focus handlers
+  const handleFocus = (fieldName: string) => {
+    setFocusedField(fieldName);
+  };
+
+  const handleBlur = () => {
+    setFocusedField('');
+  };
 
   // Handle form submission
   const handleSubmit = async (e: FormEvent) => {
@@ -118,33 +128,16 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
     // Submit form
     setLoading(true);
     
-    try {
-      // Submit to database
-      const result = await submitSilkwayApplication({
-        name: formData.name,
-        email: formData.email,
-        project: formData.project || "",
-        about: formData.about || "",
-        chinaInterest: formData.china || "",
-      });
-      
-      if (result.success) {
-        setSuccess(true);
-        
-        // Close form after delay
-        setTimeout(() => {
-          onClose();
-        }, 3000);
-      } else {
-        console.error("Submission failed:", result.error);
-        alert("Failed to submit application. Please try again later.");
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error during submission:", error);
-      alert("An error occurred. Please try again later.");
+    // Simulate API call
+    setTimeout(() => {
       setLoading(false);
-    }
+      setSuccess(true);
+      
+      // Close form after delay
+      setTimeout(() => {
+        onClose();
+      }, 3000);
+    }, 1500);
   };
 
   const handleEscape = (e: React.KeyboardEvent) => {
@@ -239,6 +232,8 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
                       value={formData[field.name as keyof typeof formData]}
                       onChange={handleChange}
                       onInput={handleTextareaInput}
+                      onFocus={() => handleFocus(field.name)}
+                      onBlur={handleBlur}
                       className="w-full bg-transparent border-none outline-none text-white font-['Geist_Mono'] text-sm resize-none overflow-hidden min-h-[3em]"
                       placeholder={(field as TextareaField).placeholder}
                       required={field.required}
@@ -252,6 +247,8 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
                       name={field.name}
                       value={formData[field.name as keyof typeof formData]}
                       onChange={handleChange}
+                      onFocus={() => handleFocus(field.name)}
+                      onBlur={handleBlur}
                       className="w-full bg-transparent border-none outline-none text-white font-['Geist_Mono'] text-sm"
                       placeholder={(field as TextField).placeholder}
                       required={field.required}
@@ -261,8 +258,8 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
                     />
                   )}
                   
-                  {/* Blinking cursor for empty first field */}
-                  {fieldIndex === 0 && formData.name.length === 0 && (
+                  {/* Show blinking cursor in the focused field when empty */}
+                  {focusedField === field.name && formData[field.name as keyof typeof formData].length === 0 && (
                     <span className={`text-blue-400 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>_</span>
                   )}
                 </div>
