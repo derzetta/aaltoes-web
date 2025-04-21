@@ -1,5 +1,5 @@
-import { useState, useEffect, FormEvent, useRef } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect, useRef } from "react"
+import { Form, Link } from "react-router"
 
 // Component for typing animation
 interface TypedTextProps {
@@ -77,7 +77,7 @@ interface TerminalFormProps {
 }
 
 const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -86,7 +86,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
     china: ''
   });
   const [cursorVisible, setCursorVisible] = useState(true);
-  const [success, setSuccess] = useState(false);
+  const [success] = useState(false);
   const [focusedField, setFocusedField] = useState('');
   const nameInputRef = useRef<HTMLInputElement>(null);
 
@@ -114,30 +114,6 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
 
   const handleBlur = () => {
     setFocusedField('');
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    
-    // Basic validation
-    if (!formData.name || !formData.email) {
-      return; // Don't proceed if required fields are empty
-    }
-    
-    // Submit form
-    setLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      
-      // Close form after delay
-      setTimeout(() => {
-        onClose();
-      }, 3000);
-    }, 1500);
   };
 
   const handleEscape = (e: React.KeyboardEvent) => {
@@ -216,7 +192,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
       </div>
 
       {!loading && !success ? (
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <Form action="/silkway" method="post" className="space-y-4 mt-4">
           <div className="space-y-3">
             {fieldGroups[0].fields.map((field, fieldIndex) => (
               <div key={field.name} className="flex flex-col">
@@ -287,7 +263,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
               </button>
             </div>
           </div>
-        </form>
+        </Form>
       ) : loading ? (
         <div className="py-6 text-center">
           <div className="text-sm animate-pulse">

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Layout from '../components/Layout'
 import CompanyLogos from '../components/CompanyLogos'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 export default function About() {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router'
 import { useEffect } from 'react'
 import Navbar from '../../components/Navbar'
 import VideoPlayer from '../../components/VideoPlayer'

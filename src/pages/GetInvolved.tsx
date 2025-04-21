@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import Layout from '../components/Layout'
 
 export default function GetInvolved() {

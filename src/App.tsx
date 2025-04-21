@@ -4,13 +4,12 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from '@react-three/drei'
 import { Suspense, useRef, useState, useEffect } from 'react'
-import './index.css'
 import { EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Analytics } from "@vercel/analytics/react"
 import Footer from './components/Footer'
 import { FooterScrollProvider } from './contexts/FooterScrollContext'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 
 
@@ -132,6 +131,7 @@ function Scene() {
     }
   }, [gltf])
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   gltf.scene.traverse((child: any) => {
     if (child.isMesh) {
       child.material = new THREE.MeshPhysicalMaterial({
