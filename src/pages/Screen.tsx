@@ -109,60 +109,78 @@ export default function Chat() {
   const [, setMousePosition] = useState({ x: 0, y: 0 })
   const [showControls, setShowControls] = useState(false)
   
-  // Layout controls
-  const [layout, setLayout] = useState<LayoutSettings>(() => {
-    const saved = localStorage.getItem('chatLayoutSettings')
-    return saved ? JSON.parse(saved) : {
-      leftScreenVisible: true,
-      rightScreenVisible: true,
-      leftScreenWidth: 66 // 66% by default (2/3)
-    }
+  // Layout controls - initialize with default values for SSR
+  const [layout, setLayout] = useState<LayoutSettings>({
+    leftScreenVisible: true,
+    rightScreenVisible: true,
+    leftScreenWidth: 66 // 66% by default (2/3)
   })
 
-  // Initialize states with saved values
-  const [eventName, setEventName] = useState(() => {
-    return localStorage.getItem('eventName') || "Brainhack"
-  })
-  
-  const [eventDate, setEventDate] = useState(() => {
-    return localStorage.getItem('eventDate') || "January 22, 2025"
-  })
-  
-  const [scheduleItems, setScheduleItems] = useState<ScheduleItem[]>(() => {
-    const saved = localStorage.getItem('scheduleItems')
-    return saved ? JSON.parse(saved) : [
-      {
-        time: "13:00",
-        title: "Team Formation & Ideation",
-        description: "Ideate measurements or projects you want to work on"
-      },
-      {
-        time: "13:45",
-        title: "Hands-on Session",
-        description: "Measuring, coding, learning, and sharing"
-      },
-      {
-        time: "16:00",
-        title: "Food Break",
-        description: "Recharge and network"
-      },
-      {
-        time: "19:00",
-        title: "Project Presentations",
-        description: "Share your ideas, progress, and learnings",
-        highlight: "🏆 Best presentation wins a Muse S device!"
-      }
-    ]
-  })
-  
-  const [gradients, setGradients] = useState<GradientSettings>(() => {
-    const saved = localStorage.getItem('gradients')
-    return saved ? JSON.parse(saved) : {
-      color1: "rgba(255,20,147,0.8)",
-      color2: "rgba(0,191,255,0.8)",
-      color3: "rgba(147,51,234,0.8)"
+  // Initialize states with default values for SSR
+  const [eventName, setEventName] = useState("Brainhack")
+  const [eventDate, setEventDate] = useState("January 22, 2025")
+  const [scheduleItems, setScheduleItems] = useState<ScheduleItem[]>([
+    {
+      time: "13:00",
+      title: "Team Formation & Ideation",
+      description: "Ideate measurements or projects you want to work on"
+    },
+    {
+      time: "13:45",
+      title: "Hands-on Session",
+      description: "Measuring, coding, learning, and sharing"
+    },
+    {
+      time: "16:00",
+      title: "Food Break",
+      description: "Recharge and network"
+    },
+    {
+      time: "19:00",
+      title: "Project Presentations",
+      description: "Share your ideas, progress, and learnings",
+      highlight: "🏆 Best presentation wins a Muse S device!"
     }
+  ])
+  
+  const [gradients, setGradients] = useState<GradientSettings>({
+    color1: "rgba(255,20,147,0.8)",
+    color2: "rgba(0,191,255,0.8)",
+    color3: "rgba(147,51,234,0.8)"
   })
+
+  // Load saved settings from localStorage when component mounts
+  useEffect(() => {
+    // Load layout settings
+    const savedLayout = localStorage.getItem('chatLayoutSettings')
+    if (savedLayout) {
+      setLayout(JSON.parse(savedLayout))
+    }
+
+    // Load event name
+    const savedEventName = localStorage.getItem('eventName')
+    if (savedEventName) {
+      setEventName(savedEventName)
+    }
+
+    // Load event date
+    const savedEventDate = localStorage.getItem('eventDate')
+    if (savedEventDate) {
+      setEventDate(savedEventDate)
+    }
+
+    // Load schedule items
+    const savedScheduleItems = localStorage.getItem('scheduleItems')
+    if (savedScheduleItems) {
+      setScheduleItems(JSON.parse(savedScheduleItems))
+    }
+
+    // Load gradient settings
+    const savedGradients = localStorage.getItem('gradients')
+    if (savedGradients) {
+      setGradients(JSON.parse(savedGradients))
+    }
+  }, [])
 
   // Save settings whenever they change
   useEffect(() => {
