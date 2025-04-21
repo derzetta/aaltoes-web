@@ -1,15 +1,52 @@
 import { useState, useEffect, useRef } from "react"
-import { Form, Link } from "react-router"
+import { Link, useFetcher } from "react-router"
 import { Route } from "./+types/Silkway";
+import { sql } from '@vercel/postgres'
+import { z } from 'zod'
+
+const applicationSchema = z.object({
+  name: z.string().min(1).max(250),
+  email: z.string().email().max(250),
+  project: z.string().min(1).max(5000),
+  about: z.string().min(1).max(5000),
+  china: z.string().min(1).max(5000),
+})
+
+const createTableIfNotExists = async () => {
+  await sql`CREATE TABLE IF NOT EXISTS silkway_applications (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    project TEXT NOT NULL,
+    about TEXT NOT NULL,
+    china TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )`;
+}
 
 export async function action({
   request,
 }: Route.ActionArgs) {
+  await createTableIfNotExists();
   const formData = await request.formData();
-  console.log(formData);
-  
-  return null;
+  const validatedFields = applicationSchema.safeParse(Object.fromEntries(formData))
+
+  if (!validatedFields.success) {
+    return { success: false, errors: validatedFields.error.flatten().fieldErrors }
+  }
+
+  const { name, email, project, about, china } = validatedFields.data
+
+  try {
+    await sql`INSERT INTO silkway_applications (name, email, project, about, china) VALUES (${name}, ${email}, ${project}, ${about}, ${china})`;
+    return { success: true };
+  } catch (error) {
+    console.error('Error submitting application:', error);
+    return { success: false };
+  }
 }
+
+type ActionData = Awaited<ReturnType<typeof action>>
 
 // Component for typing animation
 interface TypedTextProps {
@@ -87,7 +124,6 @@ interface TerminalFormProps {
 }
 
 const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
-  const [loading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -96,9 +132,22 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
     china: ''
   });
   const [cursorVisible, setCursorVisible] = useState(true);
-  const [success] = useState(false);
   const [focusedField, setFocusedField] = useState('');
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const fetcher = useFetcher<ActionData>();
+  const loading = fetcher.state !== 'idle';
+  const data = fetcher.data;
+  const [success, setSuccess] = useState<boolean | null>(data?.success ?? null);
+  const [errors, setErrors] = useState<Required<ActionData>['errors'] | null>(data?.errors ?? null);
+
+  useEffect(() => {
+    setSuccess(data?.success ?? null);
+    setErrors(data?.errors ?? null);
+  }, [data]);
+
+  const handleRetry = () => {
+    setSuccess(null);
+  };
 
   // Blink cursor
   useEffect(() => {
@@ -161,7 +210,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
           name: "project",
           label: "PROJECT",
           type: "textarea",
-          placeholder: "What are you building? (AI/Robotics/Game/Tech)",
+          placeholder: "What are you building? (AI/Robotics/Game/Tech) (max 5000 characters)",
           required: true,
           rows: 2
         } as TextareaField,
@@ -169,7 +218,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
           name: "about",
           label: "ABOUT YOU",
           type: "textarea",
-          placeholder: "Tell us something about yourself that you want us to know",
+          placeholder: "Tell us something about yourself that you want us to know (max 5000 characters)",
           required: true,
           rows: 2
         } as TextareaField,
@@ -177,7 +226,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
           name: "china",
           label: "CHINA INTEREST",
           type: "textarea",
-          placeholder: "How could working in China benefit your project?",
+          placeholder: "How could working in China benefit your project? (max 5000 characters)",
           required: true,
           rows: 2
         } as TextareaField
@@ -201,8 +250,8 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
         <div className="text-xs text-zinc-400">Press ESC to cancel</div>
       </div>
 
-      {!loading && !success ? (
-        <Form action="/silkway" method="post" className="space-y-4 mt-4">
+      {!loading && success === null ? (
+        <fetcher.Form action="/silkway" method="post" className="space-y-4 mt-4">
           <div className="space-y-3">
             {fieldGroups[0].fields.map((field, fieldIndex) => (
               <div key={field.name} className="flex flex-col">
@@ -273,7 +322,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
               </button>
             </div>
           </div>
-        </Form>
+        </fetcher.Form>
       ) : loading ? (
         <div className="py-6 text-center">
           <div className="text-sm animate-pulse">
@@ -291,6 +340,38 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
           <div className="text-sm text-zinc-400 mt-3">
             Questions? Contact <a href="mailto:doni.peltojarvi@aaltoes.com" className="text-blue-400 hover:underline">doni.peltojarvi@aaltoes.com</a>
           </div>
+        </div>
+      ) : success === false ? (
+        <div className="py-6 text-center">
+          <div className="text-red-400 text-sm">
+            Application submission failed. Please try again.
+          </div>
+          {errors && (
+            <div className="text-red-400 text-sm mt-6 flex flex-col gap-2">
+              {errors.name && (<>
+                <div><span className="font-bold">Name:</span> {errors.name}</div>
+              </>)}
+              {errors.email && (<>
+                <div><span className="font-bold">Email:</span> {errors.email}</div>
+              </>)}
+              {errors.project && (<>
+                <div><span className="font-bold">Project:</span> {errors.project}</div>
+              </>)}
+              {errors.about && (<>
+                <div><span className="font-bold">About You:</span> {errors.about}</div>
+              </>)}
+              {errors.china && (<>
+                <div><span className="font-bold">China Interest:</span> {errors.china}</div>
+              </>)}
+            </div>
+          )}
+          <button 
+            type="button" 
+            onClick={handleRetry} 
+            className="text-blue-400 hover:underline mt-3"
+          >
+            Retry
+          </button>
         </div>
       ) : null}
     </div>
