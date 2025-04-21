@@ -21,8 +21,23 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
   const sweepLight = useRef<THREE.PointLight>(null)
   const [isSweeping, setIsSweeping] = useState(false)
   const [startTime, setStartTime] = useState(0)
-  const isMobile = window.innerWidth <= 768
-  const radius = isMobile ? 90 : 150
+  const [isMobile, setIsMobile] = useState(false)
+  const [radius, setRadius] = useState(150)
+
+  useEffect(() => {
+    // Initialize window-dependent values
+    setIsMobile(window.innerWidth <= 768)
+    setRadius(window.innerWidth <= 768 ? 90 : 150)
+
+    // Handle resize events
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+      setRadius(window.innerWidth <= 768 ? 90 : 150)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     if (isModelLoaded) {
@@ -100,16 +115,18 @@ function RotatingLights({ isModelLoaded }: { isModelLoaded: boolean }) {
 function Scene() {
   const gltf = useLoader(GLTFLoader, '/aalto_logo_3ds.glb')
   const [isLoaded, setIsLoaded] = useState(false)
-  const [scale, setScale] = useState(() => {
-    if (window.innerWidth <= 480) {
-      return 8.0
-    } else if (window.innerWidth <= 768) {
-      return 9.0
-    }
-    return 14.0
-  })
+  const [scale, setScale] = useState(14.0) // Default value for non-browser environments
   
   useEffect(() => {
+    // Initialize scale based on window size once in browser
+    if (window.innerWidth <= 480) {
+      setScale(8.0)
+    } else if (window.innerWidth <= 768) {
+      setScale(9.0)
+    } else {
+      setScale(14.0)
+    }
+
     const handleResize = () => {
       if (window.innerWidth <= 480) {
         setScale(8.0)
@@ -120,7 +137,6 @@ function Scene() {
       }
     }
 
-    handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -187,14 +203,31 @@ function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const words = ["builders", "innovators", "misfits", "openings", "brave", "strivers", "mavericks","open source", "explorers", "igniters"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
-  const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isSmallMobile, setIsSmallMobile] = useState(false)
   const [cursorLightVisible, setCursorLightVisible] = useState(false)
-  const [isLoading, setIsLoading] = useState(() => {
+  const [isLoading, setIsLoading] = useState(true) // Default to true for SSR
+  const [isTabletOrMobile, setIsTabletOrMobile] = useState(false)
+
+  // Initialize client-side only state
+  useEffect(() => {
     // Check if we've already loaded once in this session
-    return !sessionStorage.getItem('hasLoaded')
-  })
-  const [isTabletOrMobile, setIsTabletOrMobile] = useState(window.innerWidth <= 1024)
+    setIsLoading(!sessionStorage.getItem('hasLoaded'))
+    
+    // Initialize responsive state
+    setIsMobile(window.innerWidth <= 768)
+    setIsSmallMobile(window.innerWidth <= 480)
+    setIsTabletOrMobile(window.innerWidth <= 1024)
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+      setIsSmallMobile(window.innerWidth <= 480)
+      setIsTabletOrMobile(window.innerWidth <= 1024)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -213,18 +246,7 @@ function App() {
       setCurrentWordIndex((prev) => (prev + 1) % words.length)
     }, 3000)
     return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
-      setIsSmallMobile(window.innerWidth <= 480)
-      setIsTabletOrMobile(window.innerWidth <= 1024)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [words.length])
 
   useEffect(() => {
     if (isLoading) {
