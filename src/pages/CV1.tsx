@@ -11,7 +11,11 @@ import AnimatedText from '../components/AnimatedText'
 
 export default function ZeroBullshit() {
   // State to track if we're on mobile
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   // Handle window resize events - only track mobile/desktop switch
   useEffect(() => {

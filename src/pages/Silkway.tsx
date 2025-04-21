@@ -1,5 +1,15 @@
 import { useState, useEffect, useRef } from "react"
 import { Form, Link } from "react-router"
+import { Route } from "./+types/Silkway";
+
+export async function action({
+  request,
+}: Route.ActionArgs) {
+  const formData = await request.formData();
+  console.log(formData);
+  
+  return null;
+}
 
 // Component for typing animation
 interface TypedTextProps {
