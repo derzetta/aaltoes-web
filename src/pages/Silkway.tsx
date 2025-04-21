@@ -27,7 +27,12 @@ const createTableIfNotExists = async () => {
 export async function action({
   request,
 }: Route.ActionArgs) {
-  await createTableIfNotExists();
+  try {
+    await createTableIfNotExists();
+  } catch (error) {
+    console.error('Error creating table:', error);
+    return { success: false }
+  }
   const formData = await request.formData();
   const validatedFields = applicationSchema.safeParse(Object.fromEntries(formData))
 
