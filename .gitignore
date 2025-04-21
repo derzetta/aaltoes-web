@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.vercel/
+.react-router/
+build
 dist
 dist-ssr
 *.local

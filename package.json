@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "react-router dev",
+    "build": "react-router build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
     "@radix-ui/react-hover-card": "^1.1.6",
+    "@react-router/node": "^7.5.1",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
     "@react-three/postprocessing": "^2.16.6",
@@ -19,26 +20,30 @@
     "@types/three": "^0.172.0",
     "@vercel/analytics": "^1.4.1",
     "@vercel/postgres": "^0.10.0",
+    "@vercel/react-router": "^1.1.0",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "drizzle-orm": "^0.38.4",
     "express": "^5.1.0",
     "framer-motion": "^11.16.4",
     "html2pdf.js": "^0.10.2",
+    "isbot": "^5",
     "js-cookie": "^3.0.5",
     "pg": "^8.14.1",
     "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
-    "react-router-dom": "^7.1.1",
+    "react-router": "^7.5.1",
     "tailwind-merge": "^2.6.0",
     "tailwind-scrollbar-hide": "^2.0.0",
     "three": "^0.172.0",
-    "uuid": "^11.0.5"
+    "uuid": "^11.0.5",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@react-router/dev": "^7.5.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/react": "^18.3.3",
@@ -56,5 +61,6 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "packageManager": "pnpm@9.15.6+sha256.5bf88eca1e818b973b9359a16e57405177c7a9b8177b9125d587577311786e64"
 }

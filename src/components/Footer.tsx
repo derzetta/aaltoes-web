@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { useEffect, useRef, useState } from 'react'
 import { useFooterScroll } from '../contexts/FooterScrollContext'
 import { FaInstagram, FaXTwitter, FaLinkedin, FaTelegram, FaChevronDown } from 'react-icons/fa6'
@@ -19,12 +19,16 @@ function Footer() {
   const legalTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
   const isResourcesClickingRef = useRef(false)
   const isLegalClickingRef = useRef(false)
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024)
+  const [isMobile, setIsMobile] = useState(false)
   const navLinkRefs = useRef<{[key: string]: HTMLAnchorElement | null}>({})
   // Add a flag to track programmatic navigation
   const isNavigatingRef = useRef(false)
   // Track the target path for navigation
   const targetPathRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 1024)
+  }, [])
 
   // For dropdown links
   const getDropdownClassName = (path: string) => {
