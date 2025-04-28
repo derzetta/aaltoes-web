@@ -743,7 +743,7 @@ export default function Silkway() {
 
             <footer className="text-sm mb-8">
               <TypedText text="Powered by " speed={5} delay={4400} />
-              <Link to="/2025" className="underline hover:no-underline">
+              <Link to="/" className="underline hover:no-underline">
                 <TypedText text="Aaltoes 2025" speed={5} delay={4550} />
               </Link>
               <TypedText text=" & " speed={5} delay={4750} />
