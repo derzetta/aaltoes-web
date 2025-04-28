@@ -251,7 +251,7 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
   return (
     <div className="font-['Geist_Mono'] mt-8 border-t border-zinc-800 pt-6">
       <div className="text-blue-400 text-base pb-2 sticky top-0 bg-transparent z-10 flex justify-between items-center">
-        <TypedText text="APPLY TO PROJECT SILKWAY" speed={30} />
+        <TypedText text="PRE-APPLY TO PROJECT SILKWAY" speed={30} />
         <div className="text-xs text-zinc-400">Press ESC to cancel</div>
       </div>
 
@@ -724,7 +724,7 @@ export default function Silkway() {
                   delay={getTerminalDelay()}
                   options={[
                     { 
-                      text: "APPLY", 
+                      text: "PRE-APPLY", 
                       link: "#", 
                       action: handleApply 
                     },
