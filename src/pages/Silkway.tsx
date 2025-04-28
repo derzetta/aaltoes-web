@@ -138,12 +138,40 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
   });
   const [cursorVisible, setCursorVisible] = useState(true);
   const [focusedField, setFocusedField] = useState('');
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
   const nameInputRef = useRef<HTMLInputElement>(null);
   const fetcher = useFetcher<ActionData>();
   const loading = fetcher.state !== 'idle';
   const data = fetcher.data;
   const [success, setSuccess] = useState<boolean | null>(data?.success ?? null);
   const [errors, setErrors] = useState<Required<ActionData>['errors'] | null>(data?.errors ?? null);
+
+  // Countdown timer effect
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const deadline = new Date('2025-05-31T23:59:59');
+      const now = new Date();
+      const difference = deadline.getTime() - now.getTime();
+      
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     setSuccess(data?.success ?? null);
@@ -251,7 +279,12 @@ const TerminalForm: React.FC<TerminalFormProps> = ({ onClose }) => {
   return (
     <div className="font-['Geist_Mono'] mt-8 border-t border-zinc-800 pt-6">
       <div className="text-blue-400 text-base pb-2 sticky top-0 bg-transparent z-10 flex justify-between items-center">
-        <TypedText text="PRE-APPLY TO PROJECT SILKWAY" speed={30} />
+        <div className="flex items-center space-x-4">
+          <TypedText text="PRE-APPLY TO PROJECT SILKWAY" speed={30} />
+          <div className="text-xs text-zinc-400">
+            {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+          </div>
+        </div>
         <div className="text-xs text-zinc-400">Press ESC to cancel</div>
       </div>
 
