@@ -442,6 +442,12 @@ function App() {
                 >
                   <span className="relative z-10 uppercase">Get Involved</span>
                 </Link>
+                <Link 
+                  to="/silkway"
+                  className="base-button inline-flex items-center justify-center bg-blue-900/30 border-blue-700/40 hover:bg-blue-800/40 hover:border-blue-600/50"
+                >
+                  <span className="relative z-10 uppercase text-blue-100">Apply to Silkway</span>
+                </Link>
               </div>
             </div>
           </div>
