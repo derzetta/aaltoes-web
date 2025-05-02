@@ -27,15 +27,13 @@ function BillingInfo() {
         </div>
 
         <div>
-          <h2 className="section-title">Bank & Shipping Details</h2>
+          <h2 className="section-title">Bank & Payment Details</h2>
           <div className="space-y-8">
             <div>
-              <h3 className="subsection-title">Paper Bills</h3>
-              <div className="text-content">
-                Aalto Entrepreneurship Society ry<br />
-                PO BOX: 16112<br />
-                00021, LASKUTUS<br />
-                Puumiehenkuja 5a, 02150 Espoo
+              <h3 className="subsection-title">Payment Terms</h3>
+              <div className="text-content space-y-1">
+                <p>Payment term: 21 days</p>
+                <p>All invoices are sent electronically</p>
               </div>
             </div>
 
