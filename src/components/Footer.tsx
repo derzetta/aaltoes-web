@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router'
 import { useEffect, useRef, useState } from 'react'
 import { useFooterScroll } from '../contexts/FooterScrollContext'
-import { FaInstagram, FaXTwitter, FaLinkedin, FaTelegram, FaChevronDown } from 'react-icons/fa6'
+import { FaInstagram, FaXTwitter, FaLinkedin, FaTelegram, FaChevronDown, FaGithub } from 'react-icons/fa6'
 import Portal from './Portal'
 
 function Footer() {
@@ -187,6 +187,11 @@ function Footer() {
       icon: <FaTelegram size={20} />,
       url: 'https://t.me/aaltoes',
       label: 'Telegram'
+    },
+    {
+      icon: <FaGithub size={20} />,
+      url: 'https://github.com/aaltoes-tech',
+      label: 'GitHub'
     }
   ]
 
