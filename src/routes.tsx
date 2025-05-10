@@ -132,6 +132,10 @@ export default [
     file: "./pages/Silkway.tsx",
   },
   {
+    path: "/challenges",
+    file: "./pages/Challenges.tsx",
+  },
+  {
     path: "*",
     file: "./pages/NotFound.tsx",
   }
