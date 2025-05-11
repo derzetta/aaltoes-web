@@ -24,17 +24,82 @@ type Challenge = {
   ctaUrl?: string
 }
 
+// Custom CSS for blinking cursor animation
+const cursorBlinkStyle = `
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+`;
+
+const TypingAnimation = ({ text, delay = 100, className = "", onComplete = () => {} }: { 
+  text: string, 
+  delay?: number, 
+  className?: string,
+  onComplete?: () => void 
+}) => {
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+      
+      return () => clearTimeout(timeout);
+    } else {
+      setIsComplete(true);
+      onComplete();
+    }
+  }, [currentIndex, delay, text, onComplete]);
+
+  return (
+    <span className={className}>
+      {displayText}
+      {!isComplete && <span className="cursor-blink inline-block align-middle">|</span>}
+    </span>
+  );
+};
+
 export default function Challenges() {
-  const [showMore, setShowMore] = useState(false)
+  const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [timeRemaining, setTimeRemaining] = useState<{ days: number; hours: number; minutes: number; seconds: number }>({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   })
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
+  const [showBuildIt, setShowBuildIt] = useState(false)
+  const [showChallenges, setShowChallenges] = useState(false)
+  const [buildItComplete, setBuildItComplete] = useState(false)
+  const [challengesComplete, setChallengesComplete] = useState(false)
+  const [showCards, setShowCards] = useState(false)
+  const [showWelcomeText, setShowWelcomeText] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    
+    // Trigger animations after a small delay
+    const timer = setTimeout(() => {
+      setIsPageLoaded(true);
+      
+      // Start typing animation after page load effects
+      const animationTimer = setTimeout(() => {
+        setShowBuildIt(true);
+      }, 500);
+      
+      return () => clearTimeout(animationTimer);
+    }, 100)
+    
+    return () => clearTimeout(timer)
   }, [])
 
   // Calculate countdown for the active challenge
@@ -65,12 +130,48 @@ export default function Challenges() {
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    // Show welcome text after cards appear
+    if (showCards) {
+      const timer = setTimeout(() => {
+        setShowWelcomeText(true);
+      }, 200);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [showCards]);
+
   const handleKeyDown = (e: React.KeyboardEvent, url?: string) => {
     if ((e.key === 'Enter' || e.key === ' ') && url) {
       e.preventDefault()
       window.open(url, '_blank', 'noopener,noreferrer')
     }
   }
+
+  const openModal = (challenge: Challenge) => {
+    if (challenge.status === 'active') {
+      setSelectedChallenge(challenge)
+      setIsModalOpen(true)
+      document.body.style.overflow = 'hidden'
+    }
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    document.body.style.overflow = 'auto'
+  }
+
+  // Handle keydown for modal
+  useEffect(() => {
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        closeModal()
+      }
+    }
+
+    window.addEventListener('keydown', handleEscapeKey)
+    return () => window.removeEventListener('keydown', handleEscapeKey)
+  }, [isModalOpen])
 
   // Create a 4x4 grid of challenge slots
   const challenges: Challenge[] = [
@@ -105,8 +206,11 @@ export default function Challenges() {
   ]
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 relative">
-      {/* ASCII Animation Background - Now only visible in the hero section */}
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 relative font-mono">
+      {/* Custom cursor animation */}
+      <style>{cursorBlinkStyle}</style>
+      
+      {/* ASCII Animation Background */}
       <div className="absolute inset-0 h-[400px] overflow-hidden">
         <AnimatedText pattern="BUILD IT " className="opacity-30" />
       </div>
@@ -116,16 +220,45 @@ export default function Challenges() {
         <div className="py-12 relative z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neutral-950/50 to-neutral-950"></div>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-none text-white" style={{ fontFamily: 'Geist, -apple-system, BlinkMacSystemFont, sans-serif', letterSpacing: '-0.04em' }}>
-                  BUILD IT
-                </h1>
-                <div className="border-2 border-white rounded-[15px] px-3 py-1 flex justify-center items-center md:self-center">
-                  <span className="text-xl sm:text-2xl uppercase tracking-wide text-white" style={{ fontFamily: 'Geist Mono, monospace' }}>
-                    CHALLENGES
-                  </span>
+            <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between">
+              <div 
+                className={`flex flex-col md:flex-row items-center md:items-end md:gap-1 transition-all duration-1000 ${isPageLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              >
+                <div className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tighter leading-none text-white font-mono">
+                  {showBuildIt && (
+                    <TypingAnimation 
+                      text="build it" 
+                      delay={80} 
+                      className="inline-block"
+                      onComplete={() => {
+                        setBuildItComplete(true);
+                        setTimeout(() => setShowChallenges(true), 200);
+                      }}
+                    />
+                  )}
                 </div>
+                
+                {(showChallenges || buildItComplete) && (
+                  <div className={`border-2 border-white rounded-[12px] px-2 py-0.5 flex justify-center items-center mt-2 sm:mt-3 md:mt-0 md:mb-1.5 md:ml-4 transition-opacity duration-300 ${showChallenges ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className="text-base sm:text-lg md:text-xl uppercase tracking-wide text-white font-mono">
+                      {showChallenges && (
+                        <TypingAnimation 
+                          text="CHALLENGES" 
+                          delay={40} 
+                          className="inline-block"
+                          onComplete={() => {
+                            setChallengesComplete(true);
+                            setTimeout(() => setShowCards(true), 300);
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              <div className={`text-white/70 font-mono text-sm mt-6 md:mt-0 md:self-end md:pb-3 transition-opacity duration-1000 ${buildItComplete ? 'opacity-100' : 'opacity-0'}`}>
+                with <span className="text-red-500">♥</span> from Aaltoes 2025
               </div>
             </div>
           </div>
@@ -135,40 +268,127 @@ export default function Challenges() {
       {/* Dark background separator */}
       <div className="absolute w-full h-[100px] bg-gradient-to-b from-neutral-950 to-neutral-950 top-[300px] z-0"></div>
 
-      {/* Challenge grid - Now with solid dark background */}
-      <div className="py-6 relative z-10 bg-neutral-950">
+      {/* Challenge grid */}
+      <div className="pt-2 pb-6 relative z-10 bg-neutral-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {challenges.map((challenge) => {
+          <div className={`mb-16 text-left transition-all duration-1000 ${showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
+            {showWelcomeText && (
+              <div className="text-white/70 text-sm font-mono whitespace-pre-line">
+                <TypingAnimation
+                  text={`Welcome to Build it challenges. Our build it sessions are ran every Tuesday and Saturday.
+
+Pick the one from cards you see below. You are welcome to do your own work as well.
+
+For questions clarify from Adit, Doni, Vaneeza or Milana!`}
+                  delay={10}
+                  className="inline"
+                />
+              </div>
+            )}
+          </div>
+          
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-1000 ${showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {challenges.map((challenge, idx) => {
               const isActive = challenge.status === 'active'
               return (
                 <div 
                   key={challenge.id}
                   className={`
-                    rounded-lg border overflow-hidden transition-all duration-300
+                    rounded-lg border overflow-hidden transition-all duration-500 
                     ${isActive 
                       ? 'border-white/10 bg-black' 
-                      : 'border-white/5 bg-neutral-950'}
-                    ${challenge.status === 'upcoming' ? 'opacity-80 cursor-not-allowed relative' : 'opacity-100'}
+                      : 'border-white/5 bg-neutral-900'}
+                    ${challenge.status === 'upcoming' ? 'opacity-80 cursor-not-allowed relative' : 'opacity-100 cursor-pointer'}
+                    ${isPageLoaded && showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}
+                    h-[380px] flex flex-col
                   `}
+                  style={{ transitionDelay: `${idx * 100}ms` }}
+                  onClick={() => openModal(challenge)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      openModal(challenge)
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`View ${challenge.title} details`}
                 >
                   {challenge.status === 'upcoming' && (
                     <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/80">
-                      <div className="flex flex-col items-center justify-center p-4">
-                        <div className="w-8 h-8 mb-1">
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <div className="w-6 h-6 mb-1">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-white/70">
                             <rect width="18" height="11" x="3" y="6" rx="2" />
                             <path d="M16 2H8v4h8V2z" />
                             <path d="M9 11h6" />
                           </svg>
                         </div>
-                        <p className="text-white/80 text-lg font-medium font-mono">LOCKED</p>
+                        <p className="text-white/80 text-sm font-medium font-mono">LOCKED</p>
                       </div>
                     </div>
                   )}
-                  <div className="p-4 relative h-full flex flex-col">
+                  <div className="p-3 relative h-full flex flex-col">
+                    {isActive && (
+                      <div className="flex space-x-2 mb-3">
+                        <a 
+                          href="https://v4.your-site.com" 
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                          onClick={(e) => e.stopPropagation()}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              window.open('https://v4.your-site.com', '_blank', 'noopener,noreferrer')
+                            }
+                          }}
+                          tabIndex={0}
+                          aria-label="Version 4"
+                        >
+                          [V4]
+                        </a>
+                        <a 
+                          href="https://v5.your-site.com" 
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                          onClick={(e) => e.stopPropagation()}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              window.open('https://v5.your-site.com', '_blank', 'noopener,noreferrer')
+                            }
+                          }}
+                          tabIndex={0}
+                          aria-label="Version 5"
+                        >
+                          [V5]
+                        </a>
+                        <a 
+                          href="https://v6.your-site.com" 
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                          onClick={(e) => e.stopPropagation()}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              window.open('https://v6.your-site.com', '_blank', 'noopener,noreferrer')
+                            }
+                          }}
+                          tabIndex={0}
+                          aria-label="Version 6"
+                        >
+                          [V6]
+                        </a>
+                      </div>
+                    )}
                     {isActive && challenge.logoUrl && (
-                      <div className="absolute top-4 right-4 w-12 h-12 opacity-50">
+                      <div className="absolute top-3 right-3 w-8 h-8 opacity-50">
                         <img 
                           src={challenge.logoUrl} 
                           alt={`${challenge.technology} logo`}
@@ -176,104 +396,75 @@ export default function Challenges() {
                         />
                       </div>
                     )}
-                    <div className="flex flex-col space-y-2 mb-4">
-                      <h2 className="text-lg font-bold tracking-wider text-white font-mono">
+                    <div className="flex flex-col space-y-1 mb-2">
+                      <h2 className="text-base font-bold tracking-wider text-white font-mono">
                         {challenge.title}
                       </h2>
                       {isActive && challenge.technology && (
-                        <div className="text-lg text-white/90 font-light">
+                        <div className="text-sm text-white/90 font-mono">
                           {challenge.technology}
                         </div>
                       )}
                     </div>
-                    <p className="text-white/70 mb-4 text-sm">
+                    <p className="text-white/70 mb-2 text-xs font-mono">
                       {challenge.description}
                     </p>
                     {isActive ? (
                       <>
                         {/* Prizes section always visible */}
-                        <div className="mb-4 font-mono">
-                          <div className="border-t border-white/10 pt-4">
+                        <div className="mb-2">
+                          <div className="border-t border-white/10 pt-2">
                             {challenge.awards.map((award, index) => (
-                              <div key={index} className="mb-3 last:mb-0">
-                                <div className="text-white/60 text-xs">{award.name}</div>
-                                <div className="text-white text-sm font-medium">{award.prize}</div>
+                              <div key={index} className="mb-1 last:mb-0">
+                                <div className="text-white/60 text-xs font-mono">{award.name}</div>
+                                <div className="text-white text-xs font-medium font-mono">{award.prize}</div>
                               </div>
                             ))}
                           </div>
                         </div>
                         {/* Timer section always visible */}
-                        <div className="mb-4">
-                          <div className="text-white/60 text-xs mb-2 font-mono">CHALLENGE ENDS IN:</div>
-                          <div className="flex space-x-3 font-mono">
+                        <div className="mb-2">
+                          <div className="text-white/60 text-xs mb-1 font-mono">CHALLENGE ENDS IN:</div>
+                          <div className="flex space-x-2">
                             <div className="text-center">
-                              <div className="text-lg text-white font-medium">{timeRemaining.days}</div>
-                              <div className="text-xs text-white/50">DAYS</div>
+                              <div className="text-sm text-white font-medium font-mono">{timeRemaining.days}</div>
+                              <div className="text-xs text-white/50 font-mono">DAYS</div>
                             </div>
                             <div className="text-center">
-                              <div className="text-lg text-white font-medium">{timeRemaining.hours}</div>
-                              <div className="text-xs text-white/50">HRS</div>
+                              <div className="text-sm text-white font-medium font-mono">{timeRemaining.hours}</div>
+                              <div className="text-xs text-white/50 font-mono">HRS</div>
                             </div>
                             <div className="text-center">
-                              <div className="text-lg text-white font-medium">{timeRemaining.minutes}</div>
-                              <div className="text-xs text-white/50">MIN</div>
+                              <div className="text-sm text-white font-medium font-mono">{timeRemaining.minutes}</div>
+                              <div className="text-xs text-white/50 font-mono">MIN</div>
                             </div>
                             <div className="text-center">
-                              <div className="text-lg text-white font-medium">{timeRemaining.seconds}</div>
-                              <div className="text-xs text-white/50">SEC</div>
+                              <div className="text-sm text-white font-medium font-mono">{timeRemaining.seconds}</div>
+                              <div className="text-xs text-white/50 font-mono">SEC</div>
                             </div>
                           </div>
                         </div>
-                        {/* Learn more and register button */}
-                        {!showMore && (
+                        {/* Learn more button */}
+                        <div className="mt-auto pt-2">
                           <button
-                            className="base-button inline-flex items-center justify-center w-full mt-2"
+                            className="base-button inline-flex items-center justify-center w-full group overflow-hidden relative text-sm py-1 bg-neutral-900 hover:bg-neutral-800 transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              openModal(challenge)
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                openModal(challenge)
+                              }
+                            }}
                             tabIndex={0}
-                            aria-label="Learn more and register to Build It"
-                            onClick={() => setShowMore(true)}
-                            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setShowMore(true) } }}
+                            aria-label="Learn more about the challenge"
                           >
-                            <span className="relative z-10 uppercase">Learn more and register to Build It</span>
+                            <span className="relative z-10 uppercase">Learn more</span>
                           </button>
-                        )}
-                        {/* Expanded content */}
-                        {showMore && (
-                          <>
-                            {/* Presentation date */}
-                            {challenge.presentationDate && (
-                              <div className="mt-4 border-t border-white/10 pt-4">
-                                <div className="text-white/70 text-xs">PRESENTATIONS ON</div>
-                                <div className="text-white font-mono text-sm">{challenge.presentationDate}</div>
-                              </div>
-                            )}
-                            {/* CTA button */}
-                            {challenge.ctaLabel && challenge.ctaUrl && (
-                              <div className="mt-4">
-                                <a
-                                  href={challenge.ctaUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="base-button inline-flex items-center justify-center w-full"
-                                  tabIndex={0}
-                                  aria-label={challenge.ctaLabel}
-                                  onKeyDown={(e) => handleKeyDown(e, challenge.ctaUrl)}
-                                >
-                                  <span className="relative z-10 uppercase">{challenge.ctaLabel}</span>
-                                </a>
-                              </div>
-                            )}
-                            {/* Hide button */}
-                            <button
-                              className="base-button inline-flex items-center justify-center w-full mt-4"
-                              tabIndex={0}
-                              aria-label="Hide details"
-                              onClick={() => setShowMore(false)}
-                              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setShowMore(false) } }}
-                            >
-                              <span className="relative z-10 uppercase">Hide</span>
-                            </button>
-                          </>
-                        )}
+                        </div>
                       </>
                     ) : null}
                   </div>
@@ -283,6 +474,122 @@ export default function Challenges() {
           </div>
         </div>
       </div>
+
+      {/* Modal for Learn More */}
+      {isModalOpen && selectedChallenge && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 font-mono">
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={closeModal}
+            role="button"
+            tabIndex={-1}
+            aria-label="Close modal"
+          />
+          <div className="relative bg-neutral-900 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-auto">
+            <div className="p-6">
+              <button 
+                className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors bg-transparent"
+                onClick={closeModal}
+                tabIndex={0}
+                aria-label="Close details popup"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="flex items-start mb-5">
+                {selectedChallenge.logoUrl && (
+                  <div className="w-12 h-12 mr-4">
+                    <img 
+                      src={selectedChallenge.logoUrl} 
+                      alt={`${selectedChallenge.technology} logo`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                )}
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-1 font-mono">
+                    {selectedChallenge.title}
+                  </h2>
+                  {selectedChallenge.technology && (
+                    <div className="text-lg text-white/90 mb-1 font-mono">
+                      {selectedChallenge.technology}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <p className="text-white/80 text-sm mb-4 font-mono">
+                  {selectedChallenge.description}
+                </p>
+
+                {/* Timer */}
+                <div className="p-4 border border-white/10 rounded-lg mb-6 bg-black/50">
+                  <div className="text-white/60 text-sm mb-2 font-mono">CHALLENGE ENDS IN:</div>
+                  <div className="flex justify-center space-x-6">
+                    <div className="text-center">
+                      <div className="text-2xl text-white font-medium font-mono">{timeRemaining.days}</div>
+                      <div className="text-xs text-white/50 font-mono">DAYS</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl text-white font-medium font-mono">{timeRemaining.hours}</div>
+                      <div className="text-xs text-white/50 font-mono">HRS</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl text-white font-medium font-mono">{timeRemaining.minutes}</div>
+                      <div className="text-xs text-white/50 font-mono">MIN</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl text-white font-medium font-mono">{timeRemaining.seconds}</div>
+                      <div className="text-xs text-white/50 font-mono">SEC</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Prizes */}
+                <div className="mb-6">
+                  <h3 className="text-white text-lg mb-3 font-mono">AWARDS & PRIZES</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {selectedChallenge.awards.map((award, index) => (
+                      <div key={index} className="p-3 border border-white/10 rounded-lg bg-black/30">
+                        <div className="text-white/60 text-xs mb-1 font-mono">{award.name}</div>
+                        <div className="text-white text-sm font-medium font-mono">{award.prize}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Presentation date */}
+                {selectedChallenge.presentationDate && (
+                  <div className="mb-6">
+                    <div className="text-white/70 text-sm mb-1 font-mono">PRESENTATIONS ON</div>
+                    <div className="text-white text-base font-mono">{selectedChallenge.presentationDate}</div>
+                  </div>
+                )}
+
+                {/* CTA button */}
+                {selectedChallenge.ctaUrl && (
+                  <div className="mt-4">
+                    <a
+                      href={selectedChallenge.ctaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="base-button inline-flex items-center justify-center w-full py-3 bg-neutral-800 hover:bg-neutral-700 transition-colors"
+                      tabIndex={0}
+                      aria-label="Register to Build It"
+                      onKeyDown={(e) => handleKeyDown(e, selectedChallenge.ctaUrl)}
+                    >
+                      <span className="relative z-10 uppercase">Register to Build It</span>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 } 
