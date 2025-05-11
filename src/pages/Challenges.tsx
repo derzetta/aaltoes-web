@@ -329,64 +329,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                     </div>
                   )}
                   <div className="p-3 relative h-full flex flex-col">
-                    {isActive && (
-                      <div className="flex space-x-2 mb-3">
-                        <a 
-                          href="https://v4.your-site.com" 
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                          onClick={(e) => e.stopPropagation()}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              e.stopPropagation()
-                              window.open('https://v4.your-site.com', '_blank', 'noopener,noreferrer')
-                            }
-                          }}
-                          tabIndex={0}
-                          aria-label="Version 4"
-                        >
-                          [V4]
-                        </a>
-                        <a 
-                          href="https://v5.your-site.com" 
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                          onClick={(e) => e.stopPropagation()}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              e.stopPropagation()
-                              window.open('https://v5.your-site.com', '_blank', 'noopener,noreferrer')
-                            }
-                          }}
-                          tabIndex={0}
-                          aria-label="Version 5"
-                        >
-                          [V5]
-                        </a>
-                        <a 
-                          href="https://v6.your-site.com" 
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                          onClick={(e) => e.stopPropagation()}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              e.stopPropagation()
-                              window.open('https://v6.your-site.com', '_blank', 'noopener,noreferrer')
-                            }
-                          }}
-                          tabIndex={0}
-                          aria-label="Version 6"
-                        >
-                          [V6]
-                        </a>
-                      </div>
-                    )}
+                   
                     {isActive && challenge.logoUrl && (
                       <div className="absolute top-3 right-3 w-8 h-8 opacity-50">
                         <img 
@@ -444,26 +387,82 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                             </div>
                           </div>
                         </div>
-                        {/* Learn more button */}
+                        {/* Buttons row */}
                         <div className="mt-auto pt-2">
-                          <button
-                            className="base-button inline-flex items-center justify-center w-full group overflow-hidden relative text-sm py-1 bg-neutral-900 hover:bg-neutral-800 transition-colors"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              openModal(challenge)
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault()
+                          <div className="flex gap-1">
+                            <a 
+                              href="https://v4.your-site.com" 
+                              target="_blank"
+                              rel="noopener noreferrer" 
+                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  window.open('https://v4.your-site.com', '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label="Version 4"
+                            >
+                              [V4]
+                            </a>
+                            <a 
+                              href="https://v5.your-site.com" 
+                              target="_blank"
+                              rel="noopener noreferrer" 
+                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  window.open('https://v5.your-site.com', '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label="Version 5"
+                            >
+                              [V5]
+                            </a>
+                            <a 
+                              href="https://v6.your-site.com" 
+                              target="_blank"
+                              rel="noopener noreferrer" 
+                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  window.open('https://v6.your-site.com', '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label="Version 6"
+                            >
+                              [V6]
+                            </a>
+                            <button
+                              className="flex-1 px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                              onClick={(e) => {
                                 e.stopPropagation()
                                 openModal(challenge)
-                              }
-                            }}
-                            tabIndex={0}
-                            aria-label="Learn more about the challenge"
-                          >
-                            <span className="relative z-10 uppercase">Learn more</span>
-                          </button>
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  openModal(challenge)
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label="Learn more about the challenge"
+                            >
+                              Learn more
+                            </button>
+                          </div>
                         </div>
                       </>
                     ) : null}
@@ -569,19 +568,61 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                   </div>
                 )}
 
-                {/* CTA button */}
-                {selectedChallenge.ctaUrl && (
+                {/* Register row with version buttons */}
+                {selectedChallenge.status === 'active' && (
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="text-white text-sm font-medium font-mono">REGISTER TO BUILD IT</div>
+                      <div className="flex gap-2">                      
+                        <a 
+                          href="https://v4.your-site.com" 
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                          tabIndex={0}
+                          aria-label="Register for Version 4"
+                        >
+                          [V4]
+                        </a>
+                        
+                        <a 
+                          href="https://v5.your-site.com" 
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                          tabIndex={0}
+                          aria-label="Register for Version 5"
+                        >
+                          [V5]
+                        </a>
+                        
+                        <a 
+                          href="https://v6.your-site.com" 
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                          tabIndex={0}
+                          aria-label="Register for Version 6"
+                        >
+                          [V6]
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Submit the work button */}
+                {selectedChallenge.status === 'active' && (
                   <div className="mt-4">
                     <a
-                      href={selectedChallenge.ctaUrl}
+                      href="https://forms.your-site.com/submit"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="base-button inline-flex items-center justify-center w-full py-3 bg-neutral-800 hover:bg-neutral-700 transition-colors"
+                      className="block bg-neutral-800 hover:bg-neutral-700 text-white py-3 px-4 text-center text-sm font-mono uppercase transition-colors rounded"
                       tabIndex={0}
-                      aria-label="Register to Build It"
-                      onKeyDown={(e) => handleKeyDown(e, selectedChallenge.ctaUrl)}
+                      aria-label="Submit your work"
                     >
-                      <span className="relative z-10 uppercase">Register to Build It</span>
+                      Submit the work
                     </a>
                   </div>
                 )}
