@@ -81,8 +81,9 @@ export default function Challenges() {
   const [showChallenges, setShowChallenges] = useState(false)
   const [buildItComplete, setBuildItComplete] = useState(false)
   const [challengesComplete, setChallengesComplete] = useState(false)
-  const [showCards, setShowCards] = useState(false)
   const [showWelcomeText, setShowWelcomeText] = useState(false)
+  const [welcomeTextComplete, setWelcomeTextComplete] = useState(false)
+  const [showCards, setShowCards] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -131,7 +132,7 @@ export default function Challenges() {
   }, [])
 
   useEffect(() => {
-    // Show welcome text after cards appear
+    // Show welcome text after challenges title animation is complete
     if (showCards) {
       const timer = setTimeout(() => {
         setShowWelcomeText(true);
@@ -212,7 +213,7 @@ export default function Challenges() {
       
       {/* ASCII Animation Background */}
       <div className="absolute inset-0 h-[400px] overflow-hidden">
-        <AnimatedText pattern="BUILD IT " className="opacity-30" />
+        <AnimatedText pattern="BUILD IT " className="opacity-100" />
       </div>
       
       {/* Hero section with Build It Challenge logo */}
@@ -224,7 +225,7 @@ export default function Challenges() {
               <div 
                 className={`flex flex-col md:flex-row items-center md:items-end md:gap-1 transition-all duration-1000 ${isPageLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               >
-                <div className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tighter leading-none text-white font-mono">
+                <div className="text-5xl sm:text-5xl md:text-6xl font-medium tracking-tighter leading-none text-white font-mono">
                   {showBuildIt && (
                     <TypingAnimation 
                       text="build it" 
@@ -240,7 +241,7 @@ export default function Challenges() {
                 
                 {(showChallenges || buildItComplete) && (
                   <div className={`border-2 border-white rounded-[12px] px-2 py-0.5 flex justify-center items-center mt-2 sm:mt-3 md:mt-0 md:mb-1.5 md:ml-4 transition-opacity duration-300 ${showChallenges ? 'opacity-100' : 'opacity-0'}`}>
-                    <div className="text-base sm:text-lg md:text-xl uppercase tracking-wide text-white font-mono">
+                    <div className="text-lg sm:text-lg md:text-xl uppercase tracking-wide text-white font-mono">
                       {showChallenges && (
                         <TypingAnimation 
                           text="CHALLENGES" 
@@ -273,7 +274,7 @@ export default function Challenges() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className={`mb-16 text-left transition-all duration-1000 ${showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
             {showWelcomeText && (
-              <div className="text-white/70 text-sm font-mono whitespace-pre-line">
+              <div className="text-white/70 text-sm font-mono whitespace-pre-line leading-relaxed">
                 <TypingAnimation
                   text={`Welcome to Build it challenges. Our build it sessions are ran every Tuesday and Saturday.
 
@@ -282,12 +283,15 @@ Pick the one from cards you see below. You are welcome to do your own work as we
 For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                   delay={10}
                   className="inline"
+                  onComplete={() => {
+                    setWelcomeTextComplete(true);
+                  }}
                 />
               </div>
             )}
           </div>
           
-          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-1000 ${showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-1000 ${welcomeTextComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {challenges.map((challenge, idx) => {
               const isActive = challenge.status === 'active'
               return (
@@ -300,7 +304,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                       : 'border-white/5 bg-neutral-900'}
                     ${challenge.status === 'upcoming' ? 'opacity-80 cursor-not-allowed relative' : 'opacity-100 cursor-pointer'}
                     ${isPageLoaded && showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}
-                    h-[380px] flex flex-col
+                    flex flex-col
                   `}
                   style={{ transitionDelay: `${idx * 100}ms` }}
                   onClick={() => openModal(challenge)}
@@ -328,7 +332,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                       </div>
                     </div>
                   )}
-                  <div className="p-3 relative h-full flex flex-col">
+                  <div className="p-4 relative h-full flex flex-col min-h-[290px]">
                    
                     {isActive && challenge.logoUrl && (
                       <div className="absolute top-3 right-3 w-8 h-8 opacity-50">
@@ -339,21 +343,23 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                         />
                       </div>
                     )}
-                    <div className="flex flex-col space-y-1 mb-2">
-                      <h2 className="text-base font-bold tracking-wider text-white font-mono">
-                        {challenge.title}
-                      </h2>
-                      {isActive && challenge.technology && (
-                        <div className="text-sm text-white/90 font-mono">
-                          {challenge.technology}
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-white/70 mb-2 text-xs font-mono">
-                      {challenge.description}
-                    </p>
+                    
                     {isActive ? (
                       <>
+                        <div className="flex flex-col space-y-1 mb-2">
+                          <h2 className="text-base font-bold tracking-wider text-white font-mono">
+                            {challenge.title}
+                          </h2>
+                          {challenge.technology && (
+                            <div className="text-sm text-white/90 font-mono">
+                              {challenge.technology}
+                            </div>
+                          )}
+                        </div>
+                        <p className="text-white/70 mb-2 text-xs font-mono">
+                          {challenge.description}
+                        </p>
+                        
                         {/* Prizes section always visible */}
                         <div className="mb-2">
                           <div className="border-t border-white/10 pt-2">
@@ -465,7 +471,26 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                           </div>
                         </div>
                       </>
-                    ) : null}
+                    ) : (
+                      <div className="flex flex-col h-full">
+                        <div>
+                          <h2 className="text-base font-bold tracking-wider text-white font-mono mb-2">
+                            {challenge.title}
+                          </h2>
+                          <p className="text-white/70 mb-2 text-xs font-mono">
+                            {challenge.description}
+                          </p>
+                        </div>
+                        
+                        <div className="mt-auto pt-2 border-t border-white/10">
+                          <p className="text-white/60 text-xs font-mono">COMING SOON</p>
+                          <div className="flex justify-between mt-2 text-white/50 text-xs font-mono">
+                            <span>EXPECTED IN</span>
+                            <span>{Math.floor(Math.random() * 12) + 1} WEEKS</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               )
