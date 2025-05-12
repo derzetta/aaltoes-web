@@ -84,6 +84,7 @@ export default function Challenges() {
   const [showWelcomeText, setShowWelcomeText] = useState(false)
   const [welcomeTextComplete, setWelcomeTextComplete] = useState(false)
   const [showCards, setShowCards] = useState(false)
+  const [modalAnimationComplete, setModalAnimationComplete] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -151,14 +152,23 @@ export default function Challenges() {
 
   const openModal = (challenge: Challenge) => {
     if (challenge.status === 'active') {
+      // Show modal immediately but in initial animation state
       setSelectedChallenge(challenge)
       setIsModalOpen(true)
       document.body.style.overflow = 'hidden'
+      
+      // Trigger animation in the next frame for smooth transition
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setModalAnimationComplete(true)
+        })
+      })
     }
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
+    setModalAnimationComplete(false)
     document.body.style.overflow = 'auto'
   }
 
@@ -503,13 +513,20 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
       {isModalOpen && selectedChallenge && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 font-mono">
           <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ease-in-out"
+            style={{ opacity: modalAnimationComplete ? 1 : 0 }}
             onClick={closeModal}
             role="button"
             tabIndex={-1}
             aria-label="Close modal"
           />
-          <div className="relative bg-neutral-900 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-auto">
+          <div 
+            className="relative bg-neutral-900 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-auto transition-all duration-300 ease-out transform"
+            style={{ 
+              opacity: modalAnimationComplete ? 1 : 0,
+              transform: modalAnimationComplete ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(10px)'
+            }}
+          >
             <div className="p-6">
               <button 
                 className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors bg-transparent"
