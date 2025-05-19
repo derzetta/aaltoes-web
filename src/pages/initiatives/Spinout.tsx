@@ -197,7 +197,7 @@ export default function Spinout() {
                   <div className="flex items-center gap-6">
                     <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                       <img 
-                        src="/board/vaneeza.png" 
+                        src="/board/optimized/vaneeza.png" 
                         alt="Vaneeza Maqsood"
                         className="w-full h-full object-cover"
                       />
@@ -240,7 +240,7 @@ export default function Spinout() {
                   <div className="flex items-center gap-6">
                     <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                       <img 
-                        src="/board/siiri.png" 
+                        src="/board/optimized/siiri.png" 
                         alt="Siiri Lautamies"
                         className="w-full h-full object-cover"
                       />

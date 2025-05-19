@@ -181,7 +181,7 @@ export default function International() {
                   <div className="flex items-center gap-6">
                     <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                       <img 
-                        src="/board/tetsu.png" 
+                        src="/board/optimized/tetsu.png" 
                         alt="Tetsu Fujimura"
                         className="w-full h-full object-cover"
                       />
@@ -223,7 +223,7 @@ export default function International() {
                   <div className="flex items-center gap-6">
                     <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                       <img 
-                        src="/board/doni.png" 
+                        src="/board/optimized/doni.png" 
                         alt="Doni Peltojärvi"
                         className="w-full h-full object-cover"
                       />

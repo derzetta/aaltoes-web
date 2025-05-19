@@ -15,7 +15,7 @@ const teamMembers = [
   {
     name: "Milana Begantsova",
     role: "Tech",
-    image: "/board/milana.png",
+    image: "/board/optimized/milana.png",
     email: "milana.begantsova@aaltoes.com",
     telegram: "milanabeg",
     linkedin: "https://linkedin.com/in/milanabeg"
@@ -23,7 +23,7 @@ const teamMembers = [
   {
     name: "Tetsu Fujimura",
     role: "Brand",
-    image: "/board/tetsu.png",
+    image: "/board/optimized/tetsu.png",
     email: "tetsu.fujimura@aaltoes.com",
     telegram: "tetsufujimura",
     linkedin: "https://linkedin.com/in/tetsufujimura"
@@ -31,7 +31,7 @@ const teamMembers = [
   {
     name: "Vaneeza Maqsood",
     role: "Ecosystem",
-    image: "/board/vaneeza.png",
+    image: "/board/optimized/vaneeza.png",
     email: "vaneeza.maqsood@aaltoes.com",
     telegram: "vaneezamaqsood",
     linkedin: "https://linkedin.com/in/vaneezamaqsood"
@@ -39,7 +39,7 @@ const teamMembers = [
   {
     name: "Siiri Lautamies",
     role: "Operations",
-    image: "/board/siiri.png",
+    image: "/board/optimized/siiri.png",
     email: "siiri.lautamies@aaltoes.com",
     telegram: "siirilautamies",
     linkedin: "https://linkedin.com/in/siirilautamies"
@@ -48,7 +48,7 @@ const teamMembers = [
   {
     name: "Yera Slam",
     role: "Partnerships & Finance",
-    image: "/board/yera.png",
+    image: "/board/optimized/yera.png",
     email: "yera.slam@aaltoes.com",
     telegram: "yeralkhan",
     linkedin: "https://linkedin.com/in/yeralkhan"
@@ -56,7 +56,7 @@ const teamMembers = [
   {
     name: "Doni Peltojärvi",
     role: "President",
-    image: "/board/doni.png",
+    image: "/board/optimized/doni.png",
     email: "doni.peltojarvi@aaltoes.com",
     telegram: "donijar",
     linkedin: "https://linkedin.com/in/donipeltojarvi"
@@ -64,7 +64,7 @@ const teamMembers = [
   {
     name: "Santtu",
     role: "Mental Health Specialist",
-    image: "/board/santtu.png",
+    image: "/board/optimized/santtu.png",
     email: "doni.peltojarvi@aaltoes.com",
     telegram: "donijar",
     linkedin: "https://linkedin.com/in/donipeltojarvi"

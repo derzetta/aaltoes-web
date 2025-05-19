@@ -679,7 +679,7 @@ export default function Log() {
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                   <img 
-                    src="/board/siiri.png" 
+                    src="/board/optimized/siiri.png" 
                     alt="Siiri Lautamies"
                     className="w-full h-full object-cover"
                   />

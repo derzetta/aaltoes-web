@@ -1111,7 +1111,7 @@ export default function Robotics() {
                 <div className="flex items-center gap-6">
                   <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                     <img 
-                      src="/board/doni.png" 
+                      src="/board/optimized/doni.png" 
                       alt="Doni Peltojärvi"
                       className="w-full h-full object-cover"
                     />
@@ -1153,7 +1153,7 @@ export default function Robotics() {
                 <div className="flex items-center gap-6">
                   <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                     <img 
-                      src="/board/yera.png" 
+                      src="/board/optimized/yera.png" 
                       alt="Yera Slam"
                       className="w-full h-full object-cover"
                     />

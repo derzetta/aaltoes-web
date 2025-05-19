@@ -613,8 +613,8 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                 {/* Register row with version buttons */}
                 {selectedChallenge.status === 'active' && (
                   <div className="mb-4">
-                    <div className="flex items-center justify-between">
-                      <div className="text-white text-sm font-medium font-mono">REGISTER TO BUILD IT</div>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                      <div className="text-white text-sm font-medium font-mono mb-2 sm:mb-0">REGISTER TO BUILD IT</div>
                       <div className="flex gap-2">                      
                         <a 
                           href="https://v4.your-site.com" 

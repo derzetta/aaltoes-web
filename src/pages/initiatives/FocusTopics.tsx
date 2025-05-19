@@ -256,7 +256,7 @@ export default function FocusTopics() {
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden bg-zinc-900 flex-shrink-0">
                   <img 
-                    src="/board/vaneeza.png" 
+                    src="/board/optimized/vaneeza.png" 
                     alt="Vaneeza Maqsood"
                     className="w-full h-full object-cover"
                   />
