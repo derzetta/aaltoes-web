@@ -139,7 +139,7 @@ function PreviousBoards() {
     {
       year: 2013,
       members: [
-        { name: "Elina Uuttela", role: "President" },
+        { name: "Elina Uutela", role: "President" },
         { name: "Risto Vuorio", role: "VP, Finance & Summer of Startups" },
         { name: "Kristian Hartikainen", role: "Technology" },
         { name: "Markus Ahrenberg", role: "Community" },
