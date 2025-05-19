@@ -80,7 +80,7 @@ export default function Challenges() {
   const [showBuildIt, setShowBuildIt] = useState(false)
   const [showChallenges, setShowChallenges] = useState(false)
   const [buildItComplete, setBuildItComplete] = useState(false)
-  const [challengesComplete, setChallengesComplete] = useState(false)
+  const [, setChallengesComplete] = useState(false)
   const [showWelcomeText, setShowWelcomeText] = useState(false)
   const [welcomeTextComplete, setWelcomeTextComplete] = useState(false)
   const [showCards, setShowCards] = useState(false)
@@ -143,12 +143,6 @@ export default function Challenges() {
     }
   }, [showCards]);
 
-  const handleKeyDown = (e: React.KeyboardEvent, url?: string) => {
-    if ((e.key === 'Enter' || e.key === ' ') && url) {
-      e.preventDefault()
-      window.open(url, '_blank', 'noopener,noreferrer')
-    }
-  }
 
   const openModal = (challenge: Challenge) => {
     if (challenge.status === 'active') {
