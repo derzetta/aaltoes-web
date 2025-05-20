@@ -187,7 +187,7 @@ export default function Challenges() {
       description: 'Create the most frustrating, confusing, and downright evil captcha form ever. Make users question their existence while trying to prove they\'re human. The more tears, the better!',
       endDate: new Date('2025-05-31T23:59:59'), // May 31st
       status: 'active',
-      technology: 'HTML/CSS/JS',
+      technology: '',
       presentationDate: 'BUILD IT [V7], MAY 3RD',
       sponsor: 'Aaltoes 2025',
       ctaLabel: 'PARTICIPATE NOW',
@@ -261,7 +261,7 @@ export default function Challenges() {
                 )}
               </div>
               
-              <div className={`text-white/70 font-mono text-sm mt-6 md:mt-0 md:self-end md:pb-3 transition-opacity duration-1000 ${buildItComplete ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={`text-white/70 font-mono text-sm mt-6 md:mt-0 md:self-end md:pb-3 transition-opacity duration-1000 ${buildItComplete ? 'opacity-100' : 'opacity-0'} flex items-center gap-2`}>
                 with <span className="text-red-500">♥</span> from{' '}
                 <a 
                   href="https://aaltoes.com" 
@@ -272,6 +272,20 @@ export default function Challenges() {
                   aria-label="Visit Aaltoes website"
                 >
                   Aaltoes 2025
+                </a>
+                <span className="text-white/30">|</span>
+                <a 
+                  href="https://discord.gg/7YzuMbYHAr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-1"
+                  tabIndex={0}
+                  aria-label="Join our Discord channel"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                  </svg>
+                  Discord
                 </a>
               </div>
             </div>
@@ -289,7 +303,7 @@ export default function Challenges() {
             {showWelcomeText && (
               <div className="text-white/70 text-sm font-mono whitespace-pre-line leading-relaxed">
                 <TypingAnimation
-                  text={`Welcome to Build it challenges. Our build it sessions are ran every Tuesday and Saturday.
+                  text={`Welcome to Build it challenges. Our build it sessions are ran every Wednesday and Saturday.
 
 Pick the one from cards you see below. You are welcome to do your own work as well.
 
@@ -427,42 +441,20 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                             >
                               [V4]
                             </a>
-                            <a 
-                              href="https://v5.your-site.com" 
-                              target="_blank"
-                              rel="noopener noreferrer" 
-                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  window.open('https://v5.your-site.com', '_blank', 'noopener,noreferrer')
-                                }
-                              }}
-                              tabIndex={0}
-                              aria-label="Version 5"
+                            <button
+                              className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
+                              disabled
+                              aria-label="Version 5 (Blocked)"
                             >
                               [V5]
-                            </a>
-                            <a 
-                              href="https://v6.your-site.com" 
-                              target="_blank"
-                              rel="noopener noreferrer" 
-                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  window.open('https://v6.your-site.com', '_blank', 'noopener,noreferrer')
-                                }
-                              }}
-                              tabIndex={0}
-                              aria-label="Version 6"
+                            </button>
+                            <button
+                              className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
+                              disabled
+                              aria-label="Version 6 (Blocked)"
                             >
                               [V6]
-                            </a>
+                            </button>
                             <button
                               className="flex-1 px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
                               onClick={(e) => {
@@ -630,27 +622,21 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                           [V4]
                         </a>
                         
-                        <a 
-                          href="https://v5.your-site.com" 
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
-                          tabIndex={0}
-                          aria-label="Register for Version 5"
+                        <button
+                          className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
+                          disabled
+                          aria-label="Version 5 (Blocked)"
                         >
                           [V5]
-                        </a>
+                        </button>
                         
-                        <a 
-                          href="https://v6.your-site.com" 
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
-                          tabIndex={0}
-                          aria-label="Register for Version 6"
+                        <button
+                          className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
+                          disabled
+                          aria-label="Version 6 (Blocked)"
                         >
                           [V6]
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -660,14 +646,17 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                 {selectedChallenge.status === 'active' && (
                   <div className="mt-4">
                     <a
-                      href="https://forms.your-site.com/submit"
+                      href="https://discord.gg/7YzuMbYHAr"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block bg-neutral-800 hover:bg-neutral-700 text-white py-3 px-4 text-center text-sm font-mono uppercase transition-colors rounded"
+                      className="block bg-[#5865F2] hover:bg-[#4752C4] text-white py-3 px-4 text-center text-sm font-mono uppercase transition-colors rounded flex items-center justify-center gap-2"
                       tabIndex={0}
-                      aria-label="Submit your work"
+                      aria-label="Join our Discord channel"
                     >
-                      Submit the work
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                      </svg>
+                      Join Discord Channel
                     </a>
                   </div>
                 )}
