@@ -183,13 +183,12 @@ export default function Challenges() {
     // Active challenge
     {
       id: 'three-js-challenge',
-      title: 'BUILD IT CHALLENGE',
+      title: 'WORLD\'S WORST CAPTCHA',
       description: 'Create the most frustrating, confusing, and downright evil captcha form ever. Make users question their existence while trying to prove they\'re human. The more tears, the better!',
       endDate: new Date('2025-05-31T23:59:59'), // May 31st
       status: 'active',
       technology: 'HTML/CSS/JS',
       presentationDate: 'BUILD IT [V7], MAY 3RD',
-      logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Three.js_Icon.svg/1200px-Three.js_Icon.svg.png',
       sponsor: 'Aaltoes 2025',
       ctaLabel: 'PARTICIPATE NOW',
       ctaUrl: 'https://threejs.org/',
@@ -263,7 +262,17 @@ export default function Challenges() {
               </div>
               
               <div className={`text-white/70 font-mono text-sm mt-6 md:mt-0 md:self-end md:pb-3 transition-opacity duration-1000 ${buildItComplete ? 'opacity-100' : 'opacity-0'}`}>
-                with <span className="text-red-500">♥</span> from Aaltoes 2025
+                with <span className="text-red-500">♥</span> from{' '}
+                <a 
+                  href="https://aaltoes.com" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                  tabIndex={0}
+                  aria-label="Visit Aaltoes website"
+                >
+                  Aaltoes 2025
+                </a>
               </div>
             </div>
           </div>
