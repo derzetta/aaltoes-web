@@ -185,7 +185,7 @@ export default function Challenges() {
       id: 'three-js-challenge',
       title: 'BUILD IT CHALLENGE',
       description: 'Create the most frustrating, confusing, and downright evil captcha form ever. Make users question their existence while trying to prove they\'re human. The more tears, the better!',
-      endDate: new Date('2024-05-31T23:59:59'), // May 31st
+      endDate: new Date('2025-05-31T23:59:59'), // May 31st
       status: 'active',
       technology: 'HTML/CSS/JS',
       presentationDate: 'BUILD IT [V7], MAY 3RD',
