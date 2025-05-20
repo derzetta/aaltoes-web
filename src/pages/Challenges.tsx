@@ -96,10 +96,10 @@ export default function Challenges() {
       // Start typing animation after page load effects
       const animationTimer = setTimeout(() => {
         setShowBuildIt(true);
-      }, 500);
+      }, 200);
       
       return () => clearTimeout(animationTimer);
-    }, 100)
+    }, 50)
     
     return () => clearTimeout(timer)
   }, [])
@@ -137,7 +137,7 @@ export default function Challenges() {
     if (showCards) {
       const timer = setTimeout(() => {
         setShowWelcomeText(true);
-      }, 200);
+      }, 100);
       
       return () => clearTimeout(timer);
     }
@@ -184,18 +184,18 @@ export default function Challenges() {
     {
       id: 'three-js-challenge',
       title: 'BUILD IT CHALLENGE',
-      description: 'Impress us with how you can build projects with Three.js.',
-      endDate: new Date('2024-05-24T23:59:59'), // May 24th
+      description: 'Create the most frustrating, confusing, and downright evil captcha form ever. Make users question their existence while trying to prove they\'re human. The more tears, the better!',
+      endDate: new Date('2024-05-31T23:59:59'), // May 31st
       status: 'active',
-      technology: 'Three.js',
+      technology: 'HTML/CSS/JS',
       presentationDate: 'BUILD IT [V7], MAY 3RD',
       logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Three.js_Icon.svg/1200px-Three.js_Icon.svg.png',
       sponsor: 'Aaltoes 2025',
       ctaLabel: 'PARTICIPATE NOW',
       ctaUrl: 'https://threejs.org/',
       awards: [
-        { name: 'WINNER AWARD', prize: 'LENNY\'S NEWSLETTER BUNDLE' },
-        { name: 'RUNNER-UP AWARD', prize: '???' },
+        { name: 'WINNER AWARD', prize: 'ANNUAL CURSOR SUBSCRIPTION (OR EQUIVALENT IN SIMILAR SERVICES)' },
+        { name: 'RUNNER-UP AWARD', prize: '25$ IN AALTOES STORE' },
         { name: 'VIBES AWARD (FREE TOPIC)', prize: '1 BOX OF PIZZA' }
       ]
     },
@@ -276,7 +276,7 @@ export default function Challenges() {
       {/* Challenge grid */}
       <div className="pt-2 pb-6 relative z-10 bg-neutral-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className={`mb-16 text-left transition-all duration-1000 ${showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
+          <div className={`mb-16 text-left ${showCards ? 'opacity-100' : 'opacity-0'}`}>
             {showWelcomeText && (
               <div className="text-white/70 text-sm font-mono whitespace-pre-line leading-relaxed">
                 <TypingAnimation
@@ -285,7 +285,7 @@ export default function Challenges() {
 Pick the one from cards you see below. You are welcome to do your own work as well.
 
 For questions clarify from Adit, Doni, Vaneeza or Milana!`}
-                  delay={10}
+                  delay={5}
                   className="inline"
                   onComplete={() => {
                     setWelcomeTextComplete(true);
@@ -295,7 +295,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
             )}
           </div>
           
-          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-1000 ${welcomeTextComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-500 ${welcomeTextComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {challenges.map((challenge, idx) => {
               const isActive = challenge.status === 'active'
               return (
