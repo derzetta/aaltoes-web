@@ -188,7 +188,7 @@ export default function Challenges() {
       endDate: new Date('2025-05-31T23:59:59'), // May 31st
       status: 'active',
       technology: '',
-      presentationDate: 'BUILD IT [V7], MAY 3RD',
+      presentationDate: 'BUILD IT [V6], MAY 31ST',
       sponsor: 'Aaltoes 2025',
       ctaLabel: 'PARTICIPATE NOW',
       ctaUrl: 'https://threejs.org/',
@@ -424,7 +424,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                         <div className="mt-auto pt-2">
                           <div className="flex gap-1">
                             <a 
-                              href="https://v4.your-site.com" 
+                              href="https://lu.ma/dur5tou2" 
                               target="_blank"
                               rel="noopener noreferrer" 
                               className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
@@ -433,7 +433,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                                 if (e.key === 'Enter' || e.key === ' ') {
                                   e.preventDefault()
                                   e.stopPropagation()
-                                  window.open('https://v4.your-site.com', '_blank', 'noopener,noreferrer')
+                                  window.open('https://lu.ma/dur5tou2', '_blank', 'noopener,noreferrer')
                                 }
                               }}
                               tabIndex={0}
@@ -612,7 +612,7 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                       <div className="text-white text-sm font-medium font-mono mb-2 sm:mb-0">REGISTER TO BUILD IT</div>
                       <div className="flex gap-2">                      
                         <a 
-                          href="https://v4.your-site.com" 
+                          href="https://lu.ma/dur5tou2" 
                           target="_blank"
                           rel="noopener noreferrer" 
                           className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
