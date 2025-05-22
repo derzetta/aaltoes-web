@@ -193,8 +193,8 @@ export default function Challenges() {
       ctaLabel: 'PARTICIPATE NOW',
       ctaUrl: 'https://threejs.org/',
       awards: [
-        { name: 'WINNER AWARD', prize: 'ANNUAL CURSOR SUBSCRIPTION (OR EQUIVALENT IN SIMILAR SERVICES)' },
-        { name: 'RUNNER-UP AWARD', prize: '25$ IN AALTOES STORE' },
+        { name: 'WINNER AWARD', prize: '$200 VERKKOKAUPPA GIFT CARD (OR EQUIVALENT IN SUBSCRIPTION SERVICES)' },
+        { name: 'RUNNER-UP AWARD', prize: '$25 IN AALTOES STORE' },
         { name: 'VIBES AWARD (FREE TOPIC)', prize: '1 BOX OF PIZZA' }
       ]
     },
