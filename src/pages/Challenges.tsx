@@ -441,20 +441,42 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                             >
                               [V4]
                             </a>
-                            <button
-                              className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
-                              disabled
-                              aria-label="Version 5 (Blocked)"
+                            <a
+                              href="https://lu.ma/p5voz8w9"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  window.open('https://lu.ma/p5voz8w9', '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label="Version 5"
                             >
                               [V5]
-                            </button>
-                            <button
-                              className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
-                              disabled
-                              aria-label="Version 6 (Blocked)"
+                            </a>
+                            <a
+                              href="https://lu.ma/jd9b5w50"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                              onClick={(e) => e.stopPropagation()}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  window.open('https://lu.ma/jd9b5w50', '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label="Version 6"
                             >
                               [V6]
-                            </button>
+                            </a>
                             <button
                               className="flex-1 px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
                               onClick={(e) => {
@@ -622,21 +644,27 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                           [V4]
                         </a>
                         
-                        <button
-                          className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
-                          disabled
-                          aria-label="Version 5 (Blocked)"
+                        <a
+                          href="https://lu.ma/p5voz8w9"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                          tabIndex={0}
+                          aria-label="Register for Version 5"
                         >
                           [V5]
-                        </button>
+                        </a>
                         
-                        <button
-                          className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
-                          disabled
-                          aria-label="Version 6 (Blocked)"
+                        <a
+                          href="https://lu.ma/jd9b5w50"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                          tabIndex={0}
+                          aria-label="Register for Version 6"
                         >
                           [V6]
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
