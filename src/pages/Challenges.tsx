@@ -8,6 +8,13 @@ type Award = {
   prize: string
 }
 
+type Winner = {
+  place: string
+  username: string
+  award: string
+  discordId?: string
+}
+
 type Challenge = {
   id: string
   title: string
@@ -17,6 +24,7 @@ type Challenge = {
   image?: string
   technology?: string
   awards: Award[]
+  winners?: Winner[]
   presentationDate?: string
   logoUrl?: string
   sponsor?: string
@@ -106,12 +114,17 @@ export default function Challenges() {
 
   // Calculate countdown for the active challenge
   useEffect(() => {
-    const activeChallenge = challenges.find(challenge => challenge.status === 'active')
-    if (!activeChallenge) return
+    const activeChallenges = challenges.filter(challenge => challenge.status === 'active')
+    if (!activeChallenges.length) return
+
+    // Find the challenge that ends earliest
+    const earliestChallenge = activeChallenges.reduce((earliest, current) => 
+      current.endDate.getTime() < earliest.endDate.getTime() ? current : earliest
+    )
 
     const calculateTimeRemaining = () => {
       const now = new Date()
-      const difference = activeChallenge.endDate.getTime() - now.getTime()
+      const difference = earliestChallenge.endDate.getTime() - now.getTime()
       
       if (difference <= 0) {
         setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0 })
@@ -180,13 +193,13 @@ export default function Challenges() {
 
   // Create a 4x4 grid of challenge slots
   const challenges: Challenge[] = [
-    // Active challenge
+    // Completed challenge with winners
     {
       id: 'three-js-challenge',
       title: 'WORLD\'S WORST CAPTCHA',
       description: 'Create the most frustrating, confusing, and downright evil captcha form ever. Make users question their existence while trying to prove they\'re human. The more tears, the better!',
       endDate: new Date('2025-05-31T23:59:59'), // May 31st
-      status: 'active',
+      status: 'completed',
       technology: '',
       presentationDate: 'BUILD IT [V6], MAY 31ST',
       sponsor: 'Aaltoes 2025',
@@ -196,14 +209,37 @@ export default function Challenges() {
         { name: 'WINNER AWARD', prize: '$200 VERKKOKAUPPA GIFT CARD (OR EQUIVALENT IN SUBSCRIPTION SERVICES)' },
         { name: 'RUNNER-UP AWARD', prize: '$25 IN AALTOES STORE' },
         { name: 'VIBES AWARD (FREE TOPIC)', prize: '1 BOX OF PIZZA' }
+      ],
+      winners: [
+        { place: '1ST PLACE', username: 'sypher', award: '$200 VERKKOKAUPPA GIFT CARD' },
+        { place: 'RUNNER UP', username: 'robojuho', award: '$25 IN AALTOES STORE' },
+        { place: 'VIBES AWARD', username: 'oxrinz', award: 'BOX OF PIZZA 🍕' }
       ]
     },
-    // Blocked challenges - 15 more to make a 4x4 grid
-    ...Array.from({ length: 15 }, (_, i) => ({
+    // Active challenge
+    {
+      id: 'worst-saas-challenge',
+      title: 'WORLD\'S WORST SAAS EVER',
+      description: 'Build the most useless, confusing, and hilariously terrible Software as a Service. Think anti-patterns, dark UX, and features nobody asked for. The more pointless and frustrating, the better!',
+      endDate: new Date('2025-06-14T18:00:00'), // June 14th at 18:00
+      status: 'active',
+      technology: '',
+      presentationDate: 'BUILD IT [V11], JUNE 14TH',
+      sponsor: 'Aaltoes 2025',
+      ctaLabel: 'PARTICIPATE NOW',
+      ctaUrl: 'https://threejs.org/',
+      awards: [
+        { name: 'WINNER AWARD', prize: '$200 VERKKOKAUPPA GIFT CARD (OR EQUIVALENT IN SUBSCRIPTION SERVICES)' },
+        { name: 'RUNNER-UP AWARD', prize: '$25 IN AALTOES STORE' },
+        { name: 'VIBES AWARD (FREE TOPIC)', prize: '1 BOX OF PIZZA' }
+      ]
+    },
+    // Blocked challenges - 14 more to make a 4x4 grid
+    ...Array.from({ length: 14 }, (_, i) => ({
       id: `blocked-challenge-${i+1}`,
-      title: `CHALLENGE ${i+2}`,
+      title: `CHALLENGE ${i+3}`,
       description: 'TBA',
-      endDate: new Date(Date.now() + (i+3) * 14 * 24 * 60 * 60 * 1000),
+      endDate: new Date(Date.now() + (i+4) * 14 * 24 * 60 * 60 * 1000),
       status: 'upcoming' as ChallengeStatus,
       awards: []
     }))
@@ -301,19 +337,36 @@ export default function Challenges() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className={`mb-16 text-left ${showCards ? 'opacity-100' : 'opacity-0'}`}>
             {showWelcomeText && (
-              <div className="text-white/70 text-sm font-mono whitespace-pre-line leading-relaxed">
+              <div className="text-white/70 text-sm font-mono leading-relaxed max-w-4xl">
                 <TypingAnimation
-                  text={`Welcome to Build it challenges. Our build it sessions are ran every Wednesday and Saturday.
-
-Pick the one from cards you see below. You are welcome to do your own work as well.
-
-For questions clarify from Adit, Doni, Vaneeza or Milana!`}
+                  text={`Welcome to Build it challenges. Our build it sessions are ran every Wednesday and Saturday at `}
                   delay={5}
                   className="inline"
                   onComplete={() => {
                     setWelcomeTextComplete(true);
                   }}
                 />
+                {welcomeTextComplete && (
+                  <>
+                    <a
+                      href="https://maps.app.goo.gl/T3cY5gNez8btiUGAA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/70 hover:text-white transition-colors underline"
+                      tabIndex={0}
+                      aria-label="View Startup Sauna location on Google Maps"
+                    >
+                      Startup Sauna, Puumiehenkuja 5a
+                    </a>
+                    <span className="inline whitespace-pre-line">
+                      {`.
+
+Pick the one from cards you see below. You are welcome to do your own work as well.
+
+For questions clarify from Adit, Doni, Vaneeza or Milana!`}
+                    </span>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -328,6 +381,8 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                     rounded-lg border overflow-hidden transition-all duration-500 
                     ${isActive 
                       ? 'border-white/10 bg-black' 
+                      : challenge.status === 'completed'
+                      ? 'border-green-500/30 bg-green-950/20'
                       : 'border-white/5 bg-neutral-900'}
                     ${challenge.status === 'upcoming' ? 'opacity-80 cursor-not-allowed relative' : 'opacity-100 cursor-pointer'}
                     ${isPageLoaded && showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}
@@ -356,6 +411,43 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                           </svg>
                         </div>
                         <p className="text-white/80 text-sm font-medium font-mono">LOCKED</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {challenge.status === 'completed' && challenge.winners && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/90">
+                      <div className="flex flex-col items-center justify-center p-4 text-center">
+                        <div className="text-yellow-400 text-lg font-bold font-mono mb-2">🏆 WINNERS 🏆</div>
+                        <div className="text-green-400 text-xs font-mono mb-3 uppercase tracking-wide">Congratulations!</div>
+                        <div className="space-y-1 w-full">
+                          {challenge.winners.map((winner, index) => (
+                            <div 
+                              key={index}
+                              className="text-white/90 text-xs font-mono cursor-pointer hover:text-white transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                // Discord user link - you can update these with actual Discord user IDs
+                                const discordUrl = `https://discord.com/users/${winner.username}`
+                                window.open(discordUrl, '_blank', 'noopener,noreferrer')
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  const discordUrl = `https://discord.com/users/${winner.username}`
+                                  window.open(discordUrl, '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              tabIndex={0}
+                              aria-label={`View ${winner.username}'s Discord profile`}
+                            >
+                              <div className="font-bold">{winner.place}</div>
+                              <div className="text-blue-400">@{winner.username}</div>
+                              <div className="text-white/60">{winner.award}</div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -423,78 +515,106 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                         {/* Buttons row */}
                         <div className="mt-auto pt-2">
                           <div className="flex gap-1">
-                            <a 
-                              href="https://lu.ma/dur5tou2" 
-                              target="_blank"
-                              rel="noopener noreferrer" 
-                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  window.open('https://lu.ma/dur5tou2', '_blank', 'noopener,noreferrer')
-                                }
-                              }}
-                              tabIndex={0}
-                              aria-label="Version 4"
-                            >
-                              [V4]
-                            </a>
-                            <a
-                              href="https://lu.ma/p5voz8w9"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  window.open('https://lu.ma/p5voz8w9', '_blank', 'noopener,noreferrer')
-                                }
-                              }}
-                              tabIndex={0}
-                              aria-label="Version 5"
-                            >
-                              [V5]
-                            </a>
-                            <a
-                              href="https://lu.ma/jd9b5w50"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                              onClick={(e) => e.stopPropagation()}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  window.open('https://lu.ma/jd9b5w50', '_blank', 'noopener,noreferrer')
-                                }
-                              }}
-                              tabIndex={0}
-                              aria-label="Version 6"
-                            >
-                              [V6]
-                            </a>
-                            <button
-                              className="flex-1 px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                openModal(challenge)
-                              }}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
+                            {challenge.id === 'worst-saas-challenge' ? (
+                              // SAAS challenge buttons (V8, V9, V10 - all locked)
+                              <>
+                                <button
+                                  className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
+                                  disabled
+                                  aria-label="Version 8 (Locked)"
+                                >
+                                  [V8]
+                                </button>
+                                <button
+                                  className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
+                                  disabled
+                                  aria-label="Version 9 (Locked)"
+                                >
+                                  [V9]
+                                </button>
+                                <button
+                                  className="px-2 py-1 bg-neutral-900 text-xs font-mono text-white/40 rounded cursor-not-allowed"
+                                  disabled
+                                  aria-label="Version 10 (Locked)"
+                                >
+                                  [V10]
+                                </button>
+                                <button
+                                  className="flex-1 px-2 py-1 bg-neutral-800 hover:bg-neutral-700 text-xs font-mono text-white/80 transition-colors rounded"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    openModal(challenge)
+                                  }}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                      e.preventDefault()
+                                      e.stopPropagation()
+                                      openModal(challenge)
+                                    }
+                                  }}
+                                  tabIndex={0}
+                                  aria-label="Learn more about the challenge"
+                                >
+                                  Learn more
+                                </button>
+                              </>
+                            ) : challenge.status === 'completed' ? (
+                              // Completed challenges - no version buttons, just learn more
+                              <button
+                                className="w-full px-2 py-1 bg-green-800 hover:bg-green-700 text-xs font-mono text-white/80 transition-colors rounded"
+                                onClick={(e) => {
                                   e.stopPropagation()
                                   openModal(challenge)
-                                }
-                              }}
-                              tabIndex={0}
-                              aria-label="Learn more about the challenge"
-                            >
-                              Learn more
-                            </button>
+                                }}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    openModal(challenge)
+                                  }
+                                }}
+                                tabIndex={0}
+                                aria-label="View challenge results"
+                              >
+                                View Results
+                              </button>
+                            ) : (
+                              // Other challenges - default version buttons
+                              <>
+                                <a 
+                                  href="https://lu.ma/dur5tou2" 
+                                  target="_blank"
+                                  rel="noopener noreferrer" 
+                                  className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                                  tabIndex={0}
+                                  aria-label="Register for Version 4"
+                                >
+                                  [V4]
+                                </a>
+                                
+                                <a
+                                  href="https://lu.ma/p5voz8w9"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                                  tabIndex={0}
+                                  aria-label="Register for Version 5"
+                                >
+                                  [V5]
+                                </a>
+                                
+                                <a
+                                  href="https://lu.ma/jd9b5w50"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                                  tabIndex={0}
+                                  aria-label="Register for Version 6"
+                                >
+                                  [V6]
+                                </a>
+                              </>
+                            )}
                           </div>
                         </div>
                       </>
@@ -632,39 +752,71 @@ For questions clarify from Adit, Doni, Vaneeza or Milana!`}
                   <div className="mb-4">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                       <div className="text-white text-sm font-medium font-mono mb-2 sm:mb-0">REGISTER TO BUILD IT</div>
-                      <div className="flex gap-2">                      
-                        <a 
-                          href="https://lu.ma/dur5tou2" 
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
-                          tabIndex={0}
-                          aria-label="Register for Version 4"
-                        >
-                          [V4]
-                        </a>
-                        
-                        <a
-                          href="https://lu.ma/p5voz8w9"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
-                          tabIndex={0}
-                          aria-label="Register for Version 5"
-                        >
-                          [V5]
-                        </a>
-                        
-                        <a
-                          href="https://lu.ma/jd9b5w50"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
-                          tabIndex={0}
-                          aria-label="Register for Version 6"
-                        >
-                          [V6]
-                        </a>
+                      <div className="flex gap-2">
+                        {selectedChallenge.id === 'worst-saas-challenge' ? (
+                          // SAAS challenge buttons (V8, V9, V10 - all locked)
+                          <>
+                            <button
+                              className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
+                              disabled
+                              aria-label="Version 8 (Locked)"
+                            >
+                              [V8]
+                            </button>
+                            
+                            <button
+                              className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
+                              disabled
+                              aria-label="Version 9 (Locked)"
+                            >
+                              [V9]
+                            </button>
+                            
+                            <button
+                              className="bg-neutral-900 text-white/40 px-6 py-3 text-sm font-mono rounded cursor-not-allowed"
+                              disabled
+                              aria-label="Version 10 (Locked)"
+                            >
+                              [V10]
+                            </button>
+                          </>
+                        ) : (
+                          // Other challenges - default version buttons
+                          <>
+                            <a 
+                              href="https://lu.ma/dur5tou2" 
+                              target="_blank"
+                              rel="noopener noreferrer" 
+                              className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                              tabIndex={0}
+                              aria-label="Register for Version 4"
+                            >
+                              [V4]
+                            </a>
+                            
+                            <a
+                              href="https://lu.ma/p5voz8w9"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                              tabIndex={0}
+                              aria-label="Register for Version 5"
+                            >
+                              [V5]
+                            </a>
+                            
+                            <a
+                              href="https://lu.ma/jd9b5w50"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-3 text-sm font-mono transition-colors rounded"
+                              tabIndex={0}
+                              aria-label="Register for Version 6"
+                            >
+                              [V6]
+                            </a>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
