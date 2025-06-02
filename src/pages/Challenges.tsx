@@ -339,34 +339,29 @@ export default function Challenges() {
             {showWelcomeText && (
               <div className="text-white/70 text-sm font-mono leading-relaxed max-w-4xl">
                 <TypingAnimation
-                  text={`Welcome to Build it challenges. Our build it sessions are ran every Wednesday and Saturday at `}
-                  delay={5}
-                  className="inline"
-                  onComplete={() => {
-                    setWelcomeTextComplete(true);
-                  }}
-                />
-                {welcomeTextComplete && (
-                  <>
-                    <a
-                      href="https://maps.app.goo.gl/T3cY5gNez8btiUGAA"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/70 hover:text-white transition-colors underline"
-                      tabIndex={0}
-                      aria-label="View Startup Sauna location on Google Maps"
-                    >
-                      Startup Sauna, Puumiehenkuja 5a
-                    </a>
-                    <span className="inline whitespace-pre-line">
-                      {`.
+                  text={`Welcome to Build it challenges. Our build it sessions are ran every Wednesday and Saturday at Startup Sauna, Puumiehenkuja 5a.
 
 Pick the one from cards you see below. You are welcome to do your own work as well.
 
 For questions clarify from Adit, Doni, Vaneeza or Milana!`}
-                    </span>
-                  </>
-                )}
+                  delay={5}
+                  className="inline whitespace-pre-line welcome-text"
+                  onComplete={() => {
+                    setWelcomeTextComplete(true);
+                    // After typing is complete, make the location clickable
+                    setTimeout(() => {
+                      const textElement = document.querySelector('.welcome-text');
+                      if (textElement) {
+                        const textContent = textElement.innerHTML;
+                        const updatedContent = textContent.replace(
+                          'Startup Sauna, Puumiehenkuja 5a',
+                          '<a href="https://maps.app.goo.gl/T3cY5gNez8btiUGAA" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white transition-colors underline" tabindex="0" aria-label="View Startup Sauna location on Google Maps">Startup Sauna, Puumiehenkuja 5a</a>'
+                        );
+                        textElement.innerHTML = updatedContent;
+                      }
+                    }, 100);
+                  }}
+                />
               </div>
             )}
           </div>
